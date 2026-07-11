@@ -1,6 +1,8 @@
 import { useState, useEffect } from 'react'
+import { Link } from 'react-router-dom'
 import { useLedger } from '../hooks/useLedger'
 import { useRedemptions } from '../hooks/useRedemptions'
+import { useAuth } from '../hooks/useAuth.jsx'
 import BalanceCard from '../components/BalanceCard.jsx'
 import LedgerList from '../components/LedgerList.jsx'
 import ChallengeList from '../components/ChallengeList.jsx'
@@ -10,6 +12,7 @@ import { getExistingSubscription, subscribeToPush, ensureSubscriptionSaved, push
 export default function Home() {
   const { entries, balance, loading } = useLedger()
   const { pending, refresh: refreshRedemptions } = useRedemptions()
+  const { profile, signOut } = useAuth()
   const [modalOpen, setModalOpen] = useState(false)
   const [notifStatus, setNotifStatus] = useState('checking')
 
@@ -23,7 +26,7 @@ export default function Home() {
         setNotifStatus('disabled')
         return
       }
-      ensureSubscriptionSaved('student')
+      ensureSubscriptionSaved()
         .then(() => setNotifStatus('enabled'))
         .catch((err) => {
           console.error('Failed to confirm subscription', err)
@@ -35,7 +38,7 @@ export default function Home() {
   async function handleEnableNotifications() {
     setNotifStatus('requesting')
     try {
-      await subscribeToPush('student')
+      await subscribeToPush()
       setNotifStatus('enabled')
     } catch (err) {
       console.error('Failed to enable notifications', err)
@@ -53,6 +56,19 @@ export default function Home() {
               GCSE Economics · Paper 2
             </div>
           </div>
+          <button
+            onClick={signOut}
+            style={{
+              background: 'none',
+              border: 'none',
+              fontSize: '11px',
+              color: 'var(--ink-faint)',
+              textDecoration: 'underline',
+              padding: 0,
+            }}
+          >
+            {profile?.display_name ? `${profile.display_name} · Sign out` : 'Sign out'}
+          </button>
         </div>
 
         {notifStatus === 'disabled' && (
@@ -73,6 +89,15 @@ export default function Home() {
             Enable notifications on this device
           </button>
         )}
+        {profile?.role === 'parent' && (
+          <Link
+            to="/parent"
+            style={{ display: 'block', fontSize: '11px', color: 'var(--brass)', textDecoration: 'underline', marginBottom: '16px' }}
+          >
+            Go to parent approvals
+          </Link>
+        )}
+
         {loading ? (
           <div style={{ fontSize: '13px', color: 'var(--ink-faint)' }}>Loading…</div>
         ) : (

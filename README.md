@@ -16,7 +16,37 @@ Dave — there is no live integration with Family Link.
 1. `npm install`
 2. Copy `.env.example` to `.env` and fill in your Supabase project URL and anon key
 3. In the Supabase SQL editor, run `supabase/schema.sql` to create the tables
-4. `npm run dev`
+4. Set up the two accounts (see below)
+5. `npm run dev`
+
+## Accounts
+
+There's no public sign-up screen on purpose — only two people should ever be
+able to log in. Create both manually:
+
+1. Supabase → Authentication → Users → Add user. Do this twice, once for
+   yourself and once for James, each with an email and a password you set.
+   Tick "Auto confirm user" so there's no email verification step to deal
+   with.
+2. Copy each user's UUID from that same Users list.
+3. In the SQL editor:
+
+```sql
+insert into public.profiles (id, role, display_name) values
+  ('DAVE_AUTH_UUID_HERE', 'parent', 'Dave'),
+  ('JAMES_AUTH_UUID_HERE', 'student', 'James');
+```
+
+That's it — role is now tied to the actual logged-in account, checked by the
+database on every read and write via RLS. A student account physically
+cannot log a `spend` ledger entry or approve a redemption request, and a
+parent account cannot log an `earn` entry, regardless of what the frontend
+code does or doesn't stop them from clicking.
+
+Worth turning off while you're in Supabase's Auth settings: Authentication →
+Providers → Email → disable "Allow new users to sign up". There's no sign-up
+form in the app, but there's no reason to leave the door open at the API
+level either.
 
 ## Deploying
 

@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import { useRedemptions } from '../hooks/useRedemptions'
+import { useAuth } from '../hooks/useAuth.jsx'
 import { supabase } from '../lib/supabaseClient'
 import { getExistingSubscription, subscribeToPush, ensureSubscriptionSaved, pushSupported } from '../lib/push.js'
 
@@ -9,6 +10,7 @@ function formatTime(isoString) {
 
 export default function Parent() {
   const { requests, refresh } = useRedemptions()
+  const { signOut } = useAuth()
   const [notifStatus, setNotifStatus] = useState('checking')
 
   useEffect(() => {
@@ -24,7 +26,7 @@ export default function Parent() {
       // Browser thinks we're subscribed, but confirm the DB row actually
       // exists too — it can go missing independently (e.g. a table reset)
       // without the browser subscription itself being affected.
-      ensureSubscriptionSaved('parent')
+      ensureSubscriptionSaved()
         .then(() => setNotifStatus('enabled'))
         .catch((err) => {
           console.error('Failed to confirm subscription', err)
@@ -36,7 +38,7 @@ export default function Parent() {
   async function handleEnableNotifications() {
     setNotifStatus('requesting')
     try {
-      await subscribeToPush('parent')
+      await subscribeToPush()
       setNotifStatus('enabled')
     } catch (err) {
       console.error('Failed to enable notifications', err)
@@ -79,7 +81,15 @@ export default function Parent() {
   return (
     <div className="device">
       <div className="screen">
-        <div className="wordmark" style={{ marginBottom: '4px' }}>CORTEX</div>
+        <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', marginBottom: '4px' }}>
+          <div className="wordmark">CORTEX</div>
+          <button
+            onClick={signOut}
+            style={{ background: 'none', border: 'none', fontSize: '11px', color: 'var(--ink-faint)', textDecoration: 'underline', padding: 0 }}
+          >
+            Sign out
+          </button>
+        </div>
         <div className="mono" style={{ fontSize: '10px', letterSpacing: '0.6px', textTransform: 'uppercase', color: 'var(--ink-soft)', marginBottom: '16px' }}>
           Parent approvals
         </div>

@@ -26,10 +26,27 @@ export async function getExistingSubscription() {
   return registration.pushManager.getSubscription()
 }
 
-async function saveSubscription(subscription, role) {
+// Role is deliberately never passed in by the caller — it's looked up from
+// the signed-in user's own profile row, so which page happened to be open
+// when the button was tapped can't affect what role a subscription gets.
+async function getCurrentUserAndRole() {
+  const {
+    data: { user },
+  } = await supabase.auth.getUser()
+  if (!user) throw new Error('You need to be signed in to enable notifications.')
+
+  const { data, error } = await supabase.from('profiles').select('role').eq('id', user.id).single()
+  if (error) throw error
+
+  return { userId: user.id, role: data.role }
+}
+
+async function saveSubscription(subscription) {
+  const { userId, role } = await getCurrentUserAndRole()
   const json = subscription.toJSON()
   const { error } = await supabase.from('push_subscriptions').upsert(
     {
+      user_id: userId,
       endpoint: json.endpoint,
       p256dh: json.keys.p256dh,
       auth: json.keys.auth,
@@ -40,19 +57,16 @@ async function saveSubscription(subscription, role) {
   if (error) throw error
 }
 
-export async function ensureSubscriptionSaved(role) {
+export async function ensureSubscriptionSaved() {
   const subscription = await getExistingSubscription()
   if (!subscription) return false
-  await saveSubscription(subscription, role)
+  await saveSubscription(subscription)
   return true
 }
 
-export async function subscribeToPush(role) {
+export async function subscribeToPush() {
   if (!pushSupported()) {
     throw new Error('Push notifications are not supported in this browser.')
-  }
-  if (role !== 'parent' && role !== 'student') {
-    throw new Error('subscribeToPush requires a role of "parent" or "student".')
   }
 
   const permission = await Notification.requestPermission()
@@ -71,6 +85,6 @@ export async function subscribeToPush(role) {
     applicationServerKey: urlBase64ToUint8Array(vapidPublicKey),
   })
 
-  await saveSubscription(subscription, role)
+  await saveSubscription(subscription)
   return subscription
 }

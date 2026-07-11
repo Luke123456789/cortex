@@ -1,14 +1,34 @@
 import { Routes, Route } from 'react-router-dom'
+import { AuthProvider } from './hooks/useAuth.jsx'
+import ProtectedRoute from './components/ProtectedRoute.jsx'
+import Login from './pages/Login.jsx'
 import Home from './pages/Home.jsx'
 import Parent from './pages/Parent.jsx'
 
 export default function App() {
   return (
-    <div className="app-shell">
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/parent" element={<Parent />} />
-      </Routes>
-    </div>
+    <AuthProvider>
+      <div className="app-shell">
+        <Routes>
+          <Route path="/login" element={<Login />} />
+          <Route
+            path="/"
+            element={
+              <ProtectedRoute>
+                <Home />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/parent"
+            element={
+              <ProtectedRoute requireRole="parent">
+                <Parent />
+              </ProtectedRoute>
+            }
+          />
+        </Routes>
+      </div>
+    </AuthProvider>
   )
 }
