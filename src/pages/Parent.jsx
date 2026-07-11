@@ -1,5 +1,7 @@
+import { useEffect, useState } from 'react'
 import { useRedemptions } from '../hooks/useRedemptions'
 import { supabase } from '../lib/supabaseClient'
+import { getExistingSubscription, subscribeToPush, pushSupported } from '../lib/push.js'
 
 function formatTime(isoString) {
   return new Date(isoString).toLocaleString([], { day: '2-digit', month: 'short', hour: '2-digit', minute: '2-digit' })
@@ -7,6 +9,26 @@ function formatTime(isoString) {
 
 export default function Parent() {
   const { requests, refresh } = useRedemptions()
+  const [notifStatus, setNotifStatus] = useState('checking')
+
+  useEffect(() => {
+    if (!pushSupported()) {
+      setNotifStatus('unsupported')
+      return
+    }
+    getExistingSubscription().then((sub) => setNotifStatus(sub ? 'enabled' : 'disabled'))
+  }, [])
+
+  async function handleEnableNotifications() {
+    setNotifStatus('requesting')
+    try {
+      await subscribeToPush()
+      setNotifStatus('enabled')
+    } catch (err) {
+      console.error('Failed to enable notifications', err)
+      setNotifStatus('disabled')
+    }
+  }
 
   async function approve(request) {
     const { error: insertError } = await supabase.from('ledger_entries').insert({
@@ -44,9 +66,38 @@ export default function Parent() {
     <div className="device">
       <div className="screen">
         <div className="wordmark" style={{ marginBottom: '4px' }}>CORTEX</div>
-        <div className="mono" style={{ fontSize: '10px', letterSpacing: '0.6px', textTransform: 'uppercase', color: 'var(--ink-soft)', marginBottom: '22px' }}>
+        <div className="mono" style={{ fontSize: '10px', letterSpacing: '0.6px', textTransform: 'uppercase', color: 'var(--ink-soft)', marginBottom: '16px' }}>
           Parent approvals
         </div>
+
+        {notifStatus === 'disabled' && (
+          <button
+            onClick={handleEnableNotifications}
+            style={{
+              width: '100%',
+              background: 'var(--brass-light)',
+              color: 'var(--brass)',
+              border: 'none',
+              borderRadius: '8px',
+              padding: '10px',
+              fontSize: '12.5px',
+              fontWeight: 600,
+              marginBottom: '20px',
+            }}
+          >
+            Enable notifications on this device
+          </button>
+        )}
+        {notifStatus === 'enabled' && (
+          <div style={{ fontSize: '11.5px', color: 'var(--ink-faint)', marginBottom: '20px' }}>
+            Notifications are on for this device.
+          </div>
+        )}
+        {notifStatus === 'unsupported' && (
+          <div style={{ fontSize: '11.5px', color: 'var(--ink-faint)', marginBottom: '20px' }}>
+            This browser doesn't support push notifications.
+          </div>
+        )}
 
         <div className="section-label">Pending</div>
         {pendingRequests.length === 0 ? (

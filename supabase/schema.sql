@@ -19,6 +19,19 @@ create table if not exists redemption_requests (
   resolved_note text
 );
 
+create table if not exists push_subscriptions (
+  id bigint generated always as identity primary key,
+  created_at timestamptz not null default now(),
+  endpoint text not null unique,
+  p256dh text not null,
+  auth text not null
+);
+
+alter table push_subscriptions enable row level security;
+
+create policy "anon full access - push subscriptions" on push_subscriptions
+  for all using (true) with check (true);
+
 -- Row Level Security: locked down by default. Since this is a single-family
 -- app with no auth yet, start with the anon key allowed to read/write
 -- everything and tighten this once Supabase Auth is wired in for James and Dave.
