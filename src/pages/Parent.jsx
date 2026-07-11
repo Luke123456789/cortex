@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import { useRedemptions } from '../hooks/useRedemptions'
 import { supabase } from '../lib/supabaseClient'
-import { getExistingSubscription, subscribeToPush, pushSupported } from '../lib/push.js'
+import { getExistingSubscription, subscribeToPush, ensureSubscriptionSaved, pushSupported } from '../lib/push.js'
 
 function formatTime(isoString) {
   return new Date(isoString).toLocaleString([], { day: '2-digit', month: 'short', hour: '2-digit', minute: '2-digit' })
@@ -16,13 +16,27 @@ export default function Parent() {
       setNotifStatus('unsupported')
       return
     }
-    getExistingSubscription().then((sub) => setNotifStatus(sub ? 'enabled' : 'disabled'))
+    getExistingSubscription().then((sub) => {
+      if (!sub) {
+        setNotifStatus('disabled')
+        return
+      }
+      // Browser thinks we're subscribed, but confirm the DB row actually
+      // exists too — it can go missing independently (e.g. a table reset)
+      // without the browser subscription itself being affected.
+      ensureSubscriptionSaved('parent')
+        .then(() => setNotifStatus('enabled'))
+        .catch((err) => {
+          console.error('Failed to confirm subscription', err)
+          setNotifStatus('enabled')
+        })
+    })
   }, [])
 
   async function handleEnableNotifications() {
     setNotifStatus('requesting')
     try {
-      await subscribeToPush()
+      await subscribeToPush('parent')
       setNotifStatus('enabled')
     } catch (err) {
       console.error('Failed to enable notifications', err)

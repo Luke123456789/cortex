@@ -1,15 +1,47 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { useLedger } from '../hooks/useLedger'
 import { useRedemptions } from '../hooks/useRedemptions'
 import BalanceCard from '../components/BalanceCard.jsx'
 import LedgerList from '../components/LedgerList.jsx'
 import ChallengeList from '../components/ChallengeList.jsx'
 import RedeemModal from '../components/RedeemModal.jsx'
+import { getExistingSubscription, subscribeToPush, ensureSubscriptionSaved, pushSupported } from '../lib/push.js'
 
 export default function Home() {
   const { entries, balance, loading } = useLedger()
   const { pending, refresh: refreshRedemptions } = useRedemptions()
   const [modalOpen, setModalOpen] = useState(false)
+  const [notifStatus, setNotifStatus] = useState('checking')
+
+  useEffect(() => {
+    if (!pushSupported()) {
+      setNotifStatus('unsupported')
+      return
+    }
+    getExistingSubscription().then((sub) => {
+      if (!sub) {
+        setNotifStatus('disabled')
+        return
+      }
+      ensureSubscriptionSaved('student')
+        .then(() => setNotifStatus('enabled'))
+        .catch((err) => {
+          console.error('Failed to confirm subscription', err)
+          setNotifStatus('enabled')
+        })
+    })
+  }, [])
+
+  async function handleEnableNotifications() {
+    setNotifStatus('requesting')
+    try {
+      await subscribeToPush('student')
+      setNotifStatus('enabled')
+    } catch (err) {
+      console.error('Failed to enable notifications', err)
+      setNotifStatus('disabled')
+    }
+  }
 
   return (
     <div className="device">
@@ -23,6 +55,24 @@ export default function Home() {
           </div>
         </div>
 
+        {notifStatus === 'disabled' && (
+          <button
+            onClick={handleEnableNotifications}
+            style={{
+              width: '100%',
+              background: 'var(--brass-light)',
+              color: 'var(--brass)',
+              border: 'none',
+              borderRadius: '8px',
+              padding: '10px',
+              fontSize: '12.5px',
+              fontWeight: 600,
+              marginBottom: '18px',
+            }}
+          >
+            Enable notifications on this device
+          </button>
+        )}
         {loading ? (
           <div style={{ fontSize: '13px', color: 'var(--ink-faint)' }}>Loading…</div>
         ) : (

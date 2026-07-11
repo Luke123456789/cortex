@@ -14,33 +14,35 @@ const supabase = createClient(
 )
 
 Deno.serve(async (req) => {
-  // The Supabase database webhook sends a header you configure yourself when
-  // you set the webhook up. This checks it matches, so nobody outside your
-  // project can trigger a push by hitting the function URL directly.
   if (WEBHOOK_SECRET && req.headers.get('x-webhook-secret') !== WEBHOOK_SECRET) {
     return new Response('unauthorized', { status: 401 })
   }
 
   const payload = await req.json()
   const record = payload.record
+  const oldRecord = payload.old_record
 
-  if (!record || record.status !== 'pending') {
+  // Only fire when status actually changed away from pending, not on every update.
+  if (!record || record.status === 'pending' || record.status === oldRecord?.status) {
     return new Response('ignored', { status: 200 })
   }
 
   const { data: subscriptions, error } = await supabase
     .from('push_subscriptions')
     .select('*')
-    .eq('role', 'parent')
+    .eq('role', 'student')
 
   if (error) {
     return new Response(JSON.stringify({ error: error.message }), { status: 500 })
   }
 
   const message = JSON.stringify({
-    title: 'Cortex — redemption request',
-    body: `James wants to redeem ${record.minutes_requested} min`,
-    url: '/parent',
+    title: record.status === 'approved' ? 'Redemption approved' : 'Redemption denied',
+    body:
+      record.status === 'approved'
+        ? `${record.minutes_requested} min approved — go ahead`
+        : `${record.minutes_requested} min was denied`,
+    url: '/',
   })
 
   const results = await Promise.allSettled(

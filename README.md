@@ -87,12 +87,58 @@ notification service, nothing to sign up for. This means:
    `push_subscriptions` table) if you haven't already.
 
 7. On Dave's phone, open the site, go to `/parent`, and tap **Enable
-   notifications on this device**. That's the subscribe step — it stores the
-   device's push subscription in `push_subscriptions` so the Edge Function
-   knows where to send to.
+   notifications on this device**. James does the same thing on his own
+   device from the home screen (`/`) — subscriptions are tagged `parent` or
+   `student` so each device only gets notified about what's relevant to it.
 
-From then on, every new redemption request pushes a notification straight to
-that device.
+From then on:
+- New request → pushes to `parent` devices (`notify-redemption`)
+- Approved or denied → pushes to `student` devices (`notify-redemption-resolved`)
+
+### Second Edge Function + trigger
+
+Repeat steps 4–5 above for a second function:
+
+- Deploy `supabase/functions/notify-redemption-resolved/index.ts` as a new
+  function named `notify-redemption-resolved`, with the same three secrets
+  already in place from the first function (no need to re-add them, they're
+  shared across all your Edge Functions in the project)
+- Wire it up with SQL rather than the dashboard's trigger dialog (the "Pick a
+  function" list there only shows Postgres functions, not Edge Functions):
+
+```sql
+create or replace function public.notify_redemption_resolved()
+returns trigger
+language plpgsql
+security definer
+as $$
+begin
+  perform net.http_post(
+    url := 'https://mkmzesmzwjcfxtvayvlz.supabase.co/functions/v1/notify-redemption-resolved',
+    headers := jsonb_build_object(
+      'Content-Type', 'application/json',
+      'x-webhook-secret', 'PASTE_YOUR_REDEMPTION_WEBHOOK_SECRET_HERE'
+    ),
+    body := jsonb_build_object(
+      'type', 'UPDATE',
+      'table', 'redemption_requests',
+      'record', to_jsonb(new),
+      'old_record', to_jsonb(old)
+    )
+  );
+  return new;
+end;
+$$;
+
+drop trigger if exists redemption_request_resolved on public.redemption_requests;
+
+create trigger redemption_request_resolved
+after update on public.redemption_requests
+for each row execute function public.notify_redemption_resolved();
+```
+
+Same as before, remember to turn off "Enforce JWT Verification" on the
+`notify-redemption-resolved` function itself.
 
 ## Folder structure
 

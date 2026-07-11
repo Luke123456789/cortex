@@ -26,9 +26,33 @@ export async function getExistingSubscription() {
   return registration.pushManager.getSubscription()
 }
 
-export async function subscribeToPush() {
+async function saveSubscription(subscription, role) {
+  const json = subscription.toJSON()
+  const { error } = await supabase.from('push_subscriptions').upsert(
+    {
+      endpoint: json.endpoint,
+      p256dh: json.keys.p256dh,
+      auth: json.keys.auth,
+      role,
+    },
+    { onConflict: 'endpoint' }
+  )
+  if (error) throw error
+}
+
+export async function ensureSubscriptionSaved(role) {
+  const subscription = await getExistingSubscription()
+  if (!subscription) return false
+  await saveSubscription(subscription, role)
+  return true
+}
+
+export async function subscribeToPush(role) {
   if (!pushSupported()) {
     throw new Error('Push notifications are not supported in this browser.')
+  }
+  if (role !== 'parent' && role !== 'student') {
+    throw new Error('subscribeToPush requires a role of "parent" or "student".')
   }
 
   const permission = await Notification.requestPermission()
@@ -47,16 +71,6 @@ export async function subscribeToPush() {
     applicationServerKey: urlBase64ToUint8Array(vapidPublicKey),
   })
 
-  const json = subscription.toJSON()
-  const { error } = await supabase.from('push_subscriptions').upsert(
-    {
-      endpoint: json.endpoint,
-      p256dh: json.keys.p256dh,
-      auth: json.keys.auth,
-    },
-    { onConflict: 'endpoint' }
-  )
-
-  if (error) throw error
+  await saveSubscription(subscription, role)
   return subscription
 }

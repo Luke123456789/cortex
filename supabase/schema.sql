@@ -24,7 +24,8 @@ create table if not exists push_subscriptions (
   created_at timestamptz not null default now(),
   endpoint text not null unique,
   p256dh text not null,
-  auth text not null
+  auth text not null,
+  role text not null check (role in ('parent', 'student'))
 );
 
 alter table push_subscriptions enable row level security;
