@@ -7,6 +7,7 @@ import Parent from './pages/Parent.jsx'
 import Quiz from './pages/Quiz.jsx'
 import Play from './pages/Play.jsx'
 import QuizSelect from './pages/QuizSelect.jsx'
+import TutorChat from './pages/TutorChat.jsx'
 
 export default function App() {
   return (
@@ -51,6 +52,14 @@ export default function App() {
             element={
               <ProtectedRoute>
                 <QuizSelect />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/tutor"
+            element={
+              <ProtectedRoute>
+                <TutorChat />
               </ProtectedRoute>
             }
           />

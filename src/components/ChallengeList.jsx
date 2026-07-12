@@ -32,8 +32,9 @@ const CHALLENGES = [
   {
     id: 'tutor',
     name: 'Ask the tutor',
-    desc: 'Get a topic explained, then answer 3 checks',
-    type: 'coming-soon',
+    desc: 'Chat it through, one to one',
+    type: 'navigate',
+    to: '/tutor',
     icon: (
       <svg viewBox="0 0 24 24" fill="none" stroke="var(--brass)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" width="18" height="18">
         <circle cx="12" cy="12" r="10" />
