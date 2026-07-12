@@ -34,6 +34,8 @@ export default function TutorChat() {
 
   const [started, setStarted] = useState(false)
   const [sessionId, setSessionId] = useState(null)
+  const [lessonPlan, setLessonPlan] = useState(null)
+  const [planLoading, setPlanLoading] = useState(false)
   const [messages, setMessages] = useState([])
   const [textInput, setTextInput] = useState('')
   const [useTextFallback, setUseTextFallback] = useState(!speechSupported)
@@ -139,6 +141,7 @@ export default function TutorChat() {
           subtopicName: subtopic?.name,
           specRef: subtopic?.spec_ref,
           messages: nextMessages,
+          lessonPlan,
         }),
       })
       if (!res.ok) throw new Error('Tutor request failed')
@@ -154,7 +157,7 @@ export default function TutorChat() {
       setError('The tutor is unavailable right now. Try again in a moment.')
       setVoiceState('idle')
     }
-  }, [topics, subtopics, topicId, subtopicId, selectedSubject, sessionId])
+  }, [topics, subtopics, topicId, subtopicId, selectedSubject, sessionId, lessonPlan])
 
   function submitMessage(text) {
     const trimmed = text.trim()
@@ -218,6 +221,9 @@ export default function TutorChat() {
     const subtopic = subtopics.find((st) => st.id === subtopicId)
     if (!topic || !subtopic) return
 
+    setPlanLoading(true)
+    setError(null)
+
     const { data: session, error: sessionError } = await supabase
       .from('tutor_sessions')
       .insert({ student_id: user.id, subtopic_id: subtopicId })
@@ -226,16 +232,41 @@ export default function TutorChat() {
     if (sessionError) {
       console.error('Failed to start tutor session', sessionError)
       setError('Could not start the session. Try again.')
+      setPlanLoading(false)
       return
     }
-
     setSessionId(session.id)
-    setStarted(true)
-    setError(null)
 
-    const greetingText = `Hey! Let's talk through "${subtopic.name}". What do you already know about it, or where do you want to start?`
-    setMessages([{ role: 'assistant', content: greetingText }])
-    speak(greetingText)
+    try {
+      const { data: { session: authSession } } = await supabase.auth.getSession()
+      const res = await fetch(`${import.meta.env.VITE_SUPABASE_URL}/functions/v1/tutor-plan`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${authSession.access_token}`,
+        },
+        body: JSON.stringify({
+          subjectName: selectedSubject?.name,
+          topicName: topic.name,
+          subtopicName: subtopic.name,
+          specRef: subtopic.spec_ref,
+        }),
+      })
+      if (!res.ok) throw new Error('Lesson plan request failed')
+      const data = await res.json()
+
+      setLessonPlan(data.plan)
+      await supabase.from('tutor_sessions').update({ lesson_plan: data.plan }).eq('id', session.id)
+
+      setMessages([{ role: 'assistant', content: data.plan.openingLine }])
+      playAudioBase64(data.audioBase64, data.plan.openingLine)
+      setStarted(true)
+    } catch (err) {
+      console.error(err)
+      setError('Could not prepare the lesson. Try again in a moment.')
+    } finally {
+      setPlanLoading(false)
+    }
   }
 
   async function finishSession() {
@@ -322,13 +353,14 @@ export default function TutorChat() {
 
               <button
                 onClick={startSession}
-                disabled={!subtopicId}
+                disabled={!subtopicId || planLoading}
                 style={{
                   width: '100%', background: 'var(--ink)', color: 'var(--paper)', border: 'none',
                   borderRadius: '8px', padding: '11px', fontSize: '13px', fontWeight: 600, marginTop: '4px',
+                  opacity: planLoading ? 0.6 : 1,
                 }}
               >
-                Start chat
+                {planLoading ? 'Preparing your lesson…' : 'Start chat'}
               </button>
               {error && <div style={{ fontSize: '11.5px', color: 'var(--red)', marginTop: '10px' }}>{error}</div>}
             </>
