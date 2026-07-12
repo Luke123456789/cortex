@@ -4,6 +4,7 @@ import ProtectedRoute from './components/ProtectedRoute.jsx'
 import Login from './pages/Login.jsx'
 import Home from './pages/Home.jsx'
 import Parent from './pages/Parent.jsx'
+import Quiz from './pages/Quiz.jsx'
 
 export default function App() {
   return (
@@ -24,6 +25,14 @@ export default function App() {
             element={
               <ProtectedRoute requireRole="parent">
                 <Parent />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/quiz/:topicId"
+            element={
+              <ProtectedRoute>
+                <Quiz />
               </ProtectedRoute>
             }
           />

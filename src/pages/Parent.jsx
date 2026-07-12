@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import { useRedemptions } from '../hooks/useRedemptions'
 import { useAuth } from '../hooks/useAuth.jsx'
 import { supabase } from '../lib/supabaseClient'
+import RoleSwitch from '../components/RoleSwitch.jsx'
 import { getExistingSubscription, subscribeToPush, ensureSubscriptionSaved, pushSupported } from '../lib/push.js'
 
 function formatTime(isoString) {
@@ -83,12 +84,15 @@ export default function Parent() {
       <div className="screen">
         <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', marginBottom: '4px' }}>
           <div className="wordmark">CORTEX</div>
-          <button
-            onClick={signOut}
-            style={{ background: 'none', border: 'none', fontSize: '11px', color: 'var(--ink-faint)', textDecoration: 'underline', padding: 0 }}
-          >
-            Sign out
-          </button>
+          <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-end', gap: '8px' }}>
+            <RoleSwitch view="parent" />
+            <button
+              onClick={signOut}
+              style={{ background: 'none', border: 'none', fontSize: '11px', color: 'var(--ink-faint)', textDecoration: 'underline', padding: 0 }}
+            >
+              Sign out
+            </button>
+          </div>
         </div>
         <div className="mono" style={{ fontSize: '10px', letterSpacing: '0.6px', textTransform: 'uppercase', color: 'var(--ink-soft)', marginBottom: '16px' }}>
           Parent approvals

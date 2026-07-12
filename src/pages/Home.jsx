@@ -1,5 +1,4 @@
 import { useState, useEffect } from 'react'
-import { Link } from 'react-router-dom'
 import { useLedger } from '../hooks/useLedger'
 import { useRedemptions } from '../hooks/useRedemptions'
 import { useAuth } from '../hooks/useAuth.jsx'
@@ -7,6 +6,8 @@ import BalanceCard from '../components/BalanceCard.jsx'
 import LedgerList from '../components/LedgerList.jsx'
 import ChallengeList from '../components/ChallengeList.jsx'
 import RedeemModal from '../components/RedeemModal.jsx'
+import QuizPicker from '../components/QuizPicker.jsx'
+import RoleSwitch from '../components/RoleSwitch.jsx'
 import { getExistingSubscription, subscribeToPush, ensureSubscriptionSaved, pushSupported } from '../lib/push.js'
 
 export default function Home() {
@@ -56,19 +57,22 @@ export default function Home() {
               GCSE Economics · Paper 2
             </div>
           </div>
-          <button
-            onClick={signOut}
-            style={{
-              background: 'none',
-              border: 'none',
-              fontSize: '11px',
-              color: 'var(--ink-faint)',
-              textDecoration: 'underline',
-              padding: 0,
-            }}
-          >
-            {profile?.display_name ? `${profile.display_name} · Sign out` : 'Sign out'}
-          </button>
+          <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-end', gap: '8px' }}>
+            <RoleSwitch view="student" />
+            <button
+              onClick={signOut}
+              style={{
+                background: 'none',
+                border: 'none',
+                fontSize: '11px',
+                color: 'var(--ink-faint)',
+                textDecoration: 'underline',
+                padding: 0,
+              }}
+            >
+              {profile?.display_name ? `${profile.display_name} · Sign out` : 'Sign out'}
+            </button>
+          </div>
         </div>
 
         {notifStatus === 'disabled' && (
@@ -89,20 +93,17 @@ export default function Home() {
             Enable notifications on this device
           </button>
         )}
-        {profile?.role === 'parent' && (
-          <Link
-            to="/parent"
-            style={{ display: 'block', fontSize: '11px', color: 'var(--brass)', textDecoration: 'underline', marginBottom: '16px' }}
-          >
-            Go to parent approvals
-          </Link>
-        )}
-
         {loading ? (
           <div style={{ fontSize: '13px', color: 'var(--ink-faint)' }}>Loading…</div>
         ) : (
           <>
             <BalanceCard balance={balance} pendingRequest={pending} onRedeemClick={() => setModalOpen(true)} />
+
+            <div className="tear">
+              <div className="tear-hole" /><span /><div className="tear-hole" /><span /><div className="tear-hole" />
+            </div>
+
+            <QuizPicker />
 
             <div className="tear">
               <div className="tear-hole" /><span /><div className="tear-hole" /><span /><div className="tear-hole" />
