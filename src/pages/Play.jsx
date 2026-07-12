@@ -3,7 +3,7 @@ import { useParams, Link, useNavigate } from 'react-router-dom'
 import { supabase } from '../lib/supabaseClient'
 import { useAuth } from '../hooks/useAuth.jsx'
 
-const MINUTES_PER_CORRECT_ANSWER = 2
+const MINUTES_PER_CORRECT_ANSWER = 1
 const optionKeys = ['a', 'b', 'c', 'd']
 
 export default function Play() {
