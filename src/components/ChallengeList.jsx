@@ -1,3 +1,4 @@
+import { useNavigate } from 'react-router-dom'
 import { supabase } from '../lib/supabaseClient'
 
 // Placeholder reward amounts and icons. Once the real quiz / worked example /
@@ -5,10 +6,11 @@ import { supabase } from '../lib/supabaseClient'
 // an actual result (score, topic) instead of this flat click-to-earn stub.
 const CHALLENGES = [
   {
-    id: 'quickfire',
-    name: 'Quickfire quiz',
-    desc: '10 questions, 5 min',
-    minutes: 5,
+    id: 'start-quiz',
+    name: 'Start quiz',
+    desc: 'Pick a subject and topic',
+    type: 'navigate',
+    to: '/quizzes',
     icon: (
       <svg viewBox="0 0 24 24" fill="none" stroke="var(--brass)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" width="18" height="18">
         <path d="M13 2 3 14h7l-1 8 10-12h-7z" />
@@ -19,6 +21,7 @@ const CHALLENGES = [
     id: 'example',
     name: 'Worked example',
     desc: 'Follow a full mark-scheme answer',
+    type: 'earn',
     minutes: 3,
     icon: (
       <svg viewBox="0 0 24 24" fill="none" stroke="var(--brass)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" width="18" height="18">
@@ -31,6 +34,7 @@ const CHALLENGES = [
     id: 'tutor',
     name: 'Ask the tutor',
     desc: 'Get a topic explained, then answer 3 checks',
+    type: 'earn',
     minutes: 8,
     icon: (
       <svg viewBox="0 0 24 24" fill="none" stroke="var(--brass)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" width="18" height="18">
@@ -43,6 +47,8 @@ const CHALLENGES = [
 ]
 
 export default function ChallengeList() {
+  const navigate = useNavigate()
+
   async function handleEarn(challenge) {
     const { error } = await supabase.from('ledger_entries').insert({
       type: 'earn',
@@ -53,12 +59,20 @@ export default function ChallengeList() {
     // useLedger's realtime subscription picks this up and updates the UI.
   }
 
+  function handleClick(challenge) {
+    if (challenge.type === 'navigate') {
+      navigate(challenge.to)
+    } else {
+      handleEarn(challenge)
+    }
+  }
+
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
       {CHALLENGES.map((challenge) => (
         <div
           key={challenge.id}
-          onClick={() => handleEarn(challenge)}
+          onClick={() => handleClick(challenge)}
           style={{
             background: 'var(--card)',
             border: '1px solid var(--rule)',
@@ -90,20 +104,26 @@ export default function ChallengeList() {
               <div style={{ fontSize: '11.5px', color: 'var(--ink-soft)', marginTop: '1px' }}>{challenge.desc}</div>
             </div>
           </div>
-          <div
-            className="mono"
-            style={{
-              fontSize: '13px',
-              fontWeight: 600,
-              color: 'var(--green)',
-              background: 'var(--green-bg)',
-              padding: '4px 9px',
-              borderRadius: '6px',
-              whiteSpace: 'nowrap',
-            }}
-          >
-            +{challenge.minutes} min
-          </div>
+          {challenge.type === 'navigate' ? (
+            <svg viewBox="0 0 24 24" fill="none" stroke="var(--ink-faint)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" width="16" height="16">
+              <path d="m9 18 6-6-6-6" />
+            </svg>
+          ) : (
+            <div
+              className="mono"
+              style={{
+                fontSize: '13px',
+                fontWeight: 600,
+                color: 'var(--green)',
+                background: 'var(--green-bg)',
+                padding: '4px 9px',
+                borderRadius: '6px',
+                whiteSpace: 'nowrap',
+              }}
+            >
+              +{challenge.minutes} min
+            </div>
+          )}
         </div>
       ))}
     </div>

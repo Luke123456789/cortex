@@ -6,6 +6,7 @@ import Home from './pages/Home.jsx'
 import Parent from './pages/Parent.jsx'
 import Quiz from './pages/Quiz.jsx'
 import Play from './pages/Play.jsx'
+import QuizSelect from './pages/QuizSelect.jsx'
 
 export default function App() {
   return (
@@ -42,6 +43,14 @@ export default function App() {
             element={
               <ProtectedRoute>
                 <Play />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/quizzes"
+            element={
+              <ProtectedRoute>
+                <QuizSelect />
               </ProtectedRoute>
             }
           />

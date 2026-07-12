@@ -6,7 +6,6 @@ import BalanceCard from '../components/BalanceCard.jsx'
 import LedgerList from '../components/LedgerList.jsx'
 import ChallengeList from '../components/ChallengeList.jsx'
 import RedeemModal from '../components/RedeemModal.jsx'
-import QuizPicker from '../components/QuizPicker.jsx'
 import RoleSwitch from '../components/RoleSwitch.jsx'
 import { getExistingSubscription, subscribeToPush, ensureSubscriptionSaved, pushSupported } from '../lib/push.js'
 
@@ -103,7 +102,8 @@ export default function Home() {
               <div className="tear-hole" /><span /><div className="tear-hole" /><span /><div className="tear-hole" />
             </div>
 
-            <QuizPicker />
+            <div className="section-label">Earn more</div>
+            <ChallengeList />
 
             <div className="tear">
               <div className="tear-hole" /><span /><div className="tear-hole" /><span /><div className="tear-hole" />
@@ -111,13 +111,6 @@ export default function Home() {
 
             <div className="section-label">Recent entries</div>
             <LedgerList entries={entries} />
-
-            <div className="tear">
-              <div className="tear-hole" /><span /><div className="tear-hole" /><span /><div className="tear-hole" />
-            </div>
-
-            <div className="section-label">Earn more</div>
-            <ChallengeList />
           </>
         )}
       </div>
