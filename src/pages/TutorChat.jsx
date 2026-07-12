@@ -99,6 +99,26 @@ export default function TutorChat() {
     window.speechSynthesis.speak(utterance)
   }
 
+  function playAudioBase64(base64, fallbackText) {
+    if (!base64) {
+      speak(fallbackText)
+      return
+    }
+    try {
+      const audio = new Audio(`data:audio/mpeg;base64,${base64}`)
+      audio.onplay = () => setVoiceState('speaking')
+      audio.onended = () => setVoiceState('idle')
+      audio.onerror = () => {
+        console.error('Audio playback failed, falling back to browser voice')
+        speak(fallbackText)
+      }
+      audio.play()
+    } catch (err) {
+      console.error('Audio playback threw', err)
+      speak(fallbackText)
+    }
+  }
+
   const callTutor = useCallback(async (nextMessages) => {
     const topic = topics.find((t) => t.id === topicId)
     const subtopic = subtopics.find((st) => st.id === subtopicId)
@@ -125,7 +145,7 @@ export default function TutorChat() {
       const data = await res.json()
       const updated = [...nextMessages, { role: 'assistant', content: data.reply }]
       setMessages(updated)
-      speak(data.reply)
+      playAudioBase64(data.audioBase64, data.reply)
 
       const studentMessageCount = updated.filter((m) => m.role === 'user').length
       await supabase.from('tutor_sessions').update({ message_count: studentMessageCount }).eq('id', sessionId)
