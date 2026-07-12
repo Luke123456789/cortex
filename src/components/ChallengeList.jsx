@@ -21,8 +21,7 @@ const CHALLENGES = [
     id: 'example',
     name: 'Worked example',
     desc: 'Follow a full mark-scheme answer',
-    type: 'earn',
-    minutes: 3,
+    type: 'coming-soon',
     icon: (
       <svg viewBox="0 0 24 24" fill="none" stroke="var(--brass)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" width="18" height="18">
         <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20" />
@@ -34,8 +33,7 @@ const CHALLENGES = [
     id: 'tutor',
     name: 'Ask the tutor',
     desc: 'Get a topic explained, then answer 3 checks',
-    type: 'earn',
-    minutes: 8,
+    type: 'coming-soon',
     icon: (
       <svg viewBox="0 0 24 24" fill="none" stroke="var(--brass)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" width="18" height="18">
         <circle cx="12" cy="12" r="10" />
@@ -62,70 +60,92 @@ export default function ChallengeList() {
   function handleClick(challenge) {
     if (challenge.type === 'navigate') {
       navigate(challenge.to)
-    } else {
+    } else if (challenge.type === 'earn') {
       handleEarn(challenge)
     }
+    // coming-soon: inert, no action
   }
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
-      {CHALLENGES.map((challenge) => (
-        <div
-          key={challenge.id}
-          onClick={() => handleClick(challenge)}
-          style={{
-            background: 'var(--card)',
-            border: '1px solid var(--rule)',
-            borderRadius: 'var(--radius)',
-            padding: '14px 15px',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'space-between',
-            cursor: 'pointer',
-          }}
-        >
-          <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
-            <div
-              style={{
-                width: '36px',
-                height: '36px',
-                borderRadius: '8px',
-                background: 'var(--brass-light)',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                flexShrink: 0,
-              }}
-            >
-              {challenge.icon}
+      {CHALLENGES.map((challenge) => {
+        const isComingSoon = challenge.type === 'coming-soon'
+        return (
+          <div
+            key={challenge.id}
+            onClick={() => handleClick(challenge)}
+            style={{
+              background: 'var(--card)',
+              border: '1px solid var(--rule)',
+              borderRadius: 'var(--radius)',
+              padding: '14px 15px',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'space-between',
+              cursor: isComingSoon ? 'not-allowed' : 'pointer',
+              opacity: isComingSoon ? 0.55 : 1,
+            }}
+          >
+            <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+              <div
+                style={{
+                  width: '36px',
+                  height: '36px',
+                  borderRadius: '8px',
+                  background: 'var(--brass-light)',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  flexShrink: 0,
+                }}
+              >
+                {challenge.icon}
+              </div>
+              <div>
+                <div style={{ fontSize: '14px', fontWeight: 600 }}>{challenge.name}</div>
+                <div style={{ fontSize: '11.5px', color: 'var(--ink-soft)', marginTop: '1px' }}>{challenge.desc}</div>
+              </div>
             </div>
-            <div>
-              <div style={{ fontSize: '14px', fontWeight: 600 }}>{challenge.name}</div>
-              <div style={{ fontSize: '11.5px', color: 'var(--ink-soft)', marginTop: '1px' }}>{challenge.desc}</div>
-            </div>
+            {isComingSoon ? (
+              <div
+                className="mono"
+                style={{
+                  fontSize: '10.5px',
+                  fontWeight: 600,
+                  textTransform: 'uppercase',
+                  letterSpacing: '0.4px',
+                  color: 'var(--ink-faint)',
+                  border: '1px solid var(--rule)',
+                  padding: '4px 9px',
+                  borderRadius: '20px',
+                  whiteSpace: 'nowrap',
+                }}
+              >
+                Coming soon
+              </div>
+            ) : challenge.type === 'navigate' ? (
+              <svg viewBox="0 0 24 24" fill="none" stroke="var(--ink-faint)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" width="16" height="16">
+                <path d="m9 18 6-6-6-6" />
+              </svg>
+            ) : (
+              <div
+                className="mono"
+                style={{
+                  fontSize: '13px',
+                  fontWeight: 600,
+                  color: 'var(--green)',
+                  background: 'var(--green-bg)',
+                  padding: '4px 9px',
+                  borderRadius: '6px',
+                  whiteSpace: 'nowrap',
+                }}
+              >
+                +{challenge.minutes} min
+              </div>
+            )}
           </div>
-          {challenge.type === 'navigate' ? (
-            <svg viewBox="0 0 24 24" fill="none" stroke="var(--ink-faint)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" width="16" height="16">
-              <path d="m9 18 6-6-6-6" />
-            </svg>
-          ) : (
-            <div
-              className="mono"
-              style={{
-                fontSize: '13px',
-                fontWeight: 600,
-                color: 'var(--green)',
-                background: 'var(--green-bg)',
-                padding: '4px 9px',
-                borderRadius: '6px',
-                whiteSpace: 'nowrap',
-              }}
-            >
-              +{challenge.minutes} min
-            </div>
-          )}
-        </div>
-      ))}
+        )
+      })}
     </div>
   )
 }
