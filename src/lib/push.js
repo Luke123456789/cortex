@@ -42,18 +42,19 @@ async function getCurrentUserAndRole() {
 }
 
 async function saveSubscription(subscription) {
-  const { userId, role } = await getCurrentUserAndRole()
+  const { role } = await getCurrentUserAndRole()
   const json = subscription.toJSON()
-  const { error } = await supabase.from('push_subscriptions').upsert(
-    {
-      user_id: userId,
-      endpoint: json.endpoint,
-      p256dh: json.keys.p256dh,
-      auth: json.keys.auth,
-      role,
-    },
-    { onConflict: 'endpoint' }
-  )
+  // Uses an RPC rather than a direct upsert: if this device's endpoint was
+  // previously registered under a different account (e.g. tested as parent,
+  // now logged in as student), a plain upsert would be blocked by RLS since
+  // the existing row belongs to someone else. The RPC explicitly reassigns
+  // ownership to whoever's currently signed in.
+  const { error } = await supabase.rpc('claim_push_subscription', {
+    p_endpoint: json.endpoint,
+    p_p256dh: json.keys.p256dh,
+    p_auth: json.keys.auth,
+    p_role: role,
+  })
   if (error) throw error
 }
 
