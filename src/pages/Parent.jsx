@@ -3,6 +3,7 @@ import { useRedemptions } from '../hooks/useRedemptions'
 import { useAuth } from '../hooks/useAuth.jsx'
 import { supabase } from '../lib/supabaseClient'
 import RoleSwitch from '../components/RoleSwitch.jsx'
+import WeakAreas from '../components/WeakAreas.jsx'
 import { getExistingSubscription, subscribeToPush, ensureSubscriptionSaved, pushSupported } from '../lib/push.js'
 
 function formatTime(isoString) {
@@ -126,6 +127,8 @@ export default function Parent() {
             This browser doesn't support push notifications.
           </div>
         )}
+
+        <WeakAreas />
 
         <div className="section-label">Pending</div>
         {pendingRequests.length === 0 ? (

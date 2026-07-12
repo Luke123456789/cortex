@@ -89,18 +89,33 @@ export default function Play() {
     const score = finalAnswers.filter((a) => a.isCorrect).length
     const minutesEarned = score * MINUTES_PER_CORRECT_ANSWER
 
-    const { error: sessionError } = await supabase.from('quiz_sessions').insert({
-      student_id: user.id,
-      quiz_id: quizId,
-      topic_id: quiz.topic_id,
-      quiz_format: 'standard',
-      question_count: questions.length,
-      score,
-      xp_earned: minutesEarned,
-      started_at: startedAt,
-      completed_at: new Date().toISOString(),
-    })
+    const { data: sessionRow, error: sessionError } = await supabase
+      .from('quiz_sessions')
+      .insert({
+        student_id: user.id,
+        quiz_id: quizId,
+        topic_id: quiz.topic_id,
+        quiz_format: 'standard',
+        question_count: questions.length,
+        score,
+        xp_earned: minutesEarned,
+        started_at: startedAt,
+        completed_at: new Date().toISOString(),
+      })
+      .select('id')
+      .single()
     if (sessionError) console.error('Failed to record quiz session', sessionError)
+
+    if (sessionRow) {
+      const historyRows = finalAnswers.map((a) => ({
+        student_id: user.id,
+        question_id: a.questionId,
+        answered_correctly: a.isCorrect,
+        quiz_session_id: sessionRow.id,
+      }))
+      const { error: historyError } = await supabase.from('student_question_history').insert(historyRows)
+      if (historyError) console.error('Failed to log question history', historyError)
+    }
 
     if (minutesEarned > 0) {
       const { error: ledgerError } = await supabase.from('ledger_entries').insert({
