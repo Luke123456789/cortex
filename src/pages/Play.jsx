@@ -248,8 +248,31 @@ export default function Play() {
 
         {selected !== null && (
           <>
-            <div style={{ fontSize: '11.5px', color: 'var(--ink-faint)', fontStyle: 'italic', marginBottom: '16px' }}>
-              {question.explanation}
+            <div
+              style={{
+                background: question.correct_option.toLowerCase() === selected ? 'var(--green-bg)' : 'var(--red-bg)',
+                border: `1px solid ${question.correct_option.toLowerCase() === selected ? 'var(--green)' : 'var(--red)'}`,
+                borderRadius: '8px',
+                padding: '12px 14px',
+                marginBottom: '16px',
+              }}
+            >
+              <div
+                className="mono"
+                style={{
+                  fontSize: '10px',
+                  textTransform: 'uppercase',
+                  letterSpacing: '0.4px',
+                  color: question.correct_option.toLowerCase() === selected ? 'var(--green)' : 'var(--red)',
+                  marginBottom: '4px',
+                  fontWeight: 600,
+                }}
+              >
+                {question.correct_option.toLowerCase() === selected ? 'Correct' : 'Not quite'}
+              </div>
+              <div style={{ fontSize: '14px', lineHeight: 1.5, color: 'var(--ink)' }}>
+                {question.explanation}
+              </div>
             </div>
             <button
               onClick={nextQuestion}
