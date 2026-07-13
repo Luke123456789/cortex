@@ -3,7 +3,7 @@ import { useParams, Link, useNavigate } from 'react-router-dom'
 import { supabase } from '../lib/supabaseClient'
 import { useAuth } from '../hooks/useAuth.jsx'
 
-const MINUTES_PER_CORRECT_ANSWER = 1
+const SECONDS_PER_CORRECT_ANSWER = 30
 const optionKeys = ['a', 'b', 'c', 'd']
 
 export default function Play() {
@@ -87,7 +87,8 @@ export default function Play() {
   async function finishQuiz(finalAnswers) {
     setSubmitting(true)
     const score = finalAnswers.filter((a) => a.isCorrect).length
-    const minutesEarned = score * MINUTES_PER_CORRECT_ANSWER
+    const secondsEarned = score * SECONDS_PER_CORRECT_ANSWER
+    const minutesEarned = Math.round(secondsEarned / 60)
 
     const { data: sessionRow, error: sessionError } = await supabase
       .from('quiz_sessions')
@@ -157,6 +158,7 @@ export default function Play() {
 
   if (finished) {
     const score = answers.filter((a) => a.isCorrect).length
+    const minutesEarned = Math.round((score * SECONDS_PER_CORRECT_ANSWER) / 60)
     return (
       <div className="device">
         <div className="screen">
@@ -164,7 +166,7 @@ export default function Play() {
           <div className="section-label">{quiz.title} · done</div>
           <div style={{ fontSize: '28px', fontWeight: 600, marginBottom: '6px' }}>{score} / {questions.length}</div>
           <div style={{ fontSize: '13px', color: 'var(--ink-faint)', marginBottom: '20px' }}>
-            {score * MINUTES_PER_CORRECT_ANSWER} minutes earned. This quiz will be locked for {quiz.cooldown_hours} hours.
+            {minutesEarned} minutes earned. This quiz will be locked for {quiz.cooldown_hours} hours.
           </div>
           <Link
             to="/"
