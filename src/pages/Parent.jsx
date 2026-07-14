@@ -1,9 +1,11 @@
 import { useEffect, useState } from 'react'
 import { useRedemptions } from '../hooks/useRedemptions'
+import { useLedger } from '../hooks/useLedger'
 import { useAuth } from '../hooks/useAuth.jsx'
 import { supabase } from '../lib/supabaseClient'
 import RoleSwitch from '../components/RoleSwitch.jsx'
 import WeakAreas from '../components/WeakAreas.jsx'
+import LedgerList from '../components/LedgerList.jsx'
 import { getExistingSubscription, subscribeToPush, ensureSubscriptionSaved, pushSupported } from '../lib/push.js'
 
 function formatTime(isoString) {
@@ -12,6 +14,7 @@ function formatTime(isoString) {
 
 export default function Parent() {
   const { requests, refresh } = useRedemptions()
+  const { entries } = useLedger()
   const { signOut } = useAuth()
   const [notifStatus, setNotifStatus] = useState('checking')
 
@@ -215,6 +218,9 @@ export default function Parent() {
             </span>
           </div>
         ))}
+
+        <div className="section-label" style={{ marginTop: '20px' }}>Activity feed</div>
+        <LedgerList entries={entries} />
       </div>
     </div>
   )

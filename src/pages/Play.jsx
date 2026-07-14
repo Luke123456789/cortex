@@ -29,7 +29,7 @@ export default function Play() {
 
       const { data: quizRow } = await supabase
         .from('quizzes')
-        .select('id, title, topic_id, cooldown_hours, question_count')
+        .select('id, title, topic_id, cooldown_hours, question_count, topics (name)')
         .eq('id', quizId)
         .single()
       setQuiz(quizRow)
@@ -122,7 +122,7 @@ export default function Play() {
       const { error: ledgerError } = await supabase.from('ledger_entries').insert({
         type: 'earn',
         amount_minutes: minutesEarned,
-        source: `Quiz: ${quiz.title}`,
+        source: quiz.topics?.name ? `${quiz.topics.name} · ${quiz.title}` : `Quiz: ${quiz.title}`,
       })
       if (ledgerError) console.error('Failed to log ledger reward', ledgerError)
     }
@@ -146,7 +146,7 @@ export default function Play() {
       <div className="device">
         <div className="screen">
           <div className="wordmark" style={{ marginBottom: '18px' }}>CORTEX</div>
-          <div className="section-label">{quiz?.title}</div>
+          <div className="section-label">{quiz?.topics?.name ? `${quiz.topics.name} · ${quiz.title}` : quiz?.title}</div>
           <div style={{ fontSize: '13px', color: 'var(--ink-faint)', marginBottom: '16px' }}>
             You've already done this one recently. It unlocks again on {lockedUntil.toLocaleString([], { day: '2-digit', month: 'short', hour: '2-digit', minute: '2-digit' })}.
           </div>
@@ -163,7 +163,7 @@ export default function Play() {
       <div className="device">
         <div className="screen">
           <div className="wordmark" style={{ marginBottom: '18px' }}>CORTEX</div>
-          <div className="section-label">{quiz.title} · done</div>
+          <div className="section-label">{quiz.topics?.name ? `${quiz.topics.name} · ${quiz.title} · done` : `${quiz.title} · done`}</div>
           <div style={{ fontSize: '28px', fontWeight: 600, marginBottom: '6px' }}>{score} / {questions.length}</div>
           <div style={{ fontSize: '13px', color: 'var(--ink-faint)', marginBottom: '20px' }}>
             {minutesEarned} minutes earned. This quiz will be locked for {quiz.cooldown_hours} hours.
