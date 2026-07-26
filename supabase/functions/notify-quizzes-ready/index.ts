@@ -37,7 +37,7 @@ Deno.serve(async (req) => {
 
   const message = JSON.stringify({
     title: 'Cortex',
-    body: 'New Economics quizzes are up — earn some screen time.',
+    body: 'New quizzes are up — earn some screen time.',
     url: '/quizzes',
   })
 

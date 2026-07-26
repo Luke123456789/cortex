@@ -53,7 +53,7 @@ export default function Home() {
           <div>
             <div className="wordmark">CORTEX</div>
             <div className="mono" style={{ fontSize: '10px', letterSpacing: '0.6px', textTransform: 'uppercase', color: 'var(--ink-soft)', marginTop: '3px' }}>
-              GCSE Economics · Paper 2
+              GCSE Revision
             </div>
           </div>
           <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-end', gap: '8px' }}>
