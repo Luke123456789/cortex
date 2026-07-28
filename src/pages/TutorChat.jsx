@@ -57,6 +57,7 @@ export default function TutorChat() {
 
   const selectedSubject = subjects.find((s) => s.id === subjectId)
   const topics = selectedSubject?.topics.filter((t) => t.questionCount > 0) || []
+  const selectedTopic = topics.find((t) => t.id === topicId)
 
   useEffect(() => {
     if (topics.length && !topics.some((t) => t.id === topicId)) {
@@ -219,7 +220,7 @@ export default function TutorChat() {
   async function startSession() {
     const topic = topics.find((t) => t.id === topicId)
     const subtopic = subtopics.find((st) => st.id === subtopicId)
-    if (!topic || !subtopic || selectedSubject?.locked) return
+    if (!topic || !subtopic || selectedTopic?.locked) return
 
     setPlanLoading(true)
     setError(null)
@@ -344,16 +345,16 @@ export default function TutorChat() {
               <select style={selectStyle} value={subjectId} onChange={(e) => setSubjectId(e.target.value)}>
                 {subjects.map((s) => <option key={s.id} value={s.id}>{s.name}{s.locked ? ' (locked)' : ''}</option>)}
               </select>
+              <select style={selectStyle} value={topicId} onChange={(e) => setTopicId(e.target.value)}>
+                {topics.map((t) => <option key={t.id} value={t.id}>{t.name}{t.locked ? ' (locked)' : ''}</option>)}
+              </select>
 
-              {selectedSubject?.locked ? (
+              {selectedTopic?.locked ? (
                 <div style={{ fontSize: '12.5px', color: 'var(--ink-faint)', background: 'var(--card)', border: '1px solid var(--rule)', borderRadius: 'var(--radius)', padding: '14px 15px' }}>
-                  A parent has locked this subject until {selectedSubject.lockedUntil.toLocaleString([], { day: '2-digit', month: 'short', hour: '2-digit', minute: '2-digit' })} — try a different subject in the meantime.
+                  A parent has locked {selectedSubject.locked ? 'this subject' : 'this topic'} until {selectedTopic.lockedUntil.toLocaleString([], { day: '2-digit', month: 'short', hour: '2-digit', minute: '2-digit' })} — try something else in the meantime.
                 </div>
               ) : (
                 <>
-                  <select style={selectStyle} value={topicId} onChange={(e) => setTopicId(e.target.value)}>
-                    {topics.map((t) => <option key={t.id} value={t.id}>{t.name}</option>)}
-                  </select>
                   <select style={selectStyle} value={subtopicId} onChange={(e) => setSubtopicId(e.target.value)}>
                     {subtopics.map((st) => <option key={st.id} value={st.id}>{st.name}</option>)}
                   </select>

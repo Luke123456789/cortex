@@ -22,7 +22,7 @@ export function useQuizCatalog() {
 
     const { data: lockRows, error: lockError } = await supabase
       .from('subject_locks')
-      .select('subject_id, locked_until')
+      .select('subject_id, topic_id, locked_until')
 
     if (lockError) {
       console.error('Failed to load subject locks', lockError)
@@ -33,8 +33,14 @@ export function useQuizCatalog() {
 
     const now = Date.now()
     const lockBySubject = {}
-    for (const lock of lockRows) {
-      lockBySubject[lock.subject_id] = lock
+    const lockByTopic = {}
+    for (const lockRow of lockRows) {
+      if (new Date(lockRow.locked_until).getTime() <= now) continue
+      if (lockRow.topic_id) {
+        lockByTopic[lockRow.topic_id] = lockRow
+      } else {
+        lockBySubject[lockRow.subject_id] = lockRow
+      }
     }
 
     const { data: topicRows, error: topicError } = await supabase
@@ -73,13 +79,28 @@ export function useQuizCatalog() {
 
     const grouped = subjectRows
       .map((subject) => {
-        const lock = lockBySubject[subject.id]
-        const locked = !!lock && new Date(lock.locked_until).getTime() > now
+        const subjectLock = lockBySubject[subject.id]
+        const subjectLocked = !!subjectLock
+        const subjectLockedUntil = subjectLocked ? new Date(subjectLock.locked_until) : null
+
+        const topics = topicsWithCounts
+          .filter((t) => t.subject_id === subject.id)
+          .map((topic) => {
+            const topicLock = lockByTopic[topic.id]
+            const locked = subjectLocked || !!topicLock
+            const lockedUntil = subjectLocked
+              ? subjectLockedUntil
+              : topicLock
+                ? new Date(topicLock.locked_until)
+                : null
+            return { ...topic, locked, lockedUntil }
+          })
+
         return {
           ...subject,
-          topics: topicsWithCounts.filter((t) => t.subject_id === subject.id),
-          locked,
-          lockedUntil: locked ? new Date(lock.locked_until) : null,
+          topics,
+          locked: subjectLocked,
+          lockedUntil: subjectLockedUntil,
         }
       })
       .filter((subject) => subject.topics.some((t) => t.questionCount > 0))

@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { useSubjectLocks } from '../hooks/useSubjectLocks'
 
 const DURATION_OPTIONS = [
@@ -9,116 +9,56 @@ const DURATION_OPTIONS = [
   { label: '2 weeks', hours: 336 },
 ]
 
+const selectStyle = {
+  flex: 1,
+  background: 'var(--paper)',
+  border: '1px solid var(--rule)',
+  borderRadius: '8px',
+  padding: '9px 10px',
+  fontSize: '12.5px',
+  fontFamily: "'Space Grotesk', sans-serif",
+  color: 'var(--ink)',
+}
+
 function formatLockedUntil(date) {
   return date.toLocaleString([], { day: '2-digit', month: 'short', hour: '2-digit', minute: '2-digit' })
 }
 
-function SubjectRow({ subject, onLock, onUnlock }) {
+export default function SubjectLocks() {
+  const { subjects, locks, loading, lock, unlock } = useSubjectLocks()
+  const [subjectId, setSubjectId] = useState('')
+  const [topicId, setTopicId] = useState('')
   const [hours, setHours] = useState(24)
   const [busy, setBusy] = useState(false)
+
+  useEffect(() => {
+    if (subjects.length && !subjectId) setSubjectId(subjects[0].id)
+  }, [subjects, subjectId])
+
+  const selectedSubject = subjects.find((s) => s.id === subjectId)
+  const topics = selectedSubject?.topics || []
+
+  useEffect(() => {
+    setTopicId('')
+  }, [subjectId])
 
   async function handleLock() {
     setBusy(true)
     try {
-      await onLock(subject.id, hours)
+      await lock(subjectId, topicId || null, hours)
     } finally {
       setBusy(false)
     }
   }
 
-  async function handleUnlock() {
+  async function handleUnlock(lockId) {
     setBusy(true)
     try {
-      await onUnlock(subject.id)
+      await unlock(lockId)
     } finally {
       setBusy(false)
     }
   }
-
-  return (
-    <div
-      style={{
-        background: 'var(--card)',
-        border: '1px solid var(--rule)',
-        borderRadius: 'var(--radius)',
-        padding: '12px 14px',
-      }}
-    >
-      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: subject.locked ? '8px' : 0 }}>
-        <span style={{ fontSize: '13.5px', fontWeight: 600 }}>{subject.name}</span>
-        {subject.locked && (
-          <span className="mono" style={{ fontSize: '9.5px', fontWeight: 600, textTransform: 'uppercase', color: 'var(--red)' }}>
-            Locked
-          </span>
-        )}
-      </div>
-
-      {subject.locked ? (
-        <>
-          <div style={{ fontSize: '11.5px', color: 'var(--ink-faint)', marginBottom: '10px' }}>
-            Unlocks {formatLockedUntil(subject.lockedUntil)}
-          </div>
-          <button
-            onClick={handleUnlock}
-            disabled={busy}
-            style={{
-              width: '100%',
-              background: 'transparent',
-              border: '1px solid var(--rule-strong)',
-              borderRadius: '8px',
-              padding: '8px',
-              fontSize: '12.5px',
-              fontWeight: 600,
-              color: 'var(--ink)',
-            }}
-          >
-            Unlock now
-          </button>
-        </>
-      ) : (
-        <div style={{ display: 'flex', gap: '8px' }}>
-          <select
-            value={hours}
-            onChange={(e) => setHours(Number(e.target.value))}
-            style={{
-              flex: 1,
-              background: 'var(--paper)',
-              border: '1px solid var(--rule)',
-              borderRadius: '8px',
-              padding: '8px 10px',
-              fontSize: '12.5px',
-              fontFamily: "'Space Grotesk', sans-serif",
-              color: 'var(--ink)',
-            }}
-          >
-            {DURATION_OPTIONS.map((opt) => (
-              <option key={opt.hours} value={opt.hours}>{opt.label}</option>
-            ))}
-          </select>
-          <button
-            onClick={handleLock}
-            disabled={busy}
-            style={{
-              background: 'var(--ink)',
-              color: 'var(--paper)',
-              border: 'none',
-              borderRadius: '8px',
-              padding: '8px 14px',
-              fontSize: '12.5px',
-              fontWeight: 600,
-              whiteSpace: 'nowrap',
-            }}
-          >
-            Lock
-          </button>
-        </div>
-      )}
-    </div>
-  )
-}
-
-export default function SubjectLocks() {
-  const { subjects, loading, lockSubject, unlockSubject } = useSubjectLocks()
 
   if (loading) {
     return <div style={{ fontSize: '12px', color: 'var(--ink-faint)', marginBottom: '18px' }}>Loading subjects…</div>
@@ -132,13 +72,89 @@ export default function SubjectLocks() {
     <div style={{ marginBottom: '20px' }}>
       <div className="section-label">Subject lockouts</div>
       <div style={{ fontSize: '11.5px', color: 'var(--ink-faint)', marginBottom: '10px' }}>
-        Lock a subject to stop quiz grinding and push practice toward other areas.
+        Lock a subject or a single topic to stop quiz grinding and push practice toward other areas.
       </div>
-      <div style={{ display: 'grid', gap: '8px' }}>
-        {subjects.map((subject) => (
-          <SubjectRow key={subject.id} subject={subject} onLock={lockSubject} onUnlock={unlockSubject} />
-        ))}
+
+      <div style={{ display: 'flex', gap: '8px', marginBottom: '8px' }}>
+        <select style={selectStyle} value={subjectId} onChange={(e) => setSubjectId(e.target.value)}>
+          {subjects.map((s) => (
+            <option key={s.id} value={s.id}>{s.name}</option>
+          ))}
+        </select>
+        <select style={selectStyle} value={topicId} onChange={(e) => setTopicId(e.target.value)}>
+          <option value="">Entire subject</option>
+          {topics.map((t) => (
+            <option key={t.id} value={t.id}>{t.name}</option>
+          ))}
+        </select>
       </div>
+
+      <div style={{ display: 'flex', gap: '8px', marginBottom: '14px' }}>
+        <select style={selectStyle} value={hours} onChange={(e) => setHours(Number(e.target.value))}>
+          {DURATION_OPTIONS.map((opt) => (
+            <option key={opt.hours} value={opt.hours}>{opt.label}</option>
+          ))}
+        </select>
+        <button
+          onClick={handleLock}
+          disabled={busy || !subjectId}
+          style={{
+            background: 'var(--ink)',
+            color: 'var(--paper)',
+            border: 'none',
+            borderRadius: '8px',
+            padding: '9px 18px',
+            fontSize: '12.5px',
+            fontWeight: 600,
+            whiteSpace: 'nowrap',
+          }}
+        >
+          Lock
+        </button>
+      </div>
+
+      {locks.length === 0 ? (
+        <div style={{ fontSize: '12px', color: 'var(--ink-faint)' }}>Nothing locked right now.</div>
+      ) : (
+        <div style={{ display: 'grid', gap: '6px' }}>
+          {locks.map((l) => (
+            <div
+              key={l.id}
+              style={{
+                display: 'flex',
+                justifyContent: 'space-between',
+                alignItems: 'center',
+                background: 'var(--card)',
+                border: '1px solid var(--rule)',
+                borderRadius: 'var(--radius)',
+                padding: '9px 12px',
+              }}
+            >
+              <div>
+                <div style={{ fontSize: '13px', fontWeight: 600 }}>{l.label}</div>
+                <div className="mono" style={{ fontSize: '9.5px', color: 'var(--ink-faint)' }}>
+                  Unlocks {formatLockedUntil(l.lockedUntil)}
+                </div>
+              </div>
+              <button
+                onClick={() => handleUnlock(l.id)}
+                disabled={busy}
+                style={{
+                  background: 'transparent',
+                  border: '1px solid var(--rule-strong)',
+                  borderRadius: '8px',
+                  padding: '6px 12px',
+                  fontSize: '11.5px',
+                  fontWeight: 600,
+                  color: 'var(--ink)',
+                }}
+              >
+                Unlock
+              </button>
+            </div>
+          ))}
+        </div>
+      )}
     </div>
   )
 }

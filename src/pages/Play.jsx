@@ -36,14 +36,18 @@ export default function Play() {
       setQuiz(quizRow)
 
       if (quizRow?.topics?.subject_id) {
-        const { data: subjectLock } = await supabase
+        const { data: locks } = await supabase
           .from('subject_locks')
-          .select('locked_until')
+          .select('topic_id, locked_until')
           .eq('subject_id', quizRow.topics.subject_id)
-          .maybeSingle()
 
-        if (subjectLock && Date.now() < new Date(subjectLock.locked_until).getTime()) {
-          setSubjectLockedUntil(new Date(subjectLock.locked_until))
+        const now = Date.now()
+        const activeLock = (locks || [])
+          .filter((l) => now < new Date(l.locked_until).getTime())
+          .find((l) => l.topic_id === null || l.topic_id === quizRow.topic_id)
+
+        if (activeLock) {
+          setSubjectLockedUntil(new Date(activeLock.locked_until))
         }
       }
 

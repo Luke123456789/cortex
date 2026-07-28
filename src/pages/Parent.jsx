@@ -18,6 +18,7 @@ export default function Parent() {
   const { entries } = useLedger()
   const { signOut } = useAuth()
   const [notifStatus, setNotifStatus] = useState('checking')
+  const [showAllActivity, setShowAllActivity] = useState(false)
 
   useEffect(() => {
     if (!pushSupported()) {
@@ -223,7 +224,15 @@ export default function Parent() {
         ))}
 
         <div className="section-label" style={{ marginTop: '20px' }}>Activity feed</div>
-        <LedgerList entries={entries} />
+        <LedgerList entries={showAllActivity ? entries : entries.slice(0, 6)} />
+        {!showAllActivity && entries.length > 6 && (
+          <button
+            onClick={() => setShowAllActivity(true)}
+            style={{ background: 'none', border: 'none', fontSize: '12px', color: 'var(--brass)', textDecoration: 'underline', padding: 0, marginTop: '2px' }}
+          >
+            View more ({entries.length - 6} more)
+          </button>
+        )}
       </div>
     </div>
   )
