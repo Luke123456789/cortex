@@ -19,6 +19,7 @@ export default function Parent() {
   const { signOut } = useAuth()
   const [notifStatus, setNotifStatus] = useState('checking')
   const [showAllActivity, setShowAllActivity] = useState(false)
+  const [showAllResolved, setShowAllResolved] = useState(false)
 
   useEffect(() => {
     if (!pushSupported()) {
@@ -104,6 +105,64 @@ export default function Parent() {
           Parent approvals
         </div>
 
+        {pendingRequests.length > 0 && (
+          <div style={{ marginBottom: '20px' }}>
+            <div className="section-label" style={{ color: 'var(--brass)' }}>
+              New request{pendingRequests.length > 1 ? 's' : ''}
+            </div>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
+              {pendingRequests.map((request) => (
+                <div
+                  key={request.id}
+                  style={{
+                    background: 'var(--brass-light)',
+                    border: '1px solid var(--brass)',
+                    borderRadius: 'var(--radius)',
+                    padding: '14px 15px',
+                  }}
+                >
+                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '10px' }}>
+                    <span className="mono" style={{ fontSize: '15px', fontWeight: 600 }}>{request.minutes_requested} min</span>
+                    <span className="mono" style={{ fontSize: '10.5px', color: 'var(--ink-faint)' }}>{formatTime(request.requested_at)}</span>
+                  </div>
+                  <div style={{ display: 'flex', gap: '10px' }}>
+                    <button
+                      onClick={() => deny(request)}
+                      style={{
+                        flex: 1,
+                        background: 'transparent',
+                        border: '1px solid var(--rule-strong)',
+                        borderRadius: '8px',
+                        padding: '9px',
+                        fontSize: '13px',
+                        fontWeight: 600,
+                        color: 'var(--red)',
+                      }}
+                    >
+                      Deny
+                    </button>
+                    <button
+                      onClick={() => approve(request)}
+                      style={{
+                        flex: 1,
+                        background: 'var(--ink)',
+                        color: 'var(--paper)',
+                        border: 'none',
+                        borderRadius: '8px',
+                        padding: '9px',
+                        fontSize: '13px',
+                        fontWeight: 600,
+                      }}
+                    >
+                      Approve
+                    </button>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
+
         {notifStatus === 'disabled' && (
           <button
             onClick={handleEnableNotifications}
@@ -137,91 +196,49 @@ export default function Parent() {
 
         <SubjectLocks />
 
-        <div className="section-label">Pending</div>
-        {pendingRequests.length === 0 ? (
-          <div style={{ fontSize: '13px', color: 'var(--ink-faint)', marginBottom: '20px' }}>Nothing waiting on you.</div>
+        <div className="section-label">Recent</div>
+        {resolvedRequests.length === 0 ? (
+          <div style={{ fontSize: '13px', color: 'var(--ink-faint)', marginBottom: '20px' }}>No requests yet.</div>
         ) : (
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '10px', marginBottom: '20px' }}>
-            {pendingRequests.map((request) => (
+          <>
+            {(showAllResolved ? resolvedRequests : resolvedRequests.slice(0, 6)).map((request) => (
               <div
                 key={request.id}
                 style={{
-                  background: 'var(--card)',
-                  border: '1px solid var(--rule)',
-                  borderRadius: 'var(--radius)',
-                  padding: '14px 15px',
+                  display: 'flex',
+                  justifyContent: 'space-between',
+                  alignItems: 'center',
+                  padding: '10px 0',
+                  borderBottom: '1px solid var(--rule)',
                 }}
               >
-                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '10px' }}>
-                  <span className="mono" style={{ fontSize: '15px', fontWeight: 600 }}>{request.minutes_requested} min</span>
-                  <span className="mono" style={{ fontSize: '10.5px', color: 'var(--ink-faint)' }}>{formatTime(request.requested_at)}</span>
+                <div>
+                  <div style={{ fontSize: '13.5px' }}>{request.minutes_requested} min requested</div>
+                  <span className="mono" style={{ fontSize: '9.5px', color: 'var(--ink-faint)' }}>{formatTime(request.requested_at)}</span>
                 </div>
-                <div style={{ display: 'flex', gap: '10px' }}>
-                  <button
-                    onClick={() => deny(request)}
-                    style={{
-                      flex: 1,
-                      background: 'transparent',
-                      border: '1px solid var(--rule-strong)',
-                      borderRadius: '8px',
-                      padding: '9px',
-                      fontSize: '13px',
-                      fontWeight: 600,
-                      color: 'var(--red)',
-                    }}
-                  >
-                    Deny
-                  </button>
-                  <button
-                    onClick={() => approve(request)}
-                    style={{
-                      flex: 1,
-                      background: 'var(--ink)',
-                      color: 'var(--paper)',
-                      border: 'none',
-                      borderRadius: '8px',
-                      padding: '9px',
-                      fontSize: '13px',
-                      fontWeight: 600,
-                    }}
-                  >
-                    Approve
-                  </button>
-                </div>
+                <span
+                  className="mono"
+                  style={{
+                    fontSize: '11px',
+                    fontWeight: 600,
+                    textTransform: 'uppercase',
+                    color: request.status === 'approved' ? 'var(--green)' : 'var(--red)',
+                  }}
+                >
+                  {request.status}
+                </span>
               </div>
             ))}
-          </div>
+            {!showAllResolved && resolvedRequests.length > 6 && (
+              <button
+                onClick={() => setShowAllResolved(true)}
+                style={{ background: 'none', border: 'none', fontSize: '12px', color: 'var(--brass)', textDecoration: 'underline', padding: 0, marginTop: '8px' }}
+              >
+                View more ({resolvedRequests.length - 6} more)
+              </button>
+            )}
+          </>
         )}
-
-        <div className="section-label">Recent</div>
-        {resolvedRequests.slice(0, 8).map((request) => (
-          <div
-            key={request.id}
-            style={{
-              display: 'flex',
-              justifyContent: 'space-between',
-              alignItems: 'center',
-              padding: '10px 0',
-              borderBottom: '1px solid var(--rule)',
-            }}
-          >
-            <div>
-              <div style={{ fontSize: '13.5px' }}>{request.minutes_requested} min requested</div>
-              <span className="mono" style={{ fontSize: '9.5px', color: 'var(--ink-faint)' }}>{formatTime(request.requested_at)}</span>
-            </div>
-            <span
-              className="mono"
-              style={{
-                fontSize: '11px',
-                fontWeight: 600,
-                textTransform: 'uppercase',
-                color: request.status === 'approved' ? 'var(--green)' : 'var(--red)',
-              }}
-            >
-              {request.status}
-            </span>
-          </div>
-        ))}
 
         <div className="section-label" style={{ marginTop: '20px' }}>Activity feed</div>
         <LedgerList entries={showAllActivity ? entries : entries.slice(0, 6)} />

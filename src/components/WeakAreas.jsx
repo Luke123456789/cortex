@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import { useWeakAreas } from '../hooks/useWeakAreas'
 
 function accuracyColor(accuracy) {
@@ -8,6 +9,7 @@ function accuracyColor(accuracy) {
 
 export default function WeakAreas() {
   const { areas, loading, totalAttempts } = useWeakAreas()
+  const [showAll, setShowAll] = useState(false)
 
   if (loading) {
     return <div style={{ fontSize: '12px', color: 'var(--ink-faint)', marginBottom: '18px' }}>Loading performance data…</div>
@@ -22,11 +24,13 @@ export default function WeakAreas() {
     )
   }
 
+  const visibleAreas = showAll ? areas : areas.slice(0, 6)
+
   return (
     <div style={{ marginBottom: '20px' }}>
       <div className="section-label">Weak areas · {totalAttempts} question(s) answered</div>
       <div style={{ display: 'grid', gap: '8px' }}>
-        {areas.map((area) => (
+        {visibleAreas.map((area) => (
           <div
             key={area.subtopicId}
             style={{
@@ -48,6 +52,14 @@ export default function WeakAreas() {
           </div>
         ))}
       </div>
+      {!showAll && areas.length > 6 && (
+        <button
+          onClick={() => setShowAll(true)}
+          style={{ background: 'none', border: 'none', fontSize: '12px', color: 'var(--brass)', textDecoration: 'underline', padding: 0, marginTop: '8px' }}
+        >
+          View more ({areas.length - 6} more)
+        </button>
+      )}
     </div>
   )
 }
