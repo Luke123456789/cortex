@@ -20,6 +20,23 @@ export function useQuizCatalog() {
       return
     }
 
+    const { data: lockRows, error: lockError } = await supabase
+      .from('subject_locks')
+      .select('subject_id, locked_until')
+
+    if (lockError) {
+      console.error('Failed to load subject locks', lockError)
+      setError(lockError)
+      setLoading(false)
+      return
+    }
+
+    const now = Date.now()
+    const lockBySubject = {}
+    for (const lock of lockRows) {
+      lockBySubject[lock.subject_id] = lock
+    }
+
     const { data: topicRows, error: topicError } = await supabase
       .from('topics')
       .select('id, subject_id, name, display_order')
@@ -55,10 +72,16 @@ export function useQuizCatalog() {
     }))
 
     const grouped = subjectRows
-      .map((subject) => ({
-        ...subject,
-        topics: topicsWithCounts.filter((t) => t.subject_id === subject.id),
-      }))
+      .map((subject) => {
+        const lock = lockBySubject[subject.id]
+        const locked = !!lock && new Date(lock.locked_until).getTime() > now
+        return {
+          ...subject,
+          topics: topicsWithCounts.filter((t) => t.subject_id === subject.id),
+          locked,
+          lockedUntil: locked ? new Date(lock.locked_until) : null,
+        }
+      })
       .filter((subject) => subject.topics.some((t) => t.questionCount > 0))
 
     setSubjects(grouped)
@@ -68,6 +91,19 @@ export function useQuizCatalog() {
 
   useEffect(() => {
     fetchCatalog()
+
+    const channel = supabase
+      .channel('subject_locks_catalog_changes')
+      .on(
+        'postgres_changes',
+        { event: '*', schema: 'public', table: 'subject_locks' },
+        () => fetchCatalog()
+      )
+      .subscribe()
+
+    return () => {
+      supabase.removeChannel(channel)
+    }
   }, [fetchCatalog])
 
   return { subjects, loading, error, refresh: fetchCatalog }

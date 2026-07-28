@@ -15,6 +15,7 @@ export default function Play() {
   const [quiz, setQuiz] = useState(null)
   const [questions, setQuestions] = useState([])
   const [lockedUntil, setLockedUntil] = useState(null)
+  const [subjectLockedUntil, setSubjectLockedUntil] = useState(null)
 
   const [currentIndex, setCurrentIndex] = useState(0)
   const [selected, setSelected] = useState(null)
@@ -29,10 +30,22 @@ export default function Play() {
 
       const { data: quizRow } = await supabase
         .from('quizzes')
-        .select('id, title, topic_id, cooldown_hours, question_count, topics (name)')
+        .select('id, title, topic_id, cooldown_hours, question_count, topics (name, subject_id)')
         .eq('id', quizId)
         .single()
       setQuiz(quizRow)
+
+      if (quizRow?.topics?.subject_id) {
+        const { data: subjectLock } = await supabase
+          .from('subject_locks')
+          .select('locked_until')
+          .eq('subject_id', quizRow.topics.subject_id)
+          .maybeSingle()
+
+        if (subjectLock && Date.now() < new Date(subjectLock.locked_until).getTime()) {
+          setSubjectLockedUntil(new Date(subjectLock.locked_until))
+        }
+      }
 
       if (quizRow && user) {
         const { data: lastSession } = await supabase
@@ -136,6 +149,21 @@ export default function Play() {
       <div className="device">
         <div className="screen">
           <div style={{ fontSize: '13px', color: 'var(--ink-faint)' }}>Loading…</div>
+        </div>
+      </div>
+    )
+  }
+
+  if (subjectLockedUntil) {
+    return (
+      <div className="device">
+        <div className="screen">
+          <div className="wordmark" style={{ marginBottom: '18px' }}>CORTEX</div>
+          <div className="section-label">{quiz?.topics?.name ? `${quiz.topics.name} · ${quiz.title}` : quiz?.title}</div>
+          <div style={{ fontSize: '13px', color: 'var(--ink-faint)', marginBottom: '16px' }}>
+            A parent has locked this subject. It unlocks again on {subjectLockedUntil.toLocaleString([], { day: '2-digit', month: 'short', hour: '2-digit', minute: '2-digit' })} — try a different subject in the meantime.
+          </div>
+          <Link to="/" style={{ fontSize: '12px', color: 'var(--brass)', textDecoration: 'underline' }}>Back to home</Link>
         </div>
       </div>
     )

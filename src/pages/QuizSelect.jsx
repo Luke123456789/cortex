@@ -42,7 +42,7 @@ export default function QuizSelect() {
   }, [subjects, subjectId])
 
   const selectedSubject = subjects.find((s) => s.id === subjectId)
-  const topics = selectedSubject?.topics.filter((t) => t.questionCount > 0) || []
+  const topics = selectedSubject?.locked ? [] : selectedSubject?.topics.filter((t) => t.questionCount > 0) || []
 
   useEffect(() => {
     if (topics.length && !topics.some((t) => t.id === topicId)) {
@@ -72,52 +72,60 @@ export default function QuizSelect() {
           <>
             <select style={selectStyle} value={subjectId} onChange={(e) => setSubjectId(e.target.value)}>
               {subjects.map((s) => (
-                <option key={s.id} value={s.id}>{s.name}</option>
+                <option key={s.id} value={s.id}>{s.name}{s.locked ? ' (locked)' : ''}</option>
               ))}
             </select>
 
-            <select style={selectStyle} value={topicId} onChange={(e) => setTopicId(e.target.value)}>
-              {topics.map((t) => (
-                <option key={t.id} value={t.id}>{t.name}</option>
-              ))}
-            </select>
-
-            {quizzesLoading ? (
-              <div style={{ fontSize: '12px', color: 'var(--ink-faint)' }}>Loading quizzes…</div>
-            ) : (
-              <div style={{ display: 'grid', gap: '8px' }}>
-                {quizzes.map((quiz) => (
-                  <button
-                    key={quiz.id}
-                    disabled={quiz.locked}
-                    onClick={() => navigate(`/play/${quiz.id}`)}
-                    style={{
-                      display: 'flex',
-                      justifyContent: 'space-between',
-                      alignItems: 'center',
-                      width: '100%',
-                      background: quiz.locked ? 'var(--paper-2)' : 'var(--ink)',
-                      color: quiz.locked ? 'var(--ink-faint)' : 'var(--paper)',
-                      border: 'none',
-                      borderRadius: '8px',
-                      padding: '10px 14px',
-                      fontSize: '13px',
-                      fontWeight: 600,
-                      opacity: quiz.locked ? 0.7 : 1,
-                      cursor: quiz.locked ? 'not-allowed' : 'pointer',
-                    }}
-                  >
-                    <span>{quiz.title} · {quiz.question_count} questions</span>
-                    <span className="mono" style={{ fontSize: '10px', fontWeight: 400 }}>
-                      {quiz.locked
-                        ? formatUnlockTime(quiz.lockedUntil)
-                        : quiz.lastScore != null
-                          ? `last: ${quiz.lastScore}/${quiz.lastQuestionCount}`
-                          : 'not attempted'}
-                    </span>
-                  </button>
-                ))}
+            {selectedSubject?.locked ? (
+              <div style={{ fontSize: '12.5px', color: 'var(--ink-faint)', background: 'var(--card)', border: '1px solid var(--rule)', borderRadius: 'var(--radius)', padding: '14px 15px' }}>
+                A parent has locked this subject. {formatUnlockTime(selectedSubject.lockedUntil)} — try a different subject in the meantime.
               </div>
+            ) : (
+              <>
+                <select style={selectStyle} value={topicId} onChange={(e) => setTopicId(e.target.value)}>
+                  {topics.map((t) => (
+                    <option key={t.id} value={t.id}>{t.name}</option>
+                  ))}
+                </select>
+
+                {quizzesLoading ? (
+                  <div style={{ fontSize: '12px', color: 'var(--ink-faint)' }}>Loading quizzes…</div>
+                ) : (
+                  <div style={{ display: 'grid', gap: '8px' }}>
+                    {quizzes.map((quiz) => (
+                      <button
+                        key={quiz.id}
+                        disabled={quiz.locked}
+                        onClick={() => navigate(`/play/${quiz.id}`)}
+                        style={{
+                          display: 'flex',
+                          justifyContent: 'space-between',
+                          alignItems: 'center',
+                          width: '100%',
+                          background: quiz.locked ? 'var(--paper-2)' : 'var(--ink)',
+                          color: quiz.locked ? 'var(--ink-faint)' : 'var(--paper)',
+                          border: 'none',
+                          borderRadius: '8px',
+                          padding: '10px 14px',
+                          fontSize: '13px',
+                          fontWeight: 600,
+                          opacity: quiz.locked ? 0.7 : 1,
+                          cursor: quiz.locked ? 'not-allowed' : 'pointer',
+                        }}
+                      >
+                        <span>{quiz.title} · {quiz.question_count} questions</span>
+                        <span className="mono" style={{ fontSize: '10px', fontWeight: 400 }}>
+                          {quiz.locked
+                            ? formatUnlockTime(quiz.lockedUntil)
+                            : quiz.lastScore != null
+                              ? `last: ${quiz.lastScore}/${quiz.lastQuestionCount}`
+                              : 'not attempted'}
+                        </span>
+                      </button>
+                    ))}
+                  </div>
+                )}
+              </>
             )}
           </>
         )}

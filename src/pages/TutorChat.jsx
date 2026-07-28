@@ -219,7 +219,7 @@ export default function TutorChat() {
   async function startSession() {
     const topic = topics.find((t) => t.id === topicId)
     const subtopic = subtopics.find((st) => st.id === subtopicId)
-    if (!topic || !subtopic) return
+    if (!topic || !subtopic || selectedSubject?.locked) return
 
     setPlanLoading(true)
     setError(null)
@@ -342,26 +342,35 @@ export default function TutorChat() {
           ) : (
             <>
               <select style={selectStyle} value={subjectId} onChange={(e) => setSubjectId(e.target.value)}>
-                {subjects.map((s) => <option key={s.id} value={s.id}>{s.name}</option>)}
-              </select>
-              <select style={selectStyle} value={topicId} onChange={(e) => setTopicId(e.target.value)}>
-                {topics.map((t) => <option key={t.id} value={t.id}>{t.name}</option>)}
-              </select>
-              <select style={selectStyle} value={subtopicId} onChange={(e) => setSubtopicId(e.target.value)}>
-                {subtopics.map((st) => <option key={st.id} value={st.id}>{st.name}</option>)}
+                {subjects.map((s) => <option key={s.id} value={s.id}>{s.name}{s.locked ? ' (locked)' : ''}</option>)}
               </select>
 
-              <button
-                onClick={startSession}
-                disabled={!subtopicId || planLoading}
-                style={{
-                  width: '100%', background: 'var(--ink)', color: 'var(--paper)', border: 'none',
-                  borderRadius: '8px', padding: '11px', fontSize: '13px', fontWeight: 600, marginTop: '4px',
-                  opacity: planLoading ? 0.6 : 1,
-                }}
-              >
-                {planLoading ? 'Preparing your lesson…' : 'Start chat'}
-              </button>
+              {selectedSubject?.locked ? (
+                <div style={{ fontSize: '12.5px', color: 'var(--ink-faint)', background: 'var(--card)', border: '1px solid var(--rule)', borderRadius: 'var(--radius)', padding: '14px 15px' }}>
+                  A parent has locked this subject until {selectedSubject.lockedUntil.toLocaleString([], { day: '2-digit', month: 'short', hour: '2-digit', minute: '2-digit' })} — try a different subject in the meantime.
+                </div>
+              ) : (
+                <>
+                  <select style={selectStyle} value={topicId} onChange={(e) => setTopicId(e.target.value)}>
+                    {topics.map((t) => <option key={t.id} value={t.id}>{t.name}</option>)}
+                  </select>
+                  <select style={selectStyle} value={subtopicId} onChange={(e) => setSubtopicId(e.target.value)}>
+                    {subtopics.map((st) => <option key={st.id} value={st.id}>{st.name}</option>)}
+                  </select>
+
+                  <button
+                    onClick={startSession}
+                    disabled={!subtopicId || planLoading}
+                    style={{
+                      width: '100%', background: 'var(--ink)', color: 'var(--paper)', border: 'none',
+                      borderRadius: '8px', padding: '11px', fontSize: '13px', fontWeight: 600, marginTop: '4px',
+                      opacity: planLoading ? 0.6 : 1,
+                    }}
+                  >
+                    {planLoading ? 'Preparing your lesson…' : 'Start chat'}
+                  </button>
+                </>
+              )}
               {error && <div style={{ fontSize: '11.5px', color: 'var(--red)', marginTop: '10px' }}>{error}</div>}
             </>
           )}

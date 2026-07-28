@@ -5,6 +5,7 @@ import { useAuth } from '../hooks/useAuth.jsx'
 import { supabase } from '../lib/supabaseClient'
 import RoleSwitch from '../components/RoleSwitch.jsx'
 import WeakAreas from '../components/WeakAreas.jsx'
+import SubjectLocks from '../components/SubjectLocks.jsx'
 import LedgerList from '../components/LedgerList.jsx'
 import { getExistingSubscription, subscribeToPush, ensureSubscriptionSaved, pushSupported } from '../lib/push.js'
 
@@ -132,6 +133,8 @@ export default function Parent() {
         )}
 
         <WeakAreas />
+
+        <SubjectLocks />
 
         <div className="section-label">Pending</div>
         {pendingRequests.length === 0 ? (
