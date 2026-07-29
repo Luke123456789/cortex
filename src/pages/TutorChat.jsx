@@ -44,12 +44,15 @@ export default function TutorChat() {
   const [voiceState, setVoiceState] = useState('idle')
   const [liveTranscript, setLiveTranscript] = useState('')
   const [rewardClaimed, setRewardClaimed] = useState(false)
+  const [minutesAwarded, setMinutesAwarded] = useState(0)
+  const [finishing, setFinishing] = useState(false)
   const [error, setError] = useState(null)
 
   const scrollRef = useRef(null)
   const recognitionRef = useRef(null)
   const messagesRef = useRef([])
   messagesRef.current = messages
+  const finishedRef = useRef(false)
 
   useEffect(() => {
     if (subjects.length && !subjectId) setSubjectId(subjects[0].id)
@@ -271,6 +274,10 @@ export default function TutorChat() {
   }
 
   async function finishSession() {
+    if (finishedRef.current) return
+    finishedRef.current = true
+    setFinishing(true)
+
     recognitionRef.current?.stop()
     window.speechSynthesis?.cancel()
 
@@ -281,21 +288,34 @@ export default function TutorChat() {
       .from('tutor_sessions')
       .update({
         completed_at: new Date().toISOString(),
-        reward_claimed: earned,
         minutes_earned: earned ? MINUTES_REWARD : 0,
       })
       .eq('id', sessionId)
 
     if (earned) {
-      await supabase.from('ledger_entries').insert({
-        type: 'earn',
-        amount_minutes: MINUTES_REWARD,
-        source: 'Ask the tutor',
-      })
-      setRewardClaimed(true)
+      const { data, error: claimError } = await supabase
+        .rpc('claim_tutor_reward', { p_session_id: sessionId })
+        .single()
+
+      if (claimError) {
+        console.error('Failed to claim tutor reward', claimError)
+        setError('Could not record your reward. Try finishing again.')
+        finishedRef.current = false
+        setFinishing(false)
+        return
+      }
+
+      if (data?.claimed) {
+        setMinutesAwarded(data.minutes_awarded ?? 0)
+        setRewardClaimed(true)
+      } else {
+        setError('This session was already claimed or had no messages to reward.')
+      }
     } else {
       setError(`Chat a bit more first — ${MIN_STUDENT_MESSAGES_FOR_REWARD}+ messages needed to earn minutes.`)
     }
+
+    setFinishing(false)
   }
 
   if (rewardClaimed) {
@@ -305,7 +325,7 @@ export default function TutorChat() {
           <div className="wordmark" style={{ marginBottom: '18px' }}>CORTEX</div>
           <div className="section-label">Session complete</div>
           <div style={{ fontSize: '15px', marginBottom: '20px' }}>
-            +{MINUTES_REWARD} minutes earned for the chat.
+            +{minutesAwarded} minutes earned for the chat.
           </div>
           <Link
             to="/"
@@ -389,9 +409,14 @@ export default function TutorChat() {
           <div className="wordmark">CORTEX</div>
           <button
             onClick={finishSession}
-            style={{ background: 'transparent', border: '1px solid var(--rule)', borderRadius: '20px', padding: '5px 12px', fontSize: '11px', color: 'var(--ink-faint)' }}
+            disabled={finishing}
+            style={{
+              background: 'transparent', border: '1px solid var(--rule)', borderRadius: '20px',
+              padding: '5px 12px', fontSize: '11px', color: 'var(--ink-faint)',
+              opacity: finishing ? 0.6 : 1,
+            }}
           >
-            Finish
+            {finishing ? 'Finishing…' : 'Finish'}
           </button>
         </div>
 
