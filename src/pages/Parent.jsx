@@ -6,6 +6,7 @@ import { supabase } from '../lib/supabaseClient'
 import RoleSwitch from '../components/RoleSwitch.jsx'
 import WeakAreas from '../components/WeakAreas.jsx'
 import SubjectLocks from '../components/SubjectLocks.jsx'
+import TutorSessionHistory from '../components/TutorSessionHistory.jsx'
 import LedgerList from '../components/LedgerList.jsx'
 import { getExistingSubscription, subscribeToPush, ensureSubscriptionSaved, pushSupported } from '../lib/push.js'
 
@@ -195,6 +196,8 @@ export default function Parent() {
         <WeakAreas />
 
         <SubjectLocks />
+
+        <TutorSessionHistory />
 
         <div className="section-label">Recent</div>
         {resolvedRequests.length === 0 ? (
