@@ -5,6 +5,7 @@ import { useAuth } from '../hooks/useAuth.jsx'
 import { supabase } from '../lib/supabaseClient'
 import RoleSwitch from '../components/RoleSwitch.jsx'
 import WeakAreas from '../components/WeakAreas.jsx'
+import QuizCompletions from '../components/QuizCompletions.jsx'
 import SubjectLocks from '../components/SubjectLocks.jsx'
 import TutorSessionHistory from '../components/TutorSessionHistory.jsx'
 import LedgerList from '../components/LedgerList.jsx'
@@ -192,6 +193,8 @@ export default function Parent() {
             This browser doesn't support push notifications.
           </div>
         )}
+
+        <QuizCompletions />
 
         <WeakAreas />
 

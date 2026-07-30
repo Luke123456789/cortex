@@ -114,10 +114,25 @@ export function useQuizCatalog() {
     fetchCatalog()
 
     const channel = supabase
-      .channel('subject_locks_catalog_changes')
+      .channel('quiz_catalog_changes')
       .on(
         'postgres_changes',
         { event: '*', schema: 'public', table: 'subject_locks' },
+        () => fetchCatalog()
+      )
+      .on(
+        'postgres_changes',
+        { event: '*', schema: 'public', table: 'subjects' },
+        () => fetchCatalog()
+      )
+      .on(
+        'postgres_changes',
+        { event: '*', schema: 'public', table: 'topics' },
+        () => fetchCatalog()
+      )
+      .on(
+        'postgres_changes',
+        { event: '*', schema: 'public', table: 'questions' },
         () => fetchCatalog()
       )
       .subscribe()

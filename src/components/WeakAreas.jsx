@@ -32,7 +32,7 @@ export default function WeakAreas() {
       <div style={{ display: 'grid', gap: '8px' }}>
         {visibleAreas.map((area) => (
           <div
-            key={area.subtopicId}
+            key={area.key}
             style={{
               background: 'var(--card)',
               border: '1px solid var(--rule)',

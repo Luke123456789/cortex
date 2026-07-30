@@ -29,32 +29,58 @@ export function useWeakAreas() {
       return
     }
 
+    // Subtopics only exist for some subjects (historically Economics only).
+    // Questions in subjects without subtopics (e.g. Chemistry, PE, Biology,
+    // English Lit) have a null subtopic_id — fall back to grouping those by
+    // topic/subject instead of silently dropping them.
+    const { data: topicRows, error: topicError } = await supabase
+      .from('topics')
+      .select('id, name, subjects (name)')
+
+    if (topicError) {
+      console.error('Failed to load topics', topicError)
+      setLoading(false)
+      return
+    }
+
     const subtopicMap = {}
     for (const st of subtopicRows) {
       subtopicMap[st.id] = { name: st.name, specRef: st.spec_ref, topicName: st.topics?.name }
     }
 
+    const topicMap = {}
+    for (const t of topicRows) {
+      topicMap[t.id] = { name: t.name, subjectName: t.subjects?.name }
+    }
+
     const stats = {}
     for (const row of historyRows) {
       const subtopicId = row.questions?.subtopic_id
-      if (!subtopicId) continue
-      if (!stats[subtopicId]) {
-        stats[subtopicId] = { attempts: 0, correct: 0 }
+      const topicId = row.questions?.topic_id
+      const key = subtopicId ? `subtopic:${subtopicId}` : topicId ? `topic:${topicId}` : null
+      if (!key) continue
+      if (!stats[key]) {
+        stats[key] = { attempts: 0, correct: 0, subtopicId, topicId }
       }
-      stats[subtopicId].attempts += 1
-      if (row.answered_correctly) stats[subtopicId].correct += 1
+      stats[key].attempts += 1
+      if (row.answered_correctly) stats[key].correct += 1
     }
 
     const result = Object.entries(stats)
-      .map(([subtopicId, s]) => ({
-        subtopicId,
-        name: subtopicMap[subtopicId]?.name || 'Unknown subtopic',
-        specRef: subtopicMap[subtopicId]?.specRef,
-        topicName: subtopicMap[subtopicId]?.topicName,
-        attempts: s.attempts,
-        correct: s.correct,
-        accuracy: Math.round((s.correct / s.attempts) * 100),
-      }))
+      .map(([key, s]) => {
+        const usingSubtopic = !!s.subtopicId
+        return {
+          key,
+          name: usingSubtopic
+            ? subtopicMap[s.subtopicId]?.name || 'Unknown subtopic'
+            : topicMap[s.topicId]?.name || 'Unknown topic',
+          specRef: usingSubtopic ? subtopicMap[s.subtopicId]?.specRef : null,
+          topicName: usingSubtopic ? subtopicMap[s.subtopicId]?.topicName : topicMap[s.topicId]?.subjectName,
+          attempts: s.attempts,
+          correct: s.correct,
+          accuracy: Math.round((s.correct / s.attempts) * 100),
+        }
+      })
       .sort((a, b) => a.accuracy - b.accuracy)
 
     setAreas(result)
