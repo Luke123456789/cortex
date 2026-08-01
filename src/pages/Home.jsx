@@ -30,7 +30,7 @@ export default function Home() {
         .then(() => setNotifStatus('enabled'))
         .catch((err) => {
           console.error('Failed to confirm subscription', err)
-          setNotifStatus('enabled')
+          setNotifStatus('disabled')
         })
     })
   }, [])
