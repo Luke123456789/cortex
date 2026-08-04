@@ -247,6 +247,9 @@ export default function TutorChat() {
 
     try {
       const { data: { session: authSession } } = await supabase.auth.getSession()
+      if (!authSession) {
+        throw new Error('No active session — please sign in again')
+      }
       const res = await fetch(`${import.meta.env.VITE_SUPABASE_URL}/functions/v1/tutor-plan`, {
         method: 'POST',
         headers: {
@@ -271,7 +274,7 @@ export default function TutorChat() {
       setStarted(true)
     } catch (err) {
       console.error(err)
-      setError('Could not prepare the lesson. Try again in a moment.')
+      setError(`Could not prepare the lesson (${err.message}). Try again in a moment.`)
     } finally {
       setPlanLoading(false)
     }
