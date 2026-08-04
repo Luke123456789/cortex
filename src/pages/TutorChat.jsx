@@ -222,7 +222,12 @@ export default function TutorChat() {
   async function startSession() {
     const topic = topics.find((t) => t.id === topicId)
     const subtopic = subtopics.find((st) => st.id === subtopicId)
-    if (!topic || !subtopic || selectedTopic?.locked) return
+    if (selectedTopic?.locked) return
+    if (!topic || !subtopic) {
+      console.error('Cannot start session — missing topic/subtopic', { topicId, subtopicId, topics, subtopics })
+      setError('Could not start — try re-selecting the subject and topic above.')
+      return
+    }
 
     setPlanLoading(true)
     setError(null)
