@@ -5,7 +5,6 @@ import Login from './pages/Login.jsx'
 import Home from './pages/Home.jsx'
 import Parent from './pages/Parent.jsx'
 import Quiz from './pages/Quiz.jsx'
-import Play from './pages/Play.jsx'
 import QuizSelect from './pages/QuizSelect.jsx'
 import TutorChat from './pages/TutorChat.jsx'
 
@@ -36,14 +35,6 @@ export default function App() {
             element={
               <ProtectedRoute>
                 <Quiz />
-              </ProtectedRoute>
-            }
-          />
-          <Route
-            path="/play/:quizId"
-            element={
-              <ProtectedRoute>
-                <Play />
               </ProtectedRoute>
             }
           />

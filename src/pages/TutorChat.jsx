@@ -1,11 +1,9 @@
 import { useState, useEffect, useRef, useCallback } from 'react'
 import { Link } from 'react-router-dom'
 import { supabase } from '../lib/supabaseClient'
+import { gradeAndClaimReward } from '../lib/gradeAndClaimReward'
 import { useAuth } from '../hooks/useAuth.jsx'
 import { useQuizCatalog } from '../hooks/useQuizCatalog'
-
-const MINUTES_REWARD = 8
-const MIN_STUDENT_MESSAGES_FOR_REWARD = 3
 
 const selectStyle = {
   width: '100%',
@@ -45,6 +43,7 @@ export default function TutorChat() {
   const [liveTranscript, setLiveTranscript] = useState('')
   const [rewardClaimed, setRewardClaimed] = useState(false)
   const [minutesAwarded, setMinutesAwarded] = useState(0)
+  const [feedback, setFeedback] = useState('')
   const [finishing, setFinishing] = useState(false)
   const [error, setError] = useState(null)
 
@@ -277,45 +276,42 @@ export default function TutorChat() {
     if (finishedRef.current) return
     finishedRef.current = true
     setFinishing(true)
+    setError(null)
 
     recognitionRef.current?.stop()
     window.speechSynthesis?.cancel()
 
-    const studentMessageCount = messages.filter((m) => m.role === 'user').length
-    const earned = studentMessageCount >= MIN_STUDENT_MESSAGES_FOR_REWARD
+    const topic = topics.find((t) => t.id === topicId)
+    const subtopic = subtopics.find((st) => st.id === subtopicId)
 
-    await supabase
-      .from('tutor_sessions')
-      .update({
-        completed_at: new Date().toISOString(),
-        minutes_earned: earned ? MINUTES_REWARD : 0,
+    try {
+      const result = await gradeAndClaimReward({
+        sessionId,
+        messages,
+        subjectName: selectedSubject?.name,
+        topicName: topic?.name,
+        subtopicName: subtopic?.name,
       })
-      .eq('id', sessionId)
 
-    if (earned) {
-      const { data, error: claimError } = await supabase
-        .rpc('claim_tutor_reward', { p_session_id: sessionId })
-        .single()
-
-      if (claimError) {
-        console.error('Failed to claim tutor reward', claimError)
-        setError('Could not record your reward. Try finishing again.')
-        finishedRef.current = false
-        setFinishing(false)
-        return
-      }
-
-      if (data?.claimed) {
-        setMinutesAwarded(data.minutes_awarded ?? 0)
+      if (result.claimed) {
+        setMinutesAwarded(result.minutesAwarded ?? 0)
+        setFeedback(result.feedback ?? '')
         setRewardClaimed(true)
       } else {
-        setError('This session was already claimed or had no messages to reward.')
+        setError(
+          result.alreadyClaimed
+            ? 'This session was already claimed.'
+            : 'This session had no messages to grade.'
+        )
+        finishedRef.current = false
       }
-    } else {
-      setError(`Chat a bit more first — ${MIN_STUDENT_MESSAGES_FOR_REWARD}+ messages needed to earn minutes.`)
+    } catch (err) {
+      console.error('Failed to grade tutor session', err)
+      setError('Could not grade your session — try again.')
+      finishedRef.current = false
+    } finally {
+      setFinishing(false)
     }
-
-    setFinishing(false)
   }
 
   if (rewardClaimed) {
@@ -324,8 +320,13 @@ export default function TutorChat() {
         <div className="screen">
           <div className="wordmark" style={{ marginBottom: '18px' }}>CORTEX</div>
           <div className="section-label">Session complete</div>
-          <div style={{ fontSize: '15px', marginBottom: '20px' }}>
-            +{minutesAwarded} minutes earned for the chat.
+          <div style={{ marginBottom: '20px' }}>
+            <div style={{ fontSize: '15px', marginBottom: feedback ? '8px' : 0 }}>
+              +{minutesAwarded} minutes earned for the chat.
+            </div>
+            {feedback && (
+              <div style={{ fontSize: '12.5px', color: 'var(--ink-faint)' }}>{feedback}</div>
+            )}
           </div>
           <Link
             to="/"
@@ -416,7 +417,7 @@ export default function TutorChat() {
               opacity: finishing ? 0.6 : 1,
             }}
           >
-            {finishing ? 'Finishing…' : 'Finish'}
+            {finishing ? 'Grading your session…' : 'Finish'}
           </button>
         </div>
 
@@ -443,7 +444,21 @@ export default function TutorChat() {
           )}
         </div>
 
-        {error && <div style={{ fontSize: '11px', color: 'var(--red)', marginBottom: '8px' }}>{error}</div>}
+        {error && (
+          <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '8px' }}>
+            <div style={{ fontSize: '11px', color: 'var(--red)' }}>{error}</div>
+            <button
+              onClick={finishSession}
+              disabled={finishing}
+              style={{
+                background: 'none', border: '1px solid var(--rule)', borderRadius: '14px',
+                padding: '3px 10px', fontSize: '10.5px', color: 'var(--ink)', flexShrink: 0,
+              }}
+            >
+              Try again
+            </button>
+          </div>
+        )}
 
         {!useTextFallback ? (
           <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '8px', paddingBottom: '4px' }}>

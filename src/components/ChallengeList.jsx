@@ -8,9 +8,8 @@ const CHALLENGES = [
   {
     id: 'start-quiz',
     name: 'Start quiz',
-    desc: 'Pick a subject and topic',
-    type: 'navigate',
-    to: '/quizzes',
+    desc: 'Being redesigned as a retention check, not a reward grind',
+    type: 'coming-soon',
     icon: (
       <svg viewBox="0 0 24 24" fill="none" stroke="var(--brass)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" width="18" height="18">
         <path d="M13 2 3 14h7l-1 8 10-12h-7z" />
