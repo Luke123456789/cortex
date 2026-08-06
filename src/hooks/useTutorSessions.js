@@ -10,7 +10,7 @@ export function useTutorSessions() {
 
     const { data, error } = await supabase
       .from('tutor_sessions')
-      .select('id, started_at, completed_at, message_count, minutes_earned, reward_claimed, subtopics (name, topics (name, subjects (name)))')
+      .select('id, started_at, completed_at, message_count, minutes_earned, reward_claimed, messages, subtopics (name, topics (name, subjects (name)))')
       .order('started_at', { ascending: false })
       .limit(50)
 
@@ -28,6 +28,7 @@ export function useTutorSessions() {
         messageCount: row.message_count,
         minutesEarned: row.minutes_earned,
         rewardClaimed: row.reward_claimed,
+        messages: Array.isArray(row.messages) ? row.messages : [],
         subtopicName: row.subtopics?.name,
         topicName: row.subtopics?.topics?.name,
         subjectName: row.subtopics?.topics?.subjects?.name,

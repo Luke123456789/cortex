@@ -145,6 +145,7 @@ export default function TutorChat() {
           specRef: subtopic?.spec_ref,
           messages: nextMessages,
           lessonPlan,
+          sessionId,
         }),
       })
       if (!res.ok) throw new Error('Tutor request failed')
