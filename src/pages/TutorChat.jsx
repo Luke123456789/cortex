@@ -233,18 +233,53 @@ export default function TutorChat() {
     setPlanLoading(true)
     setError(null)
 
-    const { data: session, error: sessionError } = await supabase
+    const { data: existing, error: existingError } = await supabase
       .from('tutor_sessions')
-      .insert({ student_id: user.id, subtopic_id: subtopicId })
-      .select('id')
-      .single()
-    if (sessionError) {
-      console.error('Failed to start tutor session', sessionError)
+      .select('id, lesson_plan, messages')
+      .eq('student_id', user.id)
+      .eq('subtopic_id', subtopicId)
+      .is('completed_at', null)
+      .order('started_at', { ascending: false })
+      .limit(1)
+      .maybeSingle()
+    if (existingError) {
+      console.error('Failed to check for an existing tutor session', existingError)
       setError('Could not start the session. Try again.')
       setPlanLoading(false)
       return
     }
+
+    let session = existing
+    if (!session) {
+      const { data: created, error: sessionError } = await supabase
+        .from('tutor_sessions')
+        .insert({ student_id: user.id, subtopic_id: subtopicId })
+        .select('id, lesson_plan, messages')
+        .single()
+      if (sessionError) {
+        console.error('Failed to start tutor session', sessionError)
+        setError('Could not start the session. Try again.')
+        setPlanLoading(false)
+        return
+      }
+      session = created
+    }
     setSessionId(session.id)
+
+    // Resuming a session that already has a lesson plan — no need to hit
+    // tutor-plan again, just pick up where it left off.
+    if (session.lesson_plan) {
+      setLessonPlan(session.lesson_plan)
+      const existingMessages = Array.isArray(session.messages) ? session.messages : []
+      setMessages(
+        existingMessages.length
+          ? existingMessages
+          : [{ role: 'assistant', content: session.lesson_plan.openingLine }]
+      )
+      setStarted(true)
+      setPlanLoading(false)
+      return
+    }
 
     try {
       const { data: { session: authSession } } = await supabase.auth.getSession()
