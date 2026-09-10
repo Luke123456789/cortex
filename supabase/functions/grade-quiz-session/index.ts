@@ -29,11 +29,11 @@ Deno.serve(async (req) => {
     return new Response(null, { status: 204, headers: corsHeaders })
   }
   if (req.method !== 'POST') {
-    return new Response('method not allowed', { status: 405, headers: corsHeaders })
+    return new Response(JSON.stringify({ error: 'method not allowed' }), { status: 405, headers: { ...corsHeaders, 'Content-Type': 'application/json' } })
   }
 
   const student = await getStudentUser(req)
-  if (!student) return new Response('unauthorized', { status: 401, headers: corsHeaders })
+  if (!student) return new Response(JSON.stringify({ error: 'You need to be signed in as the student to submit this quiz.' }), { status: 401, headers: { ...corsHeaders, 'Content-Type': 'application/json' } })
 
   const { quizId, answers } = await req.json()
   if (!quizId || !Array.isArray(answers)) {

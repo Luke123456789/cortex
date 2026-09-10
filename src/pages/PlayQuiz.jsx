@@ -55,12 +55,18 @@ export default function PlayQuiz() {
           answers: Object.entries(answers).map(([questionId, selectedOption]) => ({ questionId, selectedOption })),
         }),
       })
-      const data = await res.json()
-      if (!res.ok) throw new Error(data.error || 'Quiz submission failed')
+      let data = null
+      try {
+        data = await res.json()
+      } catch {
+        // Non-JSON body (e.g. a gateway error page) — fall through to the
+        // generic message below rather than crashing on the parse.
+      }
+      if (!res.ok) throw new Error(data?.error || `Quiz submission failed (${res.status})`)
       setResult(data)
     } catch (err) {
       console.error(err)
-      setError(err.message === 'This quiz has not been assigned' ? 'This quiz is no longer assigned.' : 'Could not submit the quiz. Try again.')
+      setError(err.message.startsWith('Quiz submission failed') ? 'Could not submit the quiz. Try again.' : err.message)
     } finally {
       setSubmitting(false)
     }
