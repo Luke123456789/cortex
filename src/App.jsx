@@ -11,6 +11,9 @@ import Activity from './pages/Activity.jsx'
 import RedemptionHistory from './pages/RedemptionHistory.jsx'
 import TutorSessions from './pages/TutorSessions.jsx'
 import Assessment from './pages/Assessment.jsx'
+import AssignWork from './pages/AssignWork.jsx'
+import Assignments from './pages/Assignments.jsx'
+import PlayQuiz from './pages/PlayQuiz.jsx'
 
 export default function App() {
   return (
@@ -87,6 +90,30 @@ export default function App() {
             element={
               <ProtectedRoute requireRole="parent">
                 <Assessment />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/parent/assign"
+            element={
+              <ProtectedRoute requireRole="parent">
+                <AssignWork />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/assignments"
+            element={
+              <ProtectedRoute>
+                <Assignments />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/play/:quizId"
+            element={
+              <ProtectedRoute>
+                <PlayQuiz />
               </ProtectedRoute>
             }
           />

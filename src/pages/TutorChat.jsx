@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef, useCallback } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useSearchParams } from 'react-router-dom'
 import { supabase } from '../lib/supabaseClient'
 import { gradeAndClaimReward } from '../lib/gradeAndClaimReward'
 import { useAuth } from '../hooks/useAuth.jsx'
@@ -24,11 +24,34 @@ const speechSupported = !!SpeechRecognitionAPI && typeof window !== 'undefined' 
 export default function TutorChat() {
   const { user } = useAuth()
   const { subjects, loading: catalogLoading } = useQuizCatalog()
+  const [searchParams] = useSearchParams()
+  const deepLinkedSubtopicId = searchParams.get('subtopicId')
 
   const [subjectId, setSubjectId] = useState('')
   const [topicId, setTopicId] = useState('')
   const [subtopics, setSubtopics] = useState([])
   const [subtopicId, setSubtopicId] = useState('')
+  const [resolvingDeepLink, setResolvingDeepLink] = useState(!!deepLinkedSubtopicId)
+
+  // An assignment ("Start session" from /assignments) links here with
+  // ?subtopicId=... — resolve which subject/topic that subtopic belongs to
+  // so the pickers below land on it instead of their usual defaults.
+  useEffect(() => {
+    if (!deepLinkedSubtopicId) return
+    let cancelled = false
+    async function resolve() {
+      const { data: subtopicRow } = await supabase.from('subtopics').select('topic_id').eq('id', deepLinkedSubtopicId).single()
+      const topicRowRes = subtopicRow ? await supabase.from('topics').select('subject_id').eq('id', subtopicRow.topic_id).single() : null
+      if (cancelled) return
+      if (subtopicRow && topicRowRes?.data) {
+        setSubjectId(topicRowRes.data.subject_id)
+        setTopicId(subtopicRow.topic_id)
+      }
+      setResolvingDeepLink(false)
+    }
+    resolve()
+    return () => { cancelled = true }
+  }, [deepLinkedSubtopicId])
 
   const [started, setStarted] = useState(false)
   const [sessionId, setSessionId] = useState(null)
@@ -54,18 +77,20 @@ export default function TutorChat() {
   const finishedRef = useRef(false)
 
   useEffect(() => {
+    if (resolvingDeepLink) return
     if (subjects.length && !subjectId) setSubjectId(subjects[0].id)
-  }, [subjects, subjectId])
+  }, [subjects, subjectId, resolvingDeepLink])
 
   const selectedSubject = subjects.find((s) => s.id === subjectId)
   const topics = selectedSubject?.topics.filter((t) => t.questionCount > 0) || []
   const selectedTopic = topics.find((t) => t.id === topicId)
 
   useEffect(() => {
+    if (resolvingDeepLink) return
     if (topics.length && !topics.some((t) => t.id === topicId)) {
       setTopicId(topics[0].id)
     }
-  }, [topics, topicId])
+  }, [topics, topicId, resolvingDeepLink])
 
   useEffect(() => {
     async function loadSubtopics() {
@@ -76,10 +101,13 @@ export default function TutorChat() {
         .eq('topic_id', topicId)
         .order('display_order')
       setSubtopics(data || [])
-      if (data && data.length) setSubtopicId(data[0].id)
+      if (data && data.length) {
+        const preferred = deepLinkedSubtopicId && data.some((s) => s.id === deepLinkedSubtopicId) ? deepLinkedSubtopicId : data[0].id
+        setSubtopicId(preferred)
+      }
     }
     loadSubtopics()
-  }, [topicId])
+  }, [topicId, deepLinkedSubtopicId])
 
   useEffect(() => {
     scrollRef.current?.scrollTo({ top: scrollRef.current.scrollHeight, behavior: 'smooth' })

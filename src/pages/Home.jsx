@@ -2,7 +2,9 @@ import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { useLedger } from '../hooks/useLedger'
 import { useRedemptions } from '../hooks/useRedemptions'
+import { useAssignments } from '../hooks/useAssignments'
 import { useAuth } from '../hooks/useAuth.jsx'
+import { ASSIGNMENT_TYPE_LABELS, assignmentAction } from '../lib/assignments'
 import BalanceCard from '../components/BalanceCard.jsx'
 import ExamCountdown from '../components/ExamCountdown.jsx'
 import LedgerList from '../components/LedgerList.jsx'
@@ -14,6 +16,8 @@ import { getExistingSubscription, subscribeToPush, ensureSubscriptionSaved, push
 export default function Home() {
   const { entries, balance, loading } = useLedger()
   const { pending, refresh: refreshRedemptions } = useRedemptions()
+  const { assignments } = useAssignments()
+  const pendingAssignments = assignments.filter((a) => a.status === 'pending')
   const { profile, signOut } = useAuth()
   const [modalOpen, setModalOpen] = useState(false)
   const [notifStatus, setNotifStatus] = useState('checking')
@@ -101,6 +105,43 @@ export default function Home() {
             <ExamCountdown />
 
             <BalanceCard balance={balance} pendingRequest={pending} onRedeemClick={() => setModalOpen(true)} />
+
+            {pendingAssignments.length > 0 && (
+              <>
+                <div className="section-label">Assigned work</div>
+                <div style={{ display: 'grid', gap: '8px', marginBottom: '18px' }}>
+                  {pendingAssignments.slice(0, 3).map((a) => {
+                    const action = assignmentAction(a)
+                    return (
+                      <div
+                        key={a.id}
+                        style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: '10px', background: 'var(--card)', border: '1px solid var(--rule)', borderRadius: 'var(--radius)', padding: '11px 13px' }}
+                      >
+                        <div>
+                          <div style={{ fontSize: '13.5px' }}>{a.title}</div>
+                          <span className="mono" style={{ fontSize: '9.5px', color: 'var(--ink-faint)' }}>{ASSIGNMENT_TYPE_LABELS[a.type] || a.type}</span>
+                        </div>
+                        {action ? (
+                          <Link
+                            to={action.to}
+                            style={{ flexShrink: 0, background: 'var(--ink)', color: 'var(--paper)', borderRadius: '8px', padding: '7px 12px', fontSize: '12px', fontWeight: 600, textDecoration: 'none' }}
+                          >
+                            {action.label}
+                          </Link>
+                        ) : (
+                          <span className="mono" style={{ flexShrink: 0, fontSize: '10px', fontWeight: 600, textTransform: 'uppercase', color: 'var(--ink-faint)' }}>Soon</span>
+                        )}
+                      </div>
+                    )
+                  })}
+                </div>
+                {pendingAssignments.length > 3 && (
+                  <Link to="/assignments" style={{ display: 'inline-block', fontSize: '12px', color: 'var(--brass)', textDecoration: 'underline', marginBottom: '18px' }}>
+                    View more
+                  </Link>
+                )}
+              </>
+            )}
 
             <div className="tear">
               <div className="tear-hole" /><span /><div className="tear-hole" /><span /><div className="tear-hole" />

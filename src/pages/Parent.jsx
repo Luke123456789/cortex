@@ -197,6 +197,25 @@ export default function Parent() {
         <SubjectLocks />
 
         <Link
+          to="/parent/assign"
+          style={{
+            display: 'block',
+            textAlign: 'center',
+            background: 'var(--ink)',
+            border: '1px solid var(--ink)',
+            borderRadius: 'var(--radius)',
+            padding: '12px',
+            fontSize: '13px',
+            fontWeight: 600,
+            color: 'var(--paper)',
+            textDecoration: 'none',
+            marginBottom: '12px',
+          }}
+        >
+          Assign work
+        </Link>
+
+        <Link
           to="/parent/assessment"
           style={{
             display: 'block',
