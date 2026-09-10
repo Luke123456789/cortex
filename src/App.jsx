@@ -10,6 +10,7 @@ import TutorChat from './pages/TutorChat.jsx'
 import Activity from './pages/Activity.jsx'
 import RedemptionHistory from './pages/RedemptionHistory.jsx'
 import TutorSessions from './pages/TutorSessions.jsx'
+import Assessment from './pages/Assessment.jsx'
 
 export default function App() {
   return (
@@ -78,6 +79,14 @@ export default function App() {
             element={
               <ProtectedRoute requireRole="parent">
                 <TutorSessions />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/parent/assessment"
+            element={
+              <ProtectedRoute requireRole="parent">
+                <Assessment />
               </ProtectedRoute>
             }
           />

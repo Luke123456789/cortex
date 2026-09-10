@@ -1,7 +1,7 @@
 import { useNavigate } from 'react-router-dom'
 import { supabase } from '../lib/supabaseClient'
 
-// Placeholder reward amounts and icons. Once the real quiz / worked example /
+// Placeholder reward amounts and icons. Once the real quiz / written test /
 // tutor screens exist, they'll write the ledger_entries row themselves with
 // an actual result (score, topic) instead of this flat click-to-earn stub.
 const CHALLENGES = [
@@ -17,9 +17,9 @@ const CHALLENGES = [
     ),
   },
   {
-    id: 'example',
-    name: 'Worked example',
-    desc: 'Follow a full mark-scheme answer',
+    id: 'written-test',
+    name: 'Written test',
+    desc: 'Answer past-paper style questions, marked against the scheme',
     type: 'coming-soon',
     icon: (
       <svg viewBox="0 0 24 24" fill="none" stroke="var(--brass)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" width="18" height="18">

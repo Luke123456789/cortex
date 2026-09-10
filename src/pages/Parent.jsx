@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { useRedemptions } from '../hooks/useRedemptions'
 import { useAuth } from '../hooks/useAuth.jsx'
+import { useStudentProfile } from '../hooks/useStudentProfile'
 import { supabase } from '../lib/supabaseClient'
 import RoleSwitch from '../components/RoleSwitch.jsx'
 import WeakAreas from '../components/WeakAreas.jsx'
@@ -16,6 +17,7 @@ function formatTime(isoString) {
 export default function Parent() {
   const { requests, refresh } = useRedemptions()
   const { signOut } = useAuth()
+  const { displayName: studentName } = useStudentProfile()
   const [notifStatus, setNotifStatus] = useState('checking')
 
   useEffect(() => {
@@ -193,6 +195,25 @@ export default function Parent() {
         <WeakAreas />
 
         <SubjectLocks />
+
+        <Link
+          to="/parent/assessment"
+          style={{
+            display: 'block',
+            textAlign: 'center',
+            background: 'var(--ink)',
+            border: '1px solid var(--ink)',
+            borderRadius: 'var(--radius)',
+            padding: '12px',
+            fontSize: '13px',
+            fontWeight: 600,
+            color: 'var(--paper)',
+            textDecoration: 'none',
+            marginBottom: '20px',
+          }}
+        >
+          Assess {studentName || 'student'}
+        </Link>
 
         <Link
           to="/parent/tutor-sessions"
