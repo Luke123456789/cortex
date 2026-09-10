@@ -8,7 +8,6 @@ import RoleSwitch from '../components/RoleSwitch.jsx'
 import WeakAreas from '../components/WeakAreas.jsx'
 import ExamCountdown from '../components/ExamCountdown.jsx'
 import SubjectLocks from '../components/SubjectLocks.jsx'
-import TutorSessionHistory from '../components/TutorSessionHistory.jsx'
 import LedgerList from '../components/LedgerList.jsx'
 import { getExistingSubscription, subscribeToPush, ensureSubscriptionSaved, pushSupported } from '../lib/push.js'
 
@@ -199,7 +198,24 @@ export default function Parent() {
 
         <SubjectLocks />
 
-        <TutorSessionHistory />
+        <Link
+          to="/parent/tutor-sessions"
+          style={{
+            display: 'block',
+            textAlign: 'center',
+            background: 'var(--card)',
+            border: '1px solid var(--rule-strong)',
+            borderRadius: 'var(--radius)',
+            padding: '12px',
+            fontSize: '13px',
+            fontWeight: 600,
+            color: 'var(--ink)',
+            textDecoration: 'none',
+            marginBottom: '20px',
+          }}
+        >
+          Review tutor sessions
+        </Link>
 
         <div className="section-label">Recent</div>
         {resolvedRequests.length === 0 ? (

@@ -9,6 +9,7 @@ import QuizSelect from './pages/QuizSelect.jsx'
 import TutorChat from './pages/TutorChat.jsx'
 import Activity from './pages/Activity.jsx'
 import RedemptionHistory from './pages/RedemptionHistory.jsx'
+import TutorSessions from './pages/TutorSessions.jsx'
 
 export default function App() {
   return (
@@ -69,6 +70,14 @@ export default function App() {
             element={
               <ProtectedRoute requireRole="parent">
                 <RedemptionHistory />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/parent/tutor-sessions"
+            element={
+              <ProtectedRoute requireRole="parent">
+                <TutorSessions />
               </ProtectedRoute>
             }
           />
