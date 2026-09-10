@@ -1,14 +1,12 @@
 import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { useRedemptions } from '../hooks/useRedemptions'
-import { useLedger } from '../hooks/useLedger'
 import { useAuth } from '../hooks/useAuth.jsx'
 import { supabase } from '../lib/supabaseClient'
 import RoleSwitch from '../components/RoleSwitch.jsx'
 import WeakAreas from '../components/WeakAreas.jsx'
 import ExamCountdown from '../components/ExamCountdown.jsx'
 import SubjectLocks from '../components/SubjectLocks.jsx'
-import LedgerList from '../components/LedgerList.jsx'
 import { getExistingSubscription, subscribeToPush, ensureSubscriptionSaved, pushSupported } from '../lib/push.js'
 
 function formatTime(isoString) {
@@ -17,7 +15,6 @@ function formatTime(isoString) {
 
 export default function Parent() {
   const { requests, refresh } = useRedemptions()
-  const { entries } = useLedger()
   const { signOut } = useAuth()
   const [notifStatus, setNotifStatus] = useState('checking')
 
@@ -234,17 +231,6 @@ export default function Parent() {
         >
           View Recent Redemptions
         </Link>
-
-        <div className="section-label">Activity feed</div>
-        <LedgerList entries={entries.slice(0, 3)} />
-        {entries.length > 3 && (
-          <Link
-            to="/activity"
-            style={{ fontSize: '12px', color: 'var(--brass)', textDecoration: 'underline', display: 'inline-block', marginTop: '2px' }}
-          >
-            View more
-          </Link>
-        )}
       </div>
     </div>
   )
