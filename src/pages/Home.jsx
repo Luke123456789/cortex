@@ -3,6 +3,7 @@ import { useLedger } from '../hooks/useLedger'
 import { useRedemptions } from '../hooks/useRedemptions'
 import { useAuth } from '../hooks/useAuth.jsx'
 import BalanceCard from '../components/BalanceCard.jsx'
+import ExamCountdown from '../components/ExamCountdown.jsx'
 import LedgerList from '../components/LedgerList.jsx'
 import ChallengeList from '../components/ChallengeList.jsx'
 import RedeemModal from '../components/RedeemModal.jsx'
@@ -96,6 +97,8 @@ export default function Home() {
           <div style={{ fontSize: '13px', color: 'var(--ink-faint)' }}>Loading…</div>
         ) : (
           <>
+            <ExamCountdown />
+
             <BalanceCard balance={balance} pendingRequest={pending} onRedeemClick={() => setModalOpen(true)} />
 
             <div className="tear">
