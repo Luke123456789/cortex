@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import { Link } from 'react-router-dom'
 import { useRedemptions } from '../hooks/useRedemptions'
 import { useLedger } from '../hooks/useLedger'
 import { useAuth } from '../hooks/useAuth.jsx'
@@ -20,8 +21,6 @@ export default function Parent() {
   const { entries } = useLedger()
   const { signOut } = useAuth()
   const [notifStatus, setNotifStatus] = useState('checking')
-  const [showAllActivity, setShowAllActivity] = useState(false)
-  const [showAllResolved, setShowAllResolved] = useState(false)
 
   useEffect(() => {
     if (!pushSupported()) {
@@ -207,7 +206,7 @@ export default function Parent() {
           <div style={{ fontSize: '13px', color: 'var(--ink-faint)', marginBottom: '20px' }}>No requests yet.</div>
         ) : (
           <>
-            {(showAllResolved ? resolvedRequests : resolvedRequests.slice(0, 6)).map((request) => (
+            {resolvedRequests.slice(0, 3).map((request) => (
               <div
                 key={request.id}
                 style={{
@@ -235,26 +234,26 @@ export default function Parent() {
                 </span>
               </div>
             ))}
-            {!showAllResolved && resolvedRequests.length > 6 && (
-              <button
-                onClick={() => setShowAllResolved(true)}
-                style={{ background: 'none', border: 'none', fontSize: '12px', color: 'var(--brass)', textDecoration: 'underline', padding: 0, marginTop: '8px' }}
+            {resolvedRequests.length > 3 && (
+              <Link
+                to="/parent/redemptions"
+                style={{ fontSize: '12px', color: 'var(--brass)', textDecoration: 'underline', display: 'inline-block', marginTop: '8px' }}
               >
-                View more ({resolvedRequests.length - 6} more)
-              </button>
+                View more
+              </Link>
             )}
           </>
         )}
 
         <div className="section-label" style={{ marginTop: '20px' }}>Activity feed</div>
-        <LedgerList entries={showAllActivity ? entries : entries.slice(0, 6)} />
-        {!showAllActivity && entries.length > 6 && (
-          <button
-            onClick={() => setShowAllActivity(true)}
-            style={{ background: 'none', border: 'none', fontSize: '12px', color: 'var(--brass)', textDecoration: 'underline', padding: 0, marginTop: '2px' }}
+        <LedgerList entries={entries.slice(0, 3)} />
+        {entries.length > 3 && (
+          <Link
+            to="/activity"
+            style={{ fontSize: '12px', color: 'var(--brass)', textDecoration: 'underline', display: 'inline-block', marginTop: '2px' }}
           >
-            View more ({entries.length - 6} more)
-          </button>
+            View more
+          </Link>
         )}
       </div>
     </div>

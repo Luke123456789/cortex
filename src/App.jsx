@@ -7,6 +7,8 @@ import Parent from './pages/Parent.jsx'
 import Quiz from './pages/Quiz.jsx'
 import QuizSelect from './pages/QuizSelect.jsx'
 import TutorChat from './pages/TutorChat.jsx'
+import Activity from './pages/Activity.jsx'
+import RedemptionHistory from './pages/RedemptionHistory.jsx'
 
 export default function App() {
   return (
@@ -51,6 +53,22 @@ export default function App() {
             element={
               <ProtectedRoute>
                 <TutorChat />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/activity"
+            element={
+              <ProtectedRoute>
+                <Activity />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/parent/redemptions"
+            element={
+              <ProtectedRoute requireRole="parent">
+                <RedemptionHistory />
               </ProtectedRoute>
             }
           />

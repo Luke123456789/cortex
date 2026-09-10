@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react'
+import { Link } from 'react-router-dom'
 import { useLedger } from '../hooks/useLedger'
 import { useRedemptions } from '../hooks/useRedemptions'
 import { useAuth } from '../hooks/useAuth.jsx'
@@ -113,7 +114,15 @@ export default function Home() {
             </div>
 
             <div className="section-label">Recent entries</div>
-            <LedgerList entries={entries} />
+            <LedgerList entries={entries.slice(0, 3)} />
+            {entries.length > 3 && (
+              <Link
+                to="/activity"
+                style={{ fontSize: '12px', color: 'var(--brass)', textDecoration: 'underline' }}
+              >
+                View more
+              </Link>
+            )}
           </>
         )}
       </div>
