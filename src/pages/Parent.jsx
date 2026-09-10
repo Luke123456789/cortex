@@ -5,7 +5,6 @@ import { useAuth } from '../hooks/useAuth.jsx'
 import { useStudentProfile } from '../hooks/useStudentProfile'
 import { supabase } from '../lib/supabaseClient'
 import RoleSwitch from '../components/RoleSwitch.jsx'
-import WeakAreas from '../components/WeakAreas.jsx'
 import ExamCountdown from '../components/ExamCountdown.jsx'
 import SubjectLocks from '../components/SubjectLocks.jsx'
 import { getExistingSubscription, subscribeToPush, ensureSubscriptionSaved, pushSupported } from '../lib/push.js'
@@ -191,8 +190,6 @@ export default function Parent() {
         )}
 
         <ExamCountdown detailed />
-
-        <WeakAreas />
 
         <SubjectLocks />
 
