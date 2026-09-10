@@ -84,7 +84,6 @@ export default function Parent() {
   }
 
   const pendingRequests = requests.filter((r) => r.status === 'pending')
-  const resolvedRequests = requests.filter((r) => r.status !== 'pending')
 
   return (
     <div className="device">
@@ -217,51 +216,26 @@ export default function Parent() {
           Review tutor sessions
         </Link>
 
-        <div className="section-label">Recent</div>
-        {resolvedRequests.length === 0 ? (
-          <div style={{ fontSize: '13px', color: 'var(--ink-faint)', marginBottom: '20px' }}>No requests yet.</div>
-        ) : (
-          <>
-            {resolvedRequests.slice(0, 3).map((request) => (
-              <div
-                key={request.id}
-                style={{
-                  display: 'flex',
-                  justifyContent: 'space-between',
-                  alignItems: 'center',
-                  padding: '10px 0',
-                  borderBottom: '1px solid var(--rule)',
-                }}
-              >
-                <div>
-                  <div style={{ fontSize: '13.5px' }}>{request.minutes_requested} min requested</div>
-                  <span className="mono" style={{ fontSize: '9.5px', color: 'var(--ink-faint)' }}>{formatTime(request.requested_at)}</span>
-                </div>
-                <span
-                  className="mono"
-                  style={{
-                    fontSize: '11px',
-                    fontWeight: 600,
-                    textTransform: 'uppercase',
-                    color: request.status === 'approved' ? 'var(--green)' : 'var(--red)',
-                  }}
-                >
-                  {request.status}
-                </span>
-              </div>
-            ))}
-            {resolvedRequests.length > 3 && (
-              <Link
-                to="/parent/redemptions"
-                style={{ fontSize: '12px', color: 'var(--brass)', textDecoration: 'underline', display: 'inline-block', marginTop: '8px' }}
-              >
-                View more
-              </Link>
-            )}
-          </>
-        )}
+        <Link
+          to="/parent/redemptions"
+          style={{
+            display: 'block',
+            textAlign: 'center',
+            background: 'var(--card)',
+            border: '1px solid var(--rule-strong)',
+            borderRadius: 'var(--radius)',
+            padding: '12px',
+            fontSize: '13px',
+            fontWeight: 600,
+            color: 'var(--ink)',
+            textDecoration: 'none',
+            marginBottom: '20px',
+          }}
+        >
+          View Recent Redemptions
+        </Link>
 
-        <div className="section-label" style={{ marginTop: '20px' }}>Activity feed</div>
+        <div className="section-label">Activity feed</div>
         <LedgerList entries={entries.slice(0, 3)} />
         {entries.length > 3 && (
           <Link
