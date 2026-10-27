@@ -261,11 +261,32 @@ export default function TutorChat() {
     setPlanLoading(true)
     setError(null)
 
-    const { data: session, error: sessionError } = await supabase
+    // Only one unfinished session per student+subtopic is allowed
+    // (one_active_session_per_subtopic). A chat that was abandoned without
+    // finishing never gets completed_at, so reuse that row — reset to a
+    // fresh start — rather than inserting a second one that would 409.
+    const { data: openSession, error: lookupError } = await supabase
       .from('tutor_sessions')
-      .insert({ student_id: user.id, subtopic_id: subtopicId })
       .select('id')
-      .single()
+      .eq('student_id', user.id)
+      .eq('subtopic_id', subtopicId)
+      .is('completed_at', null)
+      .maybeSingle()
+
+    const { data: session, error: sessionError } = lookupError
+      ? { data: null, error: lookupError }
+      : openSession
+        ? await supabase
+            .from('tutor_sessions')
+            .update({ started_at: new Date().toISOString(), message_count: 0, messages: [], lesson_plan: null })
+            .eq('id', openSession.id)
+            .select('id')
+            .single()
+        : await supabase
+            .from('tutor_sessions')
+            .insert({ student_id: user.id, subtopic_id: subtopicId })
+            .select('id')
+            .single()
     if (sessionError) {
       console.error('Failed to start tutor session', sessionError)
       setError('Could not start the session. Try again.')
