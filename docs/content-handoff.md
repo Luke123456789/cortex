@@ -138,3 +138,19 @@ Present the mapping as a table and wait for approval.
   matched its local checksum.
 - Dry runs: `/usr/lib/postgresql/16/bin` exists in the container, so the batch and its
   rollback were tested on a throwaway local Postgres first.
+
+### 2026-11-04: exam boards corrected from school mock sheets
+- **History is Pearson Edexcel GCSE (9-1) History (1HI0), not AQA.** Mock (Year 11, Nov) covers:
+  - Paper 1 thematic + historic environment: Crime and punishment in Britain c1000–present,
+    with Whitechapel c1870–c1900: crime, policing and the inner city.
+  - Paper 2 period study: P3 The American West c1835–c1895.
+  - Paper 2 British depth study: B1 Anglo-Saxon and Norman England c1060–88.
+  - Paper 3 (modern depth study) option still unknown.
+- **Business is WJEC Eduqas GCSE (9-1) Business (C710), not AQA 8132.** Mock topic list:
+  cash flow, stakeholders, business growth, terminology, product life cycle, competition,
+  revenue/costs/profit, income statements, ratios, market research, business data, ARR,
+  goods and services, entrepreneurs, external influences, percentage change, promotion,
+  technology, ownership, e-commerce, quality, legislation, business software, economic
+  factors, motivation.
+- Maths: AQA 8300 **Higher**.
+- EXAM_BOARDS updated and deployed (tutor-chat v11, tutor-plan v7).

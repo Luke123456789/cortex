@@ -29,15 +29,15 @@ async function getStudentUser(req: Request) {
   return { id: user.id, displayName: profile.display_name }
 }
 
-// James's GCSEs: separate (triple) sciences, all AQA except PE (OCR).
+// James's GCSEs: separate (triple) sciences; AQA except PE (OCR J587), History (Edexcel 1HI0) and Business (Eduqas C710).
 const EXAM_BOARDS: Record<string, string> = {
   Biology: 'AQA GCSE Biology (8461)',
   Chemistry: 'AQA GCSE Chemistry (8462)',
   Physics: 'AQA GCSE Physics (8463)',
   Maths: 'AQA GCSE Mathematics (8300), Higher tier',
   Mathematics: 'AQA GCSE Mathematics (8300), Higher tier',
-  History: 'AQA GCSE History (8145)',
-  Business: 'AQA GCSE Business (8132)',
+  History: 'Pearson Edexcel GCSE (9-1) History (1HI0)',
+  Business: 'WJEC Eduqas GCSE (9-1) Business (C710)',
   Economics: 'AQA GCSE Economics (8136)',
   'Physical Education': 'OCR GCSE (9-1) Physical Education (J587)',
   PE: 'OCR GCSE (9-1) Physical Education (J587)',
