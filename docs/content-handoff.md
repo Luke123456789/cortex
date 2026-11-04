@@ -14,7 +14,7 @@ notes and the app fixes, which are now deployed. Start the new session from `mai
 |---|---|---|
 | Biology | AQA 8461 | Existing content, 10 topics |
 | Chemistry | AQA 8462 | **Done**: C1–C5 added (100 Qs); C6–C10 now have subtopics |
-| Physics | AQA 8463 | **In progress**: P1–P3 applied, P4–P8 still to apply (see below) |
+| Physics | AQA 8463 | **Done**: P1–P8 applied and verified (164 Qs); awaiting Luke's review |
 | Business | **WJEC Eduqas C710** (not AQA) | Next after Physics |
 | PE | OCR J587 | Remap from AQA; needs Luke's approval of the mapping first |
 | English Language | AQA 8700 | Skills-based (see original brief) |
@@ -43,8 +43,8 @@ terms, use the context, analyse impacts, evaluate ("what might it depend on?").
 Finish and check each subject before the next. After each one, show Luke the
 topic list and 5 sample questions.
 
-1. **Physics**: apply P4–P8, verify, show Luke. ← resume here
-2. **Business** (Eduqas C710): build the spec file from the Eduqas spec, using
+1. **Physics**: done (P1–P8 applied and verified; Luke reviewing topic list and samples).
+2. **Business** ← resume here (Eduqas C710): build the spec file from the Eduqas spec, using
    the mock topic list above as a checklist.
 3. **PE → OCR J587**: map every existing question onto Applied Anatomy and
    Physiology, Physical Training, Socio-cultural Issues, Sports Psychology, and
@@ -100,14 +100,18 @@ part also carries the `insert into subjects` header. Name migrations like
 **Verify** after applying, per topic, by comparing with the local dry run:
 
 ```sql
-select t.spec_ref, count(q.id) n, md5(string_agg(concat_ws('|', st.name, q.question_text, q.option_a, q.option_b, q.option_c, q.option_d, q.correct_option, q.explanation, q.difficulty, q.question_type, q.ao_weighting, qq.position), E'\n' order by qq.position)) ck
-from questions q join topics t on t.id=q.topic_id join subtopics st on st.id=q.subtopic_id join quiz_questions qq on qq.question_id=q.id
+select t.spec_ref, count(q.id) n, md5(string_agg(concat_ws('|', st.name, q.question_text, q.option_a, q.option_b, q.option_c, q.option_d, q.correct_option, q.explanation, q.difficulty, q.question_type, q.ao_weighting, qq.position), E'\n' order by qq.position, z.title)) ck
+from questions q join topics t on t.id=q.topic_id join subtopics st on st.id=q.subtopic_id join quiz_questions qq on qq.question_id=q.id join quizzes z on z.id=qq.quiz_id
 where q.generation_batch_id='<batch id>' group by t.spec_ref order by 1;
 ```
 
+Order by `qq.position, z.title`, not `qq.position` alone: a topic with more than
+one quiz has repeated positions, and without the tie-break the checksum changes
+from run to run.
+
 Commit the spec, authored JSON and batch files after each subject.
 
-## Physics: exactly where it stopped
+## Physics: complete
 
 Batch **`f4523abc-cc13-426c-9eed-deef288ff03d`**, file
 `supabase/content-batches/2026-11-04-aqa-8463-physics-f4523abc.sql`
@@ -118,11 +122,11 @@ Batch **`f4523abc-cc13-426c-9eed-deef288ff03d`**, file
 | P1 Energy | `physics_p1_energy` | applied, verified | 8bd623da08350dc1f96cfb591363964d |
 | P2 Electricity | `physics_p2_electricity` | applied, verified | 186e4030c44da9e54f779e09e0093a50 |
 | P3 Particle Model of Matter | `physics_p3_particle_model` | applied, verified | c242bf072a2cc8b9b73de13d278ac68a |
-| P4 Atomic Structure | — | **to apply** | 98605cdcaf44226b14d7af2c5c2abb97 |
-| P5 Forces | — | **to apply** | 854039f7a1092b6985a08629fe2e99d8 |
-| P6 Waves | — | **to apply** | b41e04b5b145169963f79aa44e41fdf5 |
-| P7 Magnetism and Electromagnetism | — | **to apply** | 3f395c0548c4bb6ecb4a5354a9387fa4 |
-| P8 Space Physics | — | **to apply** | d99617901db4e9e7bb25ee0009912f98 |
+| P4 Atomic Structure | `physics_p4_atomic_structure` | applied, verified | 98605cdcaf44226b14d7af2c5c2abb97 |
+| P5 Forces | `physics_p5_forces` | applied, verified | c00ac67bf9fc86c6827b21fcafd3e8bf |
+| P6 Waves | `physics_p6_waves` | applied, verified | b41e04b5b145169963f79aa44e41fdf5 |
+| P7 Magnetism and Electromagnetism | `physics_p7_magnetism_and_electromagnetism` | applied, verified | 3f395c0548c4bb6ecb4a5354a9387fa4 |
+| P8 Space Physics | `physics_p8_space_physics` | applied, verified | d99617901db4e9e7bb25ee0009912f98 |
 
 Do **not** regenerate the Physics batch: a rerun shuffles answer letters and
 makes a new batch id, which won't match the rows already applied. Apply P4–P8
