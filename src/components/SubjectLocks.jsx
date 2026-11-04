@@ -24,8 +24,8 @@ function formatLockedUntil(date) {
   return date.toLocaleString([], { day: '2-digit', month: 'short', hour: '2-digit', minute: '2-digit' })
 }
 
-export default function SubjectLocks() {
-  const { subjects, locks, loading, lock, unlock } = useSubjectLocks()
+export default function SubjectLocks({ studentId }) {
+  const { subjects, locks, loading, lock, unlock } = useSubjectLocks(studentId)
   const [subjectId, setSubjectId] = useState('')
   const [topicId, setTopicId] = useState('')
   const [hours, setHours] = useState(24)

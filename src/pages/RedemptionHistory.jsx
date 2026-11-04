@@ -1,12 +1,14 @@
 import { Link } from 'react-router-dom'
 import { useRedemptions } from '../hooks/useRedemptions'
+import { useAuth } from '../hooks/useAuth.jsx'
 
 function formatTime(isoString) {
   return new Date(isoString).toLocaleString([], { day: '2-digit', month: 'short', hour: '2-digit', minute: '2-digit' })
 }
 
 export default function RedemptionHistory() {
-  const { requests, loading } = useRedemptions()
+  const { childStudent } = useAuth()
+  const { requests, loading } = useRedemptions(childStudent?.id)
   const resolvedRequests = requests.filter((r) => r.status !== 'pending')
 
   return (

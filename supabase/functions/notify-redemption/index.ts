@@ -28,10 +28,29 @@ Deno.serve(async (req) => {
     return new Response('ignored', { status: 200 })
   }
 
+  // Practice requests are made by the parent themselves: nobody to notify.
+  const { data: student } = await supabase
+    .from('profiles')
+    .select('display_name, is_practice')
+    .eq('id', record.student_id)
+    .maybeSingle()
+  if (!student || student.is_practice) {
+    return new Response('ignored (practice or unknown student)', { status: 200 })
+  }
+
+  // Only the student's linked parents. A redemption request is submitted BY
+  // the student, so the student's own subscriptions must never be pinged.
+  const { data: links } = await supabase
+    .from('student_links')
+    .select('parent_id')
+    .eq('student_id', record.student_id)
+  const parentIds = (links ?? []).map((l) => l.parent_id)
+
   const { data: subscriptions, error } = await supabase
     .from('push_subscriptions')
     .select('*')
     .eq('role', 'parent')
+    .in('user_id', parentIds)
 
   if (error) {
     return new Response(JSON.stringify({ error: error.message }), { status: 500 })
@@ -39,7 +58,7 @@ Deno.serve(async (req) => {
 
   const message = JSON.stringify({
     title: 'Cortex — redemption request',
-    body: `James wants to redeem ${record.minutes_requested} min`,
+    body: `${student.display_name ?? 'Your student'} wants to redeem ${record.minutes_requested} min`,
     url: '/parent',
   })
 

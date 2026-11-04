@@ -1,7 +1,9 @@
 import { Link } from 'react-router-dom'
 import TutorSessionHistory from '../components/TutorSessionHistory.jsx'
+import { useAuth } from '../hooks/useAuth.jsx'
 
 export default function TutorSessions() {
+  const { childStudent } = useAuth()
   return (
     <div className="device">
       <div className="screen">
@@ -12,7 +14,7 @@ export default function TutorSessions() {
           </Link>
         </div>
 
-        <TutorSessionHistory />
+        <TutorSessionHistory studentId={childStudent?.id} />
       </div>
     </div>
   )

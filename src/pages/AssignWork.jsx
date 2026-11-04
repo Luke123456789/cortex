@@ -2,7 +2,6 @@ import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { supabase } from '../lib/supabaseClient'
 import { useAuth } from '../hooks/useAuth.jsx'
-import { useStudentProfile } from '../hooks/useStudentProfile'
 import { useAssignableCatalog } from '../hooks/useAssignableCatalog'
 import { useAssignments } from '../hooks/useAssignments'
 
@@ -37,10 +36,15 @@ function truncate(text, max) {
 }
 
 export default function AssignWork() {
-  const { user } = useAuth()
-  const { displayName: studentName } = useStudentProfile()
+  const { user, childStudent, linkedStudents } = useAuth()
+  // Defaults to the real student; the practice student can be picked too, so
+  // assigned work can be tried out from the student view first.
+  const [targetId, setTargetId] = useState('')
+  const studentId = targetId || childStudent?.id
+  const target = linkedStudents.find((s) => s.id === studentId)
+  const studentName = target ? (target.isPractice ? 'practice student' : target.displayName) : null
   const { subjects, topics, subtopics, quizzes, examQuestions, loading: catalogLoading } = useAssignableCatalog()
-  const { assignments, refresh } = useAssignments()
+  const { assignments, refresh } = useAssignments(studentId)
 
   const [type, setType] = useState('quiz')
   const [subjectId, setSubjectId] = useState('')
@@ -78,6 +82,7 @@ export default function AssignWork() {
   }, [topicId])
 
   function canPush() {
+    if (!studentId) return false
     if (type === 'quiz') return !!quizId
     if (type === 'tutor_session') return !!subtopicId
     if (type === 'written_test') return !!examQuestionId
@@ -90,6 +95,7 @@ export default function AssignWork() {
     setError(null)
     try {
       const base = {
+        student_id: studentId,
         type,
         subject_id: subjectId || null,
         topic_id: topicId || null,
@@ -147,6 +153,14 @@ export default function AssignWork() {
         </div>
 
         <div className="section-label">Assign work{studentName ? ` to ${studentName}` : ''}</div>
+
+        {linkedStudents.length > 1 && (
+          <select value={studentId || ''} onChange={(e) => setTargetId(e.target.value)} style={selectStyle}>
+            {linkedStudents.map((s) => (
+              <option key={s.id} value={s.id}>{s.isPractice ? 'Practice student (for trying things out)' : s.displayName}</option>
+            ))}
+          </select>
+        )}
 
         {catalogLoading ? (
           <div style={{ fontSize: '13px', color: 'var(--ink-faint)' }}>Loading…</div>

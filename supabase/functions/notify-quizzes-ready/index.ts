@@ -14,9 +14,8 @@ const supabase = createClient(
 )
 
 // Manually-triggered notification (not a DB webhook) — used to nudge the
-// student that fresh quiz content is available. Requires a shared secret
-// header so only an authorised caller (e.g. Claude via curl, or a future
-// parent-facing "send reminder" button) can fire it.
+// student that fresh quiz content is available, or as a one-off reminder.
+// Requires a shared secret header so only an authorised caller can fire it.
 Deno.serve(async (req) => {
   if (TRIGGER_SECRET && req.headers.get('x-trigger-secret') !== TRIGGER_SECRET) {
     return new Response('unauthorized', { status: 401 })
@@ -37,7 +36,7 @@ Deno.serve(async (req) => {
 
   const message = JSON.stringify({
     title: 'Cortex',
-    body: 'New quizzes are up — earn some screen time.',
+    body: 'If your screen time is running low, take a quick quiz and earn some more!',
     url: '/quizzes',
   })
 

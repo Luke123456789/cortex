@@ -2,7 +2,8 @@ import { useEffect, useState, useCallback } from 'react'
 import { supabase } from '../lib/supabaseClient'
 import { useAuth } from './useAuth.jsx'
 
-export function useSubjectLocks() {
+// studentId: whose locks to show and change (the parent's real student).
+export function useSubjectLocks(studentId) {
   const { user } = useAuth()
   const [subjects, setSubjects] = useState([])
   const [locks, setLocks] = useState([])
@@ -36,6 +37,7 @@ export function useSubjectLocks() {
     const { data: lockRows, error: lockError } = await supabase
       .from('subject_locks')
       .select('id, subject_id, topic_id, locked_until')
+      .eq('student_id', studentId)
 
     if (lockError) {
       console.error('Failed to load subject locks', lockError)
@@ -70,16 +72,17 @@ export function useSubjectLocks() {
     setSubjects(subjectsWithTopics)
     setLocks(activeLocks)
     setLoading(false)
-  }, [])
+  }, [studentId])
 
   useEffect(() => {
+    if (!studentId) return
     fetchAll()
 
     const channel = supabase
-      .channel('subject_locks_changes')
+      .channel(`subject_locks_changes_${studentId}`)
       .on(
         'postgres_changes',
-        { event: '*', schema: 'public', table: 'subject_locks' },
+        { event: '*', schema: 'public', table: 'subject_locks', filter: `student_id=eq.${studentId}` },
         () => fetchAll()
       )
       .subscribe()
@@ -92,7 +95,7 @@ export function useSubjectLocks() {
   async function lock(subjectId, topicId, hours) {
     const lockedUntil = new Date(Date.now() + hours * 60 * 60 * 1000).toISOString()
 
-    let clearExisting = supabase.from('subject_locks').delete().eq('subject_id', subjectId)
+    let clearExisting = supabase.from('subject_locks').delete().eq('student_id', studentId).eq('subject_id', subjectId)
     clearExisting = topicId ? clearExisting.eq('topic_id', topicId) : clearExisting.is('topic_id', null)
     const { error: deleteError } = await clearExisting
     if (deleteError) {
@@ -101,6 +104,7 @@ export function useSubjectLocks() {
     }
 
     const { error } = await supabase.from('subject_locks').insert({
+      student_id: studentId,
       subject_id: subjectId,
       topic_id: topicId || null,
       locked_until: lockedUntil,

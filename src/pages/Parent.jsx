@@ -2,7 +2,6 @@ import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { useRedemptions } from '../hooks/useRedemptions'
 import { useAuth } from '../hooks/useAuth.jsx'
-import { useStudentProfile } from '../hooks/useStudentProfile'
 import { supabase } from '../lib/supabaseClient'
 import RoleSwitch from '../components/RoleSwitch.jsx'
 import ExamCountdown from '../components/ExamCountdown.jsx'
@@ -14,9 +13,9 @@ function formatTime(isoString) {
 }
 
 export default function Parent() {
-  const { requests, refresh } = useRedemptions()
-  const { signOut } = useAuth()
-  const { displayName: studentName } = useStudentProfile()
+  const { signOut, childStudent } = useAuth()
+  const { requests, refresh } = useRedemptions(childStudent?.id)
+  const studentName = childStudent?.displayName
   const [notifStatus, setNotifStatus] = useState('checking')
 
   useEffect(() => {
@@ -54,6 +53,7 @@ export default function Parent() {
 
   async function approve(request) {
     const { error: insertError } = await supabase.from('ledger_entries').insert({
+      student_id: request.student_id,
       type: 'spend',
       amount_minutes: request.minutes_requested,
       source: 'Redemption approved',
@@ -191,7 +191,7 @@ export default function Parent() {
 
         <ExamCountdown detailed />
 
-        <SubjectLocks />
+        <SubjectLocks studentId={childStudent?.id} />
 
         <Link
           to="/parent/assign"

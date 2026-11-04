@@ -3,12 +3,12 @@ import { supabase } from '../lib/supabaseClient'
 import { useAuth } from './useAuth.jsx'
 
 export function useQuizzesForTopic(topicId) {
-  const { user } = useAuth()
+  const { studentId } = useAuth()
   const [quizzes, setQuizzes] = useState([])
   const [loading, setLoading] = useState(true)
 
   const fetchQuizzes = useCallback(async () => {
-    if (!topicId || !user) return
+    if (!topicId || !studentId) return
     setLoading(true)
 
     const { data: quizRows, error: quizError } = await supabase
@@ -26,7 +26,7 @@ export function useQuizzesForTopic(topicId) {
     const { data: sessionRows, error: sessionError } = await supabase
       .from('quiz_sessions')
       .select('quiz_id, completed_at, score, question_count')
-      .eq('student_id', user.id)
+      .eq('student_id', studentId)
       .not('completed_at', 'is', null)
       .order('completed_at', { ascending: false })
 
@@ -61,7 +61,7 @@ export function useQuizzesForTopic(topicId) {
 
     setQuizzes(withStatus)
     setLoading(false)
-  }, [topicId, user])
+  }, [topicId, studentId])
 
   useEffect(() => {
     fetchQuizzes()

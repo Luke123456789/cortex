@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react'
+import { supabase } from '../lib/supabaseClient'
 import { Link } from 'react-router-dom'
 import { useLedger } from '../hooks/useLedger'
 import { useRedemptions } from '../hooks/useRedemptions'
@@ -14,13 +15,29 @@ import RoleSwitch from '../components/RoleSwitch.jsx'
 import { getExistingSubscription, subscribeToPush, ensureSubscriptionSaved, pushSupported } from '../lib/push.js'
 
 export default function Home() {
-  const { entries, balance, loading } = useLedger()
-  const { pending, refresh: refreshRedemptions } = useRedemptions()
-  const { assignments } = useAssignments()
+  // A student sees their own data; a parent's student view is their practice
+  // student, so nothing done here touches the real student's data.
+  const { profile, signOut, studentId, isPractice } = useAuth()
+  const { entries, balance, loading, refresh: refreshLedger } = useLedger(studentId)
+  const { pending, refresh: refreshRedemptions } = useRedemptions(studentId)
+  const { assignments, refresh: refreshAssignments } = useAssignments(studentId)
   const pendingAssignments = assignments.filter((a) => a.status === 'pending')
-  const { profile, signOut } = useAuth()
   const [modalOpen, setModalOpen] = useState(false)
   const [notifStatus, setNotifStatus] = useState('checking')
+  const [resetting, setResetting] = useState(false)
+
+  async function handleResetPractice() {
+    if (!window.confirm('Delete everything the practice student has done (sessions, quizzes, minutes, requests)?')) return
+    setResetting(true)
+    const { error } = await supabase.rpc('reset_practice_data', { p_student: studentId })
+    setResetting(false)
+    if (error) {
+      console.error('Failed to reset practice data', error)
+      window.alert('Could not reset practice data. Try again.')
+      return
+    }
+    await Promise.all([refreshLedger(), refreshRedemptions(), refreshAssignments()])
+  }
 
   useEffect(() => {
     if (!pushSupported()) {
@@ -79,6 +96,22 @@ export default function Home() {
             </button>
           </div>
         </div>
+
+        {isPractice && (
+          <div style={{ background: 'var(--brass-light)', border: '1px solid var(--brass)', borderRadius: '8px', padding: '10px 12px', marginBottom: '18px', fontSize: '12px', color: 'var(--ink-soft)' }}>
+            <div style={{ fontWeight: 600, color: 'var(--brass)', marginBottom: '4px' }}>Practice mode</div>
+            You're using the student view as a practice student. Nothing here touches the real student's data, and no screen time is earned.
+            <div style={{ marginTop: '8px' }}>
+              <button
+                onClick={handleResetPractice}
+                disabled={resetting}
+                style={{ background: 'none', border: 'none', padding: 0, fontSize: '11.5px', color: 'var(--brass)', textDecoration: 'underline' }}
+              >
+                {resetting ? 'Resetting…' : 'Reset practice data'}
+              </button>
+            </div>
+          </div>
+        )}
 
         {notifStatus === 'disabled' && (
           <button
@@ -170,6 +203,7 @@ export default function Home() {
 
       {modalOpen && (
         <RedeemModal
+          studentId={studentId}
           balance={balance}
           onClose={() => setModalOpen(false)}
           onRequested={() => {

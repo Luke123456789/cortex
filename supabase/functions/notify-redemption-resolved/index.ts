@@ -27,10 +27,22 @@ Deno.serve(async (req) => {
     return new Response('ignored', { status: 200 })
   }
 
+  // Practice requests were made by the parent themselves: nobody to notify.
+  const { data: student } = await supabase
+    .from('profiles')
+    .select('is_practice')
+    .eq('id', record.student_id)
+    .maybeSingle()
+  if (!student || student.is_practice) {
+    return new Response('ignored (practice or unknown student)', { status: 200 })
+  }
+
+  // Only the student whose request it was.
   const { data: subscriptions, error } = await supabase
     .from('push_subscriptions')
     .select('*')
     .eq('role', 'student')
+    .eq('user_id', record.student_id)
 
   if (error) {
     return new Response(JSON.stringify({ error: error.message }), { status: 500 })

@@ -1,28 +1,15 @@
 import { createClient } from 'npm:@supabase/supabase-js@2.45.0'
+import { getCaller } from '../_shared/access.ts'
 import { MIN_MINUTES, MAX_MINUTES, buildGradingPrompt, extractGradeFromResponse } from './grading-logic.js'
 
 const ANTHROPIC_API_KEY = Deno.env.get('ANTHROPIC_API_KEY')
 const SUPABASE_URL = Deno.env.get('SUPABASE_URL')!
-const SUPABASE_ANON_KEY = Deno.env.get('SUPABASE_ANON_KEY')!
 const SUPABASE_SERVICE_ROLE_KEY = Deno.env.get('SUPABASE_SERVICE_ROLE_KEY')!
 
 const corsHeaders = {
   'Access-Control-Allow-Origin': '*',
   'Access-Control-Allow-Headers': 'authorization, x-client-info, apikey, content-type',
   'Access-Control-Allow-Methods': 'POST, OPTIONS',
-}
-
-async function getStudentUser(req: Request) {
-  const authHeader = req.headers.get('Authorization')
-  if (!authHeader) return null
-  const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY, {
-    global: { headers: { Authorization: authHeader } },
-  })
-  const { data: { user } } = await supabase.auth.getUser()
-  if (!user) return null
-  const { data: profile } = await supabase.from('profiles').select('role, display_name').eq('id', user.id).single()
-  if (profile?.role !== 'student') return null
-  return { id: user.id, displayName: profile.display_name, client: supabase }
 }
 
 Deno.serve(async (req) => {
@@ -36,25 +23,30 @@ Deno.serve(async (req) => {
     return new Response(JSON.stringify({ error: 'ANTHROPIC_API_KEY not configured' }), { status: 500, headers: { ...corsHeaders, 'Content-Type': 'application/json' } })
   }
 
-  const user = await getStudentUser(req)
-  if (!user) return new Response('unauthorized', { status: 401, headers: corsHeaders })
+  const caller = await getCaller(req)
+  if (!caller) return new Response('unauthorized', { status: 401, headers: corsHeaders })
 
   const { sessionId, messages, subjectName, topicName, subtopicName } = await req.json()
   if (!sessionId || !Array.isArray(messages) || messages.length === 0) {
     return new Response(JSON.stringify({ error: 'sessionId and messages required' }), { status: 400, headers: { ...corsHeaders, 'Content-Type': 'application/json' } })
   }
 
-  // Ownership check: the session must belong to this student. Uses the
-  // caller's own JWT (RLS-scoped), not the service-role client, so this can
-  // never read or grade someone else's session.
-  const { data: session, error: sessionErr } = await user.client
+  // Ownership check, through the caller's own JWT (RLS-scoped), never the
+  // service role: the session must be visible to the caller AND the caller
+  // must be allowed to act as its student (the student themselves, or a
+  // parent for their practice student). A parent can read James's sessions
+  // but can never grade them.
+  const { data: session, error: sessionErr } = await caller.client
     .from('tutor_sessions')
     .select('id, student_id, reward_claimed')
     .eq('id', sessionId)
-    .eq('student_id', user.id)
     .single()
 
   if (sessionErr || !session) {
+    return new Response(JSON.stringify({ error: 'session not found' }), { status: 404, headers: { ...corsHeaders, 'Content-Type': 'application/json' } })
+  }
+  const { data: mayWrite } = await caller.client.rpc('can_write_as', { p_student: session.student_id })
+  if (mayWrite !== true) {
     return new Response(JSON.stringify({ error: 'session not found' }), { status: 404, headers: { ...corsHeaders, 'Content-Type': 'application/json' } })
   }
   if (session.reward_claimed) {

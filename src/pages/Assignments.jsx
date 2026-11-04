@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom'
 import { useAssignments } from '../hooks/useAssignments'
+import { useAuth } from '../hooks/useAuth.jsx'
 import { ASSIGNMENT_TYPE_LABELS, assignmentAction } from '../lib/assignments'
 
 function formatTime(isoString) {
@@ -42,7 +43,8 @@ function AssignmentCard({ assignment }) {
 }
 
 export default function Assignments() {
-  const { assignments, loading } = useAssignments()
+  const { studentId } = useAuth()
+  const { assignments, loading } = useAssignments(studentId)
 
   const pending = assignments.filter((a) => a.status === 'pending')
   const completed = assignments.filter((a) => a.status === 'completed').slice(0, 10)

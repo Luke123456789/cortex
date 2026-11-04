@@ -13,8 +13,8 @@ function sessionStatus(session) {
   return { text: 'No reward', color: 'var(--ink-faint)' }
 }
 
-export default function TutorSessionHistory() {
-  const { sessions, loading } = useTutorSessions()
+export default function TutorSessionHistory({ studentId }) {
+  const { sessions, loading } = useTutorSessions(studentId)
   const [showAll, setShowAll] = useState(false)
   const [expandedId, setExpandedId] = useState(null)
 

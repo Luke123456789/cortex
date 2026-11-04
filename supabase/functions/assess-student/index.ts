@@ -8,29 +8,16 @@ import {
   buildAssessmentPrompt,
   extractAssessmentFromResponse,
 } from './assessment-logic.js'
+import { getCaller, resolveParentedStudent } from '../_shared/access.ts'
 
 const ANTHROPIC_API_KEY = Deno.env.get('ANTHROPIC_API_KEY')
 const SUPABASE_URL = Deno.env.get('SUPABASE_URL')!
-const SUPABASE_ANON_KEY = Deno.env.get('SUPABASE_ANON_KEY')!
 const SUPABASE_SERVICE_ROLE_KEY = Deno.env.get('SUPABASE_SERVICE_ROLE_KEY')!
 
 const corsHeaders = {
   'Access-Control-Allow-Origin': '*',
   'Access-Control-Allow-Headers': 'authorization, x-client-info, apikey, content-type',
   'Access-Control-Allow-Methods': 'POST, OPTIONS',
-}
-
-async function getParentUser(req: Request) {
-  const authHeader = req.headers.get('Authorization')
-  if (!authHeader) return null
-  const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY, {
-    global: { headers: { Authorization: authHeader } },
-  })
-  const { data: { user } } = await supabase.auth.getUser()
-  if (!user) return null
-  const { data: profile } = await supabase.from('profiles').select('role').eq('id', user.id).single()
-  if (profile?.role !== 'parent') return null
-  return { id: user.id }
 }
 
 // Resolves which topics/subtopics/questions fall under a subject filter, so
@@ -61,29 +48,26 @@ Deno.serve(async (req) => {
     return new Response('method not allowed', { status: 405, headers: corsHeaders })
   }
 
-  const parent = await getParentUser(req)
-  if (!parent) return new Response('unauthorized', { status: 401, headers: corsHeaders })
+  const parent = await getCaller(req)
+  if (!parent || parent.role !== 'parent') return new Response('unauthorized', { status: 401, headers: corsHeaders })
 
-  const { subjectId = null, window: windowKey } = await req.json()
+  const { subjectId = null, window: windowKey, studentId } = await req.json()
   if (!isValidWindow(windowKey)) {
     return new Response(JSON.stringify({ error: 'invalid window' }), { status: 400, headers: { ...corsHeaders, 'Content-Type': 'application/json' } })
   }
 
-  // Service-role client: this aggregation needs to read across the whole
-  // student's history regardless of the caller's own RLS scope, and is the
-  // only place allowed to insert the final assessments row.
-  const admin = createClient(SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY)
-
-  const { data: student, error: studentErr } = await admin
-    .from('profiles')
-    .select('id, display_name')
-    .eq('role', 'student')
-    .limit(1)
-    .maybeSingle()
-
-  if (studentErr || !student) {
-    return new Response(JSON.stringify({ error: 'no student profile found' }), { status: 404, headers: { ...corsHeaders, 'Content-Type': 'application/json' } })
+  // A student this parent is linked to (checked with the parent's own JWT).
+  // Without studentId: the parent's one linked real student, as before.
+  const linked = await resolveParentedStudent(parent, studentId)
+  if (!linked) {
+    return new Response(JSON.stringify({ error: 'no linked student found' }), { status: 404, headers: { ...corsHeaders, 'Content-Type': 'application/json' } })
   }
+
+  // Service-role client: this aggregation reads the linked student's whole
+  // history in one go, and is the only place that inserts the final
+  // assessments row. Every query below is filtered to student.id.
+  const admin = createClient(SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY)
+  const student = { id: linked.id, display_name: linked.displayName }
 
   let subjectName: string | null = null
   if (subjectId) {
@@ -180,6 +164,7 @@ Deno.serve(async (req) => {
     const { data: row, error } = await admin
       .from('assessments')
       .insert({
+        student_id: student.id,
         subject_id: subjectId,
         time_window: windowKey,
         requested_by: parent!.id,

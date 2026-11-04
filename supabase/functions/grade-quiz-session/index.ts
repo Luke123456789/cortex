@@ -1,27 +1,14 @@
 import { createClient } from 'npm:@supabase/supabase-js@2.45.0'
+import { getCaller, resolveWritableStudent } from '../_shared/access.ts'
 import { activeQuizQuestions, computeReward, gradeAnswers } from './quiz-grading-logic.js'
 
 const SUPABASE_URL = Deno.env.get('SUPABASE_URL')!
-const SUPABASE_ANON_KEY = Deno.env.get('SUPABASE_ANON_KEY')!
 const SUPABASE_SERVICE_ROLE_KEY = Deno.env.get('SUPABASE_SERVICE_ROLE_KEY')!
 
 const corsHeaders = {
   'Access-Control-Allow-Origin': '*',
   'Access-Control-Allow-Headers': 'authorization, x-client-info, apikey, content-type',
   'Access-Control-Allow-Methods': 'POST, OPTIONS',
-}
-
-async function getStudentUser(req: Request) {
-  const authHeader = req.headers.get('Authorization')
-  if (!authHeader) return null
-  const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY, {
-    global: { headers: { Authorization: authHeader } },
-  })
-  const { data: { user } } = await supabase.auth.getUser()
-  if (!user) return null
-  const { data: profile } = await supabase.from('profiles').select('role').eq('id', user.id).single()
-  if (profile?.role !== 'student') return null
-  return { id: user.id }
 }
 
 Deno.serve(async (req) => {
@@ -32,13 +19,18 @@ Deno.serve(async (req) => {
     return new Response(JSON.stringify({ error: 'method not allowed' }), { status: 405, headers: { ...corsHeaders, 'Content-Type': 'application/json' } })
   }
 
-  const student = await getStudentUser(req)
-  if (!student) return new Response(JSON.stringify({ error: 'You need to be signed in as the student to submit this quiz.' }), { status: 401, headers: { ...corsHeaders, 'Content-Type': 'application/json' } })
+  const caller = await getCaller(req)
+  if (!caller) return new Response(JSON.stringify({ error: 'Please sign in again.' }), { status: 401, headers: { ...corsHeaders, 'Content-Type': 'application/json' } })
 
-  const { quizId, answers } = await req.json()
+  const { quizId, answers, studentId } = await req.json()
   if (!quizId || !Array.isArray(answers)) {
     return new Response(JSON.stringify({ error: 'quizId and answers required' }), { status: 400, headers: { ...corsHeaders, 'Content-Type': 'application/json' } })
   }
+
+  // The student themselves, or a parent acting for their practice student
+  // (checked with the caller's own JWT, before the service role is used).
+  const student = await resolveWritableStudent(caller, studentId)
+  if (!student) return new Response(JSON.stringify({ error: 'You can only submit a quiz as yourself or as your practice student.' }), { status: 403, headers: { ...corsHeaders, 'Content-Type': 'application/json' } })
 
   // Service-role client: needed to insert quiz_sessions/student_question_history/
   // ledger_entries rows directly (RLS on those tables doesn't permit a
@@ -48,7 +40,7 @@ Deno.serve(async (req) => {
   const admin = createClient(SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY)
 
   // Gate: quizzes are parent-assigned only. A quiz can only be graded (and
-  // rewarded) if there's a pending assignment for it — this is what
+  // rewarded) if there's a pending assignment for it, for this student — this is what
   // replaces the old client-side cooldown-lock as the anti-grinding control,
   // and it's enforced here, not just hidden in the UI, so it can't be
   // bypassed by calling this function directly.
@@ -57,6 +49,7 @@ Deno.serve(async (req) => {
     .select('id')
     .eq('type', 'quiz')
     .eq('quiz_id', quizId)
+    .eq('student_id', student.id)
     .eq('status', 'pending')
     .order('assigned_at', { ascending: true })
     .limit(1)
@@ -96,7 +89,9 @@ Deno.serve(async (req) => {
     return new Response(JSON.stringify({ error: 'quiz has no questions' }), { status: 500, headers: { ...corsHeaders, 'Content-Type': 'application/json' } })
   }
   const { results, correctCount, totalCount } = gradeAnswers(questions, answers)
-  const minutesAwarded = computeReward(correctCount)
+  // Practice students are graded like anyone else but earn nothing (the same
+  // rule as grade_and_claim_tutor_reward).
+  const minutesAwarded = student.isPractice ? 0 : computeReward(correctCount)
 
   const now = new Date().toISOString()
   const { data: session, error: sessionErr } = await admin
@@ -130,6 +125,7 @@ Deno.serve(async (req) => {
 
   if (minutesAwarded > 0) {
     const { error: ledgerErr } = await admin.from('ledger_entries').insert({
+      student_id: student.id,
       type: 'earn',
       amount_minutes: minutesAwarded,
       source: quiz.title || 'Quiz',

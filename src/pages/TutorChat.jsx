@@ -29,8 +29,9 @@ async function readJson(res) {
 }
 
 export default function TutorChat() {
-  const { user } = useAuth()
-  const { subjects, loading: catalogLoading } = useQuizCatalog()
+  // The student themselves, or a parent's practice student (see useAuth).
+  const { studentId, isPractice } = useAuth()
+  const { subjects, loading: catalogLoading } = useQuizCatalog(studentId)
   const [searchParams] = useSearchParams()
   const deepLinkedSubtopicId = searchParams.get('subtopicId')
 
@@ -141,6 +142,7 @@ export default function TutorChat() {
           messages: nextMessages,
           lessonPlan,
           sessionId,
+          studentId,
         }),
       })
       const data = await readJson(res)
@@ -157,7 +159,7 @@ export default function TutorChat() {
     } finally {
       setThinking(false)
     }
-  }, [topics, subtopics, topicId, subtopicId, selectedSubject, sessionId, lessonPlan])
+  }, [topics, subtopics, topicId, subtopicId, selectedSubject, sessionId, lessonPlan, studentId])
 
   function submitMessage(text) {
     const trimmed = text.trim()
@@ -200,7 +202,7 @@ export default function TutorChat() {
     const { data: openSession, error: lookupError } = await supabase
       .from('tutor_sessions')
       .select('id')
-      .eq('student_id', user.id)
+      .eq('student_id', studentId)
       .eq('subtopic_id', subtopicId)
       .is('completed_at', null)
       .maybeSingle()
@@ -216,7 +218,7 @@ export default function TutorChat() {
             .single()
         : await supabase
             .from('tutor_sessions')
-            .insert({ student_id: user.id, subtopic_id: subtopicId })
+            .insert({ student_id: studentId, subtopic_id: subtopicId })
             .select('id')
             .single()
     if (sessionError) {
@@ -243,6 +245,7 @@ export default function TutorChat() {
           topicName: topic.name,
           subtopicName: subtopic.name,
           specRef: subtopic.spec_ref,
+          studentId,
         }),
       })
       const data = await readJson(res)
@@ -309,7 +312,7 @@ export default function TutorChat() {
           <div className="section-label">Session complete</div>
           <div style={{ marginBottom: '20px' }}>
             <div style={{ fontSize: '15px', marginBottom: feedback ? '8px' : 0 }}>
-              +{minutesAwarded} minutes earned for the chat.
+              {isPractice ? 'Practice session graded (practice sessions earn no minutes).' : `+${minutesAwarded} minutes earned for the chat.`}
             </div>
             {feedback && (
               <div style={{ fontSize: '12.5px', color: 'var(--ink-faint)' }}>{feedback}</div>

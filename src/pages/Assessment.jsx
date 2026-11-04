@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { supabase } from '../lib/supabaseClient'
-import { useStudentProfile } from '../hooks/useStudentProfile'
+import { useAuth } from '../hooks/useAuth.jsx'
 import { useAssessments } from '../hooks/useAssessments'
 
 const WINDOW_OPTIONS = [
@@ -63,8 +63,9 @@ function ResultCard({ result }) {
 }
 
 export default function Assessment() {
-  const { displayName } = useStudentProfile()
-  const { assessments, loading: historyLoading, refresh } = useAssessments()
+  const { childStudent } = useAuth()
+  const displayName = childStudent?.displayName
+  const { assessments, loading: historyLoading, refresh } = useAssessments(childStudent?.id)
   const [subjects, setSubjects] = useState([])
   const [subjectId, setSubjectId] = useState('')
   const [windowKey, setWindowKey] = useState('7d')
@@ -98,7 +99,7 @@ export default function Assessment() {
           'Content-Type': 'application/json',
           Authorization: `Bearer ${session.access_token}`,
         },
-        body: JSON.stringify({ subjectId: subjectId || null, window: windowKey }),
+        body: JSON.stringify({ studentId: childStudent?.id, subjectId: subjectId || null, window: windowKey }),
       })
       if (!res.ok) throw new Error('Assessment request failed')
       const data = await res.json()

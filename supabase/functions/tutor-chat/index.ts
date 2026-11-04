@@ -1,8 +1,7 @@
-import { createClient } from 'npm:@supabase/supabase-js@2.45.0'
+import type { SupabaseClient } from 'npm:@supabase/supabase-js@2.45.0'
+import { getCaller, resolveWritableStudent } from '../_shared/access.ts'
 
 const ANTHROPIC_API_KEY = Deno.env.get('ANTHROPIC_API_KEY')
-const SUPABASE_URL = Deno.env.get('SUPABASE_URL')!
-const SUPABASE_ANON_KEY = Deno.env.get('SUPABASE_ANON_KEY')!
 
 const ANTHROPIC_TIMEOUT_MS = 45_000
 
@@ -14,19 +13,6 @@ const corsHeaders = {
 
 const json = (body: unknown, status = 200) =>
   new Response(JSON.stringify(body), { status, headers: { ...corsHeaders, 'Content-Type': 'application/json' } })
-
-async function getStudentUser(req: Request) {
-  const authHeader = req.headers.get('Authorization')
-  if (!authHeader) return null
-  const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY, {
-    global: { headers: { Authorization: authHeader } },
-  })
-  const { data: { user } } = await supabase.auth.getUser()
-  if (!user) return null
-  const { data: profile } = await supabase.from('profiles').select('role, display_name').eq('id', user.id).single()
-  if (profile?.role !== 'student') return null
-  return { id: user.id, displayName: profile.display_name, client: supabase }
-}
 
 // James's GCSEs: separate (triple) sciences; AQA except PE (OCR J587), History (Edexcel 1HI0) and Business (Eduqas C710).
 const EXAM_BOARDS: Record<string, string> = {
@@ -60,11 +46,12 @@ function buildPlanSummary(plan: any): string {
 
 // Best-effort transcript persistence: append this turn onto
 // tutor_sessions.messages. Uses the caller's JWT so RLS scopes it to their row.
-async function appendTranscriptTurn(client: ReturnType<typeof createClient>, sessionId: string, userContent: string, assistantContent: string) {
+async function appendTranscriptTurn(client: SupabaseClient, studentId: string, sessionId: string, userContent: string, assistantContent: string) {
   const { data: existing, error: fetchErr } = await client
     .from('tutor_sessions')
     .select('messages')
     .eq('id', sessionId)
+    .eq('student_id', studentId)
     .single()
 
   if (fetchErr) {
@@ -92,10 +79,13 @@ Deno.serve(async (req) => {
   if (req.method !== 'POST') return json({ error: 'method not allowed' }, 405)
   if (!ANTHROPIC_API_KEY) return json({ error: 'ANTHROPIC_API_KEY not configured' }, 500)
 
-  const user = await getStudentUser(req)
-  if (!user) return json({ error: 'Please sign in again as the student.' }, 401)
+  const caller = await getCaller(req)
+  if (!caller) return json({ error: 'Please sign in again.' }, 401)
 
-  const { subjectName, topicName, subtopicName, specRef, messages, lessonPlan, sessionId } = await req.json()
+  const { subjectName, topicName, subtopicName, specRef, messages, lessonPlan, sessionId, studentId } = await req.json()
+  // The student themselves, or a parent acting for their practice student.
+  const user = await resolveWritableStudent(caller, studentId)
+  if (!user) return json({ error: 'You can only chat as yourself or as your practice student.' }, 403)
 
   if (!Array.isArray(messages) || messages.length === 0) return json({ error: 'messages required' }, 400)
 
@@ -166,7 +156,7 @@ GENERAL:
 
   if (sessionId) {
     const latestUserMessage = messages[messages.length - 1]
-    await appendTranscriptTurn(user.client, sessionId, latestUserMessage?.content ?? '', reply)
+    await appendTranscriptTurn(caller.client, user.id, sessionId, latestUserMessage?.content ?? '', reply)
   }
 
   return json({ reply })

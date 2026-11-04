@@ -1,11 +1,14 @@
 import { useEffect, useState } from 'react'
 import { useParams, Link } from 'react-router-dom'
 import { supabase } from '../lib/supabaseClient'
+import { useAuth } from '../hooks/useAuth.jsx'
 
 const optionKeys = ['a', 'b', 'c', 'd']
 
 export default function PlayQuiz() {
   const { quizId } = useParams()
+  // The student themselves, or a parent's practice student (see useAuth).
+  const { studentId } = useAuth()
   const [quiz, setQuiz] = useState(null)
   const [questions, setQuestions] = useState([])
   const [answers, setAnswers] = useState({})
@@ -51,6 +54,7 @@ export default function PlayQuiz() {
           Authorization: `Bearer ${session.access_token}`,
         },
         body: JSON.stringify({
+          studentId,
           quizId,
           answers: Object.entries(answers).map(([questionId, selectedOption]) => ({ questionId, selectedOption })),
         }),

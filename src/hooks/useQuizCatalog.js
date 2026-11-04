@@ -1,12 +1,14 @@
 import { useEffect, useState, useCallback } from 'react'
 import { supabase } from '../lib/supabaseClient'
 
-export function useQuizCatalog() {
+// studentId: whose subject locks apply (see useAuth).
+export function useQuizCatalog(studentId) {
   const [subjects, setSubjects] = useState([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(null)
 
   const fetchCatalog = useCallback(async () => {
+    if (!studentId) return
     setLoading(true)
     const { data: subjectRows, error: subjectError } = await supabase
       .from('subjects')
@@ -23,6 +25,7 @@ export function useQuizCatalog() {
     const { data: lockRows, error: lockError } = await supabase
       .from('subject_locks')
       .select('subject_id, topic_id, locked_until')
+      .eq('student_id', studentId)
 
     if (lockError) {
       console.error('Failed to load subject locks', lockError)
@@ -110,16 +113,17 @@ export function useQuizCatalog() {
     setSubjects(grouped)
     setError(null)
     setLoading(false)
-  }, [])
+  }, [studentId])
 
   useEffect(() => {
+    if (!studentId) return
     fetchCatalog()
 
     const channel = supabase
-      .channel('subject_locks_catalog_changes')
+      .channel(`subject_locks_catalog_changes_${studentId}`)
       .on(
         'postgres_changes',
-        { event: '*', schema: 'public', table: 'subject_locks' },
+        { event: '*', schema: 'public', table: 'subject_locks', filter: `student_id=eq.${studentId}` },
         () => fetchCatalog()
       )
       .subscribe()

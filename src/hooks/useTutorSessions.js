@@ -1,7 +1,8 @@
 import { useEffect, useState, useCallback } from 'react'
 import { supabase } from '../lib/supabaseClient'
 
-export function useTutorSessions() {
+// studentId: whose rows to show (see useAuth). Nothing loads until it's known.
+export function useTutorSessions(studentId) {
   const [sessions, setSessions] = useState([])
   const [loading, setLoading] = useState(true)
 
@@ -11,6 +12,7 @@ export function useTutorSessions() {
     const { data, error } = await supabase
       .from('tutor_sessions')
       .select('id, started_at, completed_at, message_count, minutes_earned, reward_claimed, messages, subtopics (name, topics (name, subjects (name)))')
+      .eq('student_id', studentId)
       .order('started_at', { ascending: false })
       .limit(50)
 
@@ -35,16 +37,17 @@ export function useTutorSessions() {
       }))
     )
     setLoading(false)
-  }, [])
+  }, [studentId])
 
   useEffect(() => {
+    if (!studentId) return
     fetchSessions()
 
     const channel = supabase
-      .channel('tutor_sessions_changes')
+      .channel(`tutor_sessions_changes_${studentId}`)
       .on(
         'postgres_changes',
-        { event: '*', schema: 'public', table: 'tutor_sessions' },
+        { event: '*', schema: 'public', table: 'tutor_sessions', filter: `student_id=eq.${studentId}` },
         () => fetchSessions()
       )
       .subscribe()

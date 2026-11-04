@@ -1,7 +1,8 @@
 import { useEffect, useState, useCallback } from 'react'
 import { supabase } from '../lib/supabaseClient'
 
-export function useLedger() {
+// studentId: whose ledger and balance (see useAuth). Nothing loads until it's known.
+export function useLedger(studentId) {
   const [entries, setEntries] = useState([])
   const [balance, setBalance] = useState(0)
   const [loading, setLoading] = useState(true)
@@ -14,6 +15,7 @@ export function useLedger() {
     const { data, error } = await supabase
       .from('ledger_entries')
       .select('*')
+      .eq('student_id', studentId)
       .order('created_at', { ascending: false })
       .limit(50)
 
@@ -23,33 +25,35 @@ export function useLedger() {
       setEntries(data)
     }
     setLoading(false)
-  }, [])
+  }, [studentId])
 
   const fetchBalance = useCallback(async () => {
     // Full-history aggregate computed in the database, independent of how
     // many rows we display above — this is the only source of truth for
-    // the balance shown to James.
-    const { data, error } = await supabase.rpc('get_screen_time_balance')
+    // the balance shown to the student. Always per student: a parent can see
+    // more than one student's ledger.
+    const { data, error } = await supabase.rpc('get_screen_time_balance', { p_student: studentId })
 
     if (error) {
       console.error('Failed to load ledger balance', error)
     } else {
       setBalance(data ?? 0)
     }
-  }, [])
+  }, [studentId])
 
   const refresh = useCallback(async () => {
     await Promise.all([fetchEntries(), fetchBalance()])
   }, [fetchEntries, fetchBalance])
 
   useEffect(() => {
+    if (!studentId) return
     refresh()
 
     const channel = supabase
-      .channel('ledger_entries_changes')
+      .channel(`ledger_entries_changes_${studentId}`)
       .on(
         'postgres_changes',
-        { event: '*', schema: 'public', table: 'ledger_entries' },
+        { event: '*', schema: 'public', table: 'ledger_entries', filter: `student_id=eq.${studentId}` },
         () => refresh()
       )
       .subscribe()

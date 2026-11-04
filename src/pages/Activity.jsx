@@ -4,9 +4,11 @@ import { useAuth } from '../hooks/useAuth.jsx'
 import LedgerList from '../components/LedgerList.jsx'
 
 export default function Activity() {
-  const { entries, loading } = useLedger()
-  const { profile } = useAuth()
-  const backTarget = profile?.role === 'parent' ? '/parent' : '/'
+  // Linked from the student view (Home), so it shows the student-view ledger:
+  // the student's own, or the practice student's for a parent.
+  const { studentId } = useAuth()
+  const { entries, loading } = useLedger(studentId)
+  const backTarget = '/'
 
   return (
     <div className="device">

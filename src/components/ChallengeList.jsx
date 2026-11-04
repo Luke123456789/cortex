@@ -1,9 +1,7 @@
 import { useNavigate } from 'react-router-dom'
-import { supabase } from '../lib/supabaseClient'
 
-// Placeholder reward amounts and icons. Once the real quiz / written test /
-// tutor screens exist, they'll write the ledger_entries row themselves with
-// an actual result (score, topic) instead of this flat click-to-earn stub.
+// Rewards are written server-side by the grading edge functions; this list
+// only navigates.
 const CHALLENGES = [
   {
     id: 'written-test',
@@ -36,21 +34,9 @@ const CHALLENGES = [
 export default function ChallengeList() {
   const navigate = useNavigate()
 
-  async function handleEarn(challenge) {
-    const { error } = await supabase.from('ledger_entries').insert({
-      type: 'earn',
-      amount_minutes: challenge.minutes,
-      source: challenge.name,
-    })
-    if (error) console.error('Failed to log earn', error)
-    // useLedger's realtime subscription picks this up and updates the UI.
-  }
-
   function handleClick(challenge) {
     if (challenge.type === 'navigate') {
       navigate(challenge.to)
-    } else if (challenge.type === 'earn') {
-      handleEarn(challenge)
     }
     // coming-soon: inert, no action
   }

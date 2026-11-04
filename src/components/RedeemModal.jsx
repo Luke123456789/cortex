@@ -1,13 +1,14 @@
 import { useState } from 'react'
 import { supabase } from '../lib/supabaseClient'
 
-export default function RedeemModal({ balance, onClose, onRequested }) {
+export default function RedeemModal({ studentId, balance, onClose, onRequested }) {
   const [minutes, setMinutes] = useState(Math.min(15, balance))
   const [submitting, setSubmitting] = useState(false)
 
   async function handleConfirm() {
     setSubmitting(true)
     const { error } = await supabase.from('redemption_requests').insert({
+      student_id: studentId,
       minutes_requested: minutes,
       status: 'pending',
     })
