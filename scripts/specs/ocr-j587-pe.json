@@ -1,0 +1,41 @@
+{
+  "subject": "Physical Education",
+  "exam_board": "OCR",
+  "spec_code": "J587",
+  "notes": "OCR GCSE (9-1) Physical Education J587. Topics and subtopics already exist (remapped from AQA 8582 by migration pe_ocr_j587_remap); this file only adds gap-fill questions to them, so everything is existing: true. Use J587 terms: SMART = Specific, Measurable, Achievable, Recorded, Timed; skill continua are simple-complex and open-closed only; drugs are anabolic steroids, beta blockers and stimulants; axes are frontal, transverse and longitudinal. Checked against specification-accredited-gcse-physical-education-j587.pdf.",
+  "topics": [
+    { "name": "Skeletal and Muscular Systems", "spec_ref": "1.1.a-1.1.b", "existing": true, "subtopics": [
+      { "name": "Major bones and functions of the skeleton", "spec_ref": "1.1.a", "existing": true },
+      { "name": "Synovial joints, ligaments, cartilage and tendons", "spec_ref": "1.1.a", "existing": true },
+      { "name": "Movement at hinge and ball and socket joints", "spec_ref": "1.1.a", "existing": true },
+      { "name": "Major muscle groups and the roles of muscles", "spec_ref": "1.1.b", "existing": true } ] },
+    { "name": "Cardiovascular and Respiratory Systems & Effects of Exercise", "spec_ref": "1.1.d-1.1.e", "existing": true, "subtopics": [
+      { "name": "The heart, blood and double circulation", "spec_ref": "1.1.d", "existing": true },
+      { "name": "The respiratory system and gas exchange", "spec_ref": "1.1.d", "existing": true },
+      { "name": "Aerobic and anaerobic exercise", "spec_ref": "1.1.d", "existing": true },
+      { "name": "Short- and long-term effects of exercise", "spec_ref": "1.1.e", "existing": true } ] },
+    { "name": "Components of Fitness & Fitness Testing", "spec_ref": "1.2.a", "existing": true, "subtopics": [
+      { "name": "Applying components of fitness to sport", "spec_ref": "1.2.a", "existing": true },
+      { "name": "Fitness tests for each component", "spec_ref": "1.2.a", "existing": true } ] },
+    { "name": "Principles of Training, Optimising Training & Preventing Injury", "spec_ref": "1.2.b-1.2.c", "existing": true, "subtopics": [
+      { "name": "Principles of training and FITT", "spec_ref": "1.2.b", "existing": true },
+      { "name": "Types of training", "spec_ref": "1.2.b", "existing": true },
+      { "name": "Warm up and cool down", "spec_ref": "1.2.b", "existing": true },
+      { "name": "Preventing injury and hazards", "spec_ref": "1.2.c", "existing": true } ] },
+    { "name": "Sports Psychology", "spec_ref": "2.2", "existing": true, "subtopics": [
+      { "name": "Skilful movement and classification of skills", "spec_ref": "2.2", "existing": true },
+      { "name": "Goal setting and SMART targets", "spec_ref": "2.2", "existing": true },
+      { "name": "Guidance and feedback", "spec_ref": "2.2", "existing": true },
+      { "name": "Mental preparation", "spec_ref": "2.2", "existing": true } ] },
+    { "name": "Engagement Patterns & Commercialisation", "spec_ref": "2.1.a-2.1.b", "existing": true, "subtopics": [
+      { "name": "Role models, media and strategies to improve participation", "spec_ref": "2.1.a", "existing": true },
+      { "name": "Commercialisation: media and sponsorship", "spec_ref": "2.1.b", "existing": true } ] },
+    { "name": "Ethics, Drugs and Violence in Sport", "spec_ref": "2.1.c", "existing": true, "subtopics": [
+      { "name": "Sportsmanship, gamesmanship and deviance", "spec_ref": "2.1.c", "existing": true },
+      { "name": "Drugs in sport", "spec_ref": "2.1.c", "existing": true },
+      { "name": "Violence in sport", "spec_ref": "2.1.c", "existing": true } ] },
+    { "name": "Health, Fitness, Well-being & Diet", "spec_ref": "2.3", "existing": true, "subtopics": [
+      { "name": "Physical, emotional and social benefits", "spec_ref": "2.3", "existing": true },
+      { "name": "Diet, nutrition and hydration", "spec_ref": "2.3", "existing": true } ] }
+  ]
+}

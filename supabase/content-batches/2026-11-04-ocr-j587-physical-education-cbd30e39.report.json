@@ -1,0 +1,58 @@
+{
+  "batchId": "cbd30e39-b038-4728-8713-5d7ef6af833a",
+  "subject": "Physical Education",
+  "model": "hand-authored",
+  "topics": [
+    {
+      "name": "Skeletal and Muscular Systems",
+      "spec_ref": "1.1.a-1.1.b",
+      "kept": 7,
+      "dropped": []
+    },
+    {
+      "name": "Cardiovascular and Respiratory Systems & Effects of Exercise",
+      "spec_ref": "1.1.d-1.1.e",
+      "kept": 4,
+      "dropped": []
+    },
+    {
+      "name": "Components of Fitness & Fitness Testing",
+      "spec_ref": "1.2.a",
+      "kept": 5,
+      "dropped": []
+    },
+    {
+      "name": "Principles of Training, Optimising Training & Preventing Injury",
+      "spec_ref": "1.2.b-1.2.c",
+      "kept": 8,
+      "dropped": []
+    },
+    {
+      "name": "Sports Psychology",
+      "spec_ref": "2.2",
+      "kept": 13,
+      "dropped": []
+    },
+    {
+      "name": "Engagement Patterns & Commercialisation",
+      "spec_ref": "2.1.a-2.1.b",
+      "kept": 4,
+      "dropped": []
+    },
+    {
+      "name": "Ethics, Drugs and Violence in Sport",
+      "spec_ref": "2.1.c",
+      "kept": 12,
+      "dropped": []
+    },
+    {
+      "name": "Health, Fitness, Well-being & Diet",
+      "spec_ref": "2.3",
+      "kept": 8,
+      "dropped": []
+    }
+  ],
+  "questions": 61,
+  "checksum": "ab61d40825c1743a5cc8d866009e8c98",
+  "checksum_sql": "select count(*) as n, md5(string_agg(concat_ws('|', question_text, option_a, option_b, option_c, option_d, correct_option, explanation, difficulty, question_type, ao_weighting), E'\\n' order by convert_to(concat_ws('|', question_text, option_a, option_b, option_c, option_d, correct_option, explanation, difficulty, question_type, ao_weighting), 'UTF8'))) as checksum from questions where generation_batch_id = 'cbd30e39-b038-4728-8713-5d7ef6af833a';"
+}

@@ -1,0 +1,861 @@
+{
+ "1.1.a-1.1.b": {
+  "Major bones and functions of the skeleton": [
+   {
+    "question": "Which function of the skeleton allows the body to make red and white blood cells?",
+    "correct_answer": "Blood cell production",
+    "distractors": [
+     "Storage of minerals",
+     "Protection of organs",
+     "Support and posture"
+    ],
+    "explanation": "Blood cells are made in the bone marrow of some bones. The skeleton also stores minerals such as calcium.",
+    "difficulty": "easy",
+    "skill": "recall",
+    "involves_calculation": false
+   }
+  ],
+  "Synovial joints, ligaments, cartilage and tendons": [
+   {
+    "question": "Which bones articulate at the elbow joint?",
+    "correct_answer": "Humerus, radius, ulna",
+    "distractors": [
+     "Femur and tibia only",
+     "Humerus and scapula",
+     "Pelvis and the femur"
+    ],
+    "explanation": "The elbow is a hinge joint. The knee is femur and tibia, the shoulder is humerus and scapula, and the hip is pelvis and femur.",
+    "difficulty": "easy",
+    "skill": "recall",
+    "involves_calculation": false
+   },
+   {
+    "question": "What is the role of cartilage at a joint?",
+    "correct_answer": "It cushions the ends of bones",
+    "distractors": [
+     "It attaches muscle to bone",
+     "It attaches bone to bone",
+     "It produces red blood cells"
+    ],
+    "explanation": "Tendons attach muscle to bone and ligaments attach bone to bone.",
+    "difficulty": "easy",
+    "skill": "recall",
+    "involves_calculation": false
+   }
+  ],
+  "Movement at hinge and ball and socket joints": [
+   {
+    "question": "A cricket bowler swings their arm in a full circle at the shoulder. Which movement is this?",
+    "correct_answer": "Circumduction",
+    "distractors": [
+     "Abduction",
+     "Rotation",
+     "Hyper-extension"
+    ],
+    "explanation": "Circumduction is a circular movement of a limb, possible at ball and socket joints such as the shoulder and hip.",
+    "difficulty": "medium",
+    "skill": "application",
+    "involves_calculation": false
+   }
+  ],
+  "Major muscle groups and the roles of muscles": [
+   {
+    "question": "Which muscle group at the front of the thigh straightens the knee when kicking a ball?",
+    "correct_answer": "Quadriceps",
+    "distractors": [
+     "Hamstrings",
+     "Gluteals",
+     "Gastrocnemius"
+    ],
+    "explanation": "The quadriceps extend the knee. The hamstrings at the back of the thigh flex it.",
+    "difficulty": "easy",
+    "skill": "application",
+    "involves_calculation": false
+   },
+   {
+    "question": "What is a fixator muscle?",
+    "correct_answer": "A muscle that keeps another body part steady",
+    "distractors": [
+     "The muscle that relaxes as the agonist contracts",
+     "The main muscle that produces a movement",
+     "A tough band that joins two bones together"
+    ],
+    "explanation": "The agonist produces the movement and the antagonist relaxes. Fixators hold other body parts steady.",
+    "difficulty": "medium",
+    "skill": "recall",
+    "involves_calculation": false
+   },
+   {
+    "question": "During the upward phase of a press-up, which muscle is the agonist at the elbow?",
+    "correct_answer": "Triceps",
+    "distractors": [
+     "Biceps",
+     "Deltoid",
+     "Latissimus dorsi"
+    ],
+    "explanation": "Pushing up straightens (extends) the elbow, which is done by the triceps. The biceps act as the antagonist.",
+    "difficulty": "hard",
+    "skill": "application",
+    "involves_calculation": false
+   }
+  ]
+ },
+ "1.1.d-1.1.e": {
+  "The heart, blood and double circulation": [
+   {
+    "question": "In the double circulatory system, what does pulmonary circulation do?",
+    "correct_answer": "Carries blood between the heart and the lungs",
+    "distractors": [
+     "Carries blood between the heart and the body",
+     "Carries air between the lungs and the mouth",
+     "Carries blood between the arms and legs"
+    ],
+    "explanation": "Pulmonary circulation picks up oxygen in the lungs; systemic circulation carries oxygenated blood to the rest of the body.",
+    "difficulty": "medium",
+    "skill": "recall",
+    "involves_calculation": false
+   }
+  ],
+  "The respiratory system and gas exchange": [
+   {
+    "question": "A performer has a tidal volume of 0.5 litres and a breathing rate of 12 breaths per minute. What is their minute ventilation?",
+    "correct_answer": "6 litres per minute",
+    "distractors": [
+     "24 litres per minute",
+     "12.5 litres per minute",
+     "0.04 litres per minute"
+    ],
+    "explanation": "Minute ventilation = tidal volume × breathing rate = 0.5 × 12 = 6 litres per minute.",
+    "difficulty": "hard",
+    "skill": "application",
+    "involves_calculation": true
+   }
+  ],
+  "Aerobic and anaerobic exercise": [
+   {
+    "question": "Which of these is mainly an anaerobic activity?",
+    "correct_answer": "A 100 m sprint",
+    "distractors": [
+     "A marathon",
+     "A 30-minute jog",
+     "A long-distance swim"
+    ],
+    "explanation": "Anaerobic exercise is high intensity and short duration, without enough oxygen. Long, steady activities are aerobic.",
+    "difficulty": "easy",
+    "skill": "application",
+    "involves_calculation": false
+   }
+  ],
+  "Short- and long-term effects of exercise": [
+   {
+    "question": "What is capillarisation, as a long-term effect of exercise?",
+    "correct_answer": "More capillaries around muscles and alveoli",
+    "distractors": [
+     "The heart muscle getting thicker and stronger",
+     "A fall in resting heart rate over time",
+     "Muscles getting bigger from weight training"
+    ],
+    "explanation": "More capillaries means more oxygen reaches the muscles and more carbon dioxide is removed, improving aerobic capacity.",
+    "difficulty": "hard",
+    "skill": "recall",
+    "involves_calculation": false
+   }
+  ]
+ },
+ "1.2.a": {
+  "Fitness tests for each component": [
+   {
+    "question": "What does the Cooper 12-minute run test measure?",
+    "correct_answer": "Cardiovascular endurance",
+    "distractors": [
+     "Flexibility of the hips",
+     "Reaction time to a signal",
+     "Power in the legs"
+    ],
+    "explanation": "Performers run as far as possible in 12 minutes. The multi-stage fitness test also measures cardiovascular endurance.",
+    "difficulty": "easy",
+    "skill": "recall",
+    "involves_calculation": false
+   },
+   {
+    "question": "Which component of fitness does the sit-up test measure?",
+    "correct_answer": "Muscular endurance",
+    "distractors": [
+     "Speed over 30 metres",
+     "Balance on one leg",
+     "Agility around cones"
+    ],
+    "explanation": "The sit-up and press-up tests measure muscular endurance: how long muscles can keep contracting without tiring.",
+    "difficulty": "easy",
+    "skill": "recall",
+    "involves_calculation": false
+   },
+   {
+    "question": "Which component of fitness does the wall throw test measure?",
+    "correct_answer": "Co-ordination",
+    "distractors": [
+     "Strength",
+     "Flexibility",
+     "Cardiovascular endurance"
+    ],
+    "explanation": "Throwing and catching a ball against a wall with alternate hands tests hand-eye co-ordination.",
+    "difficulty": "easy",
+    "skill": "recall",
+    "involves_calculation": false
+   },
+   {
+    "question": "Which test is used to measure maximal strength?",
+    "correct_answer": "The 1 Repetition Maximum test",
+    "distractors": [
+     "The sit and reach test",
+     "The Illinois agility test",
+     "The stork stand balance test"
+    ],
+    "explanation": "1RM is the heaviest weight a person can lift once. The grip strength dynamometer also measures strength.",
+    "difficulty": "easy",
+    "skill": "recall",
+    "involves_calculation": false
+   }
+  ],
+  "Applying components of fitness to sport": [
+   {
+    "question": "A coach wants to test the component of fitness most important to a 100 m sprinter. Which test should they use?",
+    "correct_answer": "The 30 m sprint test",
+    "distractors": [
+     "The Cooper 12-minute run",
+     "The sit-up test",
+     "The sit and reach test"
+    ],
+    "explanation": "Speed is the key component for a sprinter, and the 30 m sprint test measures it.",
+    "difficulty": "medium",
+    "skill": "application",
+    "involves_calculation": false
+   }
+  ]
+ },
+ "1.2.b-1.2.c": {
+  "Principles of training and FITT": [
+   {
+    "question": "A swimmer trains mainly by swimming rather than running. Which principle of training is this?",
+    "correct_answer": "Specificity",
+    "distractors": [
+     "Reversibility",
+     "Overload",
+     "Progression"
+    ],
+    "explanation": "Specificity means matching training to the needs and movements of the activity.",
+    "difficulty": "easy",
+    "skill": "application",
+    "involves_calculation": false
+   }
+  ],
+  "Types of training": [
+   {
+    "question": "What is circuit training?",
+    "correct_answer": "Exercises at stations with short rests",
+    "distractors": [
+     "Running at a steady pace for a long time",
+     "Lifting a very heavy weight just once",
+     "Changing speed and terrain during a run"
+    ],
+    "explanation": "Circuits can be designed to improve different components of fitness. Steady running is continuous training and changing speed is fartlek.",
+    "difficulty": "easy",
+    "skill": "recall",
+    "involves_calculation": false
+   }
+  ],
+  "Warm up and cool down": [
+   {
+    "question": "Jogging slowly to raise the heart rate is which part of a warm up?",
+    "correct_answer": "Pulse raising",
+    "distractors": [
+     "Mobility",
+     "Skill rehearsal",
+     "Stretching"
+    ],
+    "explanation": "A warm up includes pulse raising, mobility, stretching, dynamic movements and skill rehearsal.",
+    "difficulty": "easy",
+    "skill": "application",
+    "involves_calculation": false
+   },
+   {
+    "question": "Which is an example of skill rehearsal in a warm up for basketball?",
+    "correct_answer": "Practising lay-up shots",
+    "distractors": [
+     "Jogging around the court",
+     "Doing arm circles",
+     "Holding a hamstring stretch"
+    ],
+    "explanation": "Skill rehearsal practises skills used in the activity. Arm circles are mobility and jogging is pulse raising.",
+    "difficulty": "medium",
+    "skill": "application",
+    "involves_calculation": false
+   },
+   {
+    "question": "Which is a physical benefit of a warm up?",
+    "correct_answer": "Faster muscle contraction",
+    "distractors": [
+     "A lower body temperature",
+     "Less blood flow to the muscles",
+     "A lower heart rate before starting"
+    ],
+    "explanation": "A warm up raises body temperature, heart rate and blood flow, and makes muscles contract faster.",
+    "difficulty": "easy",
+    "skill": "recall",
+    "involves_calculation": false
+   }
+  ],
+  "Preventing injury and hazards": [
+   {
+    "question": "Which of these is personal protective equipment?",
+    "correct_answer": "Shin pads in football",
+    "distractors": [
+     "A stopwatch for timing",
+     "A training diary",
+     "A water bottle"
+    ],
+    "explanation": "Personal protective equipment, such as shin pads, gum shields and helmets, reduces the risk of injury.",
+    "difficulty": "easy",
+    "skill": "recall",
+    "involves_calculation": false
+   },
+   {
+    "question": "Which is a potential hazard specific to a swimming pool?",
+    "correct_answer": "Slippery floors by the water",
+    "distractors": [
+     "Holes in a grass pitch surface",
+     "Weights left on the gym floor",
+     "Studs on football boots"
+    ],
+    "explanation": "J587 expects hazards for different settings: sports hall, fitness centre, playing field, artificial outdoor areas and swimming pool.",
+    "difficulty": "medium",
+    "skill": "application",
+    "involves_calculation": false
+   },
+   {
+    "question": "Why should a 12-year-old rugby player not usually play against adults?",
+    "correct_answer": "Size and strength differences raise injury risk",
+    "distractors": [
+     "Adults are not allowed to play rugby at all",
+     "Young players cannot learn any new skills",
+     "Matches against adults are always shorter"
+    ],
+    "explanation": "Playing at an appropriate level of competition, matched by age, size and ability, is one way to prevent injury.",
+    "difficulty": "hard",
+    "skill": "analysis",
+    "involves_calculation": false
+   }
+  ]
+ },
+ "2.2": {
+  "Skilful movement and classification of skills": [
+   {
+    "question": "Which is a characteristic of skilful movement?",
+    "correct_answer": "It is efficient, with no wasted energy",
+    "distractors": [
+     "It is hesitant and jerky",
+     "It is made up differently each time",
+     "It always needs maximum effort"
+    ],
+    "explanation": "J587 lists the characteristics of skilful movement as efficient, pre-determined, co-ordinated, fluent and aesthetic.",
+    "difficulty": "easy",
+    "skill": "recall",
+    "involves_calculation": false
+   },
+   {
+    "question": "What does it mean to say a skilful movement is pre-determined?",
+    "correct_answer": "The performer knows the aim before starting",
+    "distractors": [
+     "The result is decided by the referee in advance",
+     "The movement is copied from a coach every time",
+     "The movement only ever happens by accident"
+    ],
+    "explanation": "A skilled performer has a clear goal for the movement and performs it to achieve that goal.",
+    "difficulty": "hard",
+    "skill": "recall",
+    "involves_calculation": false
+   },
+   {
+    "question": "Which is the best example of a closed skill?",
+    "correct_answer": "A gymnast performing a vault",
+    "distractors": [
+     "A pass during a football match",
+     "Dribbling past a defender",
+     "Returning a serve in tennis"
+    ],
+    "explanation": "Closed skills happen in a stable, predictable environment. The others depend on what opponents do, so they are open.",
+    "difficulty": "easy",
+    "skill": "application",
+    "involves_calculation": false
+   },
+   {
+    "question": "Which is the best example of a complex skill?",
+    "correct_answer": "Choosing a shot in a tennis rally",
+    "distractors": [
+     "Jogging at a steady, even pace",
+     "Swimming one length of front crawl",
+     "Walking slowly to the start line"
+    ],
+    "explanation": "Complex skills need lots of decisions and attention. Simple skills need little thought.",
+    "difficulty": "medium",
+    "skill": "application",
+    "involves_calculation": false
+   },
+   {
+    "question": "Why is a penalty in football often placed towards the closed end of the environmental continuum?",
+    "correct_answer": "The environment is stable and predictable",
+    "distractors": [
+     "It needs many decisions to be made quickly",
+     "It is performed as part of a whole team",
+     "It uses a large number of muscle groups"
+    ],
+    "explanation": "There are no moving opponents apart from the goalkeeper, so the taker can perform the same way each time. Decisions relate to the difficulty continuum, not the environmental one.",
+    "difficulty": "hard",
+    "skill": "analysis",
+    "involves_calculation": false
+   }
+  ],
+  "Goal setting and SMART targets": [
+   {
+    "question": "In the J587 version of SMART goal setting, what does the R stand for?",
+    "correct_answer": "Recorded",
+    "distractors": [
+     "Realistic",
+     "Relevant",
+     "Rewarded"
+    ],
+    "explanation": "J587 uses Specific, Measurable, Achievable, Recorded, Timed. Other versions use Realistic, so read the question carefully.",
+    "difficulty": "medium",
+    "skill": "recall",
+    "involves_calculation": false
+   },
+   {
+    "question": "How can goal setting help a performer?",
+    "correct_answer": "It can motivate them to keep training",
+    "distractors": [
+     "It guarantees that they will win every time",
+     "It removes the need for any feedback at all",
+     "It means that they no longer need to warm up"
+    ],
+    "explanation": "Goals are used for exercise and training adherence, to motivate performers and to improve or optimise performance.",
+    "difficulty": "easy",
+    "skill": "recall",
+    "involves_calculation": false
+   }
+  ],
+  "Mental preparation": [
+   {
+    "question": "Before competing, a gymnast pictures a calm, relaxing place in their mind. Which technique is this?",
+    "correct_answer": "Imagery",
+    "distractors": [
+     "Selective attention",
+     "Manual guidance",
+     "Knowledge of results"
+    ],
+    "explanation": "Imagery is creating pictures in the mind, for example to relax. Mental rehearsal is picturing performing the skill itself.",
+    "difficulty": "medium",
+    "skill": "application",
+    "involves_calculation": false
+   },
+   {
+    "question": "What is mental rehearsal?",
+    "correct_answer": "Picturing performing a skill, without moving",
+    "distractors": [
+     "Practising a skill many times on the pitch",
+     "Watching a demonstration given by a coach",
+     "Being physically guided through a movement"
+    ],
+    "explanation": "Mental rehearsal builds confidence and helps performers prepare the movement in their mind.",
+    "difficulty": "easy",
+    "skill": "recall",
+    "involves_calculation": false
+   },
+   {
+    "question": "What is selective attention?",
+    "correct_answer": "Focusing on key cues and ignoring distractions",
+    "distractors": [
+     "Choosing which training sessions to attend",
+     "Watching every player on the pitch at once",
+     "Listening carefully to all advice from the crowd"
+    ],
+    "explanation": "For example, a cricketer focuses on the ball and ignores crowd noise.",
+    "difficulty": "easy",
+    "skill": "recall",
+    "involves_calculation": false
+   },
+   {
+    "question": "Before serving, a tennis player says to themselves, \"I've practised this, I can win this point.\" Which technique is this?",
+    "correct_answer": "Positive thinking",
+    "distractors": [
+     "Imagery",
+     "Mechanical guidance",
+     "Extrinsic feedback"
+    ],
+    "explanation": "Positive thinking, or positive self-talk, increases confidence and reduces worry.",
+    "difficulty": "easy",
+    "skill": "application",
+    "involves_calculation": false
+   }
+  ],
+  "Guidance and feedback": [
+   {
+    "question": "A swimming teacher gives a beginner a float to hold. Which type of guidance is this?",
+    "correct_answer": "Mechanical",
+    "distractors": [
+     "Manual",
+     "Verbal",
+     "Visual"
+    ],
+    "explanation": "Mechanical guidance uses equipment or aids. Manual guidance is when the coach physically moves or supports the performer.",
+    "difficulty": "easy",
+    "skill": "application",
+    "involves_calculation": false
+   },
+   {
+    "question": "What is knowledge of performance?",
+    "correct_answer": "Feedback on the quality of technique",
+    "distractors": [
+     "Feedback about the final score or outcome",
+     "Feedback a performer gives to their coach",
+     "Feedback shouted from the crowd"
+    ],
+    "explanation": "Knowledge of results is about the outcome; knowledge of performance is about how well the movement was performed.",
+    "difficulty": "medium",
+    "skill": "recall",
+    "involves_calculation": false
+   }
+  ]
+ },
+ "2.1.a-2.1.b": {
+  "Role models, media and strategies to improve participation": [
+   {
+    "question": "Which organisation publishes data on participation in sport in England?",
+    "correct_answer": "Sport England",
+    "distractors": [
+     "The World Anti-Doping Agency",
+     "The Met Office",
+     "The Food Standards Agency"
+    ],
+    "explanation": "J587 expects you to know sources such as Sport England, National Governing Bodies (NGBs) and the DCMS.",
+    "difficulty": "easy",
+    "skill": "recall",
+    "involves_calculation": false
+   },
+   {
+    "question": "A council builds a new sports centre in an area that has none. Which strategy to improve participation is this?",
+    "correct_answer": "Provision",
+    "distractors": [
+     "Promotion",
+     "Sponsorship",
+     "Selective attention"
+    ],
+    "explanation": "Provision is making facilities and activities available. Promotion is advertising them; access is making them easy to reach and use.",
+    "difficulty": "medium",
+    "skill": "application",
+    "involves_calculation": false
+   },
+   {
+    "question": "A leisure centre advertises free sessions on social media to attract more teenage girls. Which strategy is this?",
+    "correct_answer": "Promotion",
+    "distractors": [
+     "Provision",
+     "Access",
+     "Commercialisation"
+    ],
+    "explanation": "Promotion raises awareness and encourages people to take part.",
+    "difficulty": "medium",
+    "skill": "application",
+    "involves_calculation": false
+   }
+  ],
+  "Commercialisation: media and sponsorship": [
+   {
+    "question": "Which is a negative effect of the media on the commercialisation of sport?",
+    "correct_answer": "Less-covered sports struggle to find sponsors",
+    "distractors": [
+     "More people can watch sport live from home",
+     "Sports receive more money from TV deals",
+     "Performers become better known to the public"
+    ],
+    "explanation": "The golden triangle links sport, sponsorship and the media. Sports with little coverage find it harder to attract sponsors.",
+    "difficulty": "hard",
+    "skill": "analysis",
+    "involves_calculation": false
+   }
+  ]
+ },
+ "2.1.c": {
+  "Sportsmanship, gamesmanship and deviance": [
+   {
+    "question": "What is deviance in sport?",
+    "correct_answer": "Behaviour that breaks the rules or moral values",
+    "distractors": [
+     "Bending the rules to gain an advantage",
+     "Playing fairly and respecting opponents",
+     "Celebrating a win together with teammates"
+    ],
+    "explanation": "Examples include taking banned drugs, match fixing and violence. Bending the rules without breaking them is gamesmanship.",
+    "difficulty": "easy",
+    "skill": "recall",
+    "involves_calculation": false
+   },
+   {
+    "question": "Which is an example of gamesmanship?",
+    "correct_answer": "Deliberately wasting time when winning",
+    "distractors": [
+     "Kicking the ball out when an opponent is injured",
+     "Shaking hands with the opponents",
+     "Taking a banned substance"
+    ],
+    "explanation": "Gamesmanship stretches the rules to gain an advantage without breaking them.",
+    "difficulty": "easy",
+    "skill": "application",
+    "involves_calculation": false
+   },
+   {
+    "question": "Which is an example of sportsmanship?",
+    "correct_answer": "Kicking the ball out for an injured opponent",
+    "distractors": [
+     "Pretending to be fouled to win a free kick",
+     "Distracting an opponent as they take a shot",
+     "Arguing angrily with the referee"
+    ],
+    "explanation": "Sportsmanship is fair, generous behaviour that respects opponents and officials.",
+    "difficulty": "easy",
+    "skill": "application",
+    "involves_calculation": false
+   },
+   {
+    "question": "Which is an example of deviance in sport?",
+    "correct_answer": "Fixing the result of a match for money",
+    "distractors": [
+     "Taking a long time to prepare for a free kick",
+     "Applauding an opponent's good play",
+     "Appealing to the umpire for a wicket"
+    ],
+    "explanation": "Match fixing breaks the rules and the law. Slow preparation is gamesmanship and appealing is part of the game.",
+    "difficulty": "medium",
+    "skill": "application",
+    "involves_calculation": false
+   },
+   {
+    "question": "A coach tells their players to keep winding up an opponent so that the opponent loses their temper. This is best described as…",
+    "correct_answer": "Gamesmanship",
+    "distractors": [
+     "Sportsmanship",
+     "Selective attention",
+     "Positive thinking"
+    ],
+    "explanation": "Trying to upset an opponent to gain an advantage is gamesmanship. If it led to fighting, that would be deviance.",
+    "difficulty": "hard",
+    "skill": "application",
+    "involves_calculation": false
+   }
+  ],
+  "Drugs in sport": [
+   {
+    "question": "Why might a sports performer decide to take performance-enhancing drugs?",
+    "correct_answer": "Pressure to win and the rewards of success",
+    "distractors": [
+     "To make the competition fairer for everyone",
+     "Because drug testing has been abolished",
+     "To make their own performance worse"
+    ],
+    "explanation": "Reasons include pressure from coaches or the public, fame and money from winning, and recovering from injury faster.",
+    "difficulty": "easy",
+    "skill": "recall",
+    "involves_calculation": false
+   },
+   {
+    "question": "What is a possible side effect of anabolic steroids?",
+    "correct_answer": "Liver damage and aggression",
+    "distractors": [
+     "Better eyesight and hearing",
+     "A permanently lower heart rate",
+     "Improved sleep every night"
+    ],
+    "explanation": "Steroids increase muscle mass and strength but can cause liver damage, heart problems and aggression.",
+    "difficulty": "medium",
+    "skill": "recall",
+    "involves_calculation": false
+   },
+   {
+    "question": "In which sport is a performer most likely to misuse beta blockers?",
+    "correct_answer": "Archery",
+    "distractors": [
+     "Marathon running",
+     "Rugby",
+     "Weightlifting"
+    ],
+    "explanation": "Beta blockers lower heart rate and reduce shaking, which helps in precision sports such as archery, shooting and snooker.",
+    "difficulty": "easy",
+    "skill": "application",
+    "involves_calculation": false
+   },
+   {
+    "question": "How might drug use by elite performers affect young people who play sport?",
+    "correct_answer": "They may see drug-taking as normal",
+    "distractors": [
+     "They will all stop playing sport at once",
+     "It has no effect, as they never watch sport",
+     "It will make them train more safely"
+    ],
+    "explanation": "Drug use damages the image of sport and can send the wrong message to young performers.",
+    "difficulty": "hard",
+    "skill": "analysis",
+    "involves_calculation": false
+   }
+  ],
+  "Violence in sport": [
+   {
+    "question": "Which is a common reason for player violence in sport?",
+    "correct_answer": "Frustration at a decision",
+    "distractors": [
+     "A large crowd cheering them on",
+     "Playing in good weather",
+     "Wearing the correct kit"
+    ],
+    "explanation": "Reasons for player violence include frustration, provocation, the importance of the event and rivalry.",
+    "difficulty": "easy",
+    "skill": "recall",
+    "involves_calculation": false
+   },
+   {
+    "question": "Why is player violence more likely in a local derby match?",
+    "correct_answer": "Fierce rivalry raises emotions",
+    "distractors": [
+     "Derbies always have fewer officials",
+     "Players in derbies are paid less",
+     "Derby matches are always shorter"
+    ],
+    "explanation": "High-stakes games with fierce rivalry increase emotions, which can lead to violence.",
+    "difficulty": "medium",
+    "skill": "application",
+    "involves_calculation": false
+   },
+   {
+    "question": "Which of these is an example of player violence?",
+    "correct_answer": "Punching an opponent after a heavy tackle",
+    "distractors": [
+     "Making a hard but fair tackle within the rules",
+     "Shouting encouragement to teammates",
+     "Celebrating a goal with the fans"
+    ],
+    "explanation": "A hard tackle within the rules is part of the game. Violence is aggressive behaviour outside the rules.",
+    "difficulty": "medium",
+    "skill": "application",
+    "involves_calculation": false
+   }
+  ]
+ },
+ "2.3": {
+  "Physical, emotional and social benefits": [
+   {
+    "question": "Which is the best definition of health?",
+    "correct_answer": "Complete physical, mental and social well-being",
+    "distractors": [
+     "Being able to run a long way without stopping",
+     "Never having had any injury or illness at all",
+     "Having a low body weight for your height"
+    ],
+    "explanation": "Health covers physical, mental (emotional) and social well-being, which is how J587 groups its benefits.",
+    "difficulty": "easy",
+    "skill": "recall",
+    "involves_calculation": false
+   },
+   {
+    "question": "What is meant by fitness?",
+    "correct_answer": "Being able to meet the demands of the environment",
+    "distractors": [
+     "Never becoming ill at any point in your life",
+     "Having lots of friends who play sport with you",
+     "Eating a balanced diet with plenty of water"
+    ],
+    "explanation": "A person can be fit but not healthy (for example, with a cold), or healthy without being very fit.",
+    "difficulty": "hard",
+    "skill": "recall",
+    "involves_calculation": false
+   },
+   {
+    "question": "Regular physical activity reduces the risk of which condition?",
+    "correct_answer": "Type 2 diabetes",
+    "distractors": [
+     "Colour blindness",
+     "Hay fever",
+     "Short-sightedness"
+    ],
+    "explanation": "Physical benefits include lower risk of coronary heart disease, high blood pressure, obesity and Type 2 diabetes.",
+    "difficulty": "easy",
+    "skill": "recall",
+    "involves_calculation": false
+   },
+   {
+    "question": "How does regular weight-bearing exercise benefit long-term health?",
+    "correct_answer": "It increases bone density",
+    "distractors": [
+     "It makes bones lighter and more flexible",
+     "It stops the body making red blood cells",
+     "It lowers the amount of calcium in bones"
+    ],
+    "explanation": "Stronger, denser bones are less likely to break, especially in later life.",
+    "difficulty": "medium",
+    "skill": "recall",
+    "involves_calculation": false
+   },
+   {
+    "question": "Which is an emotional benefit of taking part in physical activity?",
+    "correct_answer": "More confidence",
+    "distractors": [
+     "Lower blood pressure",
+     "Stronger, denser bones",
+     "Meeting new friends"
+    ],
+    "explanation": "Emotional benefits include self-esteem, confidence, stress management and image. Meeting friends is a social benefit.",
+    "difficulty": "easy",
+    "skill": "recall",
+    "involves_calculation": false
+   },
+   {
+    "question": "An older person joins a weekly walking club. Which social benefit are they most likely to gain?",
+    "correct_answer": "Feeling less lonely",
+    "distractors": [
+     "A lower resting heart rate",
+     "Higher bone density",
+     "Better posture when standing"
+    ],
+    "explanation": "Social benefits include friendship, belonging to a group and reduced loneliness. The others are physical benefits.",
+    "difficulty": "easy",
+    "skill": "application",
+    "involves_calculation": false
+   }
+  ],
+  "Diet, nutrition and hydration": [
+   {
+    "question": "Why does the body need minerals such as calcium?",
+    "correct_answer": "For healthy bones and teeth",
+    "distractors": [
+     "As the main source of energy",
+     "To build muscle quickly",
+     "To insulate the body"
+    ],
+    "explanation": "Vitamins and minerals keep the body working properly. Carbohydrates are the main energy source and fats insulate the body.",
+    "difficulty": "medium",
+    "skill": "recall",
+    "involves_calculation": false
+   },
+   {
+    "question": "Why is fibre an important part of a balanced diet?",
+    "correct_answer": "It helps digestion",
+    "distractors": [
+     "It is the body's main source of energy",
+     "It repairs damaged muscle tissue",
+     "It carries oxygen in the blood"
+    ],
+    "explanation": "Fibre is found in wholegrains, fruit and vegetables.",
+    "difficulty": "easy",
+    "skill": "recall",
+    "involves_calculation": false
+   }
+  ]
+ }
+}

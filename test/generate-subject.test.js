@@ -65,6 +65,21 @@ describe('generate-subject helpers', () => {
     expect(rollbackSql).toContain("delete from questions where generation_batch_id = 'batch-1'::uuid")
     expect(rollbackSql).toContain("delete from topics where id = (select id from topics where subject_id = (select id from subjects where name = 'Chemistry') and name = 'T')")
   })
+
+  it('appends to the last quiz of an existing topic instead of creating quizzes', () => {
+    const rows = [toRow({ ...q, question: 'Existing-topic question?' })]
+    const { sql, rollbackSql } = buildSql({
+      spec: { subject: 'PE', exam_board: 'OCR', spec_code: 'J587' },
+      batchId: 'batch-2',
+      topics: [{ id: null, existing: true, name: 'T', subtopics: [{ id: null, existing: true, name: 'S', rows }] }],
+    })
+    expect(sql).not.toMatch(/insert into topics|insert into subtopics|insert into quizzes/)
+    expect(sql).toContain('order by display_order desc limit 1')
+    expect(sql).toContain('coalesce((select max(position) from quiz_questions')
+    expect(sql).toContain('where qq.quiz_id = z.id and q.active')
+    expect(rollbackSql).not.toMatch(/delete from (topics|subtopics|quizzes)/)
+    expect(rollbackSql).toContain('where qq.quiz_id = z.id and q.active')
+  })
 })
 
 describe('balanceLetters', () => {

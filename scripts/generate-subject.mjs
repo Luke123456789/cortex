@@ -384,6 +384,22 @@ select z.id, o.id, (o.i / ${nQuizzes})::int + 1
 from ordered o join quizzes z on z.topic_id = ${topicRef(t)} and z.title = 'Quiz ' || ((o.i % ${nQuizzes}) + 1);`)
       lines.push(`update quizzes z set question_count = (select count(*) from quiz_questions qq where qq.quiz_id = z.id) where z.topic_id = ${topicRef(t)};`)
       lines.push('')
+    } else if (t.subtopics.some((st) => st.rows.length)) {
+      // Existing topic: append this batch's questions to the topic's last
+      // quiz, after its current last position, so they are actually served.
+      // question_count counts active questions only (retired ones stay in
+      // quiz_questions for history but are hidden by RLS and not graded).
+      const lastQuiz = `(select id from quizzes where topic_id = ${topicRef(t)} order by display_order desc limit 1)`
+      lines.push(`with ordered as (
+  select q.id, row_number() over (order by q.created_at) as i
+  from questions q
+  where q.generation_batch_id = ${batch} and q.topic_id = ${topicRef(t)}
+)
+insert into quiz_questions (quiz_id, question_id, position)
+select ${lastQuiz}, o.id, coalesce((select max(position) from quiz_questions where quiz_id = ${lastQuiz}), 0) + o.i
+from ordered o;`)
+      lines.push(`update quizzes z set question_count = (select count(*) from quiz_questions qq join questions q on q.id = qq.question_id where qq.quiz_id = z.id and q.active) where z.topic_id = ${topicRef(t)};`)
+      lines.push('')
     }
   }
 
@@ -391,6 +407,10 @@ from ordered o join quizzes z on z.topic_id = ${topicRef(t)} and z.title = 'Quiz
   rollback.push(`-- Rollback for content batch ${batchId} (${spec.exam_board} ${spec.subject})`)
   for (const t of newTopics) rollback.push(`delete from quizzes where topic_id = ${topicRef(t)};`)
   rollback.push(`delete from questions where generation_batch_id = ${batch};`)
+  // Existing topics' quizzes lost this batch's rows (cascade): recount them.
+  for (const t of topics.filter((x) => x.existing && x.subtopics.some((st) => st.rows.length))) {
+    rollback.push(`update quizzes z set question_count = (select count(*) from quiz_questions qq join questions q on q.id = qq.question_id where qq.quiz_id = z.id and q.active) where z.topic_id = ${topicRef(t)};`)
+  }
   for (const [t, st] of newSubtopics) rollback.push(`delete from subtopics where id = ${subtopicRef(t, st)};`)
   for (const t of newTopics) rollback.push(`delete from topics where id = ${topicRef(t)};`)
   rollback.push(`-- The subjects row is left in place; delete it by hand if the whole subject should go.`)
@@ -455,7 +475,8 @@ async function main() {
     for (const t of topics) {
       const topicReport = { name: t.name, spec_ref: t.spec_ref, kept: 0, dropped: [] }
       for (const st of t.subtopics) {
-        for (const q of authored[t.spec_ref]?.[st.spec_ref] ?? []) {
+        // Keyed by subtopic spec_ref, or by subtopic name when refs are shared.
+        for (const q of authored[t.spec_ref]?.[st.spec_ref] ?? authored[t.spec_ref]?.[st.name] ?? []) {
           if (!isWellFormed(q)) { topicReport.dropped.push({ subtopic: st.name, question: q?.question ?? '(missing)', reason: 'malformed' }); continue }
           const row = toRow(q)
           if (seenHashes.has(row.content_hash)) { topicReport.dropped.push({ subtopic: st.name, question: row.question_text, reason: 'duplicate' }); continue }
@@ -464,7 +485,7 @@ async function main() {
         }
         topicReport.kept += st.rows.length
       }
-      const unknown = Object.keys(authored[t.spec_ref] ?? {}).filter((ref) => !t.subtopics.some((st) => st.spec_ref === ref))
+      const unknown = Object.keys(authored[t.spec_ref] ?? {}).filter((ref) => !t.subtopics.some((st) => st.spec_ref === ref || st.name === ref))
       if (unknown.length) throw new Error(`${t.spec_ref}: authored subtopic refs not in spec: ${unknown.join(', ')}`)
       report.topics.push(topicReport)
       console.log(`${t.spec_ref} ${t.name}: ${topicReport.kept} kept, ${topicReport.dropped.length} dropped`)
