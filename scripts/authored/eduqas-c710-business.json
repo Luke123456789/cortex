@@ -1,0 +1,2218 @@
+{
+ "B1": {
+  "B1.1": [
+   {
+    "question": "A shop's sales rose from £40,000 last year to £50,000 this year. What is the percentage change in sales?",
+    "correct_answer": "25% increase",
+    "distractors": [
+     "20% increase",
+     "10% increase",
+     "125% increase"
+    ],
+    "explanation": "Percentage change = change ÷ original × 100 = (50,000 − 40,000) ÷ 40,000 × 100 = 25%. Dividing by the new figure (50,000) wrongly gives 20%.",
+    "difficulty": "medium",
+    "skill": "application",
+    "involves_calculation": true
+   },
+   {
+    "question": "Total sales in a local market are £2 million. One business has sales of £300,000. What is its market share?",
+    "correct_answer": "15%",
+    "distractors": [
+     "6.7%",
+     "1.5%",
+     "30%"
+    ],
+    "explanation": "Market share = business sales ÷ total market sales × 100 = 300,000 ÷ 2,000,000 × 100 = 15%.",
+    "difficulty": "medium",
+    "skill": "application",
+    "involves_calculation": true
+   },
+   {
+    "question": "A business's profit fell from £80,000 to £60,000. What is the percentage change in profit?",
+    "correct_answer": "A fall of 25%",
+    "distractors": [
+     "A fall of 20%",
+     "A fall of 33.3%",
+     "A rise of 25%"
+    ],
+    "explanation": "Change = −20,000. −20,000 ÷ 80,000 × 100 = −25%. Always divide by the original (old) figure.",
+    "difficulty": "hard",
+    "skill": "application",
+    "involves_calculation": true
+   },
+   {
+    "question": "Which of these is an example of qualitative data?",
+    "correct_answer": "Comments from customers in a focus group",
+    "distractors": [
+     "Monthly sales figures",
+     "The number of website visits each week",
+     "Market share percentages"
+    ],
+    "explanation": "Qualitative data is about opinions, feelings and reasons. Quantitative data is numerical, such as sales or market share.",
+    "difficulty": "easy",
+    "skill": "recall",
+    "involves_calculation": false
+   },
+   {
+    "question": "A café's sales on four days were £200, £300, £250 and £450. What was its mean (average) daily sales?",
+    "correct_answer": "£300",
+    "distractors": [
+     "£250",
+     "£275",
+     "£1,200"
+    ],
+    "explanation": "Mean = total ÷ number of days = 1,200 ÷ 4 = £300. £1,200 is the total, not the average.",
+    "difficulty": "easy",
+    "skill": "application",
+    "involves_calculation": true
+   },
+   {
+    "question": "What does it mean to say that business activity is interdependent?",
+    "correct_answer": "A decision in one department affects the others",
+    "distractors": [
+     "Each department works on its own, separately from the rest",
+     "The business does not rely on any other businesses",
+     "Only the owners are involved in making decisions"
+    ],
+    "explanation": "For example, a marketing campaign that raises demand means operations must produce more and finance must fund it.",
+    "difficulty": "easy",
+    "skill": "recall",
+    "involves_calculation": false
+   }
+  ],
+  "B1.2": [
+   {
+    "question": "Which of these is a producer good?",
+    "correct_answer": "A delivery van bought by a bakery",
+    "distractors": [
+     "A chocolate bar bought by a shopper",
+     "A games console bought as a present",
+     "A haircut at a salon"
+    ],
+    "explanation": "Producer goods are bought by businesses to help them produce other goods and services. The others are bought by consumers for their own use.",
+    "difficulty": "easy",
+    "skill": "recall",
+    "involves_calculation": false
+   },
+   {
+    "question": "Which of these is a non-durable good?",
+    "correct_answer": "A pint of fresh milk",
+    "distractors": [
+     "A new washing machine",
+     "A second-hand family car",
+     "A laptop for schoolwork"
+    ],
+    "explanation": "Non-durable goods are used up quickly or in one go. Durable goods last a long time and are used again and again.",
+    "difficulty": "easy",
+    "skill": "recall",
+    "involves_calculation": false
+   },
+   {
+    "question": "Which of these organisations is in the public sector?",
+    "correct_answer": "A hospital run by the NHS",
+    "distractors": [
+     "A national supermarket chain",
+     "A self-employed plumber",
+     "A private furniture company"
+    ],
+    "explanation": "The public sector is owned and run by the government and funded mainly by taxes. The others are private sector businesses.",
+    "difficulty": "easy",
+    "skill": "recall",
+    "involves_calculation": false
+   }
+  ],
+  "B1.3": [
+   {
+    "question": "Which characteristic is an entrepreneur most likely to have?",
+    "correct_answer": "Being willing to take risks",
+    "distractors": [
+     "Preferring a guaranteed salary",
+     "Avoiding making decisions",
+     "Disliking new ideas"
+    ],
+    "explanation": "Entrepreneurs risk their own money and time to start a business. They also show initiative, innovation and determination.",
+    "difficulty": "easy",
+    "skill": "recall",
+    "involves_calculation": false
+   },
+   {
+    "question": "What is the main motive of a social enterprise?",
+    "correct_answer": "To help a social or community cause",
+    "distractors": [
+     "To pay the highest possible dividends to shareholders",
+     "To provide public services paid for by taxes",
+     "To avoid paying any tax"
+    ],
+    "explanation": "A social enterprise trades like a business but uses its profits mainly to benefit society or the community.",
+    "difficulty": "easy",
+    "skill": "recall",
+    "involves_calculation": false
+   },
+   {
+    "question": "Which of these is a non-financial reward of business enterprise?",
+    "correct_answer": "Satisfaction from building something",
+    "distractors": [
+     "Making a profit at the end of the year",
+     "Drawing a regular salary from the business",
+     "Receiving dividends on the shares owned"
+    ],
+    "explanation": "Non-financial rewards include satisfaction, independence and good customer feedback. The other options are all financial rewards.",
+    "difficulty": "easy",
+    "skill": "recall",
+    "involves_calculation": false
+   }
+  ],
+  "B1.4": [
+   {
+    "question": "Why would a bank want to see a business plan before giving a start-up a loan?",
+    "correct_answer": "To judge whether the business is likely to be able to repay the loan",
+    "distractors": [
+     "Because a business plan is a legal requirement for all businesses",
+     "To find out the names of the business's competitors' customers",
+     "To decide what price the business should charge"
+    ],
+    "explanation": "The plan shows the bank the business idea, the market and the financial forecasts, so it can judge the risk of lending.",
+    "difficulty": "medium",
+    "skill": "application",
+    "involves_calculation": false
+   },
+   {
+    "question": "In which section of a business plan would a cash-flow forecast usually appear?",
+    "correct_answer": "Financial",
+    "distractors": [
+     "Marketing",
+     "Human resources",
+     "Production operations"
+    ],
+    "explanation": "The financial section includes forecasts of cash-flow, sales, costs and profit, and how much finance is needed.",
+    "difficulty": "easy",
+    "skill": "recall",
+    "involves_calculation": false
+   }
+  ],
+  "B1.5": [
+   {
+    "question": "Which of these is a SMART objective?",
+    "correct_answer": "Raise sales by 10% within 12 months",
+    "distractors": [
+     "Become much more popular with all our customers",
+     "Make as much profit as we possibly can",
+     "Improve our customer service as soon as we can"
+    ],
+    "explanation": "SMART objectives are Specific, Measurable, Agreed, Realistic and Timed. Only this one has a measurable target and a time limit.",
+    "difficulty": "easy",
+    "skill": "application",
+    "involves_calculation": false
+   },
+   {
+    "question": "A café has just opened in a busy area with many competitors. What is its most likely main aim for its first year?",
+    "correct_answer": "Survival",
+    "distractors": [
+     "Profit maximisation",
+     "Market leadership",
+     "Growth overseas"
+    ],
+    "explanation": "Many new businesses fail in their first year, so they usually focus on surviving before aiming for growth or high profit.",
+    "difficulty": "medium",
+    "skill": "application",
+    "involves_calculation": false
+   },
+   {
+    "question": "What is the difference between a business aim and a business objective?",
+    "correct_answer": "An aim is a broad goal; objectives are measurable steps to it",
+    "distractors": [
+     "An aim is set by employees; an objective is set by customers",
+     "An aim is always about profit; an objective never is",
+     "An aim is short term; an objective is always long term"
+    ],
+    "explanation": "Objectives break an aim down into measurable steps, which also let the business measure its performance.",
+    "difficulty": "easy",
+    "skill": "recall",
+    "involves_calculation": false
+   }
+  ],
+  "B1.6": [
+   {
+    "question": "Which of these is an internal stakeholder?",
+    "correct_answer": "Employees",
+    "distractors": [
+     "Customers",
+     "Suppliers",
+     "The local community"
+    ],
+    "explanation": "Internal stakeholders work within the business: owners, managers and employees. The others are external stakeholders.",
+    "difficulty": "easy",
+    "skill": "recall",
+    "involves_calculation": false
+   },
+   {
+    "question": "A business cuts wages so that it can increase profits. Which two stakeholder groups' interests conflict most clearly?",
+    "correct_answer": "Owners and employees",
+    "distractors": [
+     "Customers and suppliers",
+     "The government and the local community",
+     "Suppliers and the government"
+    ],
+    "explanation": "Owners gain from higher profit, but employees lose from lower wages. Stakeholder objectives often conflict like this.",
+    "difficulty": "easy",
+    "skill": "application",
+    "involves_calculation": false
+   },
+   {
+    "question": "A supermarket plans to open a 24-hour store next to a housing estate. Which stakeholder group is most likely to object?",
+    "correct_answer": "People living near the store",
+    "distractors": [
+     "The supermarket's shareholders",
+     "The supermarket's suppliers",
+     "People looking for jobs"
+    ],
+    "explanation": "Residents may suffer from noise, traffic and lights at night. Shareholders, suppliers and job seekers are likely to benefit.",
+    "difficulty": "medium",
+    "skill": "application",
+    "involves_calculation": false
+   }
+  ],
+  "B1.7": [
+   {
+    "question": "What does unlimited liability mean?",
+    "correct_answer": "Owners may have to sell personal belongings to pay business debts",
+    "distractors": [
+     "The business is allowed to borrow as much money as it likes",
+     "Owners can only lose the money they put into the business",
+     "The business is never required to pay any tax on its profits"
+    ],
+    "explanation": "Sole traders and partnerships have unlimited liability. Shareholders in limited companies can only lose what they invested.",
+    "difficulty": "easy",
+    "skill": "recall",
+    "involves_calculation": false
+   },
+   {
+    "question": "What is the main difference between a private limited company (Ltd) and a public limited company (plc)?",
+    "correct_answer": "Only a plc can sell shares on the stock exchange",
+    "distractors": [
+     "Only a private limited company has limited liability",
+     "A plc is owned and run by the government",
+     "A private limited company cannot employ any staff"
+    ],
+    "explanation": "Both have limited liability. A plc can raise large amounts by selling shares to anyone; Ltd shares are sold privately, often to family and friends.",
+    "difficulty": "medium",
+    "skill": "recall",
+    "involves_calculation": false
+   },
+   {
+    "question": "What is a key feature of a co-operative?",
+    "correct_answer": "It is owned by its members, who share in the profits",
+    "distractors": [
+     "It is owned by one person with unlimited liability",
+     "It is run by the government",
+     "Its shares are traded on the stock exchange"
+    ],
+    "explanation": "In a co-operative, members (such as customers or workers) own the business, have a say in decisions and share the profits.",
+    "difficulty": "easy",
+    "skill": "recall",
+    "involves_calculation": false
+   },
+   {
+    "question": "Two friends want to start a small web design business. They want to share decisions, keep control themselves and protect their personal savings if it fails. Which type of ownership is most suitable?",
+    "correct_answer": "Private limited company",
+    "distractors": [
+     "Sole trader",
+     "Partnership",
+     "Public limited company"
+    ],
+    "explanation": "A private limited company gives limited liability while letting the friends keep control. A partnership has unlimited liability, and a plc is for large businesses selling shares to the public.",
+    "difficulty": "hard",
+    "skill": "analysis",
+    "involves_calculation": false
+   }
+  ],
+  "B1.8": [
+   {
+    "question": "A brewery buys a chain of pubs that sell its beer. What type of growth is this?",
+    "correct_answer": "Forward vertical integration",
+    "distractors": [
+     "Backward vertical integration",
+     "Horizontal integration",
+     "Organic growth"
+    ],
+    "explanation": "The brewery has joined with a business at a later stage of its own supply chain (closer to the customer), so it is forward vertical integration.",
+    "difficulty": "hard",
+    "skill": "application",
+    "involves_calculation": false
+   },
+   {
+    "question": "Which of these is an example of internal (organic) growth?",
+    "correct_answer": "Opening new branches using retained profit",
+    "distractors": [
+     "Merging with a competitor to form one business",
+     "Taking over one of its main suppliers",
+     "Buying a rival business in another town"
+    ],
+    "explanation": "Organic growth comes from within the business, such as selling more, opening new outlets or launching new products. Mergers and takeovers are external growth.",
+    "difficulty": "easy",
+    "skill": "application",
+    "involves_calculation": false
+   },
+   {
+    "question": "A large supermarket pays a lower price per tin of beans than a corner shop because it buys millions of tins. Which internal economy of scale is this?",
+    "correct_answer": "Purchasing",
+    "distractors": [
+     "Technical",
+     "Financial",
+     "Administrative"
+    ],
+    "explanation": "Buying in bulk lowers the cost per unit. This is a purchasing economy of scale.",
+    "difficulty": "medium",
+    "skill": "application",
+    "involves_calculation": false
+   },
+   {
+    "question": "What is an advantage for a franchisee of opening a franchise rather than starting a new business from scratch?",
+    "correct_answer": "It trades under a known brand, so risk is lower",
+    "distractors": [
+     "It keeps all of its profits with no fees to pay",
+     "It has complete freedom over the products it sells",
+     "It has no start-up costs to pay at the beginning"
+    ],
+    "explanation": "Franchisees benefit from a known brand and support from the franchisor, but they pay fees or royalties and must follow the franchisor's rules.",
+    "difficulty": "medium",
+    "skill": "recall",
+    "involves_calculation": false
+   }
+  ],
+  "B1.9": [
+   {
+    "question": "A bakery chooses a site on a busy high street. Which siting factor has it most likely focused on?",
+    "correct_answer": "High footfall",
+    "distractors": [
+     "Cheap rent",
+     "Being far from competitors",
+     "Access to raw materials"
+    ],
+    "explanation": "Footfall is the number of people passing a site. A busy high street brings more potential customers but usually higher rent.",
+    "difficulty": "easy",
+    "skill": "application",
+    "involves_calculation": false
+   },
+   {
+    "question": "A steel manufacturer uses huge amounts of heavy raw materials. Where is it most likely to locate?",
+    "correct_answer": "Close to its raw materials",
+    "distractors": [
+     "In a busy city-centre street",
+     "Right next to its competitors",
+     "Wherever the owner lives"
+    ],
+    "explanation": "Heavy, bulky materials are expensive to transport, so being close to them, with good infrastructure, keeps costs down.",
+    "difficulty": "medium",
+    "skill": "application",
+    "involves_calculation": false
+   }
+  ]
+ },
+ "B2": {
+  "B2.1": [
+   {
+    "question": "What is m-commerce?",
+    "correct_answer": "Buying goods and services on a smartphone",
+    "distractors": [
+     "Paying in a shop with a contactless debit card",
+     "Selling goods through a printed catalogue",
+     "Trading goods and services between countries"
+    ],
+    "explanation": "E-commerce is buying online via the internet; m-commerce is the part of it done on mobile devices.",
+    "difficulty": "easy",
+    "skill": "recall",
+    "involves_calculation": false
+   },
+   {
+    "question": "A business wants to calculate its monthly costs and test different sales forecasts. Which type of software is most suitable?",
+    "correct_answer": "A spreadsheet",
+    "distractors": [
+     "A database",
+     "A word processor",
+     "Presentation software"
+    ],
+    "explanation": "Spreadsheets are used to make calculations, and formulas update automatically when figures change.",
+    "difficulty": "easy",
+    "skill": "application",
+    "involves_calculation": false
+   },
+   {
+    "question": "What is a database mainly used for in a business?",
+    "correct_answer": "Storing records that can be searched and sorted",
+    "distractors": [
+     "Designing new products on screen before they are made",
+     "Writing and formatting letters and reports",
+     "Holding live video meetings with other offices"
+    ],
+    "explanation": "Databases store records. Word processors are for documents, CAD is for design and video conferencing is for meetings.",
+    "difficulty": "easy",
+    "skill": "recall",
+    "involves_calculation": false
+   },
+   {
+    "question": "What is computer aided manufacture (CAM)?",
+    "correct_answer": "Making products with computer-controlled machines",
+    "distractors": [
+     "Using computers to design products on screen",
+     "Using the internet to sell products to customers",
+     "Using spreadsheets to plan the costs of production"
+    ],
+    "explanation": "CAD (computer aided design) is used to design products; CAM uses computer-controlled machinery to make them, often more accurately and quickly.",
+    "difficulty": "medium",
+    "skill": "recall",
+    "involves_calculation": false
+   },
+   {
+    "question": "Which is a disadvantage to a small business of introducing new technology?",
+    "correct_answer": "The high cost of buying and installing it",
+    "distractors": [
+     "It allows faster communication with customers",
+     "It can reduce mistakes in calculations",
+     "It lets the business reach customers online"
+    ],
+    "explanation": "Technology can be expensive, especially for small businesses. Other drawbacks include dependency on technology and security breaches.",
+    "difficulty": "easy",
+    "skill": "recall",
+    "involves_calculation": false
+   },
+   {
+    "question": "A high street clothes shop is losing sales as more customers buy clothes online. Which response is most likely to help it?",
+    "correct_answer": "Start selling online through its own website",
+    "distractors": [
+     "Raise its prices to make up for the lost sales",
+     "Cut its opening hours to reduce its costs",
+     "Stop all of its advertising to save money"
+    ],
+    "explanation": "In a dynamic market, businesses need to use new technology to sell their products. Selling online lets it reach the customers it is losing.",
+    "difficulty": "hard",
+    "skill": "analysis",
+    "involves_calculation": false
+   }
+  ],
+  "B2.2": [
+   {
+    "question": "What does Fairtrade aim to do?",
+    "correct_answer": "Give producers in developing countries a fair minimum price",
+    "distractors": [
+     "Make sure products are always sold at the lowest possible price",
+     "Stop UK businesses from importing goods from other countries",
+     "Make sure that all food products sold are grown organically"
+    ],
+    "explanation": "Fairtrade gives farmers a fair price and better working conditions. It is one of the ethical issues in the specification.",
+    "difficulty": "easy",
+    "skill": "recall",
+    "involves_calculation": false
+   },
+   {
+    "question": "Why might adopting ethical policies reduce a business's profit in the short term?",
+    "correct_answer": "Ethical materials and fair wages often cost more",
+    "distractors": [
+     "Ethical businesses are not allowed to advertise",
+     "Customers always refuse to buy ethical products",
+     "Ethical businesses must pay extra tax on profits"
+    ],
+    "explanation": "Ethics can conflict with profit because ethical choices often raise costs, although they may attract more customers in the long run.",
+    "difficulty": "medium",
+    "skill": "application",
+    "involves_calculation": false
+   },
+   {
+    "question": "Which is a likely benefit for a business of adopting ethical policies?",
+    "correct_answer": "It may attract customers who care how products are made",
+    "distractors": [
+     "Its costs will always fall, whatever policies it chooses",
+     "It will no longer face any competition in its market",
+     "It will no longer need to follow consumer or employment law"
+    ],
+    "explanation": "Benefits include attracting consumers, more stable relationships with suppliers and better employee motivation.",
+    "difficulty": "easy",
+    "skill": "recall",
+    "involves_calculation": false
+   }
+  ],
+  "B2.3": [
+   {
+    "question": "In business, what is meant by sustainability?",
+    "correct_answer": "Avoiding using up natural resources needed in the future",
+    "distractors": [
+     "Making a profit every year for as long as possible",
+     "Keeping prices the same for a long period of time",
+     "Only selling products that are built to last for years"
+    ],
+    "explanation": "Sustainable businesses try to avoid depleting natural resources, for example through renewable energy and recycling.",
+    "difficulty": "easy",
+    "skill": "recall",
+    "involves_calculation": false
+   },
+   {
+    "question": "Which of these is an environmental cost of business activity?",
+    "correct_answer": "Pollution from a factory chimney",
+    "distractors": [
+     "Paying staff higher wages",
+     "The cost of training new staff",
+     "Interest paid on a bank loan"
+    ],
+    "explanation": "Environmental costs include pollution, climate change, congestion and the use of finite resources.",
+    "difficulty": "easy",
+    "skill": "recall",
+    "involves_calculation": false
+   },
+   {
+    "question": "A business switches to biodegradable packaging. What is a likely disadvantage?",
+    "correct_answer": "Higher costs, which may raise prices",
+    "distractors": [
+     "Customers will be less likely to buy from it",
+     "It will create a lot more waste than before",
+     "It will have to stop all of its recycling"
+    ],
+    "explanation": "Environmentally friendly policies can attract customers and motivate staff, but they often increase costs.",
+    "difficulty": "medium",
+    "skill": "application",
+    "involves_calculation": false
+   }
+  ],
+  "B2.4": [
+   {
+    "question": "Interest rates rise. How is this most likely to affect a business with a large bank loan?",
+    "correct_answer": "Its loan repayments increase, which reduces its profit",
+    "distractors": [
+     "Its loan repayments fall, which increases its profit",
+     "Its sales will rise immediately",
+     "It no longer has to repay the loan"
+    ],
+    "explanation": "Higher interest rates make borrowing more expensive. They may also reduce consumer spending as people's loans and mortgages cost more.",
+    "difficulty": "medium",
+    "skill": "application",
+    "involves_calculation": false
+   },
+   {
+    "question": "Unemployment in an area rises sharply. How is this most likely to affect a local luxury car dealer?",
+    "correct_answer": "Sales fall as many people have less income",
+    "distractors": [
+     "Sales rise because people have more free time",
+     "Costs rise because it must pay higher wages",
+     "It is not affected, as cars are always needed"
+    ],
+    "explanation": "When unemployment rises, consumer incomes fall and people cut back on expensive purchases such as luxury cars.",
+    "difficulty": "hard",
+    "skill": "analysis",
+    "involves_calculation": false
+   },
+   {
+    "question": "What is VAT?",
+    "correct_answer": "An indirect tax on spending",
+    "distractors": [
+     "A direct tax on income",
+     "A tax on company profits",
+     "A tax paid only by exporters"
+    ],
+    "explanation": "VAT is added to the price of many goods and services. Income tax is a direct tax on income; corporation tax is on company profits.",
+    "difficulty": "easy",
+    "skill": "recall",
+    "involves_calculation": false
+   },
+   {
+    "question": "What is corporation tax charged on?",
+    "correct_answer": "The profits of companies",
+    "distractors": [
+     "The wages of employees",
+     "The price of goods in shops",
+     "Imports into the UK"
+    ],
+    "explanation": "Corporation tax is a direct tax on company profits. Income tax is paid on wages and VAT on spending.",
+    "difficulty": "easy",
+    "skill": "recall",
+    "involves_calculation": false
+   },
+   {
+    "question": "Consumer incomes in the UK rise. Which business is most likely to see the biggest increase in sales?",
+    "correct_answer": "A company selling luxury holidays",
+    "distractors": [
+     "A shop selling basic food at low prices",
+     "A business that repairs old shoes",
+     "A shop selling second-hand clothes"
+    ],
+    "explanation": "When incomes rise, people spend more on luxuries and less on cheap alternatives such as repairs and second-hand goods.",
+    "difficulty": "medium",
+    "skill": "analysis",
+    "involves_calculation": false
+   }
+  ],
+  "B2.5": [
+   {
+    "question": "What is an export?",
+    "correct_answer": "A UK product sold to buyers abroad",
+    "distractors": [
+     "A product a UK firm buys from abroad",
+     "A product made and sold within the UK",
+     "A tax on goods coming into the UK"
+    ],
+    "explanation": "International trade involves exports (selling abroad) and imports (buying from abroad).",
+    "difficulty": "easy",
+    "skill": "recall",
+    "involves_calculation": false
+   },
+   {
+    "question": "Which is a reason why a business might want to become a multinational company?",
+    "correct_answer": "To produce where costs are lower",
+    "distractors": [
+     "To avoid having any competitors",
+     "To reduce the size of its market",
+     "To stop using its brand abroad"
+    ],
+    "explanation": "Reasons include cheaper production costs, larger market share, economies of scale, avoiding trade barriers and government grants.",
+    "difficulty": "easy",
+    "skill": "recall",
+    "involves_calculation": false
+   },
+   {
+    "question": "A foreign multinational opens a factory in the UK. Which is a possible negative impact?",
+    "correct_answer": "Profits may go to its home country",
+    "distractors": [
+     "It creates new jobs for local people",
+     "It introduces new technology to the UK",
+     "Consumers have more choice of products"
+    ],
+    "explanation": "The other options are positive impacts. Negatives include profits leaving the UK, environmental damage and deskilled jobs.",
+    "difficulty": "hard",
+    "skill": "application",
+    "involves_calculation": false
+   },
+   {
+    "question": "Which is a disadvantage for a UK business of selling its products abroad?",
+    "correct_answer": "Language barriers and currency changes",
+    "distractors": [
+     "Access to new markets with more customers",
+     "Spreading risk across several countries",
+     "Higher sales and profits from extra demand"
+    ],
+    "explanation": "International trade brings new markets and growth, but also language, supply chain and currency issues, and different local taxes and laws.",
+    "difficulty": "easy",
+    "skill": "recall",
+    "involves_calculation": false
+   },
+   {
+    "question": "What is the European single market?",
+    "correct_answer": "An area where goods, services, people and money move freely",
+    "distractors": [
+     "A single shop that sells goods from every country in Europe",
+     "A market in which every product must be sold at the same price",
+     "A trade agreement that bans all imports from outside Europe"
+    ],
+    "explanation": "In the single market, businesses trade without tariffs and follow shared regulations.",
+    "difficulty": "medium",
+    "skill": "recall",
+    "involves_calculation": false
+   }
+  ],
+  "B2.6": [
+   {
+    "question": "A business pays a 22-year-old worker less than the legal minimum hourly rate. Which area of law is it breaking?",
+    "correct_answer": "Employment law",
+    "distractors": [
+     "Consumer law",
+     "Intellectual property law",
+     "Trade descriptions law"
+    ],
+    "explanation": "Employment law gives employees rights to the minimum wage, a contract, safe working conditions and protection from discrimination and unfair dismissal.",
+    "difficulty": "easy",
+    "skill": "application",
+    "involves_calculation": false
+   },
+   {
+    "question": "Under consumer law, goods sold to customers must be…",
+    "correct_answer": "of satisfactory quality and as described",
+    "distractors": [
+     "the cheapest version available on the market",
+     "made in the UK from British materials",
+     "available to buy in every shop in the area"
+    ],
+    "explanation": "Consumer law protects customers against unsatisfactory quality, misleading advertising and inaccurate descriptions.",
+    "difficulty": "easy",
+    "skill": "recall",
+    "involves_calculation": false
+   },
+   {
+    "question": "An inventor creates a new type of engine. What should they apply for to stop others copying it?",
+    "correct_answer": "A patent",
+    "distractors": [
+     "A copyright",
+     "A trademark",
+     "A franchise"
+    ],
+    "explanation": "Patents protect inventions. Copyright protects written and artistic works, and trademarks protect logos and brand names.",
+    "difficulty": "easy",
+    "skill": "application",
+    "involves_calculation": false
+   },
+   {
+    "question": "A business wants to stop other firms using its logo. Which type of intellectual property protection should it use?",
+    "correct_answer": "A trademark",
+    "distractors": [
+     "A patent",
+     "A copyright",
+     "A contract of employment"
+    ],
+    "explanation": "A trademark protects a brand name, logo or slogan.",
+    "difficulty": "easy",
+    "skill": "application",
+    "involves_calculation": false
+   },
+   {
+    "question": "New health and safety laws require factories to fit extra machine guards. How is this most likely to affect a factory?",
+    "correct_answer": "Its costs rise, which may reduce profit",
+    "distractors": [
+     "Its sales rise straight away as a result",
+     "It is allowed to pay its workers less",
+     "It no longer needs to train any of its staff"
+    ],
+    "explanation": "Legislation affects costs, profits and production. Meeting new laws often means spending on equipment and training.",
+    "difficulty": "medium",
+    "skill": "application",
+    "involves_calculation": false
+   }
+  ]
+ },
+ "B3": {
+  "B3.1": [
+   {
+    "question": "What is job production?",
+    "correct_answer": "Making a single, one-off product to a customer's own requirements",
+    "distractors": [
+     "Making a set number of identical products, then switching to another product",
+     "Making large quantities of identical products continuously",
+     "Buying finished products and reselling them"
+    ],
+    "explanation": "Examples include wedding dresses and made-to-measure kitchens. Batch makes groups of identical items; flow makes products continuously.",
+    "difficulty": "easy",
+    "skill": "recall",
+    "involves_calculation": false
+   },
+   {
+    "question": "A bakery makes 200 white loaves, then 200 brown loaves, then 200 rolls. Which method of production is this?",
+    "correct_answer": "Batch production",
+    "distractors": [
+     "Job production",
+     "Flow production",
+     "Just in time"
+    ],
+    "explanation": "Batch production makes a group of identical products before changing to a different product.",
+    "difficulty": "easy",
+    "skill": "application",
+    "involves_calculation": false
+   },
+   {
+    "question": "What is the main advantage of flow (mass) production?",
+    "correct_answer": "A low cost per unit because huge quantities are made",
+    "distractors": [
+     "Every product can be made to the customer's own design",
+     "Workers find the work very varied",
+     "The machinery is cheap to set up"
+    ],
+    "explanation": "Flow production spreads costs over very large output. Its drawbacks include high set-up costs and repetitive work.",
+    "difficulty": "easy",
+    "skill": "recall",
+    "involves_calculation": false
+   },
+   {
+    "question": "What is a disadvantage of flow production for employees?",
+    "correct_answer": "The work is often repetitive and boring",
+    "distractors": [
+     "They must design each product individually",
+     "They have to be highly skilled craftspeople",
+     "They are paid more than in job production"
+    ],
+    "explanation": "On a production line each worker may do the same task again and again, which can be boring.",
+    "difficulty": "medium",
+    "skill": "recall",
+    "involves_calculation": false
+   },
+   {
+    "question": "A company builds kitchens to fit each customer's measurements. Which method of production is most appropriate?",
+    "correct_answer": "Job production",
+    "distractors": [
+     "Batch production",
+     "Flow production",
+     "Mass production"
+    ],
+    "explanation": "Each kitchen is unique and made to order, so job production is the most suitable method.",
+    "difficulty": "easy",
+    "skill": "application",
+    "involves_calculation": false
+   },
+   {
+    "question": "A furniture maker switches from job production to batch production. What is the most likely effect?",
+    "correct_answer": "Lower unit costs, but less customisation",
+    "distractors": [
+     "Higher unit costs, but much more customisation",
+     "Each item can now be made to an exact design",
+     "It will need far more highly skilled workers"
+    ],
+    "explanation": "Making identical items in batches spreads costs over more units, but customers can no longer choose an individual design.",
+    "difficulty": "hard",
+    "skill": "analysis",
+    "involves_calculation": false
+   }
+  ],
+  "B3.2": [
+   {
+    "question": "What is quality control?",
+    "correct_answer": "Inspecting finished products for faults",
+    "distractors": [
+     "Checking quality at every stage to prevent faults",
+     "Setting the price of a high-quality product",
+     "Training workers in how to sell products"
+    ],
+    "explanation": "Quality control inspects products to find faults. Quality assurance builds checks into every stage to prevent them.",
+    "difficulty": "medium",
+    "skill": "recall",
+    "involves_calculation": false
+   },
+   {
+    "question": "What is quality assurance?",
+    "correct_answer": "Checking quality at every stage to prevent faults",
+    "distractors": [
+     "Inspecting only the finished products at the very end",
+     "Offering customers a full refund if they are unhappy",
+     "Buying the cheapest raw materials that are available"
+    ],
+    "explanation": "With quality assurance, every worker is responsible for quality throughout production.",
+    "difficulty": "medium",
+    "skill": "recall",
+    "involves_calculation": false
+   },
+   {
+    "question": "Why is quality important to a business?",
+    "correct_answer": "It reduces returns and waste, which lowers costs",
+    "distractors": [
+     "It always allows the business to pay lower wages",
+     "It means the business does not need any customers",
+     "It removes the need for market research"
+    ],
+    "explanation": "Good quality satisfies customer expectations, increases sales and reduces costs and waste.",
+    "difficulty": "easy",
+    "skill": "recall",
+    "involves_calculation": false
+   },
+   {
+    "question": "A restaurant gets complaints about rude and slow service. Which action is most likely to improve the quality of its service?",
+    "correct_answer": "Training staff in customer service",
+    "distractors": [
+     "Buying cheaper ingredients for meals",
+     "Raising the prices on its menu",
+     "Reducing the number of waiting staff"
+    ],
+    "explanation": "Employing the right people and training them are key ways a business achieves quality, especially in services.",
+    "difficulty": "easy",
+    "skill": "application",
+    "involves_calculation": false
+   },
+   {
+    "question": "Why might quality assurance lower a business's costs compared with relying only on quality control?",
+    "correct_answer": "Faults are prevented early, so less output is wasted",
+    "distractors": [
+     "It removes the need to buy any raw materials at all",
+     "It means that no workers ever need to be trained",
+     "It allows the business to charge lower prices to customers"
+    ],
+    "explanation": "Quality control finds faults after products are made, when the materials and labour are already spent. Preventing faults earlier cuts waste.",
+    "difficulty": "hard",
+    "skill": "analysis",
+    "involves_calculation": false
+   }
+  ],
+  "B3.3": [
+   {
+    "question": "In the supply chain, what is procurement?",
+    "correct_answer": "Finding suppliers and buying supplies",
+    "distractors": [
+     "Transporting finished goods to customers",
+     "Storing stock safely in a warehouse",
+     "Advertising the products to customers"
+    ],
+    "explanation": "Procurement is sourcing and purchasing. Logistics covers transport, storage and distribution.",
+    "difficulty": "easy",
+    "skill": "recall",
+    "involves_calculation": false
+   },
+   {
+    "question": "Which of these is part of logistics?",
+    "correct_answer": "Distributing products to customers",
+    "distractors": [
+     "Choosing which suppliers to buy from",
+     "Setting the selling price of products",
+     "Interviewing and appointing new staff"
+    ],
+    "explanation": "Logistics includes transportation, storage (warehousing) and distribution to the end customer.",
+    "difficulty": "easy",
+    "skill": "recall",
+    "involves_calculation": false
+   },
+   {
+    "question": "What is just in time (JIT) stock control?",
+    "correct_answer": "Stock arrives just as it is needed",
+    "distractors": [
+     "Large amounts of stock are kept for emergencies",
+     "All stock is ordered just once a year",
+     "Stock is only counted at the end of the year"
+    ],
+    "explanation": "JIT reduces storage costs and waste, but depends on reliable suppliers.",
+    "difficulty": "easy",
+    "skill": "recall",
+    "involves_calculation": false
+   },
+   {
+    "question": "What is the main risk for a car factory that uses just in time stock control?",
+    "correct_answer": "If a supplier delivers late, production may have to stop",
+    "distractors": [
+     "It has to pay very high warehouse costs",
+     "Its stock may go out of date because it holds so much",
+     "It cannot use computerised stock control"
+    ],
+    "explanation": "JIT holds almost no buffer stock, so any delay in the supply chain can halt production.",
+    "difficulty": "hard",
+    "skill": "analysis",
+    "involves_calculation": false
+   },
+   {
+    "question": "A café switches to a cheaper coffee supplier overseas. What is a likely risk?",
+    "correct_answer": "Deliveries may be less reliable",
+    "distractors": [
+     "Its costs of buying coffee will rise",
+     "It will have to raise all of its prices",
+     "It will need to open more cafés to survive"
+    ],
+    "explanation": "Supply decisions affect cost, quality and reliability. Cheaper supplies from far away can be harder to get on time.",
+    "difficulty": "hard",
+    "skill": "application",
+    "involves_calculation": false
+   }
+  ],
+  "B3.4": [
+   {
+    "question": "In the sales process, what happens after the sale has been closed?",
+    "correct_answer": "Following up with after-sales service",
+    "distractors": [
+     "Identifying new sales opportunities",
+     "Preparing good product knowledge",
+     "Finding out what the customer needs"
+    ],
+    "explanation": "The stages run: prepare, identify opportunities, understand needs, inform of features and benefits, close the sale, then follow up.",
+    "difficulty": "easy",
+    "skill": "recall",
+    "involves_calculation": false
+   },
+   {
+    "question": "What is a benefit to a business of good customer service?",
+    "correct_answer": "More customer loyalty and repeat business",
+    "distractors": [
+     "Lower wages for staff",
+     "No need for any promotion",
+     "Customers will accept poor-quality products"
+    ],
+    "explanation": "Good service increases loyalty and spending, improves reputation and attracts new customers.",
+    "difficulty": "easy",
+    "skill": "recall",
+    "involves_calculation": false
+   },
+   {
+    "question": "Which of these is a feature of good customer service?",
+    "correct_answer": "Asking for feedback and responding to it",
+    "distractors": [
+     "Rushing customers so more can be served",
+     "Avoiding contact after the sale",
+     "Only greeting regular customers"
+    ],
+    "explanation": "Good service includes greeting and interacting with customers, identifying their needs, and encouraging and responding to feedback.",
+    "difficulty": "easy",
+    "skill": "recall",
+    "involves_calculation": false
+   },
+   {
+    "question": "How can an online retailer provide good customer service?",
+    "correct_answer": "Offer live chat and clear returns information",
+    "distractors": [
+     "Hide its contact details on the website to cut costs",
+     "Never reply to any reviews that customers post",
+     "Remove product descriptions so the site loads faster"
+    ],
+    "explanation": "Online businesses adapt good service for their websites, for example through quick responses, clear information and easy returns.",
+    "difficulty": "easy",
+    "skill": "application",
+    "involves_calculation": false
+   },
+   {
+    "question": "How is the sales process for a new car likely to differ from selling a magazine in a shop?",
+    "correct_answer": "More time is spent explaining features and following up",
+    "distractors": [
+     "There is no need to close the sale with the customer",
+     "The customer never needs to ask the salesperson anything",
+     "The sale must always be made online rather than in person"
+    ],
+    "explanation": "High-value sales need more product knowledge, time with the customer and after-sales service.",
+    "difficulty": "hard",
+    "skill": "application",
+    "involves_calculation": false
+   }
+  ]
+ },
+ "B4": {
+  "B4.1": [
+   {
+    "question": "Which of these is an internal source of finance?",
+    "correct_answer": "Retained profit",
+    "distractors": [
+     "A bank loan",
+     "A bank overdraft",
+     "Trade credit"
+    ],
+    "explanation": "Internal sources come from within the business: owner's capital, retained profit and selling assets.",
+    "difficulty": "easy",
+    "skill": "recall",
+    "involves_calculation": false
+   },
+   {
+    "question": "What is trade credit?",
+    "correct_answer": "Buying from suppliers and paying later",
+    "distractors": [
+     "A bank loan that is repaid with interest",
+     "Money invested in the business by its owner",
+     "Selling shares in the business to the public"
+    ],
+    "explanation": "Trade credit is usually 30 to 90 days. It helps cash-flow because the business can sell the goods before paying for them.",
+    "difficulty": "easy",
+    "skill": "recall",
+    "involves_calculation": false
+   },
+   {
+    "question": "A business has a short-term cash shortage for a few weeks. Which source of finance is most suitable?",
+    "correct_answer": "A bank overdraft",
+    "distractors": [
+     "A share issue",
+     "A 10-year bank loan",
+     "Selling the business's factory"
+    ],
+    "explanation": "An overdraft is flexible and meant for short-term needs. The others are for long-term finance.",
+    "difficulty": "medium",
+    "skill": "application",
+    "involves_calculation": false
+   },
+   {
+    "question": "What is a business angel?",
+    "correct_answer": "A wealthy person who invests in return for a share of the business",
+    "distractors": [
+     "A bank that only lends money to businesses that are just starting up",
+     "A government grant that is given to new and small businesses",
+     "A loyal customer who always pays the business on time"
+    ],
+    "explanation": "Business angels and venture capitalists give finance and often advice, but the owners give up part of the business.",
+    "difficulty": "medium",
+    "skill": "recall",
+    "involves_calculation": false
+   },
+   {
+    "question": "A public limited company needs £50 million to build a new factory and does not want to pay interest. Which source of finance is most suitable?",
+    "correct_answer": "A share issue",
+    "distractors": [
+     "A bank overdraft",
+     "Trade credit",
+     "A loan from family and friends"
+    ],
+    "explanation": "Selling new shares can raise large sums without interest, although the original owners' control is diluted.",
+    "difficulty": "hard",
+    "skill": "application",
+    "involves_calculation": false
+   },
+   {
+    "question": "What is a disadvantage of a bank loan as a source of finance?",
+    "correct_answer": "Interest has to be paid on it",
+    "distractors": [
+     "The owners lose control of the business",
+     "It never has to be paid back",
+     "Only charities are allowed to use it"
+    ],
+    "explanation": "Loans must be repaid with interest, which adds to costs. Selling shares, not a loan, dilutes ownership.",
+    "difficulty": "easy",
+    "skill": "recall",
+    "involves_calculation": false
+   }
+  ],
+  "B4.2": [
+   {
+    "question": "Which of these is a variable cost for a furniture maker?",
+    "correct_answer": "Wood used to make the furniture",
+    "distractors": [
+     "Rent on the workshop it uses",
+     "Insurance for the workshop building",
+     "The manager's yearly salary"
+    ],
+    "explanation": "Variable costs change with output: more furniture needs more wood. Rent, insurance and salaries are fixed costs.",
+    "difficulty": "easy",
+    "skill": "recall",
+    "involves_calculation": false
+   },
+   {
+    "question": "A business sells 500 units at £8 each. What is its total revenue?",
+    "correct_answer": "£4,000",
+    "distractors": [
+     "£508",
+     "£400",
+     "£40,000"
+    ],
+    "explanation": "Total revenue = selling price × quantity sold = 8 × 500 = £4,000.",
+    "difficulty": "easy",
+    "skill": "application",
+    "involves_calculation": true
+   },
+   {
+    "question": "A business has fixed costs of £2,000 and variable costs of £3 per unit. What are its total costs if it makes 400 units?",
+    "correct_answer": "£3,200",
+    "distractors": [
+     "£1,200",
+     "£2,400",
+     "£5,200"
+    ],
+    "explanation": "Total costs = fixed costs + (variable cost per unit × output) = 2,000 + (3 × 400) = £3,200.",
+    "difficulty": "medium",
+    "skill": "application",
+    "involves_calculation": true
+   },
+   {
+    "question": "A business sells 1,000 units at £5 each. Fixed costs are £1,500 and variable costs are £2 per unit. What is its profit?",
+    "correct_answer": "£1,500",
+    "distractors": [
+     "£3,000",
+     "£3,500",
+     "£1,000"
+    ],
+    "explanation": "Total revenue = £5,000. Total costs = 1,500 + 2,000 = £3,500. Profit = 5,000 − 3,500 = £1,500.",
+    "difficulty": "medium",
+    "skill": "application",
+    "involves_calculation": true
+   },
+   {
+    "question": "What are fixed costs?",
+    "correct_answer": "Costs that stay the same as output changes",
+    "distractors": [
+     "Costs that rise with every extra unit produced",
+     "Costs that are only ever paid once",
+     "Costs that the business never has to pay"
+    ],
+    "explanation": "Fixed costs stay the same in the short term whatever the output. Variable costs change with output.",
+    "difficulty": "easy",
+    "skill": "recall",
+    "involves_calculation": false
+   }
+  ],
+  "B4.3": [
+   {
+    "question": "A product sells for £12 and has a variable cost of £7 per unit. What is the contribution per unit?",
+    "correct_answer": "£5",
+    "distractors": [
+     "£19",
+     "£7",
+     "£84"
+    ],
+    "explanation": "Contribution per unit = selling price − variable cost per unit = 12 − 7 = £5.",
+    "difficulty": "easy",
+    "skill": "application",
+    "involves_calculation": true
+   },
+   {
+    "question": "A business has fixed costs of £6,000. It sells its product for £10, and the variable cost is £4 per unit. How many units must it sell to break even?",
+    "correct_answer": "1,000 units",
+    "distractors": [
+     "600 units",
+     "1,500 units",
+     "429 units"
+    ],
+    "explanation": "Break-even = fixed costs ÷ contribution per unit = 6,000 ÷ (10 − 4) = 1,000 units.",
+    "difficulty": "medium",
+    "skill": "application",
+    "involves_calculation": true
+   },
+   {
+    "question": "On a break-even chart, where is the break-even point?",
+    "correct_answer": "Where the total revenue line crosses the total cost line",
+    "distractors": [
+     "Where the fixed cost line crosses the variable cost line",
+     "Where the total revenue line starts",
+     "At the highest point of the total cost line"
+    ],
+    "explanation": "At break-even, total revenue equals total costs, so the business makes neither a profit nor a loss.",
+    "difficulty": "easy",
+    "skill": "recall",
+    "involves_calculation": false
+   },
+   {
+    "question": "The variable cost per unit of a product rises, but its selling price stays the same. What happens to the break-even output?",
+    "correct_answer": "It rises",
+    "distractors": [
+     "It falls",
+     "It stays the same",
+     "It falls to zero"
+    ],
+    "explanation": "Contribution per unit falls, so more units must be sold to cover the same fixed costs.",
+    "difficulty": "medium",
+    "skill": "analysis",
+    "involves_calculation": false
+   },
+   {
+    "question": "A business has fixed costs of £9,000 and variable costs of £9 per unit. It raises its selling price from £15 to £18. What is its new break-even output?",
+    "correct_answer": "1,000 units",
+    "distractors": [
+     "1,500 units",
+     "600 units",
+     "500 units"
+    ],
+    "explanation": "New contribution = 18 − 9 = £9. Break-even = 9,000 ÷ 9 = 1,000 units, down from 9,000 ÷ 6 = 1,500 at the old price.",
+    "difficulty": "hard",
+    "skill": "application",
+    "involves_calculation": true
+   }
+  ],
+  "B4.4": [
+   {
+    "question": "What does the average rate of return (ARR) measure?",
+    "correct_answer": "Average yearly profit as a percentage of the initial cost",
+    "distractors": [
+     "The total revenue an investment earns over its whole life",
+     "How many years it takes the business to repay a bank loan",
+     "The rate of interest a bank charges on a business loan"
+    ],
+    "explanation": "ARR is used to judge the success of an investment and to compare different investments.",
+    "difficulty": "easy",
+    "skill": "recall",
+    "involves_calculation": false
+   },
+   {
+    "question": "An investment costs £50,000 and makes a total net profit of £20,000 over 5 years. What is the ARR?",
+    "correct_answer": "8%",
+    "distractors": [
+     "40%",
+     "4%",
+     "25%"
+    ],
+    "explanation": "Average annual return = 20,000 ÷ 5 = £4,000. ARR = 4,000 ÷ 50,000 × 100 = 8%. 40% forgets to divide by the number of years.",
+    "difficulty": "medium",
+    "skill": "application",
+    "involves_calculation": true
+   },
+   {
+    "question": "A machine costs £80,000 and is expected to make a total net profit of £24,000 over 4 years. What is the ARR?",
+    "correct_answer": "7.5%",
+    "distractors": [
+     "30%",
+     "6%",
+     "3.3%"
+    ],
+    "explanation": "Average annual return = 24,000 ÷ 4 = £6,000. ARR = 6,000 ÷ 80,000 × 100 = 7.5%.",
+    "difficulty": "medium",
+    "skill": "application",
+    "involves_calculation": true
+   },
+   {
+    "question": "Project A costs £100,000 and makes a total net profit of £60,000 over 4 years. Project B costs £40,000 and makes a total net profit of £30,000 over 3 years. Which project has the higher ARR?",
+    "correct_answer": "Project B, with an ARR of 25%",
+    "distractors": [
+     "Project A, with an ARR of 60%",
+     "Project A, with an ARR of 15%",
+     "Project B, with an ARR of 75%"
+    ],
+    "explanation": "A: 60,000 ÷ 4 = 15,000; 15,000 ÷ 100,000 = 15%. B: 30,000 ÷ 3 = 10,000; 10,000 ÷ 40,000 = 25%. B has the higher ARR even though its total profit is lower.",
+    "difficulty": "hard",
+    "skill": "analysis",
+    "involves_calculation": true
+   }
+  ],
+  "B4.5": [
+   {
+    "question": "How is gross profit calculated?",
+    "correct_answer": "Sales revenue − cost of sales",
+    "distractors": [
+     "Sales revenue − all expenses",
+     "Net profit + cost of sales",
+     "Sales revenue × cost of sales"
+    ],
+    "explanation": "Gross profit = revenue − cost of sales. Net profit = gross profit − expenses.",
+    "difficulty": "easy",
+    "skill": "recall",
+    "involves_calculation": false
+   },
+   {
+    "question": "A business has sales revenue of £200,000, cost of sales of £120,000 and expenses of £50,000. What is its net profit?",
+    "correct_answer": "£30,000",
+    "distractors": [
+     "£80,000",
+     "£150,000",
+     "£70,000"
+    ],
+    "explanation": "Gross profit = 200,000 − 120,000 = £80,000. Net profit = 80,000 − 50,000 = £30,000. £80,000 is the gross profit.",
+    "difficulty": "hard",
+    "skill": "application",
+    "involves_calculation": true
+   },
+   {
+    "question": "A business has gross profit of £40,000 on sales of £160,000. What is its gross profit margin?",
+    "correct_answer": "25%",
+    "distractors": [
+     "4%",
+     "75%",
+     "40%"
+    ],
+    "explanation": "GPM = gross profit ÷ sales × 100 = 40,000 ÷ 160,000 × 100 = 25%.",
+    "difficulty": "easy",
+    "skill": "application",
+    "involves_calculation": true
+   },
+   {
+    "question": "A business has sales of £250,000 and net profit of £20,000. What is its net profit margin?",
+    "correct_answer": "8%",
+    "distractors": [
+     "12.5%",
+     "80%",
+     "20%"
+    ],
+    "explanation": "NPM = net profit ÷ sales × 100 = 20,000 ÷ 250,000 × 100 = 8%.",
+    "difficulty": "easy",
+    "skill": "application",
+    "involves_calculation": true
+   },
+   {
+    "question": "A business's gross profit margin stays at 40%, but its net profit margin falls from 15% to 9%. What is the most likely cause?",
+    "correct_answer": "Its expenses, such as rent or salaries, have risen",
+    "distractors": [
+     "Its suppliers have raised the price of its materials",
+     "It has cut its selling prices",
+     "Its cost of sales has risen faster than its sales"
+    ],
+    "explanation": "If GPM is unchanged, revenue and cost of sales are in the same proportion. The gap must come from higher expenses (overheads), which reduce net profit only.",
+    "difficulty": "hard",
+    "skill": "analysis",
+    "involves_calculation": false
+   }
+  ],
+  "B4.6": [
+   {
+    "question": "Why can a profitable business still run out of cash?",
+    "correct_answer": "Customers may pay late while bills are due",
+    "distractors": [
+     "Profit and cash are always exactly the same",
+     "Profitable businesses do not need any cash",
+     "Cash is only needed by loss-making businesses"
+    ],
+    "explanation": "Profit is revenue minus costs over a period; cash is the money actually in the bank. Selling on credit means revenue is earned before the cash arrives.",
+    "difficulty": "medium",
+    "skill": "recall",
+    "involves_calculation": false
+   },
+   {
+    "question": "A business has an opening balance of £3,000. Its cash inflows are £10,000 and its cash outflows are £12,500. What is its closing balance?",
+    "correct_answer": "£500",
+    "distractors": [
+     "−£2,500",
+     "£5,500",
+     "£25,500"
+    ],
+    "explanation": "Net cash-flow = 10,000 − 12,500 = −£2,500. Closing balance = 3,000 − 2,500 = £500.",
+    "difficulty": "medium",
+    "skill": "application",
+    "involves_calculation": true
+   },
+   {
+    "question": "In a cash-flow forecast, what is net cash-flow?",
+    "correct_answer": "Total cash inflows minus total cash outflows",
+    "distractors": [
+     "The money in the bank at the start of the month",
+     "Total revenue minus cost of sales",
+     "Total outflows plus total inflows"
+    ],
+    "explanation": "Net cash-flow is added to the opening balance to give the closing balance.",
+    "difficulty": "easy",
+    "skill": "recall",
+    "involves_calculation": false
+   },
+   {
+    "question": "Which action would improve a business's cash-flow?",
+    "correct_answer": "Asking customers to pay sooner",
+    "distractors": [
+     "Paying suppliers earlier than needed",
+     "Buying extra stock in advance",
+     "Giving customers longer to pay"
+    ],
+    "explanation": "Cash-flow improves if money comes in sooner or goes out later. Other options include delaying payments, cutting costs and extra funding.",
+    "difficulty": "easy",
+    "skill": "application",
+    "involves_calculation": false
+   },
+   {
+    "question": "In month 1 a business has an opening balance of £2,000 and a net cash-flow of −£3,000. In month 2 its net cash-flow is +£1,500. What is its closing balance at the end of month 2?",
+    "correct_answer": "£500",
+    "distractors": [
+     "−£1,000",
+     "£3,500",
+     "£6,500"
+    ],
+    "explanation": "Month 1 closing = 2,000 − 3,000 = −£1,000. This is month 2's opening balance. Month 2 closing = −1,000 + 1,500 = £500.",
+    "difficulty": "hard",
+    "skill": "application",
+    "involves_calculation": true
+   },
+   {
+    "question": "In a cash-flow forecast, what is the opening balance for a month?",
+    "correct_answer": "The previous month's closing balance",
+    "distractors": [
+     "That month's total inflows",
+     "That month's net cash-flow",
+     "The amount of profit made that month"
+    ],
+    "explanation": "Closing balance = opening balance + net cash-flow, and it becomes the next month's opening balance.",
+    "difficulty": "easy",
+    "skill": "recall",
+    "involves_calculation": false
+   }
+  ]
+ },
+ "B5": {
+  "B5.1": [
+   {
+    "question": "A business divides its market by where customers live. What type of segmentation is this?",
+    "correct_answer": "Geographic",
+    "distractors": [
+     "Lifestyle",
+     "Income",
+     "Gender"
+    ],
+    "explanation": "The specification lists segmentation by age, gender, income, geographic area and lifestyle.",
+    "difficulty": "easy",
+    "skill": "recall",
+    "involves_calculation": false
+   },
+   {
+    "question": "Why do businesses segment their market?",
+    "correct_answer": "To target products at the right customers",
+    "distractors": [
+     "To sell exactly the same product to everyone",
+     "To avoid having to carry out any market research",
+     "To stop new competitors from entering the market"
+    ],
+    "explanation": "Segmentation divides a mass market into groups, helping the business satisfy customer needs and increase sales and profit.",
+    "difficulty": "easy",
+    "skill": "recall",
+    "involves_calculation": false
+   },
+   {
+    "question": "A gym offers cheap off-peak membership for people over 65. Which type of segmentation is it using?",
+    "correct_answer": "Age",
+    "distractors": [
+     "Geographic",
+     "Gender",
+     "Lifestyle"
+    ],
+    "explanation": "The offer is aimed at a particular age group, many of whom are retired and free during the day.",
+    "difficulty": "easy",
+    "skill": "application",
+    "involves_calculation": false
+   }
+  ],
+  "B5.2": [
+   {
+    "question": "Which of these is primary (field) research?",
+    "correct_answer": "A survey the business carries out itself",
+    "distractors": [
+     "Reading government population statistics",
+     "Looking at competitors' websites and prices",
+     "Reading articles in newspapers and magazines"
+    ],
+    "explanation": "Primary research collects new data first-hand. The others use data that already exists, so they are secondary (desk) research.",
+    "difficulty": "easy",
+    "skill": "recall",
+    "involves_calculation": false
+   },
+   {
+    "question": "Which of these is secondary (desk) research?",
+    "correct_answer": "Using government population statistics",
+    "distractors": [
+     "Holding a focus group with customers",
+     "Interviewing customers in the street",
+     "Watching how shoppers move around a store"
+    ],
+    "explanation": "Secondary research uses existing data, from internal sources (such as sales records) or external sources (such as government data and the internet).",
+    "difficulty": "easy",
+    "skill": "recall",
+    "involves_calculation": false
+   },
+   {
+    "question": "What is the main advantage of secondary research compared with primary research?",
+    "correct_answer": "It is usually cheaper and quicker to collect",
+    "distractors": [
+     "It is always more up to date",
+     "It is collected specifically for the business's own needs",
+     "Competitors cannot see it"
+    ],
+    "explanation": "Secondary data already exists, but it may be out of date or not exactly what the business needs.",
+    "difficulty": "easy",
+    "skill": "recall",
+    "involves_calculation": false
+   },
+   {
+    "question": "A business holds a focus group to discuss a new snack. What type of data will this mainly produce?",
+    "correct_answer": "Qualitative data",
+    "distractors": [
+     "Quantitative data",
+     "Secondary data",
+     "Financial data"
+    ],
+    "explanation": "A focus group gives opinions, feelings and reasons, which is qualitative data.",
+    "difficulty": "medium",
+    "skill": "application",
+    "involves_calculation": false
+   },
+   {
+    "question": "A new café owner wants to find out how much local people would pay for a coffee, but has a very small budget. Which research method is most suitable?",
+    "correct_answer": "A short survey of people in the local area",
+    "distractors": [
+     "Buying a national market research report",
+     "Using national census data",
+     "Running a television advert asking for feedback"
+    ],
+    "explanation": "A local survey is cheap and gives first-hand answers about the café's own target market. National data would not show what local people would pay.",
+    "difficulty": "hard",
+    "skill": "analysis",
+    "involves_calculation": false
+   },
+   {
+    "question": "Why might market research results be unreliable?",
+    "correct_answer": "The sample may be too small or not represent the target market",
+    "distractors": [
+     "The business has used both primary and secondary research",
+     "The results were collected recently",
+     "The questions were about the business's own product"
+    ],
+    "explanation": "Research data must be accurate and up to date. Small or biased samples, and out-of-date data, limit its usefulness.",
+    "difficulty": "medium",
+    "skill": "recall",
+    "involves_calculation": false
+   }
+  ],
+  "B5.3": [
+   {
+    "question": "What are the four Ps of the marketing mix?",
+    "correct_answer": "Product, price, promotion and place",
+    "distractors": [
+     "Product, profit, people and planning",
+     "Price, packaging, production and place",
+     "Promotion, profit, place and purchasing"
+    ],
+    "explanation": "A business combines the four Ps to create a marketing strategy that meets customer needs.",
+    "difficulty": "easy",
+    "skill": "recall",
+    "involves_calculation": false
+   },
+   {
+    "question": "A new competitor opens near a successful burger restaurant. How might the restaurant change its marketing mix in response?",
+    "correct_answer": "Cut some prices and promote more",
+    "distractors": [
+     "Stop all of its advertising to save money",
+     "Raise all of its prices sharply",
+     "Close the restaurant at weekends"
+    ],
+    "explanation": "The marketing mix has to adapt as market conditions change, such as when competition increases.",
+    "difficulty": "hard",
+    "skill": "analysis",
+    "involves_calculation": false
+   }
+  ],
+  "B5.4": [
+   {
+    "question": "In which stage of the product life cycle do sales rise quickly?",
+    "correct_answer": "Growth",
+    "distractors": [
+     "Introduction",
+     "Maturity",
+     "Decline"
+    ],
+    "explanation": "In the growth stage more customers buy the product and sales rise rapidly. The stages are introduction, growth, maturity, saturation and decline.",
+    "difficulty": "easy",
+    "skill": "recall",
+    "involves_calculation": false
+   },
+   {
+    "question": "Which of these is an extension strategy?",
+    "correct_answer": "Relaunching the product with new packaging",
+    "distractors": [
+     "Withdrawing the product from sale",
+     "Launching the product for the first time",
+     "Cutting all advertising for the product"
+    ],
+    "explanation": "Extension strategies, such as new versions, packaging, markets or uses, try to stop sales falling in maturity or decline.",
+    "difficulty": "easy",
+    "skill": "recall",
+    "involves_calculation": false
+   },
+   {
+    "question": "In which stage of the product life cycle are sales low and promotion costs high, so the product often makes a loss?",
+    "correct_answer": "Introduction",
+    "distractors": [
+     "Growth",
+     "Maturity",
+     "Saturation"
+    ],
+    "explanation": "At launch, few customers know about the product, but the business spends heavily on promotion.",
+    "difficulty": "medium",
+    "skill": "recall",
+    "involves_calculation": false
+   },
+   {
+    "question": "What is a unique selling point (USP)?",
+    "correct_answer": "A feature that makes a product different from rivals",
+    "distractors": [
+     "The lowest price charged by any business in the market",
+     "The place or shop where a product is mainly sold",
+     "The very first sale that a new business makes"
+    ],
+    "explanation": "A USP gives customers a reason to choose the product over rivals. It is a form of product differentiation.",
+    "difficulty": "easy",
+    "skill": "recall",
+    "involves_calculation": false
+   },
+   {
+    "question": "What happens to sales in the saturation stage of the product life cycle?",
+    "correct_answer": "They level off because the market is full",
+    "distractors": [
+     "They rise faster than at any other stage",
+     "They are zero because the product has not launched",
+     "They fall to nothing as the product is withdrawn"
+    ],
+    "explanation": "In saturation the market is full and competition is intense, so sales level off before decline.",
+    "difficulty": "medium",
+    "skill": "recall",
+    "involves_calculation": false
+   },
+   {
+    "question": "Why does a business benefit from having a balanced product portfolio?",
+    "correct_answer": "Growing products offset those in decline",
+    "distractors": [
+     "All its products are launched at the same time",
+     "It never needs to launch any new products",
+     "It removes the need for any promotion at all"
+    ],
+    "explanation": "Having products at different life cycle stages spreads risk and keeps overall sales and cash-flow steadier.",
+    "difficulty": "hard",
+    "skill": "analysis",
+    "involves_calculation": false
+   }
+  ],
+  "B5.5": [
+   {
+    "question": "What is penetration pricing?",
+    "correct_answer": "A low launch price to gain market share",
+    "distractors": [
+     "A high price when a new product is launched",
+     "Adding a percentage to the cost of making it",
+     "Charging £9.99 instead of a round £10"
+    ],
+    "explanation": "Once the product has a loyal customer base, the price may be raised.",
+    "difficulty": "easy",
+    "skill": "recall",
+    "involves_calculation": false
+   },
+   {
+    "question": "A company launches a new, high-tech games console at a very high price, then lowers the price later. Which pricing strategy is this?",
+    "correct_answer": "Price skimming",
+    "distractors": [
+     "Penetration pricing",
+     "Loss leader pricing",
+     "Cost-plus pricing"
+    ],
+    "explanation": "Skimming targets early adopters who will pay a high price for something new.",
+    "difficulty": "easy",
+    "skill": "application",
+    "involves_calculation": false
+   },
+   {
+    "question": "A product costs £4 to make. The business uses cost-plus pricing with a 25% mark-up. What is the selling price?",
+    "correct_answer": "£5.00",
+    "distractors": [
+     "£4.25",
+     "£6.25",
+     "£29.00"
+    ],
+    "explanation": "Mark-up = 25% of £4 = £1. Selling price = 4 + 1 = £5.00.",
+    "difficulty": "medium",
+    "skill": "application",
+    "involves_calculation": true
+   },
+   {
+    "question": "A shop prices a jumper at £19.99 instead of £20. Which pricing strategy is this?",
+    "correct_answer": "Psychological pricing",
+    "distractors": [
+     "Competitive pricing",
+     "Price skimming",
+     "Price discrimination"
+    ],
+    "explanation": "Prices just below a round number seem much cheaper to customers.",
+    "difficulty": "easy",
+    "skill": "recall",
+    "involves_calculation": false
+   },
+   {
+    "question": "What is a loss leader?",
+    "correct_answer": "A product sold below cost to attract customers",
+    "distractors": [
+     "A product that has made a loss for several years",
+     "The cheapest product that a rival business sells",
+     "A product that is in the decline stage of its life cycle"
+    ],
+    "explanation": "Supermarkets often do this with items such as milk, hoping customers will buy other, profitable products.",
+    "difficulty": "medium",
+    "skill": "recall",
+    "involves_calculation": false
+   },
+   {
+    "question": "A train company charges more for tickets at peak times than off-peak for the same journey. Which pricing strategy is this?",
+    "correct_answer": "Price discrimination",
+    "distractors": [
+     "Cost-plus pricing",
+     "Penetration pricing",
+     "Psychological pricing"
+    ],
+    "explanation": "Price discrimination charges different prices to different groups of customers for the same product.",
+    "difficulty": "medium",
+    "skill": "application",
+    "involves_calculation": false
+   }
+  ],
+  "B5.6": [
+   {
+    "question": "Which of these is a sales promotion?",
+    "correct_answer": "Buy one, get one free",
+    "distractors": [
+     "A television advert",
+     "An email sent to past customers",
+     "A newspaper article about the business"
+    ],
+    "explanation": "Sales promotions are short-term offers to boost sales, such as BOGOF, discounts and free samples.",
+    "difficulty": "easy",
+    "skill": "recall",
+    "involves_calculation": false
+   },
+   {
+    "question": "What is direct marketing?",
+    "correct_answer": "Sending promotions straight to individual customers",
+    "distractors": [
+     "Advertising the business on national television",
+     "Selling products through a wholesaler and retailers",
+     "Offering price discounts to everyone in the shop"
+    ],
+    "explanation": "Direct marketing targets particular customers rather than the general public.",
+    "difficulty": "medium",
+    "skill": "recall",
+    "involves_calculation": false
+   },
+   {
+    "question": "A self-employed local plumber has a small promotion budget. Which method is most appropriate?",
+    "correct_answer": "Leaflets and a local directory listing",
+    "distractors": [
+     "An advert on national television",
+     "An advert shown in cinemas across the UK",
+     "A full-page advert in a national newspaper"
+    ],
+    "explanation": "The plumber only serves a local area, so cheap local promotion reaches the right customers without wasting money.",
+    "difficulty": "easy",
+    "skill": "application",
+    "involves_calculation": false
+   },
+   {
+    "question": "Why are social media adverts often useful for small businesses?",
+    "correct_answer": "They can target particular groups cheaply",
+    "distractors": [
+     "They are always completely free to place",
+     "They only reach people who never go online",
+     "They guarantee that the business's sales will rise"
+    ],
+    "explanation": "Technology has allowed businesses to target adverts by age, location and interests, often cheaply.",
+    "difficulty": "medium",
+    "skill": "application",
+    "involves_calculation": false
+   }
+  ],
+  "B5.7": [
+   {
+    "question": "What is the role of a wholesaler in a distribution channel?",
+    "correct_answer": "It buys in bulk and sells smaller amounts to retailers",
+    "distractors": [
+     "It manufactures the products in its own factories",
+     "It sells products directly to consumers through its website",
+     "It advertises the products on national television"
+    ],
+    "explanation": "In the channel manufacturer → wholesaler → retailer → consumer, the wholesaler breaks bulk for retailers.",
+    "difficulty": "medium",
+    "skill": "recall",
+    "involves_calculation": false
+   },
+   {
+    "question": "A manufacturer switches from selling through retailers to selling directly to consumers online. How might this affect the final price?",
+    "correct_answer": "It could be lower, because no retailer adds its own mark-up",
+    "distractors": [
+     "It must be higher, because there are more businesses in the channel",
+     "It cannot change",
+     "It will always double"
+    ],
+    "explanation": "Each intermediary adds a mark-up, so a shorter channel can mean a lower price for the consumer.",
+    "difficulty": "hard",
+    "skill": "analysis",
+    "involves_calculation": false
+   },
+   {
+    "question": "What is multi-channel distribution?",
+    "correct_answer": "Selling through several channels, such as shops and online",
+    "distractors": [
+     "Selling a product through only one shop in one town",
+     "Buying supplies from several different suppliers",
+     "Advertising a product on several different TV channels"
+    ],
+    "explanation": "Multi-channel distribution gives customers choice and convenience, aiming to increase sales and loyalty.",
+    "difficulty": "easy",
+    "skill": "recall",
+    "involves_calculation": false
+   },
+   {
+    "question": "How has the growth of e-commerce affected many physical shops?",
+    "correct_answer": "Fewer shoppers, and some shops have closed",
+    "distractors": [
+     "High street shops have all doubled their sales",
+     "Shops no longer need to sell any products",
+     "People have stopped shopping online completely"
+    ],
+    "explanation": "E-commerce and m-commerce let customers buy anywhere at any time, which has reduced footfall in many town centres.",
+    "difficulty": "medium",
+    "skill": "application",
+    "involves_calculation": false
+   }
+  ]
+ },
+ "B6": {
+  "B6.1": [
+   {
+    "question": "What does a job description set out?",
+    "correct_answer": "The duties and responsibilities of the job",
+    "distractors": [
+     "The skills and qualities of the ideal candidate",
+     "The candidate's work history",
+     "The questions to ask at interview"
+    ],
+    "explanation": "A job description describes the job. A person specification describes the person needed to do it.",
+    "difficulty": "easy",
+    "skill": "recall",
+    "involves_calculation": false
+   },
+   {
+    "question": "Which document describes the skills, qualifications and qualities the ideal candidate should have?",
+    "correct_answer": "A person specification",
+    "distractors": [
+     "A job description",
+     "A curriculum vitae (CV)",
+     "A contract of employment"
+    ],
+    "explanation": "Applicants are compared with the person specification when the business shortlists candidates.",
+    "difficulty": "easy",
+    "skill": "recall",
+    "involves_calculation": false
+   },
+   {
+    "question": "What is an advantage of internal recruitment?",
+    "correct_answer": "It is usually quicker and cheaper",
+    "distractors": [
+     "It brings in new ideas from outside",
+     "It creates no other vacancy",
+     "It gives a wider choice of candidates"
+    ],
+    "explanation": "Internal recruitment saves time and money, but it limits the choice of candidates and leaves another job to fill.",
+    "difficulty": "easy",
+    "skill": "recall",
+    "involves_calculation": false
+   },
+   {
+    "question": "In the recruitment process, what usually happens after applications have been received?",
+    "correct_answer": "The applications are shortlisted",
+    "distractors": [
+     "The job is advertised for the first time",
+     "A job description is written",
+     "The vacancy is identified"
+    ],
+    "explanation": "The process runs: identify vacancy, prepare job description and person specification, advertise, shortlist, check references, interview, then select and appoint.",
+    "difficulty": "medium",
+    "skill": "recall",
+    "involves_calculation": false
+   },
+   {
+    "question": "A call centre wants to see how applicants handle an angry customer. Which selection method is most suitable?",
+    "correct_answer": "A role play",
+    "distractors": [
+     "Checking their CVs",
+     "A maths aptitude test",
+     "Reading their references"
+    ],
+    "explanation": "Role play shows how candidates actually behave in a realistic situation from the job.",
+    "difficulty": "medium",
+    "skill": "application",
+    "involves_calculation": false
+   },
+   {
+    "question": "A small business urgently needs a specialist IT manager, and none of its staff has the right skills. Which recruitment method is most appropriate?",
+    "correct_answer": "External recruitment via a specialist agency",
+    "distractors": [
+     "Internal recruitment by promoting an employee",
+     "Asking several existing staff to share the role",
+     "Waiting until someone sends in a CV"
+    ],
+    "explanation": "Internal recruitment cannot work if no one has the skills. A specialist agency can find suitable candidates quickly, although it charges a fee.",
+    "difficulty": "hard",
+    "skill": "analysis",
+    "involves_calculation": false
+   }
+  ],
+  "B6.2": [
+   {
+    "question": "What is induction training?",
+    "correct_answer": "Training that introduces new staff to the business",
+    "distractors": [
+     "Training staff to use a new piece of technology",
+     "Training that is given to managers and nobody else",
+     "Training that is given when an employee is leaving"
+    ],
+    "explanation": "Induction covers things like health and safety, the business's rules and meeting colleagues.",
+    "difficulty": "easy",
+    "skill": "recall",
+    "involves_calculation": false
+   },
+   {
+    "question": "Which of these is an example of on-the-job training?",
+    "correct_answer": "Job shadowing an experienced colleague",
+    "distractors": [
+     "A day-release college course",
+     "A course run at a hotel by outside trainers",
+     "A sandwich course at university"
+    ],
+    "explanation": "On-the-job training happens at work while doing the job: demonstration, coaching, mentoring, job shadowing and job rotation.",
+    "difficulty": "easy",
+    "skill": "recall",
+    "involves_calculation": false
+   },
+   {
+    "question": "What is an advantage of off-the-job training?",
+    "correct_answer": "Staff learn from specialist trainers without distractions",
+    "distractors": [
+     "It costs the business nothing at all to provide",
+     "Employees carry on producing goods while they train",
+     "It always takes place at the employee's own workstation"
+    ],
+    "explanation": "Off-the-job training can be high quality, but it costs more and employees are not working while they train.",
+    "difficulty": "medium",
+    "skill": "recall",
+    "involves_calculation": false
+   },
+   {
+    "question": "Which of these is a benefit of effective training?",
+    "correct_answer": "Less wastage of materials",
+    "distractors": [
+     "Higher absence among staff",
+     "More customer complaints",
+     "More mistakes made at work"
+    ],
+    "explanation": "Training improves morale, quality and customer satisfaction, and can reduce wastage and costs.",
+    "difficulty": "easy",
+    "skill": "recall",
+    "involves_calculation": false
+   }
+  ],
+  "B6.3": [
+   {
+    "question": "What is piece rate?",
+    "correct_answer": "Paying workers for each item they produce",
+    "distractors": [
+     "Paying workers a fixed amount each year",
+     "Paying workers for each hour they work",
+     "Paying workers a share of the profits"
+    ],
+    "explanation": "Time rate pays per hour, salaries are fixed yearly amounts and profit sharing pays a share of profits.",
+    "difficulty": "easy",
+    "skill": "recall",
+    "involves_calculation": false
+   },
+   {
+    "question": "What is commission?",
+    "correct_answer": "Pay based on the value of sales made",
+    "distractors": [
+     "A fixed wage paid at the end of each week",
+     "A company car given to senior staff",
+     "Extra pay for working more than normal hours"
+    ],
+    "explanation": "Commission is a type of performance-related pay, common for sales staff.",
+    "difficulty": "easy",
+    "skill": "recall",
+    "involves_calculation": false
+   },
+   {
+    "question": "What is job enrichment?",
+    "correct_answer": "Giving staff more responsibility",
+    "distractors": [
+     "Giving staff more tasks at the same level",
+     "Moving staff between different tasks",
+     "Paying staff a bonus for meeting targets"
+    ],
+    "explanation": "Job enlargement adds more tasks of the same level; job rotation moves workers between tasks. Enrichment adds responsibility and challenge.",
+    "difficulty": "hard",
+    "skill": "recall",
+    "involves_calculation": false
+   },
+   {
+    "question": "Workers on a production line swap between different tasks every few weeks. What is this called?",
+    "correct_answer": "Job rotation",
+    "distractors": [
+     "Job enrichment",
+     "Empowerment",
+     "Profit sharing"
+    ],
+    "explanation": "Job rotation gives variety and helps workers learn new skills.",
+    "difficulty": "easy",
+    "skill": "application",
+    "involves_calculation": false
+   },
+   {
+    "question": "Which of these is a benefit to a business of a motivated workforce?",
+    "correct_answer": "Lower staff turnover",
+    "distractors": [
+     "Higher absenteeism",
+     "More customer complaints",
+     "Worse relations between workers and managers"
+    ],
+    "explanation": "Motivated workers are more likely to stay, attend work and perform well.",
+    "difficulty": "easy",
+    "skill": "recall",
+    "involves_calculation": false
+   },
+   {
+    "question": "A factory pays its workers piece rate and finds that the quality of its products is falling. What is the most likely reason?",
+    "correct_answer": "Workers rush because pay depends on quantity",
+    "distractors": [
+     "Workers are paid the same however much they make",
+     "Workers have been given too much responsibility",
+     "Workers are paid a share of the business's profits"
+    ],
+    "explanation": "Piece rate rewards quantity, not quality, so the business may need quality checks or a different pay method.",
+    "difficulty": "hard",
+    "skill": "analysis",
+    "involves_calculation": false
+   }
+  ],
+  "B6.4": [
+   {
+    "question": "What is meant by span of control?",
+    "correct_answer": "The number of staff a manager directly supervises",
+    "distractors": [
+     "The number of levels in a business's hierarchy",
+     "The total number of employees in a business",
+     "The amount of money a manager is allowed to spend"
+    ],
+    "explanation": "A wide span means a manager has many subordinates; a narrow span means few.",
+    "difficulty": "easy",
+    "skill": "recall",
+    "involves_calculation": false
+   },
+   {
+    "question": "Compared with a tall structure, a flat structure has…",
+    "correct_answer": "fewer layers of management and wider spans of control",
+    "distractors": [
+     "more layers of management and narrower spans of control",
+     "no managers at all",
+     "a longer chain of command"
+    ],
+    "explanation": "Flat structures usually communicate faster, but each manager has more people to supervise.",
+    "difficulty": "medium",
+    "skill": "recall",
+    "involves_calculation": false
+   },
+   {
+    "question": "What is delayering?",
+    "correct_answer": "Removing layers of management",
+    "distractors": [
+     "Adding extra layers of management",
+     "Recruiting more operatives to the business",
+     "Moving the business to a new location"
+    ],
+    "explanation": "Delayering is one way to solve problems of tall structures, such as slow communication.",
+    "difficulty": "medium",
+    "skill": "recall",
+    "involves_calculation": false
+   },
+   {
+    "question": "What is the chain of command?",
+    "correct_answer": "The line of authority from the top down",
+    "distractors": [
+     "The number of staff one manager supervises",
+     "The order in which products are made",
+     "The route goods take to reach customers"
+    ],
+    "explanation": "Instructions pass down the chain of command; tall structures have longer chains.",
+    "difficulty": "easy",
+    "skill": "recall",
+    "involves_calculation": false
+   },
+   {
+    "question": "What is a zero hours contract?",
+    "correct_answer": "A contract with no guaranteed hours of work",
+    "distractors": [
+     "A contract for full-time work with fixed hours",
+     "A contract where two people share one job",
+     "A contract that is only for working from home"
+    ],
+    "explanation": "Zero hours contracts give businesses flexibility, but workers have no guaranteed income.",
+    "difficulty": "easy",
+    "skill": "recall",
+    "involves_calculation": false
+   },
+   {
+    "question": "What is the main role of a trade union?",
+    "correct_answer": "To negotiate better pay and conditions for workers",
+    "distractors": [
+     "To set the prices that businesses charge for products",
+     "To recruit new managers on behalf of businesses",
+     "To collect taxes from businesses for the government"
+    ],
+    "explanation": "Trade unions represent workers and may take industrial action, such as go-slows or strikes.",
+    "difficulty": "easy",
+    "skill": "recall",
+    "involves_calculation": false
+   },
+   {
+    "question": "A business removes a layer of middle managers. What is the most likely effect?",
+    "correct_answer": "Faster communication, but wider spans of control",
+    "distractors": [
+     "Slower communication and narrower spans of control",
+     "A longer chain of command from top to bottom",
+     "More promotion opportunities for staff"
+    ],
+    "explanation": "Delayering shortens the chain of command, but each remaining manager supervises more people and there are fewer promotion opportunities.",
+    "difficulty": "hard",
+    "skill": "analysis",
+    "involves_calculation": false
+   },
+   {
+    "question": "In a business, a managing director has 3 directors reporting to them. Each director has 4 managers, and each manager has 6 operatives. How many levels of hierarchy are there, and what is each manager's span of control?",
+    "correct_answer": "4 levels; a span of control of 6",
+    "distractors": [
+     "3 levels; a span of control of 4",
+     "4 levels; a span of control of 4",
+     "13 levels; a span of control of 6"
+    ],
+    "explanation": "The levels are managing director, directors, managers and operatives (4). Each manager directly supervises 6 operatives.",
+    "difficulty": "hard",
+    "skill": "analysis",
+    "involves_calculation": false
+   }
+  ]
+ }
+}

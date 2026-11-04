@@ -1,0 +1,46 @@
+{
+  "batchId": "3845bb7b-2410-4a62-b8d7-cc41a4035446",
+  "subject": "Business",
+  "model": "hand-authored",
+  "topics": [
+    {
+      "name": "Business Activity",
+      "spec_ref": "B1",
+      "kept": 30,
+      "dropped": []
+    },
+    {
+      "name": "Influences on Business",
+      "spec_ref": "B2",
+      "kept": 27,
+      "dropped": []
+    },
+    {
+      "name": "Business Operations",
+      "spec_ref": "B3",
+      "kept": 21,
+      "dropped": []
+    },
+    {
+      "name": "Finance",
+      "spec_ref": "B4",
+      "kept": 31,
+      "dropped": []
+    },
+    {
+      "name": "Marketing",
+      "spec_ref": "B5",
+      "kept": 31,
+      "dropped": []
+    },
+    {
+      "name": "Human Resources",
+      "spec_ref": "B6",
+      "kept": 24,
+      "dropped": []
+    }
+  ],
+  "questions": 164,
+  "checksum": "8127c23153237b4a4656d294e3bce43c",
+  "checksum_sql": "select count(*) as n, md5(string_agg(concat_ws('|', question_text, option_a, option_b, option_c, option_d, correct_option, explanation, difficulty, question_type, ao_weighting), E'\\n' order by convert_to(concat_ws('|', question_text, option_a, option_b, option_c, option_d, correct_option, explanation, difficulty, question_type, ao_weighting), 'UTF8'))) as checksum from questions where generation_batch_id = '3845bb7b-2410-4a62-b8d7-cc41a4035446';"
+}
