@@ -54,6 +54,7 @@ begin
     case
       when p_expected = 'rows>0' then v_actual ~ '^rows=[1-9]'
       when p_expected = 'denied' then v_actual like 'denied%'
+      when p_expected like 'error %' then v_actual like p_expected || '%'
       else v_actual = p_expected
     end);
 end $$;
@@ -157,7 +158,7 @@ begin
   perform pg_temp.chk('student', v_james, 'cannot remove subject lock', 'write', format('delete from subject_locks where student_id = %L', sid), 'denied');
   perform pg_temp.chk('student', v_james, 'cannot write practice quiz_session', 'write', format('insert into quiz_sessions (student_id, quiz_format, question_count) values (%L, ''standard'', 1)', v_practice), 'denied');
   perform pg_temp.chk('student', v_james, 'cannot reset practice data', 'write', format('select reset_practice_data(%L)', v_practice), 'denied');
-  perform pg_temp.chk('student', v_james, 'old client: redemption without student_id still works', 'write', 'insert into redemption_requests (minutes_requested) values (10)', 'allowed');
+  perform pg_temp.chk('student', v_james, 'redemption without student_id is rejected', 'write', 'insert into redemption_requests (minutes_requested) values (10)', 'error 23502');
 
   -- ===== Parent =====
   perform pg_temp.chk('parent', v_parent, 'reads James quiz_sessions', 'count', format('select 1 from quiz_sessions where student_id = %L', sid), 'rows>0');
@@ -194,7 +195,7 @@ begin
   perform pg_temp.chk('parent', v_parent, 'can request assessment for James', 'write', format('insert into assessments (student_id, time_window, requested_by) values (%L, ''7d'', %L)', sid, v_parent), 'allowed');
   perform pg_temp.chk('parent', v_parent, 'cannot reset James data', 'write', format('select reset_practice_data(%L)', sid), 'denied');
   perform pg_temp.chk('parent', v_parent, 'can reset practice data', 'value', format('select (reset_practice_data(%L) ->> ''tutor_sessions'')::int > 0', v_practice), 'true');
-  perform pg_temp.chk('parent', v_parent, 'old client: assignment without student_id still works', 'write', format('insert into assignments (type, title, quiz_id, assigned_by) values (''quiz'', ''x'', %L, %L)', v_quiz, v_parent), 'allowed');
+  perform pg_temp.chk('parent', v_parent, 'assignment without student_id is rejected', 'write', format('insert into assignments (type, title, quiz_id, assigned_by) values (''quiz'', ''x'', %L, %L)', v_quiz, v_parent), 'error 23502');
 
   -- ===== Unrelated authenticated user =====
   perform pg_temp.chk('unrelated', v_other, 'sees no quiz_sessions', 'count', 'select 1 from quiz_sessions', 'rows=0');
