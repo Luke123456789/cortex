@@ -157,7 +157,7 @@ eight checksums, and show Luke the topic list and 5 sample questions.
   (batch `16300e7d`, 100 Qs, verified by checksum).
 - `chemistry_c6_c10_subtopics`: 17 subtopics for the existing C6–C10, all 80
   questions linked (rollback in `content-batches/…c6-c10-subtopics.rollback.sql`).
-- `topic_question_counts_view`: per-topic active question counts
+- `topic_question_counts` (view): per-topic active question counts
   (security_invoker), used by the app.
 - Edge functions deployed: `tutor-chat` v11 and `tutor-plan` v7 (EXAM_BOARDS
   now covers every subject above with the corrected boards);
