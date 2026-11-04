@@ -1,4 +1,4 @@
-# PE: AQA 8582 → OCR J587 mapping (awaiting Luke's approval)
+# PE: AQA 8582 → OCR J587 mapping (approved by Luke and applied)
 
 Checked against the official OCR spec (`specification-accredited-gcse-physical-education-j587.pdf`).
 The mapping lives in `scripts/authoring/pe-ocr-mapping.mjs`, which generates the migration.
@@ -100,7 +100,7 @@ In the same migration:
 
 ## Gaps: J587 content with no questions after the remap
 
-These need new questions, which I'd write next as a separate batch:
+Filled by batch `cbd30e39` (61 new questions, every topic back to 20 active). Originally missing:
 
 - **1.1.a–b:** most of the J587 bone and muscle lists (deltoid, trapezius, latissimus dorsi, pectorals, triceps, abdominals, quadriceps, gluteals, gastrocnemius); fixators; cartilage; circumduction and rotation.
 - **1.1.d–e:** double circulation and heart valves; breathing rate and minute ventilation; more short- and long-term effects (bone density, capillarisation, recovery).
