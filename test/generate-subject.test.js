@@ -57,10 +57,27 @@ describe('generate-subject helpers', () => {
       batchId: 'batch-1',
       topics: [{ id: 'topic-1', name: 'T', spec_ref: 'C1', paper: 'Paper 1', display_order: 1, subtopics: [{ id: 'sub-1', name: 'S', spec_ref: '4.1.1', display_order: 1, rows }] }],
     })
-    expect(sql.match(/insert into questions/g)).toHaveLength(25)
-    expect(sql.match(/'batch-1'/g)).toHaveLength(25)
+    expect(sql.match(/insert into questions/g)).toHaveLength(1)
+    expect(sql.match(/'batch-1'::uuid/g).length).toBeGreaterThanOrEqual(2)
+    for (const r of rows) expect(sql).toContain(`'${r.question_text}'`)
     expect(sql.match(/insert into quizzes/g)).toHaveLength(2)
-    expect(rollbackSql).toContain("delete from questions where generation_batch_id = 'batch-1'")
-    expect(rollbackSql).toContain("delete from topics where id in ('topic-1')")
+    expect(sql).toContain("z.title = 'Quiz ' || ((o.i % 2) + 1)")
+    expect(rollbackSql).toContain("delete from questions where generation_batch_id = 'batch-1'::uuid")
+    expect(rollbackSql).toContain("delete from topics where id = (select id from topics where subject_id = (select id from subjects where name = 'Chemistry') and name = 'T')")
+  })
+})
+
+describe('balanceLetters', () => {
+  it('spreads correct answers evenly and keeps the right answer attached', async () => {
+    const { balanceLetters } = await import('../scripts/generate-subject.mjs')
+    const rows = Array.from({ length: 100 }, (_, i) => ({ option_a: `right${i}`, option_b: 'w1', option_c: 'w2', option_d: 'w3', correct_option: 'A' }))
+    balanceLetters(rows)
+    const counts = { A: 0, B: 0, C: 0, D: 0 }
+    rows.forEach((r, i) => {
+      counts[r.correct_option]++
+      expect(r[`option_${r.correct_option.toLowerCase()}`]).toBe(`right${i}`)
+      expect(new Set([r.option_a, r.option_b, r.option_c, r.option_d]).size).toBe(4)
+    })
+    expect(counts).toEqual({ A: 25, B: 25, C: 25, D: 25 })
   })
 })

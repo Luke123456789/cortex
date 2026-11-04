@@ -122,3 +122,19 @@ Present the mapping as a table and wait for approval.
 - Push to `claude/cortex-tutor-remove-voice-3ymu54`. Content changes go
   straight to the database via migrations; push to `main` only for app code
   changes Luke wants deployed.
+
+## Progress log
+
+### 2026-11-04: Chemistry C1–C5 done
+- No API key in this session either, so the generator gained `--authored <file.json>`:
+  questions are hand-written in `scripts/authored/<spec>.json` (same shape as the
+  submit_questions tool output) and the script builds the SQL, rollback and report.
+- SQL format changed: IDs and content hashes are made by the database, and
+  topics/subtopics/quizzes are referenced by name, so a batch has nothing random
+  in it except the batch id. Answer letters are balanced across A–D per batch.
+- `.report.json` carries a checksum and a `checksum_sql` query; run it after applying
+  and compare. Batch `16300e7d` was applied as five migrations
+  (`chemistry_c1_atomic_structure` … `chemistry_c5_energy_changes`) and every topic
+  matched its local checksum.
+- Dry runs: `/usr/lib/postgresql/16/bin` exists in the container, so the batch and its
+  rollback were tested on a throwaway local Postgres first.
