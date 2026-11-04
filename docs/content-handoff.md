@@ -4,18 +4,9 @@ Read this whole file before doing anything. Supabase project: `mkmzesmzwjcfxtvay
 
 ## Branch
 
-All work so far is on **`claude/bold-bell-m46y8o`** (it includes the earlier
-`claude/cortex-tutor-remove-voice-3ymu54` commits). Start a fresh session by
-fetching it and continuing on it, or on whatever branch the new session is given
-with this branch merged in:
-
-```
-git fetch origin claude/bold-bell-m46y8o && git merge --ff-only origin/claude/bold-bell-m46y8o
-```
-
-`main` has only the app as deployed, plus `.claude/settings.json`, which allows
-`mcp__Supabase__apply_migration` without a prompt. **App code changes on this
-branch are not on `main` yet** (see "App fixes" below). Ask Luke before merging to `main`.
+Everything so far is merged into **`main`**: content tooling, batch files, these
+notes and the app fixes, which are now deployed. Start the new session from `main`.
+`.claude/settings.json` on `main` allows `mcp__Supabase__apply_migration` without a prompt.
 
 ## James's subjects and exam boards (confirmed from school mock sheets)
 
@@ -156,7 +147,7 @@ eight checksums, and show Luke the topic list and 5 sample questions.
   now covers every subject above with the corrected boards);
   `grade-quiz-session` v3 (skips inactive questions).
 
-## App fixes on this branch, not yet on `main` (needs Luke's OK to deploy)
+## App fixes (merged to `main` and deployed with Luke's OK)
 
 From the step 3 audit ("check the app can handle the new subjects: subject and
 topic pickers, the parent's subject locks and assignment screens, the tutor,
@@ -179,9 +170,9 @@ list all subjects generically. Findings to tell Luke about but not fixed:
 
 ## Open questions for Luke
 
-1. OK to merge the app fixes to `main` (deploys the app)?
-2. History Paper 3 (modern depth study) option.
-3. PE mapping table, when it's ready (needs approval).
+1. History Paper 3 (modern depth study) option.
+2. PE mapping table, when it's ready (needs approval).
+3. Whether to build written-test questions, and the assessment row-cap issue (see above).
 
 ## Git
 
