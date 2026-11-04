@@ -29,12 +29,20 @@ async function getStudentUser(req: Request) {
   return { id: user.id, displayName: profile.display_name }
 }
 
+// James's GCSEs: separate (triple) sciences, all AQA except PE (OCR).
 const EXAM_BOARDS: Record<string, string> = {
-  Economics: 'AQA GCSE Economics (8136)',
   Biology: 'AQA GCSE Biology (8461)',
   Chemistry: 'AQA GCSE Chemistry (8462)',
-  'Physical Education': 'AQA GCSE Physical Education (8582)',
+  Physics: 'AQA GCSE Physics (8463)',
+  Maths: 'AQA GCSE Mathematics (8300), Higher tier',
+  Mathematics: 'AQA GCSE Mathematics (8300), Higher tier',
+  History: 'AQA GCSE History (8145)',
+  Business: 'AQA GCSE Business (8132)',
+  Economics: 'AQA GCSE Economics (8136)',
+  'Physical Education': 'OCR GCSE (9-1) Physical Education (J587)',
+  PE: 'OCR GCSE (9-1) Physical Education (J587)',
   'English Literature': 'AQA GCSE English Literature (8702)',
+  'English Language': 'AQA GCSE English Language (8700)',
 }
 
 // Structured output via a forced tool call — no more scraping JSON out of
