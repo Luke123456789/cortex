@@ -39,9 +39,18 @@ f. **History (AQA 8145) and Maths (AQA 8300): STOP and ask Luke first.**
    study and British depth study the school teaches; Maths depends on Higher
    vs Foundation tier. Do not guess either.
 
-Step 3 of the request ("check that the app can handle the new subjects: the
-subject and topic pickers, the parent's subject…") was **cut off**. Ask Luke
-for the rest.
+**Step 3 (confirmed by Luke): check that the app can handle the new subjects.**
+- Student subject and topic pickers: new subjects appear and sort sensibly.
+- Parent screens: subject/topic locks, assigning quizzes (`AssignWork`,
+  `useAssignableCatalog`), and the progress assessment's subject filter.
+- Tutor: update `EXAM_BOARDS` in tutor-chat and tutor-plan (add Physics,
+  Business, English Language and later History/Maths; change PE to
+  "OCR GCSE Physical Education (J587)"). This needs a redeploy of both
+  functions; see the open questions below.
+- Deactivated questions: `PlayQuiz.jsx` and the `grade-quiz-session` edge
+  function must ignore `active = false` questions (currently they don't), and
+  quizzes left with no active questions shouldn't be offered for assignment.
+  `grade-quiz-session` also needs a redeploy.
 
 ## What's already done
 
@@ -111,8 +120,10 @@ Present the mapping as a table and wait for approval.
 
 ## Open questions for Luke
 
-1. The rest of step 3 (it was cut off).
-2. OK to update `EXAM_BOARDS` and redeploy tutor-chat and tutor-plan?
+1. OK to redeploy tutor-chat, tutor-plan and grade-quiz-session for the
+   step 3 fixes? (Asked; not yet answered.)
+2. Did step 3 need anything beyond the list above? Luke confirmed the list
+   but the original sentence was cut off, so check once.
 3. (Later) History options and Maths tier.
 
 ## Git
