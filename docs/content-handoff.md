@@ -154,3 +154,12 @@ Present the mapping as a table and wait for approval.
   factors, motivation.
 - Maths: AQA 8300 **Higher**.
 - EXAM_BOARDS updated and deployed (tutor-chat v11, tutor-plan v7).
+
+### 2026-11-04: Physics in progress
+- Batch `f4523abc` (164 questions, P1–P8) built and dry-run locally; checksums per topic:
+  P1 8bd623da… P2 186e4030… P3 c242bf07… P4 98605cdc… P5 854039f7… P6 b41e04b5… P7 3f395c05… P8 d9961790…
+- Applied one migration per topic (`physics_p1_energy`, …). Check which are applied with
+  list_migrations; the remaining parts are the `insert into topics` sections of the .sql file.
+- App fixes on this branch (not yet on main): catalog row cap (topic_question_counts view,
+  applied), grader skips inactive questions (grade-quiz-session v3, deployed), empty quizzes
+  hidden in Assign work, tutor stale-subtopic fix. Chemistry C6–C10 now have subtopics.

@@ -1,0 +1,58 @@
+{
+  "batchId": "f4523abc-cc13-426c-9eed-deef288ff03d",
+  "subject": "Physics",
+  "model": "hand-authored",
+  "topics": [
+    {
+      "name": "Energy",
+      "spec_ref": "P1",
+      "kept": 20,
+      "dropped": []
+    },
+    {
+      "name": "Electricity",
+      "spec_ref": "P2",
+      "kept": 20,
+      "dropped": []
+    },
+    {
+      "name": "Particle Model of Matter",
+      "spec_ref": "P3",
+      "kept": 20,
+      "dropped": []
+    },
+    {
+      "name": "Atomic Structure",
+      "spec_ref": "P4",
+      "kept": 20,
+      "dropped": []
+    },
+    {
+      "name": "Forces",
+      "spec_ref": "P5",
+      "kept": 24,
+      "dropped": []
+    },
+    {
+      "name": "Waves",
+      "spec_ref": "P6",
+      "kept": 20,
+      "dropped": []
+    },
+    {
+      "name": "Magnetism and Electromagnetism",
+      "spec_ref": "P7",
+      "kept": 20,
+      "dropped": []
+    },
+    {
+      "name": "Space Physics",
+      "spec_ref": "P8",
+      "kept": 20,
+      "dropped": []
+    }
+  ],
+  "questions": 164,
+  "checksum": "bd96fa3d0c2e913c4576101a1f1996cc",
+  "checksum_sql": "select count(*) as n, md5(string_agg(concat_ws('|', question_text, option_a, option_b, option_c, option_d, correct_option, explanation, difficulty, question_type, ao_weighting), E'\\n' order by convert_to(concat_ws('|', question_text, option_a, option_b, option_c, option_d, correct_option, explanation, difficulty, question_type, ao_weighting), 'UTF8'))) as checksum from questions where generation_batch_id = 'f4523abc-cc13-426c-9eed-deef288ff03d';"
+}
