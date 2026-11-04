@@ -70,3 +70,19 @@ describe('gradeAnswers', () => {
     expect(q2.explanation).toBe('because C')
   })
 })
+
+describe('activeQuizQuestions', () => {
+  it('drops deactivated and missing questions so they are not graded as wrong', async () => {
+    const { activeQuizQuestions, gradeAnswers } = await import('../supabase/functions/grade-quiz-session/quiz-grading-logic.js')
+    const rows = [
+      { position: 1, questions: { id: 'q1', correct_option: 'A', active: true } },
+      { position: 2, questions: { id: 'q2', correct_option: 'B', active: false } },
+      { position: 3, questions: null },
+      { position: 4, questions: { id: 'q4', correct_option: 'C' } },
+    ]
+    const questions = activeQuizQuestions(rows)
+    expect(questions.map((q) => q.id)).toEqual(['q1', 'q4'])
+    const { correctCount, totalCount } = gradeAnswers(questions, [{ questionId: 'q1', selectedOption: 'A' }, { questionId: 'q4', selectedOption: 'C' }])
+    expect([correctCount, totalCount]).toEqual([2, 2])
+  })
+})

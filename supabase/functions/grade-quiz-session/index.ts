@@ -1,5 +1,5 @@
 import { createClient } from 'npm:@supabase/supabase-js@2.45.0'
-import { computeReward, gradeAnswers } from './quiz-grading-logic.js'
+import { activeQuizQuestions, computeReward, gradeAnswers } from './quiz-grading-logic.js'
 
 const SUPABASE_URL = Deno.env.get('SUPABASE_URL')!
 const SUPABASE_ANON_KEY = Deno.env.get('SUPABASE_ANON_KEY')!
@@ -82,7 +82,7 @@ Deno.serve(async (req) => {
 
   const { data: quizQuestionRows, error: questionsErr } = await admin
     .from('quiz_questions')
-    .select('position, questions (id, correct_option, explanation)')
+    .select('position, questions (id, correct_option, explanation, active)')
     .eq('quiz_id', quizId)
     .order('position')
 
@@ -91,7 +91,10 @@ Deno.serve(async (req) => {
     return new Response(JSON.stringify({ error: 'quiz has no questions' }), { status: 500, headers: { ...corsHeaders, 'Content-Type': 'application/json' } })
   }
 
-  const questions = quizQuestionRows.map((r: any) => r.questions).filter(Boolean)
+  const questions = activeQuizQuestions(quizQuestionRows)
+  if (questions.length === 0) {
+    return new Response(JSON.stringify({ error: 'quiz has no questions' }), { status: 500, headers: { ...corsHeaders, 'Content-Type': 'application/json' } })
+  }
   const { results, correctCount, totalCount } = gradeAnswers(questions, answers)
   const minutesAwarded = computeReward(correctCount)
 

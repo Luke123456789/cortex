@@ -55,10 +55,12 @@ export function useQuizCatalog() {
       return
     }
 
+    // Counted in the database (topic_question_counts view): fetching every
+    // question row to count client-side silently truncated at the API's
+    // 1000-row limit, which hid whole topics and subjects.
     const { data: questionCounts, error: countError } = await supabase
-      .from('questions')
-      .select('topic_id')
-      .eq('active', true)
+      .from('topic_question_counts')
+      .select('topic_id, question_count')
 
     if (countError) {
       console.error('Failed to load question counts', countError)
@@ -69,7 +71,7 @@ export function useQuizCatalog() {
 
     const countsByTopic = {}
     for (const row of questionCounts) {
-      countsByTopic[row.topic_id] = (countsByTopic[row.topic_id] || 0) + 1
+      countsByTopic[row.topic_id] = row.question_count
     }
 
     const topicsWithCounts = topicRows.map((topic) => ({

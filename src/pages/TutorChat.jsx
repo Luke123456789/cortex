@@ -106,6 +106,10 @@ export default function TutorChat() {
       if (data && data.length) {
         const preferred = deepLinkedSubtopicId && data.some((s) => s.id === deepLinkedSubtopicId) ? deepLinkedSubtopicId : data[0].id
         setSubtopicId(preferred)
+      } else {
+        // Don't carry over the previous topic's subtopic: that would start a
+        // session on the wrong subtopic (or silently fail to start).
+        setSubtopicId('')
       }
     }
     loadSubtopics()
@@ -353,9 +357,15 @@ export default function TutorChat() {
                 </div>
               ) : (
                 <>
-                  <select style={selectStyle} value={subtopicId} onChange={(e) => setSubtopicId(e.target.value)}>
-                    {subtopics.map((st) => <option key={st.id} value={st.id}>{st.name}</option>)}
-                  </select>
+                  {subtopics.length === 0 ? (
+                    <div style={{ fontSize: '12.5px', color: 'var(--ink-faint)', marginBottom: '8px' }}>
+                      No tutor lessons for this topic yet — pick another topic.
+                    </div>
+                  ) : (
+                    <select style={selectStyle} value={subtopicId} onChange={(e) => setSubtopicId(e.target.value)}>
+                      {subtopics.map((st) => <option key={st.id} value={st.id}>{st.name}</option>)}
+                    </select>
+                  )}
 
                   <button
                     onClick={startSession}
