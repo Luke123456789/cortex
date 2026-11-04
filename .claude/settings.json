@@ -2,7 +2,11 @@
   "permissions": {
     "allow": [
       "mcp__Supabase__apply_migration",
-      "mcp__Supabase__execute_sql"
+      "mcp__Supabase__execute_sql",
+      "Bash(psql:*)",
+      "Bash(npx supabase:*)",
+      "Bash(curl:*)",
+      "Bash(node:*)"
     ]
   }
 }
