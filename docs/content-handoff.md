@@ -15,7 +15,7 @@ notes and the app fixes, which are now deployed. Start the new session from `mai
 | Biology | AQA 8461 | Existing content, 10 topics |
 | Chemistry | AQA 8462 | **Done**: C1–C5 added (100 Qs); C6–C10 now have subtopics |
 | Physics | AQA 8463 | **Done**: P1–P8 applied and verified (164 Qs); awaiting Luke's review |
-| Business | **WJEC Eduqas C710** (not AQA) | Next after Physics |
+| Business | **WJEC Eduqas C710** (not AQA) | **Done**: B1–B6 applied and verified (164 Qs, batch `3845bb7b`); awaiting Luke's review |
 | PE | OCR J587 | Remap from AQA; needs Luke's approval of the mapping first |
 | English Language | AQA 8700 | Skills-based (see original brief) |
 | History | **Pearson Edexcel 1HI0** (not AQA) | Units known (below); Paper 3 option unknown |
@@ -44,9 +44,14 @@ Finish and check each subject before the next. After each one, show Luke the
 topic list and 5 sample questions.
 
 1. **Physics**: done (P1–P8 applied and verified; Luke reviewing topic list and samples).
-2. **Business** ← resume here (Eduqas C710): build the spec file from the Eduqas spec, using
-   the mock topic list above as a checklist.
-3. **PE → OCR J587**: map every existing question onto Applied Anatomy and
+2. **Business** (Eduqas C710): done. Spec checked against the official PDF
+   (`eduqas-gcse-business-spec-from-2017.pdf`; eduqas.co.uk is now allowed in
+   the environment's network settings, reachable with curl but not WebFetch).
+   The spec's sub-headings are unnumbered, so `B<n>.<m>` refs are ours, in spec
+   order. Questions are built by `scripts/authoring/build-business.mjs`, which
+   also rebalances option lengths so the right answer isn't the longest.
+3. **PE → OCR J587** ← resume here.
+   Map every existing question onto Applied Anatomy and
    Physiology, Physical Training, Socio-cultural Issues, Sports Psychology, and
    Health, Fitness and Well-being. Set `active = false` on AQA-only questions
    (including the whole "Use of Data" topic). **Never delete** (quiz history).
@@ -140,6 +145,13 @@ awk -v d=/tmp/cortex-pgtest 'BEGIN{n=0} /^insert into topics/{n++} {print > (d "
 eight checksums, and show Luke the topic list and 5 sample questions.
 
 ## Database changes already made this round
+
+- Migrations `business_b1_business_activity` … `business_b6_human_resources`
+  (batch `3845bb7b-2410-4a62-b8d7-cc41a4035446`, 164 Qs, new `subjects` row
+  Business / WJEC Eduqas / C710). Checksums per topic: B1 477190fe…,
+  B2 ee699ef5…, B3 ee87193c…, B4 c298f097…, B5 e7831d8e…, B6 b486b569….
+- Migrations `physics_p4_atomic_structure` … `physics_p8_space_physics`
+  (batch `f4523abc`, all eight Physics checksums verified).
 
 - Migrations `chemistry_c1_atomic_structure` … `chemistry_c5_energy_changes`
   (batch `16300e7d`, 100 Qs, verified by checksum).
