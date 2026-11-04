@@ -177,6 +177,8 @@ begin
   perform pg_temp.chk('parent', v_parent, 'cannot update James tutor session', 'write', format('update tutor_sessions set message_count = message_count where id = %L', v_js), 'denied');
   perform pg_temp.chk('parent', v_parent, 'cannot submit written answer as James', 'write', format('insert into fm_attempts (student_id, question_id) values (%L, gen_random_uuid())', sid), 'denied');
   perform pg_temp.chk('parent', v_parent, 'cannot request redemption as James', 'write', format('insert into redemption_requests (student_id, minutes_requested) values (%L, 10)', sid), 'denied');
+  perform pg_temp.chk('parent', v_parent, 'cannot write quiz_session under own id', 'write', format('insert into quiz_sessions (student_id, quiz_format, question_count) values (%L, ''standard'', 1)', v_parent), 'denied');
+  perform pg_temp.chk('parent', v_parent, 'cannot start tutor session under own id', 'write', format('insert into tutor_sessions (student_id, message_count, messages) values (%L, 0, ''[]'')', v_parent), 'denied');
   perform pg_temp.chk('parent', v_parent, 'practice: can write quiz_session', 'write', format('insert into quiz_sessions (student_id, quiz_format, question_count) values (%L, ''standard'', 1)', v_practice), 'allowed');
   perform pg_temp.chk('parent', v_parent, 'practice: can write question history', 'write', format('insert into student_question_history (student_id, question_id, answered_correctly) values (%L, %L, true)', v_practice, v_q), 'allowed');
   perform pg_temp.chk('parent', v_parent, 'practice: can start tutor session', 'write', format('insert into tutor_sessions (student_id, message_count, messages) values (%L, 0, ''[]'')', v_practice), 'allowed');
