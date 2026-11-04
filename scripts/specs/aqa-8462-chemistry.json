@@ -1,0 +1,58 @@
+{
+  "subject": "Chemistry",
+  "exam_board": "AQA",
+  "spec_code": "8462",
+  "notes": "Separate-science GCSE Chemistry (not Combined Science). Include chemistry-only content. Higher-tier-only content may appear in hard questions.",
+  "topics": [
+    {
+      "name": "Atomic Structure and the Periodic Table", "spec_ref": "C1", "paper": "Paper 1", "display_order": 1,
+      "subtopics": [
+        { "name": "Atoms, elements, compounds and mixtures", "spec_ref": "4.1.1.1-4.1.1.2" },
+        { "name": "Development of the model of the atom", "spec_ref": "4.1.1.3" },
+        { "name": "Subatomic particles, isotopes and relative atomic mass", "spec_ref": "4.1.1.4-4.1.1.6" },
+        { "name": "Electronic structure", "spec_ref": "4.1.1.7" },
+        { "name": "The periodic table, metals and non-metals", "spec_ref": "4.1.2.1-4.1.2.2" },
+        { "name": "Group 0, Group 1 and Group 7", "spec_ref": "4.1.2.3-4.1.2.6" },
+        { "name": "Properties of transition metals", "spec_ref": "4.1.3" }
+      ]
+    },
+    {
+      "name": "Bonding, Structure and Properties", "spec_ref": "C2", "paper": "Paper 1", "display_order": 2,
+      "subtopics": [
+        { "name": "Ionic, covalent and metallic bonding", "spec_ref": "4.2.1" },
+        { "name": "States of matter and properties of ionic compounds", "spec_ref": "4.2.2.1-4.2.2.3" },
+        { "name": "Small molecules, polymers and giant covalent structures", "spec_ref": "4.2.2.4-4.2.2.6" },
+        { "name": "Properties of metals and alloys", "spec_ref": "4.2.2.7-4.2.2.8" },
+        { "name": "Diamond, graphite, graphene and fullerenes", "spec_ref": "4.2.3" },
+        { "name": "Nanoparticles", "spec_ref": "4.2.4" }
+      ]
+    },
+    {
+      "name": "Quantitative Chemistry", "spec_ref": "C3", "paper": "Paper 1", "display_order": 3,
+      "subtopics": [
+        { "name": "Conservation of mass, relative formula mass and balanced equations", "spec_ref": "4.3.1" },
+        { "name": "Moles, reacting masses and limiting reactants", "spec_ref": "4.3.2" },
+        { "name": "Yield and atom economy", "spec_ref": "4.3.3" },
+        { "name": "Concentrations of solutions and titration calculations", "spec_ref": "4.3.4" },
+        { "name": "Volumes of gases", "spec_ref": "4.3.5" }
+      ]
+    },
+    {
+      "name": "Chemical Changes", "spec_ref": "C4", "paper": "Paper 1", "display_order": 4,
+      "subtopics": [
+        { "name": "Reactivity series, extraction of metals, oxidation and reduction", "spec_ref": "4.4.1" },
+        { "name": "Reactions of acids, salts and neutralisation", "spec_ref": "4.4.2.1-4.4.2.3" },
+        { "name": "pH, strong and weak acids, and titrations", "spec_ref": "4.4.2.4-4.4.2.6" },
+        { "name": "Electrolysis", "spec_ref": "4.4.3" }
+      ]
+    },
+    {
+      "name": "Energy Changes", "spec_ref": "C5", "paper": "Paper 1", "display_order": 5,
+      "subtopics": [
+        { "name": "Exothermic and endothermic reactions and reaction profiles", "spec_ref": "4.5.1.1-4.5.1.2" },
+        { "name": "Bond energies", "spec_ref": "4.5.1.3" },
+        { "name": "Chemical cells and fuel cells", "spec_ref": "4.5.2" }
+      ]
+    }
+  ]
+}

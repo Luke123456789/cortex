@@ -16,6 +16,14 @@ export function computeReward(correctCount) {
   return Math.max(1, Math.round((correctCount * SECONDS_PER_CORRECT_ANSWER) / 60))
 }
 
+// quiz_questions rows (with an embedded `questions` object) -> the questions
+// to grade. Deactivated questions are skipped: RLS already hides them from the
+// student's quiz screen, so grading them would count an unseen question as
+// wrong. The grader runs as service role, so it has to filter them itself.
+export function activeQuizQuestions(rows) {
+  return (rows || []).map((r) => r && r.questions).filter((q) => q && q.active !== false)
+}
+
 // questions: [{ id, correct_option, explanation }], answers: [{ questionId, selectedOption }]
 export function gradeAnswers(questions, answers) {
   const answerByQuestionId = {}

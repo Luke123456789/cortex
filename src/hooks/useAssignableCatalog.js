@@ -19,7 +19,9 @@ export function useAssignableCatalog() {
       supabase.from('subjects').select('id, name').order('name'),
       supabase.from('topics').select('id, subject_id, name').order('display_order'),
       supabase.from('subtopics').select('id, topic_id, name').order('display_order'),
-      supabase.from('quizzes').select('id, topic_id, title, question_count').order('display_order'),
+      // question_count is kept in step with active questions when content is
+      // deactivated, so an emptied quiz drops out of the picker.
+      supabase.from('quizzes').select('id, topic_id, title, question_count').gt('question_count', 0).order('display_order'),
       supabase.from('fm_exam_questions').select('id, topic_id, subtopic_id, question_text, command_word, total_marks').eq('active', true),
     ])
 

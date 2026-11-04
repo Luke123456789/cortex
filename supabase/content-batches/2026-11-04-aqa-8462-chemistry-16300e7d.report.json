@@ -1,0 +1,40 @@
+{
+  "batchId": "16300e7d-a5e3-4b3b-9ca1-4865408672f4",
+  "subject": "Chemistry",
+  "model": "hand-authored",
+  "topics": [
+    {
+      "name": "Atomic Structure and the Periodic Table",
+      "spec_ref": "C1",
+      "kept": 20,
+      "dropped": []
+    },
+    {
+      "name": "Bonding, Structure and Properties",
+      "spec_ref": "C2",
+      "kept": 20,
+      "dropped": []
+    },
+    {
+      "name": "Quantitative Chemistry",
+      "spec_ref": "C3",
+      "kept": 20,
+      "dropped": []
+    },
+    {
+      "name": "Chemical Changes",
+      "spec_ref": "C4",
+      "kept": 20,
+      "dropped": []
+    },
+    {
+      "name": "Energy Changes",
+      "spec_ref": "C5",
+      "kept": 20,
+      "dropped": []
+    }
+  ],
+  "questions": 100,
+  "checksum": "828fd0f55c8e87f20ca2ab858c989495",
+  "checksum_sql": "select count(*) as n, md5(string_agg(concat_ws('|', question_text, option_a, option_b, option_c, option_d, correct_option, explanation, difficulty, question_type, ao_weighting), E'\\n' order by convert_to(concat_ws('|', question_text, option_a, option_b, option_c, option_d, correct_option, explanation, difficulty, question_type, ao_weighting), 'UTF8'))) as checksum from questions where generation_batch_id = '16300e7d-a5e3-4b3b-9ca1-4865408672f4';"
+}

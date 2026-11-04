@@ -1,0 +1,55 @@
+{
+  "subject": "Physics",
+  "exam_board": "AQA",
+  "spec_code": "8463",
+  "notes": "Separate-science GCSE Physics (not Combined Science), Higher tier. Include physics-only content. Use AQA equation symbols and g = 9.8 N/kg.",
+  "topics": [
+    { "name": "Energy", "spec_ref": "P1", "paper": "Paper 1", "display_order": 1, "subtopics": [
+      { "name": "Energy stores and calculating energy changes", "spec_ref": "4.1.1.1-4.1.1.2" },
+      { "name": "Specific heat capacity", "spec_ref": "4.1.1.3" },
+      { "name": "Power", "spec_ref": "4.1.1.4" },
+      { "name": "Conservation, dissipation and efficiency", "spec_ref": "4.1.2" },
+      { "name": "National and global energy resources", "spec_ref": "4.1.3" } ] },
+    { "name": "Electricity", "spec_ref": "P2", "paper": "Paper 1", "display_order": 2, "subtopics": [
+      { "name": "Charge and current", "spec_ref": "4.2.1.1-4.2.1.2" },
+      { "name": "Resistance and I-V characteristics", "spec_ref": "4.2.1.3-4.2.1.4" },
+      { "name": "Series and parallel circuits", "spec_ref": "4.2.2" },
+      { "name": "Domestic uses and safety", "spec_ref": "4.2.3" },
+      { "name": "Power, energy transfers and the National Grid", "spec_ref": "4.2.4" },
+      { "name": "Static electricity", "spec_ref": "4.2.5" } ] },
+    { "name": "Particle Model of Matter", "spec_ref": "P3", "paper": "Paper 1", "display_order": 3, "subtopics": [
+      { "name": "Density and changes of state", "spec_ref": "4.3.1" },
+      { "name": "Internal energy and specific latent heat", "spec_ref": "4.3.2" },
+      { "name": "Particle motion in gases and gas pressure", "spec_ref": "4.3.3" } ] },
+    { "name": "Atomic Structure", "spec_ref": "P4", "paper": "Paper 1", "display_order": 4, "subtopics": [
+      { "name": "Atoms, isotopes and the development of the atomic model", "spec_ref": "4.4.1" },
+      { "name": "Radioactive decay, nuclear radiation and nuclear equations", "spec_ref": "4.4.2.1-4.4.2.3" },
+      { "name": "Half-life, contamination and irradiation", "spec_ref": "4.4.2.4-4.4.2.5" },
+      { "name": "Background radiation, uses of radiation, fission and fusion", "spec_ref": "4.4.3-4.4.4" } ] },
+    { "name": "Forces", "spec_ref": "P5", "paper": "Paper 2", "display_order": 5, "target": 24, "subtopics": [
+      { "name": "Scalars, vectors, weight and resultant forces", "spec_ref": "4.5.1" },
+      { "name": "Work done and energy transfer", "spec_ref": "4.5.2" },
+      { "name": "Forces and elasticity", "spec_ref": "4.5.3" },
+      { "name": "Moments, levers and gears", "spec_ref": "4.5.4" },
+      { "name": "Pressure in fluids", "spec_ref": "4.5.5" },
+      { "name": "Describing motion: speed, velocity, acceleration and graphs", "spec_ref": "4.5.6.1" },
+      { "name": "Newton's laws of motion", "spec_ref": "4.5.6.2" },
+      { "name": "Stopping distances", "spec_ref": "4.5.6.3" },
+      { "name": "Momentum", "spec_ref": "4.5.7" } ] },
+    { "name": "Waves", "spec_ref": "P6", "paper": "Paper 2", "display_order": 6, "subtopics": [
+      { "name": "Transverse and longitudinal waves and the wave equation", "spec_ref": "4.6.1.1-4.6.1.2" },
+      { "name": "Reflection, sound, ultrasound and seismic waves", "spec_ref": "4.6.1.3-4.6.1.5" },
+      { "name": "Electromagnetic waves: properties, uses and hazards", "spec_ref": "4.6.2.1-4.6.2.4" },
+      { "name": "Lenses", "spec_ref": "4.6.2.5" },
+      { "name": "Visible light and colour", "spec_ref": "4.6.2.6" },
+      { "name": "Black body radiation", "spec_ref": "4.6.3" } ] },
+    { "name": "Magnetism and Electromagnetism", "spec_ref": "P7", "paper": "Paper 2", "display_order": 7, "subtopics": [
+      { "name": "Permanent and induced magnetism and magnetic fields", "spec_ref": "4.7.1" },
+      { "name": "Electromagnetism and the motor effect", "spec_ref": "4.7.2" },
+      { "name": "Induced potential, generators and transformers", "spec_ref": "4.7.3" } ] },
+    { "name": "Space Physics", "spec_ref": "P8", "paper": "Paper 2", "display_order": 8, "subtopics": [
+      { "name": "The solar system and the life cycle of a star", "spec_ref": "4.8.1.1-4.8.1.2" },
+      { "name": "Orbital motion, natural and artificial satellites", "spec_ref": "4.8.1.3" },
+      { "name": "Red-shift and the Big Bang", "spec_ref": "4.8.2" } ] }
+  ]
+}
