@@ -1,0 +1,47 @@
+{
+  "subject": "Business",
+  "exam_board": "WJEC Eduqas",
+  "spec_code": "C710",
+  "notes": "WJEC Eduqas GCSE (9-1) Business, first teaching 2017. Not AQA 8132. Both components (C1 Business Dynamics, C2 Business Considerations) assess all six content areas, so paper is recorded as 'Components 1 and 2'. Use UK terminology (income statement, not P&L account; statement of financial position). Formulas as given in the Eduqas spec: gross/net profit margin, average rate of return, percentage change, break-even = fixed costs / contribution per unit. DRAFT: subtopic titles and numbering written from memory of the spec; must be checked against the official PDF before any batch is applied.",
+  "topics": [
+    { "name": "Business Activity", "spec_ref": "B1", "paper": "Components 1 and 2", "display_order": 1, "subtopics": [
+      { "name": "The role of business enterprise and entrepreneurship", "spec_ref": "1.1" },
+      { "name": "Business planning", "spec_ref": "1.2" },
+      { "name": "Business ownership", "spec_ref": "1.3" },
+      { "name": "Business aims and objectives", "spec_ref": "1.4" },
+      { "name": "Stakeholders in business", "spec_ref": "1.5" },
+      { "name": "Business growth", "spec_ref": "1.6" } ] },
+    { "name": "Influences on Business", "spec_ref": "B2", "paper": "Components 1 and 2", "display_order": 2, "subtopics": [
+      { "name": "Technology and business", "spec_ref": "2.1" },
+      { "name": "Ethical and environmental considerations", "spec_ref": "2.2" },
+      { "name": "The economic climate", "spec_ref": "2.3" },
+      { "name": "Globalisation", "spec_ref": "2.4" },
+      { "name": "Legislation and business", "spec_ref": "2.5" },
+      { "name": "The competitive environment", "spec_ref": "2.6" } ] },
+    { "name": "Business Operations", "spec_ref": "B3", "paper": "Components 1 and 2", "display_order": 3, "subtopics": [
+      { "name": "Production processes", "spec_ref": "3.1" },
+      { "name": "Quality of goods and services", "spec_ref": "3.2" },
+      { "name": "The sales process and customer service", "spec_ref": "3.3" },
+      { "name": "Consumer law", "spec_ref": "3.4" },
+      { "name": "Business location", "spec_ref": "3.5" },
+      { "name": "Working with suppliers", "spec_ref": "3.6" } ] },
+    { "name": "Finance", "spec_ref": "B4", "paper": "Components 1 and 2", "display_order": 4, "target": 24, "subtopics": [
+      { "name": "The role of the finance function", "spec_ref": "4.1" },
+      { "name": "Sources of finance", "spec_ref": "4.2" },
+      { "name": "Revenue, costs, profit and loss", "spec_ref": "4.3" },
+      { "name": "Break-even", "spec_ref": "4.4" },
+      { "name": "Cash and cash flow", "spec_ref": "4.5" },
+      { "name": "Financial performance", "spec_ref": "4.6" } ] },
+    { "name": "Marketing", "spec_ref": "B5", "paper": "Components 1 and 2", "display_order": 5, "subtopics": [
+      { "name": "Identifying and understanding customers", "spec_ref": "5.1" },
+      { "name": "Segmentation", "spec_ref": "5.2" },
+      { "name": "The purpose and methods of market research", "spec_ref": "5.3" },
+      { "name": "The marketing mix", "spec_ref": "5.4" } ] },
+    { "name": "Human Resources", "spec_ref": "B6", "paper": "Components 1 and 2", "display_order": 6, "subtopics": [
+      { "name": "Organisational structures", "spec_ref": "6.1" },
+      { "name": "Recruitment and selection", "spec_ref": "6.2" },
+      { "name": "Motivation and retention", "spec_ref": "6.3" },
+      { "name": "Training and development", "spec_ref": "6.4" },
+      { "name": "Employment law", "spec_ref": "6.5" } ] }
+  ]
+}
