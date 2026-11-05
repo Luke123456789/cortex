@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest'
-import { dueDayKey, weekDays, groupWeek, upNext, dueLabel } from '../src/lib/week.js'
+import { dueDayKey, weekDays, groupWeek, upNext, dueLabel, daysLate, onTimeRate } from '../src/lib/week.js'
 
 const now = new Date(2026, 10, 5, 15) // Thu 5 Nov 2026, 15:00 local
 const due = (ymd) => `${ymd}T00:00:00.000Z`
@@ -63,5 +63,25 @@ describe('dueLabel', () => {
     expect(dueLabel(due('2026-11-09'), now)).toMatch(/^Due Monday$/)
     expect(dueLabel(due('2026-11-20'), now)).toMatch(/^Due Fri/)
     expect(dueLabel(null, now)).toBeNull()
+  })
+})
+
+describe('daysLate and onTimeRate', () => {
+  it('counts whole days past the due date', () => {
+    expect(daysLate(due('2026-11-03'), now)).toBe(2)
+    expect(daysLate(due('2026-11-05'), now)).toBe(0)
+    expect(daysLate(due('2026-11-07'), now)).toBe(-2)
+    expect(daysLate(null, now)).toBeNull()
+  })
+
+  it('works out the on-time rate for dated, recently completed work', () => {
+    const list = [
+      a({ status: 'completed', due_at: due('2026-11-04'), completed_at: new Date(2026, 10, 4, 20).toISOString() }), // on the day
+      a({ status: 'completed', due_at: due('2026-11-01'), completed_at: new Date(2026, 10, 3, 9).toISOString() }), // 2 days late
+      a({ status: 'completed', due_at: null, completed_at: new Date(2026, 10, 3, 9).toISOString() }), // no due date
+      a({ status: 'completed', due_at: due('2026-09-01'), completed_at: new Date(2026, 8, 1, 9).toISOString() }), // too old
+    ]
+    expect(onTimeRate(list, 30, now)).toEqual({ onTime: 1, total: 2, pct: 50 })
+    expect(onTimeRate([], 30, now)).toBeNull()
   })
 })

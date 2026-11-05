@@ -326,3 +326,13 @@ to the student straight away, labelled AI-marked, parent can adjust.
   paste record or no record refused (400); a typed AI-style answer marked
   3/6 and flagged with the student notice; release tested in a rolled-back
   transaction (paid 3, one ledger row, second release refused).
+
+## Analytics: work set for the student
+
+`components/analytics/AssignedStatus.jsx`, near the top of Analytics, using
+the Your week grouping (`groupWeek`) plus `daysLate` / `onTimeRate` in
+`src/lib/week.js` (tested): tiles for overdue, due next 7 days (with later /
+no date counts), done this week and on-time rate over 30 days; overdue list
+with days late; next 7 days by day; collapsed later / undated / recently
+completed (on time or N days late). Items show subject · topic
+(useAssignments now also selects subject_id, topic_id).

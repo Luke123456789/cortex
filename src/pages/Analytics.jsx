@@ -7,6 +7,7 @@ import Sparkline from '../components/analytics/Sparkline.jsx'
 import SuggestedAssignments from '../components/analytics/SuggestedAssignments.jsx'
 import ProgressReview from '../components/analytics/ProgressReview.jsx'
 import WrittenWork from '../components/analytics/WrittenWork.jsx'
+import AssignedStatus from '../components/analytics/AssignedStatus.jsx'
 import styles from './Analytics.module.css'
 
 const PERIODS = [
@@ -83,6 +84,8 @@ export default function Analytics() {
               <Tile label="Subjects studied" value={summary.current.subjects.length} previous={summary.previous.subjects.length} />
             </ul>
           </section>
+
+          <AssignedStatus studentId={studentId} studentName={name} subjects={data.subjects} topics={data.topics} />
 
           <section aria-labelledby="activity-title">
             <h2 id="activity-title" className="section-label">Activity: last 7 days vs previous 7</h2>

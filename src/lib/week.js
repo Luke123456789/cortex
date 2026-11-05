@@ -84,3 +84,24 @@ export function dueLabel(dueAt, now = new Date()) {
   const date = new Date(y, m - 1, d)
   return `Due ${date.toLocaleDateString([], { weekday: 'short', day: 'numeric', month: 'short' })}`
 }
+
+// Whole days between the due date and `on` (default today): positive = late.
+// null when there's no due date.
+export function daysLate(dueAt, on = new Date()) {
+  const key = dueDayKey(dueAt)
+  if (!key) return null
+  const [y, m, d] = key.split('-').map(Number)
+  const due = new Date(y, m - 1, d)
+  const when = startOfDay(on)
+  return Math.round((when - due) / DAY)
+}
+
+// Completed work in the last `days` days that had a due date: how many were
+// done on or before it.
+export function onTimeRate(assignments, days = 30, now = new Date()) {
+  const since = startOfDay(now).getTime() - (days - 1) * DAY
+  const dated = assignments.filter((a) => a.status === 'completed' && a.completed_at && a.due_at && new Date(a.completed_at).getTime() >= since)
+  if (!dated.length) return null
+  const onTime = dated.filter((a) => daysLate(a.due_at, new Date(a.completed_at)) <= 0).length
+  return { onTime, total: dated.length, pct: Math.round((onTime / dated.length) * 100) }
+}
