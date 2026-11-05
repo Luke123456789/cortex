@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { Navigate } from 'react-router-dom'
 import { useAuth } from '../hooks/useAuth.jsx'
+import styles from './Login.module.css'
 
 export default function Login() {
   const { user, loading, signIn } = useAuth()
@@ -25,8 +26,8 @@ export default function Login() {
   }
 
   return (
-    <div className="device">
-      <div className="screen">
+    <div className="page--centered">
+      <div className={styles.card}>
         <div className="wordmark" style={{ marginBottom: '4px' }}>CORTEX</div>
         <div className="mono" style={{ fontSize: '10px', letterSpacing: '0.6px', textTransform: 'uppercase', color: 'var(--ink-soft)', marginBottom: '26px' }}>
           Sign in

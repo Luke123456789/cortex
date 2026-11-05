@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react'
-import { Link } from 'react-router-dom'
 import { supabase } from '../lib/supabaseClient'
 import { useAuth } from '../hooks/useAuth.jsx'
 import { useAssignableCatalog } from '../hooks/useAssignableCatalog'
@@ -145,12 +144,6 @@ export default function AssignWork() {
   return (
     <div className="device">
       <div className="screen">
-        <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', marginBottom: '18px' }}>
-          <div className="wordmark">CORTEX</div>
-          <Link to="/parent" style={{ fontSize: '11px', color: 'var(--ink-faint)', textDecoration: 'underline' }}>
-            Back
-          </Link>
-        </div>
 
         <div className="section-label">Assign work{studentName ? ` to ${studentName}` : ''}</div>
 

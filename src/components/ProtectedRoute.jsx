@@ -6,10 +6,8 @@ export default function ProtectedRoute({ children, requireRole }) {
 
   if (loading) {
     return (
-      <div className="device">
-        <div className="screen" style={{ fontSize: '13px', color: 'var(--ink-faint)' }}>
-          Loading…
-        </div>
+      <div className="page--centered faint" role="status">
+        Loading…
       </div>
     )
   }

@@ -1,6 +1,17 @@
+/*
+ * Cortex design tokens and base styles.
+ *
+ * Breakpoints (mobile-first; CSS custom properties can't be used inside
+ * @media, so these are written out literally wherever they're needed):
+ *   phone    < 640px
+ *   tablet   640px - 1023px   @media (min-width: 640px)
+ *   desktop  >= 1024px        @media (min-width: 1024px)
+ */
 :root {
+  /* Palette (unchanged identity) */
   --paper: #EDE8DA;
   --paper-2: #E3DCC8;
+  --paper-3: #D9D3C1;
   --rule: #C7BFA8;
   --rule-strong: #B3A98C;
   --ink: #1E2A38;
@@ -13,55 +24,148 @@
   --brass: #8C6A2F;
   --brass-light: #E9DFC4;
   --card: #F6F2E7;
+
+  /* Type families */
+  --font-body: 'Space Grotesk', system-ui, sans-serif;
+  --font-mono: 'IBM Plex Mono', ui-monospace, monospace;
+  --font-display: 'Special Elite', 'Courier New', monospace;
+
+  /* Fluid type scale: phone size -> desktop size */
+  --text-2xs: clamp(0.625rem, 0.6rem + 0.1vw, 0.6875rem);   /* 10 -> 11 */
+  --text-xs: clamp(0.6875rem, 0.66rem + 0.12vw, 0.75rem);   /* 11 -> 12 */
+  --text-sm: clamp(0.78rem, 0.75rem + 0.15vw, 0.875rem);    /* 12.5 -> 14 */
+  --text-base: clamp(0.875rem, 0.84rem + 0.2vw, 1rem);      /* 14 -> 16 */
+  --text-lg: clamp(1rem, 0.95rem + 0.3vw, 1.125rem);        /* 16 -> 18 */
+  --text-xl: clamp(1.25rem, 1.12rem + 0.6vw, 1.5rem);       /* 20 -> 24 */
+  --text-2xl: clamp(1.5rem, 1.3rem + 1vw, 2rem);            /* 24 -> 32 */
+  --text-display: clamp(2.5rem, 2.1rem + 1.8vw, 3.5rem);    /* 40 -> 56 */
+  --leading-tight: 1.2;
+  --leading-normal: 1.5;
+
+  /* Spacing (4px base) */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 20px;
+  --space-6: 24px;
+  --space-7: 32px;
+  --space-8: 48px;
+  --gutter: clamp(16px, 3vw, 32px);
+
+  /* Radii */
+  --radius-sm: 6px;
+  --radius-md: 8px;
   --radius: 10px;
+  --radius-lg: 14px;
+  --radius-pill: 999px;
+
+  /* Shadows */
+  --shadow-1: 0 1px 2px rgba(30, 42, 56, 0.06);
+  --shadow-2: 0 8px 24px rgba(30, 42, 56, 0.12);
+  --shadow-3: 0 24px 60px rgba(30, 42, 56, 0.18);
+
+  /* Layout */
+  --content-reading: 720px;
+  --content-wide: 1200px;
+  --sidebar-w: 240px;
+  --sidebar-w-collapsed: 72px;
+  --header-h: 56px;
+  --tabbar-h: 60px;
+  --tap-min: 44px;
+
+  /* Motion */
+  --ease: cubic-bezier(0.2, 0.7, 0.2, 1);
+  --dur: 160ms;
 }
 
-* {
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --dur: 0ms;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+*,
+*::before,
+*::after {
   box-sizing: border-box;
+}
+
+/* Kept from the original index.css: pages rely on it. */
+* {
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
 }
 
 body {
   margin: 0;
-  background: #D9D3C1;
-  font-family: 'Space Grotesk', sans-serif;
-  color: var(--ink);
-}
-
-.app-shell {
   min-height: 100vh;
-  display: flex;
-  align-items: flex-start;
-  justify-content: center;
-  padding: 40px 16px;
-}
-
-.device {
-  width: 390px;
-  max-width: 100%;
+  min-height: 100dvh;
   background: var(--paper);
-  border-radius: 24px;
-  border: 1px solid #C9C2AC;
-  box-shadow: 0 24px 60px rgba(30, 42, 56, 0.18);
-  overflow: hidden;
+  font-family: var(--font-body);
+  font-size: var(--text-base);
+  line-height: var(--leading-normal);
+  color: var(--ink);
+  overflow-x: hidden;
 }
 
-.screen {
-  padding: 22px 20px 28px;
+img,
+svg {
+  max-width: 100%;
 }
 
+button,
+input,
+select,
+textarea {
+  font: inherit;
+  color: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+button:disabled {
+  cursor: not-allowed;
+}
+
+a {
+  color: inherit;
+}
+
+:focus-visible {
+  outline: 2px solid var(--brass);
+  outline-offset: 2px;
+}
+
+/* ---- Identity pieces shared everywhere ---- */
 .wordmark {
-  font-family: 'Special Elite', monospace;
+  font-family: var(--font-display);
   font-size: 20px;
   letter-spacing: 1px;
+  line-height: 1;
 }
 
 .mono {
-  font-family: 'IBM Plex Mono', monospace;
+  font-family: var(--font-mono);
 }
 
 .section-label {
-  font-family: 'IBM Plex Mono', monospace;
-  font-size: 11px;
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
   letter-spacing: 1px;
   text-transform: uppercase;
   color: var(--ink-soft);
@@ -72,8 +176,7 @@ body {
   display: flex;
   align-items: center;
   gap: 5px;
-  margin: 20px -20px 18px;
-  padding: 0 20px;
+  margin: 20px 0 18px;
 }
 
 .tear span {
@@ -86,11 +189,6 @@ body {
   width: 8px;
   height: 8px;
   border-radius: 50%;
-  background: #D9D3C1;
+  background: var(--paper-3);
   border: 1px solid var(--rule);
-}
-
-button {
-  font-family: 'Space Grotesk', sans-serif;
-  cursor: pointer;
 }

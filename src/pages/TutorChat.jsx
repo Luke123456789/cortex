@@ -308,7 +308,6 @@ export default function TutorChat() {
     return (
       <div className="device">
         <div className="screen">
-          <div className="wordmark" style={{ marginBottom: '18px' }}>CORTEX</div>
           <div className="section-label">Session complete</div>
           <div style={{ marginBottom: '20px' }}>
             <div style={{ fontSize: '15px', marginBottom: feedback ? '8px' : 0 }}>
@@ -336,11 +335,6 @@ export default function TutorChat() {
     return (
       <div className="device">
         <div className="screen">
-          <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', marginBottom: '18px' }}>
-            <div className="wordmark">CORTEX</div>
-            <Link to="/" style={{ fontSize: '11px', color: 'var(--ink-faint)', textDecoration: 'underline' }}>Back</Link>
-          </div>
-
           <div className="section-label">Ask the tutor</div>
 
           {catalogLoading ? (
@@ -398,8 +392,7 @@ export default function TutorChat() {
   return (
     <div className="device">
       <div className="screen" style={{ display: 'flex', flexDirection: 'column', height: '100%' }}>
-        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '12px' }}>
-          <div className="wordmark">CORTEX</div>
+        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'flex-end', marginBottom: '12px' }}>
           <button
             onClick={finishSession}
             disabled={finishing}

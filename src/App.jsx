@@ -1,6 +1,7 @@
 import { Routes, Route } from 'react-router-dom'
 import { AuthProvider } from './hooks/useAuth.jsx'
 import ProtectedRoute from './components/ProtectedRoute.jsx'
+import AppShell from './components/shell/AppShell.jsx'
 import Login from './pages/Login.jsx'
 import Home from './pages/Home.jsx'
 import Parent from './pages/Parent.jsx'
@@ -14,111 +15,40 @@ import Assessment from './pages/Assessment.jsx'
 import AssignWork from './pages/AssignWork.jsx'
 import Assignments from './pages/Assignments.jsx'
 import PlayQuiz from './pages/PlayQuiz.jsx'
+import SubjectLocksPage from './pages/SubjectLocksPage.jsx'
+
+const parentOnly = (element) => <ProtectedRoute requireRole="parent">{element}</ProtectedRoute>
 
 export default function App() {
   return (
     <AuthProvider>
-      <div className="app-shell">
-        <Routes>
-          <Route path="/login" element={<Login />} />
-          <Route
-            path="/"
-            element={
-              <ProtectedRoute>
-                <Home />
-              </ProtectedRoute>
-            }
-          />
-          <Route
-            path="/parent"
-            element={
-              <ProtectedRoute requireRole="parent">
-                <Parent />
-              </ProtectedRoute>
-            }
-          />
-          <Route
-            path="/quiz/:topicId"
-            element={
-              <ProtectedRoute>
-                <Quiz />
-              </ProtectedRoute>
-            }
-          />
-          <Route
-            path="/quizzes"
-            element={
-              <ProtectedRoute>
-                <QuizSelect />
-              </ProtectedRoute>
-            }
-          />
-          <Route
-            path="/tutor"
-            element={
-              <ProtectedRoute>
-                <TutorChat />
-              </ProtectedRoute>
-            }
-          />
-          <Route
-            path="/activity"
-            element={
-              <ProtectedRoute>
-                <Activity />
-              </ProtectedRoute>
-            }
-          />
-          <Route
-            path="/parent/redemptions"
-            element={
-              <ProtectedRoute requireRole="parent">
-                <RedemptionHistory />
-              </ProtectedRoute>
-            }
-          />
-          <Route
-            path="/parent/tutor-sessions"
-            element={
-              <ProtectedRoute requireRole="parent">
-                <TutorSessions />
-              </ProtectedRoute>
-            }
-          />
-          <Route
-            path="/parent/assessment"
-            element={
-              <ProtectedRoute requireRole="parent">
-                <Assessment />
-              </ProtectedRoute>
-            }
-          />
-          <Route
-            path="/parent/assign"
-            element={
-              <ProtectedRoute requireRole="parent">
-                <AssignWork />
-              </ProtectedRoute>
-            }
-          />
-          <Route
-            path="/assignments"
-            element={
-              <ProtectedRoute>
-                <Assignments />
-              </ProtectedRoute>
-            }
-          />
-          <Route
-            path="/play/:quizId"
-            element={
-              <ProtectedRoute>
-                <PlayQuiz />
-              </ProtectedRoute>
-            }
-          />
-        </Routes>
-      </div>
+      <Routes>
+        <Route path="/login" element={<Login />} />
+
+        {/* Every signed-in page renders inside the app shell. */}
+        <Route
+          element={
+            <ProtectedRoute>
+              <AppShell />
+            </ProtectedRoute>
+          }
+        >
+          <Route path="/" element={<Home />} />
+          <Route path="/quizzes" element={<QuizSelect />} />
+          <Route path="/quiz/:topicId" element={<Quiz />} />
+          <Route path="/play/:quizId" element={<PlayQuiz />} />
+          <Route path="/tutor" element={<TutorChat />} />
+          <Route path="/assignments" element={<Assignments />} />
+          <Route path="/activity" element={<Activity />} />
+
+          <Route path="/parent" element={parentOnly(<Parent />)} />
+          <Route path="/parent/assign" element={parentOnly(<AssignWork />)} />
+          <Route path="/parent/locks" element={parentOnly(<SubjectLocksPage />)} />
+          <Route path="/parent/redemptions" element={parentOnly(<RedemptionHistory />)} />
+          <Route path="/parent/tutor-sessions" element={parentOnly(<TutorSessions />)} />
+          <Route path="/parent/assessment" element={parentOnly(<Assessment />)} />
+        </Route>
+      </Routes>
     </AuthProvider>
   )
 }

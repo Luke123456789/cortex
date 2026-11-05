@@ -52,12 +52,6 @@ export default function Assignments() {
   return (
     <div className="device">
       <div className="screen">
-        <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', marginBottom: '18px' }}>
-          <div className="wordmark">CORTEX</div>
-          <Link to="/" style={{ fontSize: '11px', color: 'var(--ink-faint)', textDecoration: 'underline' }}>
-            Back
-          </Link>
-        </div>
 
         <div className="section-label">Assigned work</div>
 

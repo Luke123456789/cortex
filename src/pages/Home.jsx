@@ -11,13 +11,12 @@ import ExamCountdown from '../components/ExamCountdown.jsx'
 import LedgerList from '../components/LedgerList.jsx'
 import ChallengeList from '../components/ChallengeList.jsx'
 import RedeemModal from '../components/RedeemModal.jsx'
-import RoleSwitch from '../components/RoleSwitch.jsx'
 import { getExistingSubscription, subscribeToPush, ensureSubscriptionSaved, pushSupported } from '../lib/push.js'
 
 export default function Home() {
   // A student sees their own data; a parent's student view is their practice
   // student, so nothing done here touches the real student's data.
-  const { profile, signOut, studentId, isPractice } = useAuth()
+  const { studentId, isPractice } = useAuth()
   const { entries, balance, loading, refresh: refreshLedger } = useLedger(studentId)
   const { pending, refresh: refreshRedemptions } = useRedemptions(studentId)
   const { assignments, refresh: refreshAssignments } = useAssignments(studentId)
@@ -72,31 +71,6 @@ export default function Home() {
   return (
     <div className="device">
       <div className="screen">
-        <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', marginBottom: '22px' }}>
-          <div>
-            <div className="wordmark">CORTEX</div>
-            <div className="mono" style={{ fontSize: '10px', letterSpacing: '0.6px', textTransform: 'uppercase', color: 'var(--ink-soft)', marginTop: '3px' }}>
-              GCSE Revision
-            </div>
-          </div>
-          <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-end', gap: '8px' }}>
-            <RoleSwitch view="student" />
-            <button
-              onClick={signOut}
-              style={{
-                background: 'none',
-                border: 'none',
-                fontSize: '11px',
-                color: 'var(--ink-faint)',
-                textDecoration: 'underline',
-                padding: 0,
-              }}
-            >
-              {profile?.display_name ? `${profile.display_name} · Sign out` : 'Sign out'}
-            </button>
-          </div>
-        </div>
-
         {isPractice && (
           <div style={{ background: 'var(--brass-light)', border: '1px solid var(--brass)', borderRadius: '8px', padding: '10px 12px', marginBottom: '18px', fontSize: '12px', color: 'var(--ink-soft)' }}>
             <div style={{ fontWeight: 600, color: 'var(--brass)', marginBottom: '4px' }}>Practice mode</div>

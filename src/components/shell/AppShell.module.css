@@ -1,0 +1,484 @@
+/* ---------- Grid ----------
+   phone:   header / main / tab bar (fixed)
+   tablet:  sidebar (icons, expandable) | main
+   desktop: sidebar (full) | main                                   */
+.shell {
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  grid-template-rows: auto 1fr;
+  grid-template-areas:
+    'header'
+    'main';
+}
+
+.skip {
+  position: absolute;
+  left: var(--space-2);
+  top: -100px;
+  z-index: 100;
+  background: var(--ink);
+  color: var(--paper);
+  padding: var(--space-2) var(--space-3);
+  border-radius: var(--radius-md);
+  font-size: var(--text-sm);
+}
+
+.skip:focus {
+  top: var(--space-2);
+}
+
+.main {
+  grid-area: main;
+  min-width: 0;
+  padding-bottom: calc(var(--tabbar-h) + env(safe-area-inset-bottom));
+}
+
+.main:focus {
+  outline: none;
+}
+
+/* ---------- Phone header ---------- */
+.topbar {
+  grid-area: header;
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-2);
+  min-height: var(--header-h);
+  padding: calc(var(--space-2) + env(safe-area-inset-top)) max(var(--gutter), env(safe-area-inset-right)) var(--space-2) max(var(--gutter), env(safe-area-inset-left));
+  background: var(--paper);
+  border-bottom: 1px solid var(--rule);
+}
+
+.brand {
+  display: inline-flex;
+  align-items: center;
+  min-height: var(--tap-min);
+  color: var(--ink);
+  text-decoration: none;
+}
+
+.topbarEnd {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  align-items: center;
+  gap: var(--space-2);
+  margin-left: auto;
+  min-width: 0;
+}
+
+.topbarButton {
+  width: 40px;
+  height: 40px;
+}
+
+/* The Home page's Practice mode banner says it at narrow widths. */
+.topbarEnd .practiceBadge {
+  display: none;
+}
+
+@media (min-width: 480px) {
+  .topbarEnd .practiceBadge {
+    display: inline;
+  }
+}
+
+.iconButton {
+  display: inline-grid;
+  place-items: center;
+  width: var(--tap-min);
+  height: var(--tap-min);
+  flex-shrink: 0;
+  border: none;
+  border-radius: var(--radius-md);
+  background: none;
+  color: var(--ink-soft);
+}
+
+.iconButton:hover {
+  background: var(--paper-2);
+  color: var(--ink);
+}
+
+.practiceBadge {
+  font-family: var(--font-mono);
+  font-size: var(--text-2xs);
+  font-weight: 600;
+  letter-spacing: 0.4px;
+  text-transform: uppercase;
+  color: var(--brass);
+  background: var(--brass-light);
+  border: 1px solid var(--brass);
+  border-radius: var(--radius-pill);
+  padding: 2px 8px;
+  white-space: nowrap;
+}
+
+/* ---------- Balance ---------- */
+.balancePill {
+  font-family: var(--font-mono);
+  font-size: var(--text-sm);
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  background: var(--card);
+  border: 1px solid var(--rule-strong);
+  border-radius: var(--radius-pill);
+  padding: 4px 8px;
+  white-space: nowrap;
+}
+
+.balanceCard {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  background: var(--card);
+  border: 1.5px solid var(--rule-strong);
+  border-radius: var(--radius);
+  padding: var(--space-3);
+}
+
+.balanceLabel {
+  font-family: var(--font-mono);
+  font-size: var(--text-2xs);
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+}
+
+.balanceValue {
+  font-family: var(--font-mono);
+  font-size: var(--text-xl);
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  line-height: 1.1;
+}
+
+.balanceUnit {
+  font-size: var(--text-xs);
+  font-weight: 500;
+  color: var(--ink-soft);
+}
+
+/* ---------- Phone tab bar ---------- */
+.tabbar {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 20;
+  background: var(--card);
+  border-top: 1px solid var(--rule-strong);
+  padding: 0 env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
+}
+
+.tabList {
+  list-style: none;
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: minmax(0, 1fr);
+}
+
+.tabLink {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+  min-height: var(--tabbar-h);
+  padding: 6px 2px;
+  font-family: var(--font-mono);
+  font-size: var(--text-2xs);
+  letter-spacing: 0.2px;
+  color: var(--ink-soft);
+  text-decoration: none;
+  position: relative;
+}
+
+.tabLink .navLabel {
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.tabLink[aria-current='page'] {
+  color: var(--ink);
+  font-weight: 600;
+}
+
+.tabLink[aria-current='page']::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 25%;
+  right: 25%;
+  height: 3px;
+  border-radius: 0 0 3px 3px;
+  background: var(--brass);
+}
+
+/* ---------- Sidebar (hidden on phone) ---------- */
+.sidebar {
+  display: none;
+}
+
+/* ---------- Tablet and up ---------- */
+@media (min-width: 640px) {
+  .shell {
+    grid-template-columns: var(--sidebar-w-collapsed) minmax(0, 1fr);
+    grid-template-rows: 1fr;
+    grid-template-areas: 'sidebar main';
+  }
+
+  .shell[data-sidebar-open] {
+    grid-template-columns: var(--sidebar-w) minmax(0, 1fr);
+  }
+
+  .topbar,
+  .tabbar {
+    display: none;
+  }
+
+  .main {
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+
+  .sidebar {
+    grid-area: sidebar;
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    height: 100dvh;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
+    padding: calc(var(--space-4) + env(safe-area-inset-top)) var(--space-3) var(--space-4) max(var(--space-3), env(safe-area-inset-left));
+    background: var(--paper-2);
+    border-right: 1px solid var(--rule);
+  }
+
+  .sidebarTop {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-2);
+  }
+
+  .sidebarWordmark {
+    display: none;
+  }
+
+  .sidebarMonogram {
+    font-size: 24px;
+  }
+
+  .sidebarBalance .balanceCard {
+    align-items: center;
+    text-align: center;
+    padding: var(--space-2) 2px;
+  }
+
+  .sidebarBalance .balanceLabel {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    white-space: nowrap;
+  }
+
+  .sidebarBalance .balanceValue {
+    font-size: var(--text-base);
+  }
+
+  .sidebarNav {
+    flex: 1;
+  }
+
+  .sideList {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .sideLink {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-3);
+    width: 100%;
+    min-height: var(--tap-min);
+    padding: var(--space-2);
+    border: none;
+    border-radius: var(--radius-md);
+    background: none;
+    color: var(--ink-soft);
+    font-size: var(--text-sm);
+    text-align: left;
+    text-decoration: none;
+  }
+
+  .sideLink:hover {
+    background: var(--paper);
+    color: var(--ink);
+  }
+
+  .sideLink[aria-current='page'] {
+    background: var(--card);
+    color: var(--ink);
+    font-weight: 600;
+    box-shadow: inset 3px 0 0 var(--brass), var(--shadow-1);
+  }
+
+  .sideLink svg {
+    flex-shrink: 0;
+  }
+
+  /* Icon-only: labels stay available to screen readers. */
+  .sideLink .navLabel {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    white-space: nowrap;
+  }
+
+  .sidebarFooter {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-2);
+  }
+
+  .sidebarFooter > :global(nav),
+  .sidebarFooter .practiceBadge {
+    display: none;
+  }
+
+  /* Expanded (tablet toggle, or always on desktop) */
+  .shell[data-sidebar-open] .sidebarTop {
+    flex-direction: row;
+    justify-content: space-between;
+  }
+
+  .shell[data-sidebar-open] .sidebarWordmark {
+    display: inline;
+  }
+
+  .shell[data-sidebar-open] .sidebarMonogram {
+    display: none;
+  }
+
+  .shell[data-sidebar-open] .sidebarBalance .balanceCard {
+    align-items: flex-start;
+    padding: var(--space-3);
+  }
+
+  .shell[data-sidebar-open] .sidebarBalance .balanceLabel {
+    position: static;
+    width: auto;
+    height: auto;
+    clip: auto;
+  }
+
+  .shell[data-sidebar-open] .sidebarBalance .balanceValue {
+    font-size: var(--text-xl);
+  }
+
+  .shell[data-sidebar-open] .sideLink {
+    justify-content: flex-start;
+    padding: var(--space-2) var(--space-3);
+  }
+
+  .shell[data-sidebar-open] .sideLink .navLabel {
+    position: static;
+    width: auto;
+    height: auto;
+    clip: auto;
+  }
+
+  .shell[data-sidebar-open] .sidebarFooter {
+    align-items: stretch;
+  }
+
+  .shell[data-sidebar-open] .sidebarFooter > :global(nav),
+  .shell[data-sidebar-open] .sidebarFooter .practiceBadge {
+    display: inline-flex;
+    align-self: flex-start;
+  }
+}
+
+/* ---------- Desktop: sidebar always expanded ---------- */
+@media (min-width: 1024px) {
+  .shell,
+  .shell[data-sidebar-open] {
+    grid-template-columns: var(--sidebar-w) minmax(0, 1fr);
+  }
+
+  .collapseToggle {
+    display: none;
+  }
+
+  .sidebarTop {
+    flex-direction: row;
+    justify-content: flex-start;
+    padding: var(--space-2) var(--space-2) 0;
+  }
+
+  .sidebarWordmark {
+    display: inline;
+    font-size: 22px;
+  }
+
+  .sidebarMonogram {
+    display: none;
+  }
+
+  .sidebarBalance .balanceCard {
+    align-items: flex-start;
+    padding: var(--space-3);
+  }
+
+  .sidebarBalance .balanceLabel {
+    position: static;
+    width: auto;
+    height: auto;
+    clip: auto;
+  }
+
+  .sidebarBalance .balanceValue {
+    font-size: var(--text-xl);
+  }
+
+  .sideLink {
+    justify-content: flex-start;
+    padding: var(--space-2) var(--space-3);
+  }
+
+  .sideLink .navLabel {
+    position: static;
+    width: auto;
+    height: auto;
+    clip: auto;
+  }
+
+  .sidebarFooter {
+    align-items: stretch;
+  }
+
+  .sidebarFooter > :global(nav),
+  .sidebarFooter .practiceBadge {
+    display: inline-flex;
+    align-self: flex-start;
+  }
+}

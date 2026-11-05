@@ -65,3 +65,36 @@ export function useLedger(studentId) {
 
   return { entries, balance, loading, refresh }
 }
+
+// Balance only, for the app shell's header/sidebar. Same RPC and realtime
+// trigger as useLedger, on its own channel name so the two never collide.
+export function useBalance(studentId) {
+  const [balance, setBalance] = useState(null)
+
+  const fetchBalance = useCallback(async () => {
+    const { data, error } = await supabase.rpc('get_screen_time_balance', { p_student: studentId })
+    if (error) {
+      console.error('Failed to load balance', error)
+    } else {
+      setBalance(data ?? 0)
+    }
+  }, [studentId])
+
+  useEffect(() => {
+    if (!studentId) return
+    fetchBalance()
+    const channel = supabase
+      .channel(`ledger_balance_${studentId}`)
+      .on(
+        'postgres_changes',
+        { event: '*', schema: 'public', table: 'ledger_entries', filter: `student_id=eq.${studentId}` },
+        () => fetchBalance()
+      )
+      .subscribe()
+    return () => {
+      supabase.removeChannel(channel)
+    }
+  }, [fetchBalance])
+
+  return { balance: studentId ? balance : null }
+}

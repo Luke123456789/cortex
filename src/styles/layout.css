@@ -1,0 +1,91 @@
+/* Shared layout and utility classes. Component-specific styles live in
+   Component.module.css next to each component. */
+
+/* A page inside the app shell's <main>. Reading width by default. */
+.page {
+  width: 100%;
+  max-width: var(--content-reading);
+  margin-inline: auto;
+  padding: var(--space-5) var(--gutter) var(--space-7);
+  min-width: 0;
+}
+
+.page--wide {
+  max-width: var(--content-wide);
+}
+
+/* Standalone screens outside the shell (login, loading). */
+.page--centered {
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: grid;
+  place-items: center;
+  padding: var(--space-6) var(--gutter);
+}
+
+.stack {
+  display: flex;
+  flex-direction: column;
+  gap: var(--stack-gap, var(--space-3));
+}
+
+.cluster {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--cluster-gap, var(--space-2));
+}
+
+.muted {
+  color: var(--ink-soft);
+}
+
+.faint {
+  color: var(--ink-faint);
+}
+
+/* Contextual "Back" link at the top of a sub-page. */
+.back-link {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-1);
+  min-height: var(--tap-min);
+  font-size: var(--text-xs);
+  color: var(--ink-soft);
+  text-decoration: underline;
+}
+
+.visually-hidden {
+  position: absolute !important;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* Wide content (tables etc.) scrolls inside itself, never the page. */
+.scroll-x {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  max-width: 100%;
+}
+
+/* Legacy page wrappers from the phone-frame layout. The frame itself is gone;
+   these now behave like .page and are removed as each page moves to its own
+   CSS Module (stages b and c). */
+.device {
+  width: 100%;
+  min-width: 0;
+}
+
+.screen {
+  width: 100%;
+  max-width: var(--content-reading);
+  margin-inline: auto;
+  padding: var(--space-5) var(--gutter) var(--space-7);
+  min-width: 0;
+}

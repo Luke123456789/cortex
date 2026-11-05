@@ -1,0 +1,16 @@
+.card {
+  width: 100%;
+  max-width: 380px;
+  background: var(--paper);
+  border: 1px solid var(--rule);
+  border-radius: var(--radius-lg);
+  padding: var(--space-6) var(--space-5) var(--space-7);
+}
+
+@media (min-width: 640px) {
+  .card {
+    background: var(--card);
+    box-shadow: var(--shadow-2);
+    padding: var(--space-7);
+  }
+}

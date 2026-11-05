@@ -91,7 +91,6 @@ export default function PlayQuiz() {
     return (
       <div className="device">
         <div className="screen">
-          <div className="wordmark" style={{ marginBottom: '18px' }}>CORTEX</div>
           <div className="section-label">Quiz complete</div>
           <div style={{ background: 'var(--card)', border: '1.5px solid var(--rule-strong)', borderRadius: 'var(--radius)', padding: '16px', marginBottom: '18px' }}>
             <div style={{ fontSize: '20px', fontWeight: 700, marginBottom: '4px' }}>{result.score} / {result.totalCount} correct</div>
@@ -159,12 +158,7 @@ export default function PlayQuiz() {
   return (
     <div className="device">
       <div className="screen">
-        <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', marginBottom: '18px' }}>
-          <div className="wordmark">CORTEX</div>
-          <Link to="/" style={{ fontSize: '11px', color: 'var(--ink-faint)', textDecoration: 'underline' }}>
-            Back
-          </Link>
-        </div>
+        <Link to="/" className="back-link">← Back</Link>
 
         <div className="section-label">{quiz?.title || 'Quiz'}</div>
         <div className="mono" style={{ fontSize: '10.5px', color: 'var(--ink-faint)', marginBottom: '14px' }}>
