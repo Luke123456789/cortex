@@ -171,3 +171,30 @@ not a rebrand. No Tailwind, no component library.
 - Login: labels tied to inputs, shared field/button classes.
 - No inline styles left except runtime values (quiz progress width, chat
   height). `.device`/`.screen` removed from `layout.css`.
+
+## What stage (d) did (accessibility pass)
+
+- Stage (c) pushed to `main` after review (`ba5331b`).
+- Contrast (WCAG AA 4.5:1 for text), measured on every surface:
+  - `--ink-soft` #62707E → #48535D (was 3.4–4.5:1, now 5.3–7.0:1).
+  - `--ink-faint` #8B9199 → #626870 (was 2.1–2.8:1, now 4.6:1 on paper/card;
+    only used for a decorative chevron and `.faint`).
+  - New `--brass-ink` #6F5425 for brass text (4.7:1+ everywhere). `--brass`
+    itself is unchanged for borders, the focus ring and indicators (3:1+).
+  - Manifest colours are `--ink` / `--paper-3`, unchanged, so they still match.
+- Shell: page title per route ("Activity · Cortex"); on navigation focus moves
+  to `<main>` and the window scrolls to the top.
+- Headings: every page has one `<h1>` (Home's is visually hidden; SubjectLocks
+  takes `headingLevel`).
+- Quiz options follow the radio-group pattern: one Tab stop, arrow keys move
+  and choose.
+- Fields always show a focus ring on `:focus` (date inputs never match
+  `:focus-visible` in Chromium).
+- Tutor chat auto-scroll respects `prefers-reduced-motion`.
+- "View more" links on Home name what they open (visually hidden text).
+- Checks run (scripts not committed): axe-core 4.10 (WCAG 2.0/2.1/2.2 A+AA and
+  best practice) on all 14 pages at 375 and 1440 plus the redeem modal, quiz
+  answered, live tutor chat and outline drawer: no violations. Keyboard
+  walkthrough: login by keyboard, skip link first, every focused element has
+  a visible indicator, modal traps focus / Escape closes / focus returns,
+  quiz keys work. `npx vitest run`: 57 passed.

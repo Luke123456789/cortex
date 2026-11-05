@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { Link, Outlet, useLocation } from 'react-router-dom'
 import { useAuth } from '../../hooks/useAuth.jsx'
 import { useBalance } from '../../hooks/useLedger'
@@ -62,6 +62,26 @@ export default function AppShell() {
     ? `${childStudent?.displayName ?? 'Student'}'s time`
     : isPractice ? 'Practice time' : 'Screen time'
 
+  // On navigation: name the page in the tab title and move focus to <main>,
+  // so keyboard and screen-reader users start at the new page's content.
+  const mainRef = useRef(null)
+  const firstRender = useRef(true)
+  const activeItem = items.find((item) => isActive(item, pathname))
+  const pageTitle = pathname.startsWith('/play/') ? 'Quiz'
+    : pathname.startsWith('/quiz/') ? 'Question bank'
+    : activeItem?.label
+  useEffect(() => {
+    document.title = pageTitle ? `${pageTitle} · Cortex` : 'Cortex'
+  }, [pageTitle])
+  useEffect(() => {
+    if (firstRender.current) {
+      firstRender.current = false
+      return
+    }
+    mainRef.current?.focus({ preventScroll: true })
+    window.scrollTo(0, 0)
+  }, [pathname])
+
   const signOutLabel = profile?.display_name ? `Sign out (${profile.display_name})` : 'Sign out'
 
   return (
@@ -119,7 +139,7 @@ export default function AppShell() {
         </div>
       </aside>
 
-      <main id="main" className={styles.main} tabIndex={-1}>
+      <main id="main" ref={mainRef} className={styles.main} tabIndex={-1}>
         <Outlet />
       </main>
 

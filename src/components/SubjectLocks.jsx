@@ -14,7 +14,8 @@ function formatLockedUntil(date) {
   return date.toLocaleString([], { day: '2-digit', month: 'short', hour: '2-digit', minute: '2-digit' })
 }
 
-export default function SubjectLocks({ studentId }) {
+export default function SubjectLocks({ studentId, headingLevel = 2 }) {
+  const Heading = `h${headingLevel}`
   const { subjects, locks, loading, lock, unlock } = useSubjectLocks(studentId)
   const [subjectId, setSubjectId] = useState('')
   const [topicId, setTopicId] = useState('')
@@ -60,7 +61,7 @@ export default function SubjectLocks({ studentId }) {
 
   return (
     <section aria-labelledby="locks-title">
-      <h2 id="locks-title" className="section-label">Subject lockouts</h2>
+      <Heading id="locks-title" className="section-label">Subject lockouts</Heading>
       <p className={styles.intro}>
         Lock a subject or a single topic to stop quiz grinding and push practice toward other areas.
       </p>

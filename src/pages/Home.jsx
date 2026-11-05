@@ -72,6 +72,7 @@ export default function Home() {
 
   return (
     <div className="page page--wide">
+      <h1 className="visually-hidden">Home</h1>
       {(isPractice || notifStatus === 'disabled') && (
         <div className={styles.banners}>
           {isPractice && (
@@ -128,7 +129,7 @@ export default function Home() {
                   })}
                 </ul>
                 {pendingAssignments.length > 3 && (
-                  <Link to="/assignments" className={`link ${styles.more}`}>View more</Link>
+                  <Link to="/assignments" className={`link ${styles.more}`}>View more<span className="visually-hidden"> assigned work</span></Link>
                 )}
               </section>
             )}
@@ -145,7 +146,7 @@ export default function Home() {
             <h2 id="home-recent" className="section-label">Recent entries</h2>
             <LedgerList entries={entries.slice(0, 3)} />
             {entries.length > 3 && (
-              <Link to="/activity" className={`link ${styles.more}`}>View more</Link>
+              <Link to="/activity" className={`link ${styles.more}`}>View more<span className="visually-hidden"> activity</span></Link>
             )}
           </section>
         </div>

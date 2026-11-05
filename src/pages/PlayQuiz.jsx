@@ -177,6 +177,16 @@ export default function PlayQuiz() {
 
   const total = questions.length
   const q = questions[current]
+
+  function handleRadioKeys(e) {
+    const step = { ArrowDown: 1, ArrowRight: 1, ArrowUp: -1, ArrowLeft: -1 }[e.key]
+    if (!step || !q) return
+    e.preventDefault()
+    const from = Number(e.target.closest('[role="radio"]')?.dataset.index ?? 0)
+    const next = (from + step + optionKeys.length) % optionKeys.length
+    selectAnswer(q.id, optionKeys[next])
+    e.currentTarget.querySelector(`[data-index="${next}"]`)?.focus()
+  }
   const isLast = current === total - 1
   const answeredCount = questions.filter((x) => answers[x.id]).length
   const unanswered = total - answeredCount
@@ -200,16 +210,21 @@ export default function PlayQuiz() {
         <section className={`card ${card.card} ${styles.questionCard}`} aria-labelledby="play-question">
           <span className="meta">Q{current + 1}</span>
           <p id="play-question" className={card.text}>{q.question_text}</p>
-          <div className={card.options} role="radiogroup" aria-labelledby="play-question">
-            {optionKeys.map((k) => {
+          <div className={card.options} role="radiogroup" aria-labelledby="play-question" onKeyDown={handleRadioKeys}>
+            {optionKeys.map((k, i) => {
               const letter = k.toUpperCase()
               const isSelected = answers[q.id] === letter
+              // Radio-group pattern: one Tab stop (the chosen option, or the
+              // first), arrow keys move and choose.
+              const tabbable = isSelected || (!answers[q.id] && i === 0)
               return (
                 <button
                   key={k}
                   type="button"
                   role="radio"
                   aria-checked={isSelected}
+                  tabIndex={tabbable ? 0 : -1}
+                  data-index={i}
                   className={`${card.option} ${card.choice}`}
                   onClick={() => selectAnswer(q.id, letter)}
                 >

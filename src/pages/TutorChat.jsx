@@ -112,7 +112,8 @@ export default function TutorChat() {
   }, [topicId, deepLinkedSubtopicId])
 
   useEffect(() => {
-    scrollRef.current?.scrollTo({ top: scrollRef.current.scrollHeight, behavior: 'smooth' })
+    const reduceMotion = window.matchMedia?.('(prefers-reduced-motion: reduce)').matches
+    scrollRef.current?.scrollTo({ top: scrollRef.current.scrollHeight, behavior: reduceMotion ? 'auto' : 'smooth' })
   }, [messages, thinking])
 
   const callTutor = useCallback(async (nextMessages) => {

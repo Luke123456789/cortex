@@ -44,7 +44,7 @@ button.item:hover {
   flex-shrink: 0;
   border-radius: var(--radius-md);
   background: var(--brass-light);
-  color: var(--brass);
+  color: var(--brass-ink);
 }
 
 .name {

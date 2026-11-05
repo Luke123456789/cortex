@@ -15,13 +15,16 @@
   --rule: #C7BFA8;
   --rule-strong: #B3A98C;
   --ink: #1E2A38;
-  --ink-soft: #62707E;
-  --ink-faint: #8B9199;
+  /* Darkened in the accessibility pass so text meets WCAG AA (4.5:1):
+     ink-soft was 3.7:1 on the sidebar, ink-faint 2.6:1 on paper. */
+  --ink-soft: #48535D;
+  --ink-faint: #626870;
   --green: #2F6E4E;
   --green-bg: #DDE8DD;
   --red: #9C3B2E;
   --red-bg: #EFDFDA;
-  --brass: #8C6A2F;
+  --brass: #8C6A2F;       /* borders, focus ring, indicators (3:1+) */
+  --brass-ink: #6F5425;   /* brass-coloured text (4.7:1+ on every surface) */
   --brass-light: #E9DFC4;
   --card: #F6F2E7;
 

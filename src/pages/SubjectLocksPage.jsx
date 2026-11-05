@@ -7,7 +7,7 @@ export default function SubjectLocksPage() {
   const { childStudent } = useAuth()
   return (
     <div className="page">
-      <SubjectLocks studentId={childStudent?.id} />
+      <SubjectLocks studentId={childStudent?.id} headingLevel={1} />
     </div>
   )
 }

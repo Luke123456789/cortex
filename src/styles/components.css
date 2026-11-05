@@ -55,7 +55,7 @@
 
 .btn--soft {
   background: var(--brass-light);
-  color: var(--brass);
+  color: var(--brass-ink);
 }
 
 .btn--small {
@@ -78,7 +78,7 @@
   padding: 0;
   border: none;
   background: none;
-  color: var(--brass);
+  color: var(--brass-ink);
   font-size: var(--text-xs);
   text-decoration: underline;
   text-underline-offset: 2px;
@@ -97,6 +97,20 @@
   font-family: var(--font-body);
   font-size: var(--text-sm);
   color: var(--ink);
+}
+
+.field:focus {
+  /* Always show it on fields (some, like date inputs, never match
+     :focus-visible in Chromium). */
+  outline: 2px solid var(--brass);
+  outline-offset: 1px;
+  border-color: var(--brass);
+}
+
+.field:focus-within,
+.field::-webkit-calendar-picker-indicator:focus-visible {
+  outline: 2px solid var(--brass);
+  outline-offset: 1px;
 }
 
 textarea.field {
