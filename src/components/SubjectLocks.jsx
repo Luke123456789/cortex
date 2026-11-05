@@ -11,6 +11,7 @@ const DURATION_OPTIONS = [
 
 const selectStyle = {
   flex: 1,
+  minWidth: 0,
   background: 'var(--paper)',
   border: '1px solid var(--rule)',
   borderRadius: '8px',
