@@ -20,6 +20,24 @@ function writeDraft(key, value) {
   }
 }
 
+// How the answer was produced, sent with it for the parent's integrity
+// check. Kept with the draft so a reload doesn't reset it.
+const EMPTY_TELEMETRY = { typedChars: 0, pastedChars: 0, pasteCount: 0, largestPaste: 0, droppedChars: 0, activeMs: 0, tabAways: 0, inputEvents: 0 }
+const IDLE_GAP_MS = 20000
+
+function readTelemetry(key) {
+  try { return { ...EMPTY_TELEMETRY, ...JSON.parse(localStorage.getItem(`${key}:t`) || '{}') } } catch { return { ...EMPTY_TELEMETRY } }
+}
+
+function writeTelemetry(key, value) {
+  try {
+    if (value) localStorage.setItem(`${key}:t`, JSON.stringify(value))
+    else localStorage.removeItem(`${key}:t`)
+  } catch {
+    // Storage unavailable: the record still goes with this session's answer.
+  }
+}
+
 const wordCount = (text) => (text.trim() ? text.trim().split(/\s+/).length : 0)
 const fmtClock = (s) => `${Math.floor(s / 60)}:${String(s % 60).padStart(2, '0')}`
 
@@ -100,6 +118,9 @@ export default function WrittenTest() {
   const [elapsed, setElapsed] = useState(0)
   const key = draftKey(studentId, questionId)
   const loaded = useRef(false)
+  const answerRef = useRef(null)
+  const telemetry = useRef({ ...EMPTY_TELEMETRY })
+  const lastInputAt = useRef(0)
 
   useEffect(() => {
     if (!studentId) return
@@ -118,6 +139,7 @@ export default function WrittenTest() {
       setAttempt((latest.data || [])[0] || null)
       if (!loaded.current) {
         setAnswer(readDraft(key))
+        telemetry.current = readTelemetry(key)
         loaded.current = true
       }
       setLoading(false)
@@ -125,6 +147,54 @@ export default function WrittenTest() {
     load()
     return () => { cancelled = true }
   }, [questionId, studentId, key])
+
+  // Record how text arrives in the answer box: typed (including phone
+  // keyboards and autocorrect), pasted or dropped, plus active time and tab
+  // switches. Monitoring only; nothing is blocked.
+  useEffect(() => {
+    const el = answerRef.current
+    if (!el) return
+    const t = telemetry.current
+    const save = () => writeTelemetry(key, telemetry.current)
+    function tick() {
+      const now = Date.now()
+      if (lastInputAt.current && now - lastInputAt.current <= IDLE_GAP_MS) t.activeMs += now - lastInputAt.current
+      lastInputAt.current = now
+      t.inputEvents += 1
+    }
+    function onBeforeInput(e) {
+      tick()
+      if (e.inputType === 'insertFromDrop') {
+        t.droppedChars += (e.dataTransfer?.getData('text') || '').length
+      } else if (e.inputType === 'insertLineBreak' || e.inputType === 'insertParagraph') {
+        t.typedChars += 1
+      } else if (e.inputType && e.inputType.startsWith('insert') && e.inputType !== 'insertFromPaste' && e.inputType !== 'insertFromPasteAsQuotation') {
+        t.typedChars += (e.data || '').length
+      }
+      save()
+    }
+    function onPaste(e) {
+      const len = (e.clipboardData?.getData('text') || '').length
+      t.pastedChars += len
+      t.pasteCount += 1
+      t.largestPaste = Math.max(t.largestPaste, len)
+      save()
+    }
+    function onVisibility() {
+      if (document.visibilityState === 'hidden' && answerRef.current?.value) {
+        t.tabAways += 1
+        save()
+      }
+    }
+    el.addEventListener('beforeinput', onBeforeInput)
+    el.addEventListener('paste', onPaste)
+    document.addEventListener('visibilitychange', onVisibility)
+    return () => {
+      el.removeEventListener('beforeinput', onBeforeInput)
+      el.removeEventListener('paste', onPaste)
+      document.removeEventListener('visibilitychange', onVisibility)
+    }
+  }, [key, pending, loading])
 
   useEffect(() => {
     if (!timerStart) return
@@ -148,11 +218,12 @@ export default function WrittenTest() {
       const res = await fetch(`${import.meta.env.VITE_SUPABASE_URL}/functions/v1/mark-written-answer`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${session.access_token}` },
-        body: JSON.stringify({ questionId, answer, studentId }),
+        body: JSON.stringify({ questionId, answer, studentId, telemetry: telemetry.current }),
       })
       const data = await res.json().catch(() => ({}))
       if (!res.ok) throw new Error(data.error || 'Marking failed. Try again in a moment.')
       writeDraft(key, '')
+      writeTelemetry(key, null)
       const { data: saved } = await supabase.from('fm_attempts').select('*').eq('id', data.attemptId).single()
       setAttempt(saved || null)
       setPending(false)
@@ -213,6 +284,7 @@ export default function WrittenTest() {
             </span>
           </div>
           <textarea
+            ref={answerRef}
             id="written-answer"
             className={`field ${styles.answer}`}
             rows={12}
@@ -223,7 +295,7 @@ export default function WrittenTest() {
             spellCheck={!/spelling, punctuation and grammar/i.test(question.question_text)}
           />
           <div className={styles.answerFooter}>
-            <span className="meta">{words} word{words === 1 ? '' : 's'} · saved on this device</span>
+            <span className="meta">{words} word{words === 1 ? '' : 's'} · saved on this device · pasted text is recorded</span>
             <button type="button" className="btn btn--primary" onClick={handleSubmit} disabled={submitting || !answer.trim()}>
               {submitting ? 'Marking…' : 'Submit for marking'}
             </button>

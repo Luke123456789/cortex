@@ -75,7 +75,8 @@ ${scheme.spag_marks ? `- Award spelling, punctuation and grammar separately, out
 - Check whether the answer did what the command word asks (${question.command_word}: ${commandWordHint(question.command_word) || 'as the question asks'}).
 - Feedback is for the student (a GCSE pupil): plain, specific and encouraging. Say "you".
 - The student can't see the mark scheme, so never refer to it by number ("point 3", "Level 2 descriptor"); say what the point is.
-- "missing" lists only things that would have earned more marks. If the answer got full marks, leave it empty.`
+- "missing" lists only things that would have earned more marks. If the answer got full marks, leave it empty.
+- Separately, judge whether the answer looks AI-generated rather than written by a GCSE pupil (e.g. vocabulary or polish well beyond the pupil's level, generic essay structure, no personal voice or slips, headings or bullet points in an essay, American spelling). This does NOT affect the mark. Most genuine answers are "low"; use "high" only when several signs point the same way. Never mention this in the student feedback.`
 }
 
 export function markingTool(question, scheme) {
@@ -95,8 +96,10 @@ export function markingTool(question, scheme) {
         next_step: { type: 'string', description: 'One concrete thing to do to gain the next mark next time' },
         command_word_satisfied: { type: 'boolean', description: 'Did the answer do what the command word asks?' },
         summary: { type: 'string', description: 'Two sentences of overall feedback for the student' },
+        ai_likelihood: { type: 'string', enum: ['low', 'medium', 'high'], description: 'How likely the answer is AI-generated (for the parent only; does not affect the mark)' },
+        ai_signals: { type: 'array', items: { type: 'string' }, description: 'The specific signs behind ai_likelihood (empty if low)' },
       },
-      required: ['content_marks', 'spag_marks', 'level', 'ao_awarded', 'credited', 'missing', 'next_step', 'command_word_satisfied', 'summary'],
+      required: ['content_marks', 'spag_marks', 'level', 'ao_awarded', 'credited', 'missing', 'next_step', 'command_word_satisfied', 'summary', 'ai_likelihood', 'ai_signals'],
     },
   }
 }
@@ -137,6 +140,8 @@ export function extractMark(anthropicResponseJson, question, scheme) {
     nextStep: cleanText(m.next_step),
     commandWordSatisfied: m.command_word_satisfied === true,
     summary: cleanText(m.summary),
+    aiLikelihood: ['low', 'medium', 'high'].includes(m.ai_likelihood) ? m.ai_likelihood : null,
+    aiSignals: strings(m.ai_signals),
   }
 }
 

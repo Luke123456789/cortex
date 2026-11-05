@@ -75,6 +75,11 @@ describe('extractMark', () => {
     expect(m.credited).toEqual(['a'])
   })
 
+  it('reads the AI judgement', () => {
+    expect(extractMark(response({ ...good, ai_likelihood: 'high', ai_signals: ['too polished'] }), pointsQ, pointsS)).toMatchObject({ aiLikelihood: 'high', aiSignals: ['too polished'] })
+    expect(extractMark(response({ ...good, ai_likelihood: 'maybe' }), pointsQ, pointsS).aiLikelihood).toBeNull()
+  })
+
   it('adds SPaG to content marks', () => {
     const m = extractMark(response({ ...good, content_marks: 20, spag_marks: 3, level: 4 }), essayQ, essayS)
     expect(m).toMatchObject({ marks: 23, contentMarks: 20, spagMarks: 3, level: 4 })

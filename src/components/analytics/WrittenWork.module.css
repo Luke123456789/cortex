@@ -124,3 +124,24 @@
   list-style: none;
   padding-left: 0;
 }
+
+.integrity {
+  display: grid;
+  gap: var(--space-2);
+  padding: var(--space-3);
+}
+
+.integrityFlagged {
+  border-color: var(--red);
+  background: var(--red-bg);
+}
+
+.integrityTag {
+  color: var(--red);
+  border-color: var(--red);
+}
+
+.small {
+  font-size: var(--text-xs);
+  color: var(--ink-soft);
+}

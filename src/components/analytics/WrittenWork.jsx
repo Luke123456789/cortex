@@ -28,6 +28,42 @@ function Scheme({ questionId }) {
   )
 }
 
+const mins = (ms) => Math.max(1, Math.round(ms / 60000))
+
+// How the answer was produced and any AI-writing signs (parents only).
+function Integrity({ integrity }) {
+  if (!integrity) return null
+  const t = integrity.typing || {}
+  const ai = integrity.ai || {}
+  return (
+    <div className={`card ${styles.integrity} ${integrity.flagged ? styles.integrityFlagged : ''}`}>
+      <h4 className="section-label">Integrity check</h4>
+      {integrity.flagged ? (
+        <ul className={styles.points}>{integrity.reasons.map((r, i) => <li key={i}>{r}</li>)}</ul>
+      ) : (
+        <p className={styles.text}>No signs of copying or AI writing.</p>
+      )}
+      {t.recorded && (
+        <p className={styles.runs}>
+          Typed {t.typedChars} chars · pasted {t.pastedChars} ({t.pasteCount} paste{t.pasteCount === 1 ? '' : 's'}) · active about {mins(t.activeMs)} min
+          {t.cpm != null ? ` · ${t.cpm} chars/min` : ''} · left the tab {t.tabAways}×
+        </p>
+      )}
+      {ai.likelihood && (
+        <>
+          <p className={styles.runs}>AI-written likelihood: {ai.likelihood}</p>
+          {[...(ai.signals || []).slice(0, 3), ...(ai.phraseSignals || [])].length > 0 && (
+            <ul className={`${styles.points} ${styles.small}`}>
+              {[...(ai.signals || []).slice(0, 3), ...(ai.phraseSignals || [])].map((sig, i) => <li key={i}>{sig}</li>)}
+            </ul>
+          )}
+        </>
+      )}
+      <p className="meta">Detection can be wrong either way, so treat this as a reason to ask, not proof.</p>
+    </div>
+  )
+}
+
 function Review({ attempt, onSaved }) {
   const [marks, setMarks] = useState(attempt.parent_marks ?? attempt.marks_awarded)
   const [note, setNote] = useState(attempt.parent_note || '')
@@ -96,7 +132,7 @@ export default function WrittenWork({ studentId, studentName }) {
     <section aria-labelledby="written-title">
       <h2 id="written-title" className="section-label">Written work</h2>
       <p className={styles.intro}>
-        Answers are marked twice by the AI against the mark scheme. Where the two markings disagree by more than 10% of the marks, it's flagged for you to check.
+        Answers are marked twice by the AI against the mark scheme. It's flagged for you to check where the two markings disagree by more than 10% of the marks, or where there are signs of pasting or AI writing.
         {toCheck > 0 ? ` ${toCheck} to check.` : ''}
       </p>
       {loading ? <p className="empty">Loading…</p> : attempts.length === 0 ? (
@@ -113,6 +149,7 @@ export default function WrittenWork({ studentId, studentName }) {
                   <span>
                     <span className={styles.title}>{q.subtopics?.name || 'Written answer'}</span>
                     {a.needs_review && <span className={`tag ${styles.flag}`}>Check</span>}
+                    {a.integrity?.flagged && <span className={`tag ${styles.flag} ${styles.integrityTag}`}>Integrity</span>}
                     <span className={`meta ${styles.sub}`}>
                       {q.topics?.subjects?.name} · {fmtDate(a.submitted_at)}{a.parent_marks != null ? ' · checked by you' : ''}
                     </span>
@@ -135,6 +172,7 @@ export default function WrittenWork({ studentId, studentName }) {
                       {Array.isArray(a.marking_runs) && (
                         <p className={styles.runs}>Two markings: {a.marking_runs.map((r) => (r ? r.marks : '–')).join(' and ')} → {a.marks_awarded}</p>
                       )}
+                      <Integrity integrity={a.integrity} />
                       <Scheme questionId={a.question_id} />
                       <Review attempt={a} onSaved={load} />
                     </div>

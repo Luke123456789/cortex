@@ -13,6 +13,7 @@ import {
   reconcile,
   computeMinutes,
 } from './marking-logic.js'
+import { buildIntegrity } from './integrity-logic.js'
 
 const ANTHROPIC_API_KEY = Deno.env.get('ANTHROPIC_API_KEY')
 const SUPABASE_URL = Deno.env.get('SUPABASE_URL')!
@@ -54,7 +55,7 @@ Deno.serve(async (req) => {
   const caller = await getCaller(req)
   if (!caller) return json({ error: 'Please sign in again.' }, 401)
 
-  const { questionId, answer, studentId } = await req.json().catch(() => ({}))
+  const { questionId, answer, studentId, telemetry } = await req.json().catch(() => ({}))
   if (!questionId) return json({ error: 'questionId required' }, 400)
   const checked = validateAnswer(answer)
   if (!checked.ok) return json({ error: checked.error }, 400)
@@ -110,6 +111,9 @@ Deno.serve(async (req) => {
   )
   if (!result) return json({ error: 'Marking failed. Your answer was not saved; try again in a moment.' }, 502)
 
+  // Copy/paste and AI-writing signals: for the parent only, never the mark.
+  const integrity = buildIntegrity({ telemetry, answer: checked.text, runs: result.runs })
+
   const minutes = computeMinutes(result.marks, question.total_marks, student.isPractice)
   const now = new Date().toISOString()
 
@@ -130,8 +134,9 @@ Deno.serve(async (req) => {
       next_step: result.nextStep,
       command_word_satisfied: result.commandWordSatisfied,
       feedback_summary: result.summary,
-      marking_runs: result.runs.map((r: any) => (r ? { marks: r.marks, level: r.level, summary: r.summary } : null)),
-      needs_review: result.needsReview,
+      marking_runs: result.runs.map((r: any) => (r ? { marks: r.marks, level: r.level, summary: r.summary, aiLikelihood: r.aiLikelihood } : null)),
+      needs_review: result.needsReview || integrity.flagged,
+      integrity,
       minutes_earned: minutes,
       submitted_at: now,
       marked_at: now,

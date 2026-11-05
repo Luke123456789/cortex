@@ -288,3 +288,21 @@ to the student straight away, labelled AI-marked, parent can adjust.
   (answer, feedback, both markings, mark scheme, Save mark).
 - Tested end to end as the practice student (2/2 Biology, 3/8 English with
   markings 3 and 4); review RPC checked; 0 minutes for practice.
+
+## Written answers: integrity checks
+
+- The answer page records how text arrives (beforeinput: typed incl. phone
+  keyboards/autocorrect; paste events with length; drops), active typing
+  time (gaps over 20 s ignored) and tab switches, kept with the draft and
+  sent with the answer. Students see "pasted text is recorded"; nothing is
+  blocked.
+- `integrity-logic.js` (tested in `test/integrity-logic.test.js`): flags 25%+
+  pasted, a single paste of 150+ chars, text unaccounted for by typing or
+  pasting, over 450 typed chars/min, or a missing record; a phrase check for
+  AI-style writing and formatting; each marking also returns ai_likelihood
+  and ai_signals (never shown to the student), combined by taking the
+  higher. Flags set needs_review and are stored in `fm_attempts.integrity`
+  (migration `written_integrity`); the mark and minutes are unchanged.
+- Tested as the practice student: a typed answer (391 chars/min) was not
+  flagged; a pasted AI-style answer was flagged for 100% paste and high AI
+  likelihood from both markings and the phrase check.
