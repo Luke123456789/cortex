@@ -1,0 +1,136 @@
+.intro {
+  font-size: var(--text-xs);
+  color: var(--ink-soft);
+  margin-bottom: var(--space-4);
+}
+
+/* Phone: the two selects side by side, button underneath.
+   Desktop: all three on one row. */
+.controls {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: var(--space-2);
+  margin-bottom: var(--space-5);
+}
+
+.controls > :global(.btn) {
+  grid-column: 1 / -1;
+}
+
+@media (min-width: 1024px) {
+  .controls {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) auto;
+    align-items: end;
+  }
+
+  .controls > :global(.btn) {
+    grid-column: auto;
+  }
+}
+
+.error {
+  margin-bottom: var(--space-4);
+}
+
+.history {
+  margin-top: var(--space-6);
+}
+
+.list {
+  list-style: none;
+}
+
+.item {
+  border-bottom: 1px solid var(--rule);
+}
+
+.row {
+  display: flex;
+  align-items: baseline;
+  gap: var(--space-2);
+  width: 100%;
+  padding: var(--space-3) 0;
+  border: none;
+  background: none;
+  text-align: left;
+}
+
+.row:hover .headline {
+  text-decoration: underline;
+  text-decoration-color: var(--rule-strong);
+}
+
+.chevron {
+  flex-shrink: 0;
+  width: 10px;
+  color: var(--ink-soft);
+  transition: transform var(--dur) var(--ease);
+}
+
+.row[aria-expanded='true'] .chevron {
+  transform: rotate(90deg);
+}
+
+.headline {
+  display: block;
+  font-size: var(--text-sm);
+}
+
+.expanded {
+  padding-bottom: var(--space-4);
+}
+
+/* Result card */
+.result {
+  margin-bottom: var(--space-4);
+}
+
+.resultHeadline {
+  font-size: var(--text-base);
+  font-weight: 600;
+  margin-bottom: var(--space-2);
+}
+
+.narrative {
+  font-size: var(--text-sm);
+  line-height: 1.5;
+  margin-bottom: var(--space-3);
+}
+
+.groups {
+  display: grid;
+  gap: var(--space-3);
+}
+
+@media (min-width: 1024px) {
+  .groups {
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  }
+}
+
+.groupTitle {
+  font-family: var(--font-mono);
+  font-size: var(--text-2xs);
+  font-weight: 600;
+  letter-spacing: 0.4px;
+  text-transform: uppercase;
+  margin-bottom: var(--space-1);
+}
+
+.strengths {
+  color: var(--green);
+}
+
+.improve {
+  color: var(--brass);
+}
+
+.next {
+  color: var(--ink-soft);
+}
+
+.points {
+  padding-left: 18px;
+  font-size: var(--text-sm);
+  line-height: 1.5;
+}

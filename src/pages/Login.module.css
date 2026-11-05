@@ -14,3 +14,28 @@
     padding: var(--space-7);
   }
 }
+
+.wordmark {
+  font-weight: 400;
+  margin-bottom: var(--space-1);
+}
+
+.subtitle {
+  font-family: var(--font-mono);
+  font-size: var(--text-2xs);
+  letter-spacing: 0.6px;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+  margin-bottom: var(--space-6);
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.input {
+  border-color: var(--rule-strong);
+  font-size: var(--text-base);
+}

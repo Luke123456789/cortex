@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import { supabase } from '../lib/supabaseClient'
 import { useAuth } from '../hooks/useAuth.jsx'
 import { useAssessments } from '../hooks/useAssessments'
+import styles from './Assessment.module.css'
 
 const WINDOW_OPTIONS = [
   { value: '24h', label: 'Past 24 hours' },
@@ -10,54 +11,34 @@ const WINDOW_OPTIONS = [
   { value: 'all', label: 'All time' },
 ]
 
-const selectStyle = {
-  flex: 1,
-  background: 'var(--paper)',
-  border: '1px solid var(--rule)',
-  borderRadius: '8px',
-  padding: '9px 10px',
-  fontSize: '12.5px',
-  fontFamily: "'Space Grotesk', sans-serif",
-  color: 'var(--ink)',
-}
-
 function formatTime(isoString) {
   return new Date(isoString).toLocaleString([], { day: '2-digit', month: 'short', hour: '2-digit', minute: '2-digit' })
 }
 
 function ResultCard({ result }) {
+  const groups = [
+    { key: 'strengths', title: 'Strengths', items: result.strengths, className: styles.strengths },
+    { key: 'improve', title: 'Areas to improve', items: result.areasToImprove, className: styles.improve },
+    { key: 'next', title: 'Recommended next steps', items: result.recommendedActions, className: styles.next },
+  ].filter((g) => g.items.length > 0)
+
   return (
-    <div style={{ background: 'var(--card)', border: '1.5px solid var(--rule-strong)', borderRadius: 'var(--radius)', padding: '16px', marginBottom: '16px' }}>
-      <div style={{ fontSize: '15px', fontWeight: 600, marginBottom: '10px' }}>{result.headline}</div>
-      <div style={{ fontSize: '13px', lineHeight: 1.5, marginBottom: '12px' }}>{result.narrative}</div>
-
-      {result.strengths.length > 0 && (
-        <div style={{ marginBottom: '10px' }}>
-          <div className="mono" style={{ fontSize: '9.5px', textTransform: 'uppercase', letterSpacing: '0.4px', color: 'var(--green)', marginBottom: '4px' }}>Strengths</div>
-          <ul style={{ margin: 0, paddingLeft: '18px', fontSize: '12.5px', lineHeight: 1.5 }}>
-            {result.strengths.map((s, i) => <li key={i}>{s}</li>)}
-          </ul>
+    <article className={`card card--strong ${styles.result}`}>
+      <h3 className={styles.resultHeadline}>{result.headline}</h3>
+      <p className={styles.narrative}>{result.narrative}</p>
+      {groups.length > 0 && (
+        <div className={styles.groups}>
+          {groups.map((g) => (
+            <div key={g.key}>
+              <h4 className={`${styles.groupTitle} ${g.className}`}>{g.title}</h4>
+              <ul className={styles.points}>
+                {g.items.map((item, i) => <li key={i}>{item}</li>)}
+              </ul>
+            </div>
+          ))}
         </div>
       )}
-
-      {result.areasToImprove.length > 0 && (
-        <div style={{ marginBottom: '10px' }}>
-          <div className="mono" style={{ fontSize: '9.5px', textTransform: 'uppercase', letterSpacing: '0.4px', color: 'var(--brass)', marginBottom: '4px' }}>Areas to improve</div>
-          <ul style={{ margin: 0, paddingLeft: '18px', fontSize: '12.5px', lineHeight: 1.5 }}>
-            {result.areasToImprove.map((s, i) => <li key={i}>{s}</li>)}
-          </ul>
-        </div>
-      )}
-
-      {result.recommendedActions.length > 0 && (
-        <div>
-          <div className="mono" style={{ fontSize: '9.5px', textTransform: 'uppercase', letterSpacing: '0.4px', color: 'var(--ink-faint)', marginBottom: '4px' }}>Recommended next steps</div>
-          <ul style={{ margin: 0, paddingLeft: '18px', fontSize: '12.5px', lineHeight: 1.5 }}>
-            {result.recommendedActions.map((s, i) => <li key={i}>{s}</li>)}
-          </ul>
-        </div>
-      )}
-    </div>
+    </article>
   )
 }
 
@@ -114,82 +95,76 @@ export default function Assessment() {
   }
 
   return (
-    <div className="device">
-      <div className="screen">
+    <div className="page">
+      <h1 className="section-label">Assess {studentLabel}</h1>
+      <p className={styles.intro}>
+        Pulls recent tutor sessions, quizzes and written tests and asks the model for an honest read on progress. Runs only when you ask — nothing here happens automatically.
+      </p>
 
-        <div className="section-label">Assess {studentLabel}</div>
-        <div style={{ fontSize: '11.5px', color: 'var(--ink-faint)', marginBottom: '14px' }}>
-          Pulls recent tutor sessions, quizzes and written tests and asks the model for an honest read on progress. Runs only when you ask — nothing here happens automatically.
-        </div>
-
-        <div style={{ display: 'flex', gap: '8px', marginBottom: '10px' }}>
-          <select style={selectStyle} value={subjectId} onChange={(e) => setSubjectId(e.target.value)}>
+      <div className={styles.controls}>
+        <div>
+          <label className="field-label" htmlFor="assess-subject">Subject</label>
+          <select id="assess-subject" className="field" value={subjectId} onChange={(e) => setSubjectId(e.target.value)}>
             <option value="">All subjects</option>
             {subjects.map((s) => (
               <option key={s.id} value={s.id}>{s.name}</option>
             ))}
           </select>
-          <select style={selectStyle} value={windowKey} onChange={(e) => setWindowKey(e.target.value)}>
+        </div>
+        <div>
+          <label className="field-label" htmlFor="assess-window">Period</label>
+          <select id="assess-window" className="field" value={windowKey} onChange={(e) => setWindowKey(e.target.value)}>
             {WINDOW_OPTIONS.map((opt) => (
               <option key={opt.value} value={opt.value}>{opt.label}</option>
             ))}
           </select>
         </div>
-
-        <button
-          onClick={handleAssess}
-          disabled={running}
-          style={{
-            width: '100%',
-            background: 'var(--ink)',
-            color: 'var(--paper)',
-            border: 'none',
-            borderRadius: '8px',
-            padding: '11px',
-            fontSize: '13px',
-            fontWeight: 600,
-            marginBottom: '18px',
-            opacity: running ? 0.6 : 1,
-          }}
-        >
+        <button type="button" className="btn btn--primary" onClick={handleAssess} disabled={running}>
           {running ? 'Assessing…' : `Assess ${studentLabel}`}
         </button>
-
-        {error && (
-          <div style={{ fontSize: '12.5px', color: 'var(--red)', marginBottom: '16px' }}>{error}</div>
-        )}
-
-        {latestResult && <ResultCard result={latestResult} />}
-
-        <div className="section-label" style={{ marginTop: '10px' }}>Past assessments</div>
-        {historyLoading ? (
-          <div style={{ fontSize: '13px', color: 'var(--ink-faint)' }}>Loading…</div>
-        ) : assessments.length === 0 ? (
-          <div style={{ fontSize: '13px', color: 'var(--ink-faint)' }}>No assessments run yet.</div>
-        ) : (
-          assessments.map((a) => {
-            const isExpanded = expandedId === a.id
-            return (
-              <div key={a.id} style={{ borderBottom: '1px solid var(--rule)' }}>
-                <div
-                  onClick={() => setExpandedId(isExpanded ? null : a.id)}
-                  style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '10px 0', cursor: 'pointer' }}
-                >
-                  <div>
-                    <div style={{ fontSize: '13.5px' }}>
-                      {a.status === 'error' ? 'Assessment failed' : (a.result?.headline || 'Assessment')}
-                    </div>
-                    <span className="mono" style={{ fontSize: '9.5px', color: 'var(--ink-faint)' }}>
-                      {a.subjects?.name || 'All subjects'} · {WINDOW_OPTIONS.find((w) => w.value === a.time_window)?.label || a.time_window} · {formatTime(a.requested_at)}
-                    </span>
-                  </div>
-                </div>
-                {isExpanded && a.result && <ResultCard result={a.result} />}
-              </div>
-            )
-          })
-        )}
       </div>
+
+      {error && <p className={`error-text ${styles.error}`} role="alert">{error}</p>}
+
+      {latestResult && <ResultCard result={latestResult} />}
+
+      <section className={styles.history} aria-labelledby="assess-history">
+        <h2 id="assess-history" className="section-label">Past assessments</h2>
+        {historyLoading ? (
+          <p className="empty">Loading…</p>
+        ) : assessments.length === 0 ? (
+          <p className="empty">No assessments run yet.</p>
+        ) : (
+          <ul className={styles.list}>
+            {assessments.map((a) => {
+              const isExpanded = expandedId === a.id
+              return (
+                <li key={a.id} className={styles.item}>
+                  <button
+                    type="button"
+                    className={styles.row}
+                    aria-expanded={isExpanded}
+                    onClick={() => setExpandedId(isExpanded ? null : a.id)}
+                  >
+                    <span className={styles.chevron} aria-hidden="true">{a.result ? '›' : ''}</span>
+                    <span>
+                      <span className={styles.headline}>
+                        {a.status === 'error' ? 'Assessment failed' : (a.result?.headline || 'Assessment')}
+                      </span>
+                      <span className="meta">
+                        {a.subjects?.name || 'All subjects'} · {WINDOW_OPTIONS.find((w) => w.value === a.time_window)?.label || a.time_window} · {formatTime(a.requested_at)}
+                      </span>
+                    </span>
+                  </button>
+                  {isExpanded && a.result && (
+                    <div className={styles.expanded}><ResultCard result={a.result} /></div>
+                  )}
+                </li>
+              )
+            })}
+          </ul>
+        )}
+      </section>
     </div>
   )
 }

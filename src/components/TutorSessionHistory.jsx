@@ -1,16 +1,17 @@
 import { useState } from 'react'
 import { useTutorSessions } from '../hooks/useTutorSessions'
+import styles from './TutorSessionHistory.module.css'
 
 function formatTime(isoString) {
   return new Date(isoString).toLocaleString([], { day: '2-digit', month: 'short', hour: '2-digit', minute: '2-digit' })
 }
 
 function sessionStatus(session) {
-  if (!session.completedAt) return { text: 'In progress', color: 'var(--ink-faint)' }
+  if (!session.completedAt) return { text: 'In progress', earned: false }
   if (session.rewardClaimed && session.minutesEarned > 0) {
-    return { text: `+${session.minutesEarned} min`, color: 'var(--green)' }
+    return { text: `+${session.minutesEarned} min`, earned: true }
   }
-  return { text: 'No reward', color: 'var(--ink-faint)' }
+  return { text: 'No reward', earned: false }
 }
 
 export default function TutorSessionHistory({ studentId }) {
@@ -19,110 +20,86 @@ export default function TutorSessionHistory({ studentId }) {
   const [expandedId, setExpandedId] = useState(null)
 
   if (loading) {
-    return <div style={{ fontSize: '12px', color: 'var(--ink-faint)', marginBottom: '18px' }}>Loading tutor sessions…</div>
+    return <p className="empty">Loading tutor sessions…</p>
   }
 
   if (sessions.length === 0) {
     return (
-      <div style={{ marginBottom: '20px' }}>
-        <div className="section-label">Tutor sessions</div>
-        <div style={{ fontSize: '12px', color: 'var(--ink-faint)' }}>No tutor sessions yet.</div>
-      </div>
+      <section aria-labelledby="sessions-title">
+        <h1 id="sessions-title" className="section-label">Tutor sessions</h1>
+        <p className="empty">No tutor sessions yet.</p>
+      </section>
     )
   }
 
   const visible = showAll ? sessions : sessions.slice(0, 6)
 
   return (
-    <div style={{ marginBottom: '20px' }}>
-      <div className="section-label">Tutor sessions</div>
-      {visible.map((session) => {
-        const status = sessionStatus(session)
-        const isExpanded = expandedId === session.id
-        const hasTranscript = session.messages.length > 0
-        return (
-          <div key={session.id} style={{ borderBottom: '1px solid var(--rule)' }}>
-            <div
-              onClick={() => hasTranscript && setExpandedId(isExpanded ? null : session.id)}
-              style={{
-                display: 'flex',
-                justifyContent: 'space-between',
-                alignItems: 'center',
-                padding: '10px 0',
-                gap: '10px',
-                cursor: hasTranscript ? 'pointer' : 'default',
-              }}
-            >
-              <div>
-                <div style={{ fontSize: '13.5px' }}>
-                  {hasTranscript && (
-                    <span style={{ display: 'inline-block', marginRight: '6px', color: 'var(--ink-faint)', transform: isExpanded ? 'rotate(90deg)' : 'none', transition: 'transform 0.15s' }}>
-                      ›
-                    </span>
-                  )}
-                  {session.subtopicName || 'Unknown topic'}
-                </div>
-                <span className="mono" style={{ fontSize: '9.5px', color: 'var(--ink-faint)' }}>
-                  {[session.subjectName, session.topicName].filter(Boolean).join(' · ')}
-                  {' · '}{formatTime(session.startedAt)}
-                  {' · '}{session.messageCount} message{session.messageCount === 1 ? '' : 's'}
-                </span>
-              </div>
-              <span
-                className="mono"
-                style={{ fontSize: '12px', fontWeight: 600, color: status.color, whiteSpace: 'nowrap' }}
-              >
-                {status.text}
+    <section aria-labelledby="sessions-title">
+      <h1 id="sessions-title" className="section-label">Tutor sessions</h1>
+      <div className={styles.head} aria-hidden="true">
+        <span>Lesson</span>
+        <span>Subject · topic</span>
+        <span>Started</span>
+        <span>Messages</span>
+        <span className={styles.num}>Result</span>
+      </div>
+      <ul className={styles.list}>
+        {visible.map((session) => {
+          const status = sessionStatus(session)
+          const isExpanded = expandedId === session.id
+          const hasTranscript = session.messages.length > 0
+          const subjectLine = [session.subjectName, session.topicName].filter(Boolean).join(' · ')
+          const messagesLabel = `${session.messageCount} message${session.messageCount === 1 ? '' : 's'}`
+          const cells = (
+            <>
+              <span className={styles.lesson}>
+                <span className={styles.chevron} aria-hidden="true">{hasTranscript ? '›' : ''}</span>
+                <span>{session.subtopicName || 'Unknown topic'}</span>
               </span>
-            </div>
-            {isExpanded && (
-              <div
-                style={{
-                  display: 'flex',
-                  flexDirection: 'column',
-                  gap: '8px',
-                  padding: '4px 0 14px',
-                }}
-              >
-                {session.messages.map((m, i) => (
-                  <div
-                    key={i}
-                    style={{
-                      alignSelf: m.role === 'user' ? 'flex-end' : 'flex-start',
-                      maxWidth: '85%',
-                    }}
-                  >
-                    <div className="mono" style={{ fontSize: '9px', color: 'var(--ink-faint)', textAlign: m.role === 'user' ? 'right' : 'left', marginBottom: '2px' }}>
-                      {m.role === 'user' ? 'Student' : 'Tutor'}
+              <span className={`meta ${styles.metaLine}`}>
+                {subjectLine}{' · '}{formatTime(session.startedAt)}{' · '}{messagesLabel}
+              </span>
+              <span className={styles.subject}>{subjectLine}</span>
+              <span className={`meta ${styles.started}`}>{formatTime(session.startedAt)}</span>
+              <span className={`meta ${styles.messages}`}>{messagesLabel}</span>
+              <span className={`${styles.status} ${status.earned ? styles.earned : ''}`}>{status.text}</span>
+            </>
+          )
+          return (
+            <li key={session.id} className={styles.item}>
+              {hasTranscript ? (
+                <button
+                  type="button"
+                  className={styles.row}
+                  aria-expanded={isExpanded}
+                  aria-controls={`transcript-${session.id}`}
+                  onClick={() => setExpandedId(isExpanded ? null : session.id)}
+                >
+                  {cells}
+                </button>
+              ) : (
+                <div className={styles.row}>{cells}</div>
+              )}
+              {isExpanded && (
+                <div id={`transcript-${session.id}`} className={styles.transcript}>
+                  {session.messages.map((m, i) => (
+                    <div key={i} className={`${styles.message} ${m.role === 'user' ? styles.fromStudent : ''}`}>
+                      <div className={styles.who}>{m.role === 'user' ? 'Student' : 'Tutor'}</div>
+                      <div className={styles.bubble}>{m.content}</div>
                     </div>
-                    <div
-                      style={{
-                        background: m.role === 'user' ? 'var(--ink)' : 'var(--card)',
-                        color: m.role === 'user' ? 'var(--paper)' : 'var(--ink)',
-                        border: m.role === 'user' ? 'none' : '1px solid var(--rule)',
-                        borderRadius: '10px',
-                        padding: '9px 12px',
-                        fontSize: '13px',
-                        lineHeight: 1.45,
-                      }}
-                    >
-                      {m.content}
-                    </div>
-                  </div>
-                ))}
-              </div>
-            )}
-          </div>
-        )
-      })}
+                  ))}
+                </div>
+              )}
+            </li>
+          )
+        })}
+      </ul>
       {!showAll && sessions.length > 6 && (
-        <button
-          onClick={() => setShowAll(true)}
-          style={{ background: 'none', border: 'none', fontSize: '12px', color: 'var(--brass)', textDecoration: 'underline', padding: 0, marginTop: '8px' }}
-        >
+        <button type="button" className={`link ${styles.more}`} onClick={() => setShowAll(true)}>
           View more ({sessions.length - 6} more)
         </button>
       )}
-    </div>
+    </section>
   )
 }

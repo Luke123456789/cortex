@@ -148,3 +148,26 @@ not a rebrand. No Tailwind, no component library.
 - Review screenshots with sample rows: a throwaway script intercepted
   Supabase requests in the browser (all writes answered locally, nothing hit
   the database). Not committed.
+
+## What stage (c) built (parent pages)
+
+- Stage (b) was pushed to `main` after review (`ec8e3ad`).
+- Overview: pending requests across the top (a grid of cards on desktop);
+  then exams + subject lockouts | a "Quick actions" column (sticky) on
+  desktop. Phone keeps the original order. SubjectLocks stays on Overview as
+  well as `/parent/locks` (no feature removed).
+- SubjectLocks: labelled fields; subject | topic | duration + Lock on one row
+  on desktop.
+- Assign work: form | pending + recently completed on desktop; labelled
+  fields; type picker is a group of `aria-pressed` buttons.
+- Redemptions: table with a sticky header from 640px, stacked rows on phone.
+  Activity's table now scrolls with the page too (`overflow: clip`), so the
+  header sticks to the window instead of an inner scroll box.
+- Tutor transcripts: rows are `<button aria-expanded>`; desktop shows
+  columns (lesson, subject · topic, started, messages, result) under a sticky
+  header row.
+- Assessment: subject | period | Assess on one row on desktop; result groups
+  side by side; history rows are `<button aria-expanded>`.
+- Login: labels tied to inputs, shared field/button classes.
+- No inline styles left except runtime values (quiz progress width, chat
+  height). `.device`/`.screen` removed from `layout.css`.

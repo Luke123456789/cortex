@@ -27,75 +27,44 @@ export default function Login() {
 
   return (
     <div className="page--centered">
-      <div className={styles.card}>
-        <div className="wordmark" style={{ marginBottom: '4px' }}>CORTEX</div>
-        <div className="mono" style={{ fontSize: '10px', letterSpacing: '0.6px', textTransform: 'uppercase', color: 'var(--ink-soft)', marginBottom: '26px' }}>
-          Sign in
-        </div>
+      <main className={styles.card}>
+        <h1 className={`wordmark ${styles.wordmark}`}>CORTEX</h1>
+        <p className={styles.subtitle}>Sign in</p>
 
-        <form onSubmit={handleSubmit}>
-          <label style={{ display: 'block', fontSize: '12px', color: 'var(--ink-soft)', marginBottom: '6px' }}>
-            Email
-          </label>
-          <input
-            type="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            required
-            style={{
-              width: '100%',
-              padding: '10px 12px',
-              borderRadius: '8px',
-              border: '1px solid var(--rule-strong)',
-              background: 'var(--card)',
-              fontSize: '14px',
-              marginBottom: '16px',
-              fontFamily: 'Space Grotesk, sans-serif',
-            }}
-          />
+        <form className={styles.form} onSubmit={handleSubmit}>
+          <div>
+            <label className="field-label" htmlFor="login-email">Email</label>
+            <input
+              id="login-email"
+              className={`field ${styles.input}`}
+              type="email"
+              autoComplete="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              required
+            />
+          </div>
 
-          <label style={{ display: 'block', fontSize: '12px', color: 'var(--ink-soft)', marginBottom: '6px' }}>
-            Password
-          </label>
-          <input
-            type="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            required
-            style={{
-              width: '100%',
-              padding: '10px 12px',
-              borderRadius: '8px',
-              border: '1px solid var(--rule-strong)',
-              background: 'var(--card)',
-              fontSize: '14px',
-              marginBottom: '20px',
-              fontFamily: 'Space Grotesk, sans-serif',
-            }}
-          />
+          <div>
+            <label className="field-label" htmlFor="login-password">Password</label>
+            <input
+              id="login-password"
+              className={`field ${styles.input}`}
+              type="password"
+              autoComplete="current-password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              required
+            />
+          </div>
 
-          {error && (
-            <div style={{ fontSize: '12.5px', color: 'var(--red)', marginBottom: '14px' }}>{error}</div>
-          )}
+          {error && <p className="error-text" role="alert">{error}</p>}
 
-          <button
-            type="submit"
-            disabled={submitting}
-            style={{
-              width: '100%',
-              background: 'var(--ink)',
-              color: 'var(--paper)',
-              border: 'none',
-              borderRadius: '8px',
-              padding: '11px',
-              fontSize: '13px',
-              fontWeight: 600,
-            }}
-          >
+          <button type="submit" className="btn btn--primary btn--block" disabled={submitting}>
             {submitting ? 'Signing in…' : 'Sign in'}
           </button>
         </form>
-      </div>
+      </main>
     </div>
   )
 }

@@ -73,19 +73,3 @@
   -webkit-overflow-scrolling: touch;
   max-width: 100%;
 }
-
-/* Legacy page wrappers from the phone-frame layout. The frame itself is gone;
-   these now behave like .page and are removed as each page moves to its own
-   CSS Module (stages b and c). */
-.device {
-  width: 100%;
-  min-width: 0;
-}
-
-.screen {
-  width: 100%;
-  max-width: var(--content-reading);
-  margin-inline: auto;
-  padding: var(--space-5) var(--gutter) var(--space-7);
-  min-width: 0;
-}

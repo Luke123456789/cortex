@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import { useSubjectLocks } from '../hooks/useSubjectLocks'
+import styles from './SubjectLocks.module.css'
 
 const DURATION_OPTIONS = [
   { label: '6 hours', hours: 6 },
@@ -8,18 +9,6 @@ const DURATION_OPTIONS = [
   { label: '1 week', hours: 168 },
   { label: '2 weeks', hours: 336 },
 ]
-
-const selectStyle = {
-  flex: 1,
-  minWidth: 0,
-  background: 'var(--paper)',
-  border: '1px solid var(--rule)',
-  borderRadius: '8px',
-  padding: '9px 10px',
-  fontSize: '12.5px',
-  fontFamily: "'Space Grotesk', sans-serif",
-  color: 'var(--ink)',
-}
 
 function formatLockedUntil(date) {
   return date.toLocaleString([], { day: '2-digit', month: 'short', hour: '2-digit', minute: '2-digit' })
@@ -62,7 +51,7 @@ export default function SubjectLocks({ studentId }) {
   }
 
   if (loading) {
-    return <div style={{ fontSize: '12px', color: 'var(--ink-faint)', marginBottom: '18px' }}>Loading subjects…</div>
+    return <p className="empty">Loading subjects…</p>
   }
 
   if (subjects.length === 0) {
@@ -70,92 +59,62 @@ export default function SubjectLocks({ studentId }) {
   }
 
   return (
-    <div style={{ marginBottom: '20px' }}>
-      <div className="section-label">Subject lockouts</div>
-      <div style={{ fontSize: '11.5px', color: 'var(--ink-faint)', marginBottom: '10px' }}>
+    <section aria-labelledby="locks-title">
+      <h2 id="locks-title" className="section-label">Subject lockouts</h2>
+      <p className={styles.intro}>
         Lock a subject or a single topic to stop quiz grinding and push practice toward other areas.
-      </div>
+      </p>
 
-      <div style={{ display: 'flex', gap: '8px', marginBottom: '8px' }}>
-        <select style={selectStyle} value={subjectId} onChange={(e) => setSubjectId(e.target.value)}>
-          {subjects.map((s) => (
-            <option key={s.id} value={s.id}>{s.name}</option>
-          ))}
-        </select>
-        <select style={selectStyle} value={topicId} onChange={(e) => setTopicId(e.target.value)}>
-          <option value="">Entire subject</option>
-          {topics.map((t) => (
-            <option key={t.id} value={t.id}>{t.name}</option>
-          ))}
-        </select>
-      </div>
-
-      <div style={{ display: 'flex', gap: '8px', marginBottom: '14px' }}>
-        <select style={selectStyle} value={hours} onChange={(e) => setHours(Number(e.target.value))}>
-          {DURATION_OPTIONS.map((opt) => (
-            <option key={opt.hours} value={opt.hours}>{opt.label}</option>
-          ))}
-        </select>
-        <button
-          onClick={handleLock}
-          disabled={busy || !subjectId}
-          style={{
-            background: 'var(--ink)',
-            color: 'var(--paper)',
-            border: 'none',
-            borderRadius: '8px',
-            padding: '9px 18px',
-            fontSize: '12.5px',
-            fontWeight: 600,
-            whiteSpace: 'nowrap',
-          }}
-        >
-          Lock
-        </button>
+      <div className={styles.form}>
+        <div>
+          <label className="field-label" htmlFor="lock-subject">Subject</label>
+          <select id="lock-subject" className="field" value={subjectId} onChange={(e) => setSubjectId(e.target.value)}>
+            {subjects.map((s) => (
+              <option key={s.id} value={s.id}>{s.name}</option>
+            ))}
+          </select>
+        </div>
+        <div>
+          <label className="field-label" htmlFor="lock-topic">Topic</label>
+          <select id="lock-topic" className="field" value={topicId} onChange={(e) => setTopicId(e.target.value)}>
+            <option value="">Entire subject</option>
+            {topics.map((t) => (
+              <option key={t.id} value={t.id}>{t.name}</option>
+            ))}
+          </select>
+        </div>
+        <div className={styles.durationField}>
+          <label className="field-label" htmlFor="lock-duration">For</label>
+          <div className={styles.duration}>
+            <select id="lock-duration" className="field" value={hours} onChange={(e) => setHours(Number(e.target.value))}>
+              {DURATION_OPTIONS.map((opt) => (
+                <option key={opt.hours} value={opt.hours}>{opt.label}</option>
+              ))}
+            </select>
+            <button type="button" className="btn btn--primary" onClick={handleLock} disabled={busy || !subjectId}>
+              Lock
+            </button>
+          </div>
+        </div>
       </div>
 
       {locks.length === 0 ? (
-        <div style={{ fontSize: '12px', color: 'var(--ink-faint)' }}>Nothing locked right now.</div>
+        <p className="empty">Nothing locked right now.</p>
       ) : (
-        <div style={{ display: 'grid', gap: '6px' }}>
+        <ul className={styles.locks}>
           {locks.map((l) => (
-            <div
-              key={l.id}
-              style={{
-                display: 'flex',
-                justifyContent: 'space-between',
-                alignItems: 'center',
-                background: 'var(--card)',
-                border: '1px solid var(--rule)',
-                borderRadius: 'var(--radius)',
-                padding: '9px 12px',
-              }}
-            >
+            <li key={l.id} className={`card ${styles.lock}`}>
               <div>
-                <div style={{ fontSize: '13px', fontWeight: 600 }}>{l.label}</div>
-                <div className="mono" style={{ fontSize: '9.5px', color: 'var(--ink-faint)' }}>
-                  Unlocks {formatLockedUntil(l.lockedUntil)}
-                </div>
+                <div className={styles.lockLabel}>{l.label}</div>
+                <div className="meta">Unlocks {formatLockedUntil(l.lockedUntil)}</div>
               </div>
-              <button
-                onClick={() => handleUnlock(l.id)}
-                disabled={busy}
-                style={{
-                  background: 'transparent',
-                  border: '1px solid var(--rule-strong)',
-                  borderRadius: '8px',
-                  padding: '6px 12px',
-                  fontSize: '11.5px',
-                  fontWeight: 600,
-                  color: 'var(--ink)',
-                }}
-              >
+              <button type="button" className="btn btn--secondary btn--small" onClick={() => handleUnlock(l.id)} disabled={busy}>
                 Unlock
               </button>
-            </div>
+            </li>
           ))}
-        </div>
+        </ul>
       )}
-    </div>
+    </section>
   )
 }

@@ -4,11 +4,8 @@ import { useAuth } from '../hooks/useAuth.jsx'
 export default function TutorSessions() {
   const { childStudent } = useAuth()
   return (
-    <div className="device">
-      <div className="screen">
-
-        <TutorSessionHistory studentId={childStudent?.id} />
-      </div>
+    <div className="page page--wide">
+      <TutorSessionHistory studentId={childStudent?.id} />
     </div>
   )
 }

@@ -1,5 +1,6 @@
 import { useRedemptions } from '../hooks/useRedemptions'
 import { useAuth } from '../hooks/useAuth.jsx'
+import styles from './RedemptionHistory.module.css'
 
 function formatTime(isoString) {
   return new Date(isoString).toLocaleString([], { day: '2-digit', month: 'short', hour: '2-digit', minute: '2-digit' })
@@ -11,46 +12,37 @@ export default function RedemptionHistory() {
   const resolvedRequests = requests.filter((r) => r.status !== 'pending')
 
   return (
-    <div className="device">
-      <div className="screen">
+    <div className="page">
+      <h1 className="section-label">Redemption requests</h1>
 
-        <div className="section-label">Redemption requests</div>
-
-        {loading ? (
-          <div style={{ fontSize: '13px', color: 'var(--ink-faint)' }}>Loading…</div>
-        ) : resolvedRequests.length === 0 ? (
-          <div style={{ fontSize: '13px', color: 'var(--ink-faint)' }}>No requests yet.</div>
-        ) : (
-          resolvedRequests.map((request) => (
-            <div
-              key={request.id}
-              style={{
-                display: 'flex',
-                justifyContent: 'space-between',
-                alignItems: 'center',
-                padding: '10px 0',
-                borderBottom: '1px solid var(--rule)',
-              }}
-            >
-              <div>
-                <div style={{ fontSize: '13.5px' }}>{request.minutes_requested} min requested</div>
-                <span className="mono" style={{ fontSize: '9.5px', color: 'var(--ink-faint)' }}>{formatTime(request.requested_at)}</span>
-              </div>
-              <span
-                className="mono"
-                style={{
-                  fontSize: '11px',
-                  fontWeight: 600,
-                  textTransform: 'uppercase',
-                  color: request.status === 'approved' ? 'var(--green)' : 'var(--red)',
-                }}
-              >
-                {request.status}
-              </span>
-            </div>
-          ))
-        )}
-      </div>
+      {loading ? (
+        <p className="empty">Loading…</p>
+      ) : resolvedRequests.length === 0 ? (
+        <p className="empty">No requests yet.</p>
+      ) : (
+        <div className={styles.scroller}>
+          <table className={styles.table}>
+            <thead>
+              <tr>
+                <th scope="col">Requested</th>
+                <th scope="col">When</th>
+                <th scope="col">Status</th>
+              </tr>
+            </thead>
+            <tbody>
+              {resolvedRequests.map((request) => (
+                <tr key={request.id}>
+                  <td className={styles.minutes}>{request.minutes_requested} min requested</td>
+                  <td className={`meta ${styles.when}`}>{formatTime(request.requested_at)}</td>
+                  <td className={`${styles.status} ${request.status === 'approved' ? styles.approved : styles.denied}`}>
+                    {request.status}
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      )}
     </div>
   )
 }

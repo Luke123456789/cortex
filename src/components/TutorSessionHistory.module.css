@@ -1,0 +1,194 @@
+.list {
+  list-style: none;
+}
+
+.item {
+  border-bottom: 1px solid var(--rule);
+}
+
+/* Phone/tablet: title + meta line, status on the right.
+   Desktop: real columns under a sticky header row. */
+.row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  grid-template-areas:
+    'lesson status'
+    'meta meta';
+  align-items: center;
+  column-gap: var(--space-3);
+  row-gap: 2px;
+  width: 100%;
+  padding: var(--space-3) 0;
+  border: none;
+  background: none;
+  text-align: left;
+  font-size: var(--text-sm);
+}
+
+button.row:hover .lesson {
+  text-decoration: underline;
+  text-decoration-color: var(--rule-strong);
+}
+
+.lesson {
+  grid-area: lesson;
+  display: flex;
+  align-items: baseline;
+  gap: var(--space-2);
+  min-width: 0;
+}
+
+.chevron {
+  flex-shrink: 0;
+  display: inline-block;
+  width: 10px;
+  color: var(--ink-soft);
+  transition: transform var(--dur) var(--ease);
+}
+
+[aria-expanded='true'] .chevron {
+  transform: rotate(90deg);
+}
+
+.subject,
+.started,
+.messages {
+  grid-area: meta;
+}
+
+/* On phone these three share the meta line. */
+.metaLine {
+  grid-area: meta;
+  padding-left: calc(10px + var(--space-2));
+}
+
+.subject,
+.started,
+.messages {
+  display: none;
+}
+
+.status {
+  grid-area: status;
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  font-weight: 600;
+  white-space: nowrap;
+  color: var(--ink-soft);
+}
+
+.earned {
+  color: var(--green);
+}
+
+.head {
+  display: none;
+}
+
+.transcript {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  max-width: var(--content-reading);
+  padding: var(--space-1) 0 var(--space-4);
+}
+
+.message {
+  align-self: flex-start;
+  max-width: 85%;
+}
+
+.fromStudent {
+  align-self: flex-end;
+}
+
+.who {
+  font-family: var(--font-mono);
+  font-size: var(--text-2xs);
+  color: var(--ink-soft);
+  margin-bottom: 2px;
+}
+
+.fromStudent .who {
+  text-align: right;
+}
+
+.bubble {
+  background: var(--card);
+  color: var(--ink);
+  border: 1px solid var(--rule);
+  border-radius: var(--radius);
+  padding: var(--space-2) var(--space-3);
+  font-size: var(--text-sm);
+  line-height: 1.45;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+
+.fromStudent .bubble {
+  background: var(--ink);
+  border-color: var(--ink);
+  color: var(--paper);
+}
+
+.more {
+  margin-top: var(--space-3);
+}
+
+@media (min-width: 1024px) {
+  .row,
+  .head {
+    grid-template-columns: minmax(0, 2fr) minmax(0, 2fr) 130px 90px 90px;
+    grid-template-areas: 'lesson subject started messages status';
+  }
+
+  .head {
+    display: grid;
+    column-gap: var(--space-3);
+    position: sticky;
+    top: 0;
+    z-index: 1;
+    padding: var(--space-2) 0;
+    background: var(--paper);
+    border-bottom: 1px solid var(--rule-strong);
+    font-family: var(--font-mono);
+    font-size: var(--text-2xs);
+    font-weight: 600;
+    letter-spacing: 0.8px;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+  }
+
+  .metaLine {
+    display: none;
+  }
+
+  .subject,
+  .started,
+  .messages {
+    display: block;
+  }
+
+  .subject {
+    grid-area: subject;
+    font-size: var(--text-xs);
+    color: var(--ink-soft);
+  }
+
+  .started {
+    grid-area: started;
+  }
+
+  .messages {
+    grid-area: messages;
+  }
+
+  .status,
+  .head .num {
+    text-align: right;
+  }
+
+  .transcript {
+    padding-left: calc(10px + var(--space-2));
+  }
+}

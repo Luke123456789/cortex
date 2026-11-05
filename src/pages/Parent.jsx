@@ -5,6 +5,7 @@ import { useAuth } from '../hooks/useAuth.jsx'
 import { supabase } from '../lib/supabaseClient'
 import ExamCountdown from '../components/ExamCountdown.jsx'
 import SubjectLocks from '../components/SubjectLocks.jsx'
+import styles from './Parent.module.css'
 import { getExistingSubscription, subscribeToPush, ensureSubscriptionSaved, pushSupported } from '../lib/push.js'
 
 function formatTime(isoString) {
@@ -83,178 +84,62 @@ export default function Parent() {
   const pendingRequests = requests.filter((r) => r.status === 'pending')
 
   return (
-    <div className="device">
-      <div className="screen">
-        <div className="mono" style={{ fontSize: '10px', letterSpacing: '0.6px', textTransform: 'uppercase', color: 'var(--ink-soft)', marginBottom: '16px' }}>
-          Parent approvals
+    <div className="page page--wide">
+      <h1 className={`section-label ${styles.title}`}>Parent approvals</h1>
+
+      {pendingRequests.length > 0 && (
+        <section className={styles.requests} aria-labelledby="parent-requests">
+          <h2 id="parent-requests" className={`section-label ${styles.requestsTitle}`}>
+            New request{pendingRequests.length > 1 ? 's' : ''}
+          </h2>
+          <ul className={styles.requestList}>
+            {pendingRequests.map((request) => (
+              <li key={request.id} className={styles.request}>
+                <div className={styles.requestTop}>
+                  <span className={styles.minutes}>{request.minutes_requested} min</span>
+                  <span className="meta">{formatTime(request.requested_at)}</span>
+                </div>
+                <div className={styles.requestActions}>
+                  <button type="button" className={`btn btn--secondary ${styles.deny}`} onClick={() => deny(request)}>
+                    Deny
+                  </button>
+                  <button type="button" className="btn btn--primary" onClick={() => approve(request)}>
+                    Approve
+                  </button>
+                </div>
+              </li>
+            ))}
+          </ul>
+        </section>
+      )}
+
+      {notifStatus === 'disabled' && (
+        <button type="button" className={`btn btn--soft btn--block ${styles.notif}`} onClick={handleEnableNotifications}>
+          Enable notifications on this device
+        </button>
+      )}
+      {notifStatus === 'enabled' && (
+        <p className={`${styles.notif} ${styles.notifText}`}>Notifications are on for this device.</p>
+      )}
+      {notifStatus === 'unsupported' && (
+        <p className={`${styles.notif} ${styles.notifText}`}>This browser doesn't support push notifications.</p>
+      )}
+
+      <div className={styles.layout}>
+        <div className={styles.main}>
+          <ExamCountdown detailed />
+          <SubjectLocks studentId={childStudent?.id} />
         </div>
 
-        {pendingRequests.length > 0 && (
-          <div style={{ marginBottom: '20px' }}>
-            <div className="section-label" style={{ color: 'var(--brass)' }}>
-              New request{pendingRequests.length > 1 ? 's' : ''}
-            </div>
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
-              {pendingRequests.map((request) => (
-                <div
-                  key={request.id}
-                  style={{
-                    background: 'var(--brass-light)',
-                    border: '1px solid var(--brass)',
-                    borderRadius: 'var(--radius)',
-                    padding: '14px 15px',
-                  }}
-                >
-                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '10px' }}>
-                    <span className="mono" style={{ fontSize: '15px', fontWeight: 600 }}>{request.minutes_requested} min</span>
-                    <span className="mono" style={{ fontSize: '10.5px', color: 'var(--ink-faint)' }}>{formatTime(request.requested_at)}</span>
-                  </div>
-                  <div style={{ display: 'flex', gap: '10px' }}>
-                    <button
-                      onClick={() => deny(request)}
-                      style={{
-                        flex: 1,
-                        background: 'transparent',
-                        border: '1px solid var(--rule-strong)',
-                        borderRadius: '8px',
-                        padding: '9px',
-                        fontSize: '13px',
-                        fontWeight: 600,
-                        color: 'var(--red)',
-                      }}
-                    >
-                      Deny
-                    </button>
-                    <button
-                      onClick={() => approve(request)}
-                      style={{
-                        flex: 1,
-                        background: 'var(--ink)',
-                        color: 'var(--paper)',
-                        border: 'none',
-                        borderRadius: '8px',
-                        padding: '9px',
-                        fontSize: '13px',
-                        fontWeight: 600,
-                      }}
-                    >
-                      Approve
-                    </button>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        )}
-
-        {notifStatus === 'disabled' && (
-          <button
-            onClick={handleEnableNotifications}
-            style={{
-              width: '100%',
-              background: 'var(--brass-light)',
-              color: 'var(--brass)',
-              border: 'none',
-              borderRadius: '8px',
-              padding: '10px',
-              fontSize: '12.5px',
-              fontWeight: 600,
-              marginBottom: '20px',
-            }}
-          >
-            Enable notifications on this device
-          </button>
-        )}
-        {notifStatus === 'enabled' && (
-          <div style={{ fontSize: '11.5px', color: 'var(--ink-faint)', marginBottom: '20px' }}>
-            Notifications are on for this device.
-          </div>
-        )}
-        {notifStatus === 'unsupported' && (
-          <div style={{ fontSize: '11.5px', color: 'var(--ink-faint)', marginBottom: '20px' }}>
-            This browser doesn't support push notifications.
-          </div>
-        )}
-
-        <div style={{ marginBottom: '18px' }}><ExamCountdown detailed /></div>
-
-        <SubjectLocks studentId={childStudent?.id} />
-
-        <Link
-          to="/parent/assign"
-          style={{
-            display: 'block',
-            textAlign: 'center',
-            background: 'var(--ink)',
-            border: '1px solid var(--ink)',
-            borderRadius: 'var(--radius)',
-            padding: '12px',
-            fontSize: '13px',
-            fontWeight: 600,
-            color: 'var(--paper)',
-            textDecoration: 'none',
-            marginBottom: '12px',
-          }}
-        >
-          Assign work
-        </Link>
-
-        <Link
-          to="/parent/assessment"
-          style={{
-            display: 'block',
-            textAlign: 'center',
-            background: 'var(--ink)',
-            border: '1px solid var(--ink)',
-            borderRadius: 'var(--radius)',
-            padding: '12px',
-            fontSize: '13px',
-            fontWeight: 600,
-            color: 'var(--paper)',
-            textDecoration: 'none',
-            marginBottom: '20px',
-          }}
-        >
-          Assess {studentName || 'student'}
-        </Link>
-
-        <Link
-          to="/parent/tutor-sessions"
-          style={{
-            display: 'block',
-            textAlign: 'center',
-            background: 'var(--card)',
-            border: '1px solid var(--rule-strong)',
-            borderRadius: 'var(--radius)',
-            padding: '12px',
-            fontSize: '13px',
-            fontWeight: 600,
-            color: 'var(--ink)',
-            textDecoration: 'none',
-            marginBottom: '20px',
-          }}
-        >
-          Review tutor sessions
-        </Link>
-
-        <Link
-          to="/parent/redemptions"
-          style={{
-            display: 'block',
-            textAlign: 'center',
-            background: 'var(--card)',
-            border: '1px solid var(--rule-strong)',
-            borderRadius: 'var(--radius)',
-            padding: '12px',
-            fontSize: '13px',
-            fontWeight: 600,
-            color: 'var(--ink)',
-            textDecoration: 'none',
-            marginBottom: '20px',
-          }}
-        >
-          View Recent Redemptions
-        </Link>
+        <nav className={styles.side} aria-labelledby="parent-actions">
+          <h2 id="parent-actions" className={`section-label ${styles.actionsTitle}`}>Quick actions</h2>
+          <ul className={styles.actions}>
+            <li><Link to="/parent/assign" className="btn btn--primary">Assign work</Link></li>
+            <li><Link to="/parent/assessment" className="btn btn--primary">Assess {studentName || 'student'}</Link></li>
+            <li><Link to="/parent/tutor-sessions" className="btn btn--secondary">Review tutor sessions</Link></li>
+            <li><Link to="/parent/redemptions" className="btn btn--secondary">View Recent Redemptions</Link></li>
+          </ul>
+        </nav>
       </div>
     </div>
   )

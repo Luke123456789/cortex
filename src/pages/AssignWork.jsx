@@ -3,6 +3,7 @@ import { supabase } from '../lib/supabaseClient'
 import { useAuth } from '../hooks/useAuth.jsx'
 import { useAssignableCatalog } from '../hooks/useAssignableCatalog'
 import { useAssignments } from '../hooks/useAssignments'
+import styles from './AssignWork.module.css'
 
 const TYPES = [
   { value: 'quiz', label: 'Quiz' },
@@ -10,20 +11,6 @@ const TYPES = [
   { value: 'written_test', label: 'Written test' },
   { value: 'past_paper', label: 'Past paper' },
 ]
-
-const selectStyle = {
-  width: '100%',
-  background: 'var(--paper)',
-  border: '1px solid var(--rule)',
-  borderRadius: '8px',
-  padding: '9px 10px',
-  fontSize: '12.5px',
-  fontFamily: "'Space Grotesk', sans-serif",
-  color: 'var(--ink)',
-  marginBottom: '8px',
-}
-
-const inputStyle = { ...selectStyle }
 
 function formatTime(isoString) {
   return new Date(isoString).toLocaleString([], { day: '2-digit', month: 'short', hour: '2-digit', minute: '2-digit' })
@@ -142,188 +129,186 @@ export default function AssignWork() {
   const completed = assignments.filter((a) => a.status === 'completed').slice(0, 6)
 
   return (
-    <div className="device">
-      <div className="screen">
+    <div className="page page--wide">
+      <h1 className="section-label">Assign work{studentName ? ` to ${studentName}` : ''}</h1>
 
-        <div className="section-label">Assign work{studentName ? ` to ${studentName}` : ''}</div>
-
-        {linkedStudents.length > 1 && (
-          <select value={studentId || ''} onChange={(e) => setTargetId(e.target.value)} style={selectStyle}>
-            {linkedStudents.map((s) => (
-              <option key={s.id} value={s.id}>{s.isPractice ? 'Practice student (for trying things out)' : s.displayName}</option>
-            ))}
-          </select>
-        )}
-
-        {catalogLoading ? (
-          <div style={{ fontSize: '13px', color: 'var(--ink-faint)' }}>Loading…</div>
-        ) : (
-          <>
-            <div style={{ display: 'flex', gap: '6px', marginBottom: '10px' }}>
-              {TYPES.map((t) => (
-                <button
-                  key={t.value}
-                  onClick={() => setType(t.value)}
-                  style={{
-                    flex: 1,
-                    background: type === t.value ? 'var(--ink)' : 'var(--card)',
-                    color: type === t.value ? 'var(--paper)' : 'var(--ink)',
-                    border: '1px solid ' + (type === t.value ? 'var(--ink)' : 'var(--rule)'),
-                    borderRadius: '20px',
-                    padding: '7px 4px',
-                    fontSize: '11px',
-                    fontWeight: 600,
-                  }}
-                >
-                  {t.label}
-                </button>
-              ))}
-            </div>
-
-            {type === 'past_paper' ? (
-              <input
-                style={inputStyle}
-                placeholder="e.g. AQA Economics Paper 1, June 2019"
-                value={pastPaperTitle}
-                onChange={(e) => setPastPaperTitle(e.target.value)}
-              />
-            ) : (
-              <>
-                <select style={selectStyle} value={subjectId} onChange={(e) => setSubjectId(e.target.value)}>
-                  {subjects.map((s) => (
-                    <option key={s.id} value={s.id}>{s.name}</option>
+      <div className={styles.layout}>
+        <section className={styles.formPanel} aria-label="New assignment">
+          <div className={styles.form}>
+            {linkedStudents.length > 1 && (
+              <div>
+                <label className="field-label" htmlFor="assign-student">Student</label>
+                <select id="assign-student" className="field" value={studentId || ''} onChange={(e) => setTargetId(e.target.value)}>
+                  {linkedStudents.map((s) => (
+                    <option key={s.id} value={s.id}>{s.isPractice ? 'Practice student (for trying things out)' : s.displayName}</option>
                   ))}
                 </select>
-                <select style={selectStyle} value={topicId} onChange={(e) => setTopicId(e.target.value)}>
-                  {topicsForSubject.map((t) => (
-                    <option key={t.id} value={t.id}>{t.name}</option>
-                  ))}
-                </select>
-
-                {type === 'quiz' && (
-                  quizzesForTopic.length === 0 ? (
-                    <div style={{ fontSize: '12px', color: 'var(--ink-faint)', marginBottom: '8px' }}>No quizzes for this topic.</div>
-                  ) : (
-                    <select style={selectStyle} value={quizId} onChange={(e) => setQuizId(e.target.value)}>
-                      {quizzesForTopic.map((q) => (
-                        <option key={q.id} value={q.id}>{q.title} ({q.question_count})</option>
-                      ))}
-                    </select>
-                  )
-                )}
-
-                {type === 'tutor_session' && (
-                  subtopicsForTopic.length === 0 ? (
-                    <div style={{ fontSize: '12px', color: 'var(--ink-faint)', marginBottom: '8px' }}>No subtopics for this topic.</div>
-                  ) : (
-                    <select style={selectStyle} value={subtopicId} onChange={(e) => setSubtopicId(e.target.value)}>
-                      {subtopicsForTopic.map((s) => (
-                        <option key={s.id} value={s.id}>{s.name}</option>
-                      ))}
-                    </select>
-                  )
-                )}
-
-                {type === 'written_test' && (
-                  examQuestionsForTopic.length === 0 ? (
-                    <div style={{ fontSize: '12px', color: 'var(--ink-faint)', marginBottom: '8px' }}>No written test questions for this topic yet.</div>
-                  ) : (
-                    <select style={selectStyle} value={examQuestionId} onChange={(e) => setExamQuestionId(e.target.value)}>
-                      {examQuestionsForTopic.map((q) => (
-                        <option key={q.id} value={q.id}>{q.command_word} · {truncate(q.question_text, 40)} ({q.total_marks} marks)</option>
-                      ))}
-                    </select>
-                  )
-                )}
-              </>
+              </div>
             )}
 
-            <input
-              type="date"
-              style={inputStyle}
-              value={dueDate}
-              onChange={(e) => setDueDate(e.target.value)}
-            />
-            <textarea
-              style={{ ...inputStyle, minHeight: '54px', resize: 'vertical', fontFamily: "'Space Grotesk', sans-serif" }}
-              placeholder="Optional note for the student"
-              value={note}
-              onChange={(e) => setNote(e.target.value)}
-            />
-
-            <button
-              onClick={handlePush}
-              disabled={busy || !canPush()}
-              style={{
-                width: '100%',
-                background: 'var(--ink)',
-                color: 'var(--paper)',
-                border: 'none',
-                borderRadius: '8px',
-                padding: '11px',
-                fontSize: '13px',
-                fontWeight: 600,
-                marginBottom: '10px',
-                opacity: busy || !canPush() ? 0.5 : 1,
-              }}
-            >
-              {busy ? 'Pushing…' : 'Push to student'}
-            </button>
-
-            {error && <div style={{ fontSize: '12.5px', color: 'var(--red)', marginBottom: '14px' }}>{error}</div>}
-          </>
-        )}
-
-        <div className="section-label" style={{ marginTop: '18px' }}>Pending</div>
-        {pending.length === 0 ? (
-          <div style={{ fontSize: '13px', color: 'var(--ink-faint)', marginBottom: '20px' }}>Nothing outstanding.</div>
-        ) : (
-          <div style={{ display: 'grid', gap: '6px', marginBottom: '20px' }}>
-            {pending.map((a) => (
-              <div
-                key={a.id}
-                style={{
-                  display: 'flex',
-                  justifyContent: 'space-between',
-                  alignItems: 'center',
-                  background: 'var(--card)',
-                  border: '1px solid var(--rule)',
-                  borderRadius: 'var(--radius)',
-                  padding: '9px 12px',
-                  gap: '10px',
-                }}
-              >
-                <div>
-                  <div style={{ fontSize: '13px' }}>{a.title}</div>
-                  <span className="mono" style={{ fontSize: '9.5px', color: 'var(--ink-faint)' }}>
-                    {TYPES.find((t) => t.value === a.type)?.label} · {formatTime(a.assigned_at)}
-                    {a.due_at ? ` · due ${new Date(a.due_at).toLocaleDateString([], { day: '2-digit', month: 'short' })}` : ''}
-                  </span>
+            {catalogLoading ? (
+              <p className="empty">Loading…</p>
+            ) : (
+              <>
+                <div className={styles.types} role="group" aria-label="Type of work">
+                  {TYPES.map((t) => (
+                    <button
+                      key={t.value}
+                      type="button"
+                      className={styles.type}
+                      aria-pressed={type === t.value}
+                      onClick={() => setType(t.value)}
+                    >
+                      {t.label}
+                    </button>
+                  ))}
                 </div>
-                <button
-                  onClick={() => cancelAssignment(a.id)}
-                  style={{ background: 'transparent', border: '1px solid var(--rule-strong)', borderRadius: '8px', padding: '6px 10px', fontSize: '11px', fontWeight: 600, color: 'var(--ink-faint)', whiteSpace: 'nowrap' }}
-                >
-                  Cancel
-                </button>
-              </div>
-            ))}
-          </div>
-        )}
 
-        <div className="section-label">Recently completed</div>
-        {completed.length === 0 ? (
-          <div style={{ fontSize: '13px', color: 'var(--ink-faint)' }}>Nothing completed yet.</div>
-        ) : (
-          <div style={{ display: 'grid', gap: '6px' }}>
-            {completed.map((a) => (
-              <div key={a.id} style={{ display: 'flex', justifyContent: 'space-between', padding: '8px 0', borderBottom: '1px solid var(--rule)' }}>
-                <div style={{ fontSize: '13px' }}>{a.title}</div>
-                <span className="mono" style={{ fontSize: '9.5px', color: 'var(--green)' }}>{formatTime(a.completed_at)}</span>
-              </div>
-            ))}
+                {type === 'past_paper' ? (
+                  <div>
+                    <label className="field-label" htmlFor="assign-paper">Past paper</label>
+                    <input
+                      id="assign-paper"
+                      className="field"
+                      placeholder="e.g. AQA Economics Paper 1, June 2019"
+                      value={pastPaperTitle}
+                      onChange={(e) => setPastPaperTitle(e.target.value)}
+                    />
+                  </div>
+                ) : (
+                  <>
+                    <div className={styles.twoUp}>
+                      <div>
+                        <label className="field-label" htmlFor="assign-subject">Subject</label>
+                        <select id="assign-subject" className="field" value={subjectId} onChange={(e) => setSubjectId(e.target.value)}>
+                          {subjects.map((s) => (
+                            <option key={s.id} value={s.id}>{s.name}</option>
+                          ))}
+                        </select>
+                      </div>
+                      <div>
+                        <label className="field-label" htmlFor="assign-topic">Topic</label>
+                        <select id="assign-topic" className="field" value={topicId} onChange={(e) => setTopicId(e.target.value)}>
+                          {topicsForSubject.map((t) => (
+                            <option key={t.id} value={t.id}>{t.name}</option>
+                          ))}
+                        </select>
+                      </div>
+                    </div>
+
+                    {type === 'quiz' && (
+                      quizzesForTopic.length === 0 ? (
+                        <p className={styles.notice}>No quizzes for this topic.</p>
+                      ) : (
+                        <div>
+                          <label className="field-label" htmlFor="assign-quiz">Quiz</label>
+                          <select id="assign-quiz" className="field" value={quizId} onChange={(e) => setQuizId(e.target.value)}>
+                            {quizzesForTopic.map((q) => (
+                              <option key={q.id} value={q.id}>{q.title} ({q.question_count})</option>
+                            ))}
+                          </select>
+                        </div>
+                      )
+                    )}
+
+                    {type === 'tutor_session' && (
+                      subtopicsForTopic.length === 0 ? (
+                        <p className={styles.notice}>No subtopics for this topic.</p>
+                      ) : (
+                        <div>
+                          <label className="field-label" htmlFor="assign-subtopic">Lesson</label>
+                          <select id="assign-subtopic" className="field" value={subtopicId} onChange={(e) => setSubtopicId(e.target.value)}>
+                            {subtopicsForTopic.map((s) => (
+                              <option key={s.id} value={s.id}>{s.name}</option>
+                            ))}
+                          </select>
+                        </div>
+                      )
+                    )}
+
+                    {type === 'written_test' && (
+                      examQuestionsForTopic.length === 0 ? (
+                        <p className={styles.notice}>No written test questions for this topic yet.</p>
+                      ) : (
+                        <div>
+                          <label className="field-label" htmlFor="assign-question">Question</label>
+                          <select id="assign-question" className="field" value={examQuestionId} onChange={(e) => setExamQuestionId(e.target.value)}>
+                            {examQuestionsForTopic.map((q) => (
+                              <option key={q.id} value={q.id}>{q.command_word} · {truncate(q.question_text, 40)} ({q.total_marks} marks)</option>
+                            ))}
+                          </select>
+                        </div>
+                      )
+                    )}
+                  </>
+                )}
+
+                <div>
+                  <label className="field-label" htmlFor="assign-due">Due date (optional)</label>
+                  <input id="assign-due" type="date" className="field" value={dueDate} onChange={(e) => setDueDate(e.target.value)} />
+                </div>
+                <div>
+                  <label className="field-label" htmlFor="assign-note">Note (optional)</label>
+                  <textarea
+                    id="assign-note"
+                    className={`field ${styles.note}`}
+                    placeholder="Optional note for the student"
+                    value={note}
+                    onChange={(e) => setNote(e.target.value)}
+                  />
+                </div>
+
+                <button type="button" className="btn btn--primary btn--block" onClick={handlePush} disabled={busy || !canPush()}>
+                  {busy ? 'Pushing…' : 'Push to student'}
+                </button>
+
+                {error && <p className="error-text" role="alert">{error}</p>}
+              </>
+            )}
           </div>
-        )}
+        </section>
+
+        <div className={styles.lists}>
+          <section aria-labelledby="assign-pending">
+            <h2 id="assign-pending" className="section-label">Pending</h2>
+            {pending.length === 0 ? (
+              <p className="empty">Nothing outstanding.</p>
+            ) : (
+              <ul className={styles.pending}>
+                {pending.map((a) => (
+                  <li key={a.id} className={`card ${styles.pendingItem}`}>
+                    <div>
+                      <div className={styles.pendingTitle}>{a.title}</div>
+                      <span className="meta">
+                        {TYPES.find((t) => t.value === a.type)?.label} · {formatTime(a.assigned_at)}
+                        {a.due_at ? ` · due ${new Date(a.due_at).toLocaleDateString([], { day: '2-digit', month: 'short' })}` : ''}
+                      </span>
+                    </div>
+                    <button type="button" className="btn btn--secondary btn--small" onClick={() => cancelAssignment(a.id)}>
+                      Cancel
+                    </button>
+                  </li>
+                ))}
+              </ul>
+            )}
+          </section>
+
+          <section aria-labelledby="assign-done">
+            <h2 id="assign-done" className="section-label">Recently completed</h2>
+            {completed.length === 0 ? (
+              <p className="empty">Nothing completed yet.</p>
+            ) : (
+              <ul className={styles.done}>
+                {completed.map((a) => (
+                  <li key={a.id} className={styles.doneRow}>
+                    <span>{a.title}</span>
+                    <span className="meta">{formatTime(a.completed_at)}</span>
+                  </li>
+                ))}
+              </ul>
+            )}
+          </section>
+        </div>
       </div>
     </div>
   )
