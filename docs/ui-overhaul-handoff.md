@@ -233,3 +233,23 @@ GCSE grades. That needs marked written answers (phase 2, to be discussed).
   work.
 - The old Assessment page is now `components/analytics/ProgressReview.jsx`,
   a section at the bottom of Analytics, behaviour unchanged.
+
+## Your week (student assignments)
+
+Luke assigns in big batches but doesn't want James overwhelmed by a long list.
+`/assignments` is now "Your week" (nav label "Your week", tab "Week"):
+
+- `src/lib/week.js` (tested in `test/week.test.js`): groups pending work into
+  "from earlier", each of the next 7 days (today first), "due after this
+  week" and "no due date". due_at is stored as UTC midnight of the date the
+  parent picked, so the day comes from the date part of the string.
+- Headline "N things due this week · M done" with a progress bar; a 7-day
+  strip with dots per item.
+- Phone/tablet show one day at a time (the strip picks the day; default today,
+  else the next day with work) with "Show all days"; desktop shows every day
+  with work in a grid and the strip scrolls to the day.
+- Missed work sits in a soft "From earlier" box ("fit them in when you can"),
+  not red "overdue" labels. Later, undated and completed work are collapsed.
+- The type filter chips were removed. Home's panel is "Coming up": the next 3
+  by due date (earlier first) with "Due today"-style labels and "See your
+  week".

@@ -6,6 +6,7 @@ import { useRedemptions } from '../hooks/useRedemptions'
 import { useAssignments } from '../hooks/useAssignments'
 import { useAuth } from '../hooks/useAuth.jsx'
 import { ASSIGNMENT_TYPE_LABELS, assignmentAction } from '../lib/assignments'
+import { dueLabel, upNext } from '../lib/week'
 import BalanceCard from '../components/BalanceCard.jsx'
 import ExamCountdown from '../components/ExamCountdown.jsx'
 import LedgerList from '../components/LedgerList.jsx'
@@ -109,15 +110,15 @@ export default function Home() {
           <div className={styles.panels}>
             {pendingAssignments.length > 0 && (
               <section className={styles.panel} aria-labelledby="home-work">
-                <h2 id="home-work" className="section-label">Assigned work</h2>
+                <h2 id="home-work" className="section-label">Coming up</h2>
                 <ul className={styles.work}>
-                  {pendingAssignments.slice(0, 3).map((a) => {
+                  {upNext(assignments, 3).map((a) => {
                     const action = assignmentAction(a)
                     return (
                       <li key={a.id} className={`card ${styles.workItem}`}>
                         <div>
                           <div className={styles.workTitle}>{a.title}</div>
-                          <span className="meta">{ASSIGNMENT_TYPE_LABELS[a.type] || a.type}</span>
+                          <span className="meta">{ASSIGNMENT_TYPE_LABELS[a.type] || a.type}{a.due_at ? ` · ${dueLabel(a.due_at)}` : ''}</span>
                         </div>
                         {action ? (
                           <Link to={action.to} className="btn btn--primary btn--small">{action.label}</Link>
@@ -128,9 +129,7 @@ export default function Home() {
                     )
                   })}
                 </ul>
-                {pendingAssignments.length > 3 && (
-                  <Link to="/assignments" className={`link ${styles.more}`}>View more<span className="visually-hidden"> assigned work</span></Link>
-                )}
+                <Link to="/assignments" className={`link ${styles.more}`}>See your week</Link>
               </section>
             )}
 
