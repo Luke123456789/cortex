@@ -30,10 +30,12 @@ function truncate(text, max) {
 
 export default function AssignWork() {
   const { user, childStudent, linkedStudents } = useAuth()
-  // Defaults to the real student; the practice student can be picked too, so
-  // assigned work can be tried out from the student view first.
+  // Defaults to the practice student, so work is tried out from the student
+  // view first; the real student is picked deliberately. Falls back to the
+  // real student if there's no practice student.
   const [targetId, setTargetId] = useState('')
-  const studentId = targetId || childStudent?.id
+  const practiceStudent = linkedStudents.find((s) => s.isPractice)
+  const studentId = targetId || practiceStudent?.id || childStudent?.id
   const target = linkedStudents.find((s) => s.id === studentId)
   const studentName = target ? (target.isPractice ? 'practice student' : target.displayName) : null
   const { subjects, topics, subtopics, quizzes, examQuestions, loading: catalogLoading } = useAssignableCatalog()
