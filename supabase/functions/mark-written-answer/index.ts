@@ -13,7 +13,7 @@ import {
   reconcile,
   computeMinutes,
 } from './marking-logic.js'
-import { buildIntegrity } from './integrity-logic.js'
+import { buildIntegrity, pasteRejection } from './integrity-logic.js'
 
 const ANTHROPIC_API_KEY = Deno.env.get('ANTHROPIC_API_KEY')
 const SUPABASE_URL = Deno.env.get('SUPABASE_URL')!
@@ -59,6 +59,9 @@ Deno.serve(async (req) => {
   if (!questionId) return json({ error: 'questionId required' }, 400)
   const checked = validateAnswer(answer)
   if (!checked.ok) return json({ error: checked.error }, 400)
+  // Pasted answers are turned away before any marking.
+  const pasted = pasteRejection(telemetry)
+  if (pasted) return json({ error: pasted }, 400)
 
   // The student themselves, or a parent acting for their practice student.
   const student = await resolveWritableStudent(caller, studentId)
@@ -114,7 +117,10 @@ Deno.serve(async (req) => {
   // Copy/paste and AI-writing signals: for the parent only, never the mark.
   const integrity = buildIntegrity({ telemetry, answer: checked.text, runs: result.runs })
 
-  const minutes = computeMinutes(result.marks, question.total_marks, student.isPractice)
+  // A flagged answer's minutes are held until a parent releases them.
+  const earned = computeMinutes(result.marks, question.total_marks, student.isPractice)
+  const minutes = integrity.flagged ? 0 : earned
+  const minutesHeld = integrity.flagged ? earned : 0
   const now = new Date().toISOString()
 
   const { data: attempt, error: insertErr } = await admin
@@ -138,6 +144,7 @@ Deno.serve(async (req) => {
       needs_review: result.needsReview || integrity.flagged,
       integrity,
       minutes_earned: minutes,
+      minutes_held: minutesHeld,
       submitted_at: now,
       marked_at: now,
     })
@@ -171,5 +178,8 @@ Deno.serve(async (req) => {
     commandWordSatisfied: result.commandWordSatisfied,
     summary: result.summary,
     minutesEarned: minutes,
+    minutesHeld,
+    flagged: integrity.flagged,
+    aiFlagged: integrity.aiFlagged,
   })
 })

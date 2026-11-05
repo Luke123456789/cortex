@@ -64,6 +64,41 @@ function Integrity({ integrity }) {
   )
 }
 
+// Minutes held back on a flagged answer: release (worked out from your mark
+// if you changed it) or withhold.
+function HeldMinutes({ attempt, onSaved }) {
+  const [busy, setBusy] = useState(false)
+  const [error, setError] = useState(null)
+  if (attempt.reward_decision === 'released') return <p className={styles.runs}>Minutes released: +{attempt.minutes_earned}</p>
+  if (attempt.reward_decision === 'withheld') return <p className={styles.runs}>Minutes withheld.</p>
+  if (!(attempt.minutes_held > 0)) return null
+  async function decide(release) {
+    setBusy(true)
+    setError(null)
+    const { error: rpcError } = await supabase.rpc('release_written_reward', { p_attempt: attempt.id, p_release: release })
+    setBusy(false)
+    if (rpcError) {
+      console.error('Failed to decide reward', rpcError)
+      setError('Could not save that. Try again.')
+      return
+    }
+    onSaved()
+  }
+  return (
+    <div className={`card ${styles.review}`}>
+      <h4 className="section-label">Minutes on hold</h4>
+      <p className={styles.text}>
+        {attempt.minutes_held} minutes are on hold because this answer was flagged. If you change the mark first, releasing pays out on your mark.
+      </p>
+      <div className={styles.reviewRow}>
+        <button type="button" className="btn btn--primary btn--small" onClick={() => decide(true)} disabled={busy}>Release</button>
+        <button type="button" className="btn btn--secondary btn--small" onClick={() => decide(false)} disabled={busy}>Withhold</button>
+      </div>
+      {error && <p className="error-text" role="alert">{error}</p>}
+    </div>
+  )
+}
+
 function Review({ attempt, onSaved }) {
   const [marks, setMarks] = useState(attempt.parent_marks ?? attempt.marks_awarded)
   const [note, setNote] = useState(attempt.parent_note || '')
@@ -99,7 +134,7 @@ function Review({ attempt, onSaved }) {
         {saving ? 'Saving…' : 'Save mark'}
       </button>
       {error && <p className="error-text" role="alert">{error}</p>}
-      <p className="meta">Minutes already earned don't change.</p>
+      <p className="meta">{attempt.minutes_held > 0 && !attempt.reward_decision ? 'Set the mark before releasing held minutes.' : "Minutes already earned don't change."}</p>
     </div>
   )
 }
@@ -132,7 +167,7 @@ export default function WrittenWork({ studentId, studentName }) {
     <section aria-labelledby="written-title">
       <h2 id="written-title" className="section-label">Written work</h2>
       <p className={styles.intro}>
-        Answers are marked twice by the AI against the mark scheme. It's flagged for you to check where the two markings disagree by more than 10% of the marks, or where there are signs of pasting or AI writing.
+        Answers are marked twice by the AI against the mark scheme. It's flagged for you to check where the two markings disagree by more than 10% of the marks, or where there are signs of AI writing or odd typing. Minutes for flagged answers are held until you release them. Pasted answers are refused.
         {toCheck > 0 ? ` ${toCheck} to check.` : ''}
       </p>
       {loading ? <p className="empty">Loading…</p> : attempts.length === 0 ? (
@@ -150,6 +185,7 @@ export default function WrittenWork({ studentId, studentName }) {
                     <span className={styles.title}>{q.subtopics?.name || 'Written answer'}</span>
                     {a.needs_review && <span className={`tag ${styles.flag}`}>Check</span>}
                     {a.integrity?.flagged && <span className={`tag ${styles.flag} ${styles.integrityTag}`}>Integrity</span>}
+                    {a.minutes_held > 0 && !a.reward_decision && <span className={`tag ${styles.flag}`}>On hold</span>}
                     <span className={`meta ${styles.sub}`}>
                       {q.topics?.subjects?.name} · {fmtDate(a.submitted_at)}{a.parent_marks != null ? ' · checked by you' : ''}
                     </span>
@@ -173,6 +209,7 @@ export default function WrittenWork({ studentId, studentName }) {
                         <p className={styles.runs}>Two markings: {a.marking_runs.map((r) => (r ? r.marks : '–')).join(' and ')} → {a.marks_awarded}</p>
                       )}
                       <Integrity integrity={a.integrity} />
+                      <HeldMinutes attempt={a} onSaved={load} />
                       <Scheme questionId={a.question_id} />
                       <Review attempt={a} onSaved={load} />
                     </div>

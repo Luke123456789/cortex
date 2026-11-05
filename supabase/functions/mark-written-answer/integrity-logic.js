@@ -8,6 +8,18 @@ export const LARGE_PASTE_CHARS = 150 // one paste this long is worth a look
 export const MAX_PLAUSIBLE_CPM = 450 // characters per active minute, typed
 const UNEXPLAINED_SLACK = 40 // chars of text not accounted for by typing/pasting
 
+// Pasted or dropped-in text is never accepted, and an answer must come with
+// the answer page's typing record. Returns an error for the student, or null.
+export function pasteRejection(telemetry) {
+  if (!telemetry || typeof telemetry !== 'object') {
+    return 'Type your answer on the answer page in Cortex, then submit it from there.'
+  }
+  if (Number(telemetry.pastedChars) > 0 || Number(telemetry.droppedChars) > 0 || Number(telemetry.pasteCount) > 0) {
+    return "Pasted text isn't allowed. Clear the answer box and type your answer yourself."
+  }
+  return null
+}
+
 const num = (v) => (Number.isFinite(Number(v)) && Number(v) >= 0 ? Number(v) : 0)
 
 // telemetry (from the answer page):
@@ -84,15 +96,20 @@ export function buildIntegrity({ telemetry, answer, runs }) {
   const phrases = phraseSignals(answer)
   const ai = combineAi(runs)
   const reasons = [...typing.flags]
+  let aiFlagged = false
   if (ai.likelihood === 'high' || (ai.likelihood === 'medium' && phrases.length > 0)) {
     reasons.push(`Possibly AI-written (${ai.likelihood} likelihood).`)
+    aiFlagged = true
   } else if (phrases.length >= 2) {
     reasons.push('Some signs of AI-style writing.')
+    aiFlagged = true
   }
   return {
     typing,
     ai: { ...ai, phraseSignals: phrases },
     flagged: reasons.length > 0,
+    aiFlagged,
+    typingFlagged: typing.flags.length > 0,
     reasons,
   }
 }

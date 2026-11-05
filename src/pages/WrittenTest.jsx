@@ -57,8 +57,21 @@ function Result({ attempt, question }) {
           {attempt.level != null && <span className="tag">Level {attempt.level}</span>}
           <span className="tag">{attempt.parent_marks != null ? 'Checked' : 'AI-marked'}</span>
           {attempt.minutes_earned > 0 && <span className={`tag ${styles.earned}`}>+{attempt.minutes_earned} min</span>}
+          {attempt.minutes_held > 0 && <span className={`tag ${styles.held}`}>+{attempt.minutes_held} min on hold</span>}
         </span>
       </div>
+
+      {attempt.integrity?.flagged && !attempt.reward_decision && (
+        <p className={styles.flagNotice} role="status">
+          {attempt.integrity.aiFlagged
+            ? 'This answer has been flagged as possibly AI-written and sent to Dad to check.'
+            : "This answer has been flagged for a check because of how it was entered, and sent to Dad."}
+          {attempt.minutes_held > 0 ? ' Your minutes are on hold until he has looked at it.' : ''}
+        </p>
+      )}
+      {attempt.reward_decision === 'withheld' && (
+        <p className={styles.flagNotice}>Dad checked this answer and decided not to give minutes for it.</p>
+      )}
 
       {attempt.parent_marks != null && (
         <p className={styles.checked}>
@@ -115,6 +128,8 @@ export default function WrittenTest() {
   const [submitting, setSubmitting] = useState(false)
   const [error, setError] = useState(null)
   const [timerStart, setTimerStart] = useState(null)
+  const [pasteBlocked, setPasteBlocked] = useState(false)
+  const [draftCleared, setDraftCleared] = useState(false)
   const [elapsed, setElapsed] = useState(0)
   const key = draftKey(studentId, questionId)
   const loaded = useRef(false)
@@ -138,8 +153,17 @@ export default function WrittenTest() {
       setPending((a.data || []).length > 0)
       setAttempt((latest.data || [])[0] || null)
       if (!loaded.current) {
-        setAnswer(readDraft(key))
-        telemetry.current = readTelemetry(key)
+        const restored = readTelemetry(key)
+        if (restored.pastedChars > 0 || restored.droppedChars > 0) {
+          // A draft from before pasting was turned off: start it again.
+          writeDraft(key, '')
+          writeTelemetry(key, null)
+          telemetry.current = { ...EMPTY_TELEMETRY }
+          setDraftCleared(true)
+        } else {
+          setAnswer(readDraft(key))
+          telemetry.current = restored
+        }
         loaded.current = true
       }
       setLoading(false)
@@ -162,24 +186,29 @@ export default function WrittenTest() {
       lastInputAt.current = now
       t.inputEvents += 1
     }
+    function blocked(e) {
+      e.preventDefault()
+      t.blockedPastes = (t.blockedPastes || 0) + 1
+      save()
+      setPasteBlocked(true)
+    }
     function onBeforeInput(e) {
+      // Pasting and dragging text in are turned off.
+      if (e.inputType === 'insertFromPaste' || e.inputType === 'insertFromPasteAsQuotation' || e.inputType === 'insertFromDrop') {
+        blocked(e)
+        return
+      }
       tick()
-      if (e.inputType === 'insertFromDrop') {
-        t.droppedChars += (e.dataTransfer?.getData('text') || '').length
-      } else if (e.inputType === 'insertLineBreak' || e.inputType === 'insertParagraph') {
+      if (e.inputType === 'insertLineBreak' || e.inputType === 'insertParagraph') {
         t.typedChars += 1
-      } else if (e.inputType && e.inputType.startsWith('insert') && e.inputType !== 'insertFromPaste' && e.inputType !== 'insertFromPasteAsQuotation') {
+      } else if (e.inputType && e.inputType.startsWith('insert')) {
         t.typedChars += (e.data || '').length
       }
       save()
     }
-    function onPaste(e) {
-      const len = (e.clipboardData?.getData('text') || '').length
-      t.pastedChars += len
-      t.pasteCount += 1
-      t.largestPaste = Math.max(t.largestPaste, len)
-      save()
-    }
+    function onPaste(e) { blocked(e) }
+    function onDrop(e) { blocked(e) }
+    function onDragOver(e) { e.preventDefault() }
     function onVisibility() {
       if (document.visibilityState === 'hidden' && answerRef.current?.value) {
         t.tabAways += 1
@@ -188,10 +217,14 @@ export default function WrittenTest() {
     }
     el.addEventListener('beforeinput', onBeforeInput)
     el.addEventListener('paste', onPaste)
+    el.addEventListener('drop', onDrop)
+    el.addEventListener('dragover', onDragOver)
     document.addEventListener('visibilitychange', onVisibility)
     return () => {
       el.removeEventListener('beforeinput', onBeforeInput)
       el.removeEventListener('paste', onPaste)
+      el.removeEventListener('drop', onDrop)
+      el.removeEventListener('dragover', onDragOver)
       document.removeEventListener('visibilitychange', onVisibility)
     }
   }, [key, pending, loading])
@@ -294,8 +327,15 @@ export default function WrittenTest() {
             // No spellchecker where spelling is marked, as in the real exam.
             spellCheck={!/spelling, punctuation and grammar/i.test(question.question_text)}
           />
+          {(pasteBlocked || draftCleared) && (
+            <p className={styles.pasteNotice} role="alert">
+              {draftCleared
+                ? "Your saved draft had pasted text in it, so it's been cleared. Type your answer yourself."
+                : "Pasting isn't allowed here. Type your answer yourself."}
+            </p>
+          )}
           <div className={styles.answerFooter}>
-            <span className="meta">{words} word{words === 1 ? '' : 's'} · saved on this device · pasted text is recorded</span>
+            <span className="meta">{words} word{words === 1 ? '' : 's'} · saved on this device · pasting is turned off</span>
             <button type="button" className="btn btn--primary" onClick={handleSubmit} disabled={submitting || !answer.trim()}>
               {submitting ? 'Marking…' : 'Submit for marking'}
             </button>

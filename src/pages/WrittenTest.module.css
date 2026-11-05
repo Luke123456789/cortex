@@ -194,3 +194,19 @@ textarea.answer {
   white-space: pre-wrap;
   line-height: 1.6;
 }
+
+.pasteNotice,
+.flagNotice {
+  margin: var(--space-2) 0 var(--space-4);
+  padding: var(--space-3) var(--space-4);
+  background: var(--red-bg);
+  border: 1px solid var(--red);
+  border-radius: var(--radius-md);
+  color: var(--ink);
+  font-size: var(--text-sm);
+}
+
+.held {
+  color: var(--brass-ink);
+  border-color: var(--brass);
+}

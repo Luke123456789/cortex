@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest'
-import { assessTyping, phraseSignals, combineAi, buildIntegrity } from '../supabase/functions/mark-written-answer/integrity-logic.js'
+import { assessTyping, phraseSignals, combineAi, buildIntegrity, pasteRejection } from '../supabase/functions/mark-written-answer/integrity-logic.js'
 
 const answer = (n) => 'a'.repeat(n)
 const typed = (n, extra = {}) => ({ typedChars: n, pastedChars: 0, pasteCount: 0, largestPaste: 0, droppedChars: 0, activeMs: 5 * 60000, tabAways: 0, ...extra })
@@ -74,5 +74,21 @@ describe('combineAi and buildIntegrity', () => {
   it('passes a clean answer', () => {
     const r = buildIntegrity({ telemetry: typed(600), answer: answer(580), runs: [{ aiLikelihood: 'low' }, { aiLikelihood: 'low' }] })
     expect(r).toMatchObject({ flagged: false, reasons: [] })
+  })
+})
+
+describe('pasteRejection', () => {
+  it('rejects pasted, dropped or unrecorded answers and accepts typed ones', () => {
+    expect(pasteRejection(null)).toMatch(/answer page/)
+    expect(pasteRejection(typed(100, { pastedChars: 5, pasteCount: 1 }))).toMatch(/Pasted text/)
+    expect(pasteRejection(typed(100, { droppedChars: 20 }))).toMatch(/Pasted text/)
+    expect(pasteRejection(typed(100))).toBeNull()
+  })
+
+  it('says which kind of flag was raised', () => {
+    const ai = buildIntegrity({ telemetry: typed(600), answer: answer(580), runs: [{ aiLikelihood: 'high' }] })
+    expect(ai).toMatchObject({ aiFlagged: true, typingFlagged: false })
+    const fast = buildIntegrity({ telemetry: typed(100), answer: answer(600), runs: [{ aiLikelihood: 'low' }] })
+    expect(fast).toMatchObject({ aiFlagged: false, typingFlagged: true })
   })
 })

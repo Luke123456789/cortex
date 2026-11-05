@@ -306,3 +306,23 @@ to the student straight away, labelled AI-marked, parent can adjust.
 - Tested as the practice student: a typed answer (391 chars/min) was not
   flagged; a pasted AI-style answer was flagged for 100% paste and high AI
   likelihood from both markings and the phrase check.
+
+## Written answers: no pasting, flagged answers told, minutes held
+
+- Pasting and drag-and-drop are blocked in the answer box (paste, drop and
+  beforeinput insertFromPaste/Drop are cancelled) with a notice; a saved
+  draft containing pasted text is cleared. The function rejects any answer
+  whose record shows pasted/dropped text, or with no record, before marking
+  (`pasteRejection` in integrity-logic.js).
+- Flagged answers (AI or typing signs) tell the student on the result
+  ("flagged as possibly AI-written and sent to Dad to check... minutes on
+  hold"). Their minutes go to `fm_attempts.minutes_held`, not the ledger.
+- `release_written_reward(attempt, release)` (migration
+  `written_held_rewards`): parent-only; release pays 1/mark + 5 at 70% on
+  the parent's mark if set (0 for practice) with a "(released)" ledger
+  entry; withhold pays nothing; one decision per attempt. Parents get
+  Release / Withhold in Written work.
+- Tested on the practice student: browser paste blocked; direct calls with a
+  paste record or no record refused (400); a typed AI-style answer marked
+  3/6 and flagged with the student notice; release tested in a rolled-back
+  transaction (paid 3, one ledger row, second release refused).
