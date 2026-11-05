@@ -253,3 +253,38 @@ Luke assigns in big batches but doesn't want James overwhelmed by a long list.
 - The type filter chips were removed. Home's panel is "Coming up": the next 3
   by due date (earlier first) with "Due today"-style labels and "See your
   week".
+
+## Written answers, W1 (typed answers, AI marking)
+
+Luke's decisions: typed first (photos in W2); pilot Biology + English
+Literature; Claude writes original AQA-style questions and mark schemes;
+Higher tier in all sciences; reward 1 min per mark + 5 at 70%; marks shown
+to the student straight away, labelled AI-marked, parent can adjust.
+
+- Migrations (applied): `20261105142452_written_marking.sql`
+  (`fm_mark_schemes`, readable by parents only; attempt columns; trigger
+  completing the written_test assignment; `review_written_attempt` RPC;
+  student insert policy on fm_attempts removed; the 2 old test questions
+  linked to topics) and `20261105143500_written_command_words.sql`
+  (adds "determine" and "explore").
+- Content: `scripts/authored/written/*.json` → `scripts/generate-written.mjs`
+  → `supabase/content-batches/2026-11-05-written-pilot-biology-english.sql`
+  (applied as migration `written_pilot_biology_english`): 14 Biology, 8
+  English Literature. The 2 old test questions have no scheme and were set
+  inactive.
+- Edge function `mark-written-answer` (deployed, verify_jwt on): requires a
+  pending written_test assignment; marks twice in parallel; mean rounded
+  down; flags if the markings differ by more than max(1, 10% of marks);
+  saves the attempt (service role), which completes the assignment; ledger
+  reward except for the practice student. Logic in `marking-logic.js`,
+  tested in `test/marking-logic.test.js`.
+- Student: `/written/:questionId` (from Your week "Start answer"): question,
+  command-word hint, suggested time + optional timer, word count, draft kept
+  on the device, no spellcheck where SPaG is marked; result shows mark,
+  level, what got marks, what would get more, next step. Home's Written test
+  card now opens Your week.
+- Parent: Assign work titles written tests "<lesson>: written answer (N
+  marks)" and previews the question. Analytics has a Written work section
+  (answer, feedback, both markings, mark scheme, Save mark).
+- Tested end to end as the practice student (2/2 Biology, 3/8 English with
+  markings 3 and 4); review RPC checked; 0 minutes for practice.

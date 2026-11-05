@@ -1,0 +1,126 @@
+.intro {
+  font-size: var(--text-xs);
+  color: var(--ink-soft);
+  margin-bottom: var(--space-3);
+}
+
+.list {
+  list-style: none;
+}
+
+.item {
+  border-bottom: 1px solid var(--rule);
+}
+
+.row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: var(--space-1) var(--space-3);
+  align-items: center;
+  width: 100%;
+  padding: var(--space-3) 0;
+  border: none;
+  background: none;
+  text-align: left;
+  font-size: var(--text-sm);
+}
+
+.row:hover .title {
+  text-decoration: underline;
+  text-decoration-color: var(--rule-strong);
+}
+
+.title {
+  font-weight: 600;
+}
+
+.score {
+  font-family: var(--font-mono);
+  font-weight: 600;
+  white-space: nowrap;
+  text-align: right;
+}
+
+.flag {
+  color: var(--brass-ink);
+  border-color: var(--brass);
+  margin-left: var(--space-2);
+}
+
+.detail {
+  display: grid;
+  gap: var(--space-4);
+  padding: 0 0 var(--space-5);
+}
+
+@media (min-width: 1024px) {
+  .detail {
+    grid-template-columns: minmax(0, 3fr) minmax(0, 2fr);
+    align-items: start;
+  }
+}
+
+.block :global(.section-label) {
+  margin-bottom: var(--space-1);
+}
+
+.text {
+  font-size: var(--text-sm);
+  line-height: 1.6;
+  white-space: pre-wrap;
+}
+
+.answer {
+  max-height: 320px;
+  overflow-y: auto;
+  padding: var(--space-3);
+}
+
+.points {
+  padding-left: 18px;
+  font-size: var(--text-sm);
+  line-height: 1.5;
+}
+
+.runs {
+  font-family: var(--font-mono);
+  font-size: var(--text-2xs);
+  color: var(--ink-soft);
+}
+
+.review {
+  display: grid;
+  gap: var(--space-2);
+  padding: var(--space-3);
+}
+
+.reviewRow {
+  display: flex;
+  align-items: flex-end;
+  gap: var(--space-2);
+}
+
+.reviewRow input {
+  width: 90px;
+}
+
+.scheme {
+  font-size: var(--text-xs);
+}
+
+.scheme summary {
+  cursor: pointer;
+  min-height: 36px;
+  display: flex;
+  align-items: center;
+}
+
+.sub {
+  display: block;
+}
+
+/* ✓ / ✗ lists carry their own markers. */
+.marked {
+  list-style: none;
+  padding-left: 0;
+}

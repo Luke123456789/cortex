@@ -182,7 +182,11 @@ export default function Assignments() {
                 <ul className={styles.list}>
                   {completed.map((a) => (
                     <li key={a.id} className={styles.doneRow}>
-                      <span>{a.title}</span>
+                      {a.type === 'written_test' && a.exam_question_id ? (
+                        <Link to={`/written/${a.exam_question_id}`}>{a.title}</Link>
+                      ) : (
+                        <span>{a.title}</span>
+                      )}
                       <span className="meta">{formatTime(a.completed_at)}</span>
                     </li>
                   ))}

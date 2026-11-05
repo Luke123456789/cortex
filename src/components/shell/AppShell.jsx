@@ -68,6 +68,7 @@ export default function AppShell() {
   const firstRender = useRef(true)
   const activeItem = items.find((item) => isActive(item, pathname))
   const pageTitle = pathname.startsWith('/play/') ? 'Quiz'
+    : pathname.startsWith('/written/') ? 'Written answer'
     : pathname.startsWith('/quiz/') ? 'Question bank'
     : activeItem?.label
   useEffect(() => {

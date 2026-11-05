@@ -16,6 +16,13 @@ function formatTime(isoString) {
   return new Date(isoString).toLocaleString([], { day: '2-digit', month: 'short', hour: '2-digit', minute: '2-digit' })
 }
 
+// "Stem cells: written answer (6 marks)". The question text itself often
+// starts with an extract, so it makes a poor title.
+function writtenTitle(question, subtopics) {
+  const lesson = subtopics.find((s) => s.id === question.subtopic_id)?.name
+  return `${lesson || 'Written answer'}: written answer (${question.total_marks} marks)`
+}
+
 function truncate(text, max) {
   if (!text) return text
   return text.length > max ? `${text.slice(0, max - 1)}…` : text
@@ -99,7 +106,7 @@ export default function AssignWork() {
         payload = { ...base, subtopic_id: subtopicId, title: subtopic ? `${subtopic.name} tutor session` : 'Tutor session' }
       } else if (type === 'written_test') {
         const q = examQuestions.find((eq) => eq.id === examQuestionId)
-        payload = { ...base, subtopic_id: q?.subtopic_id || null, exam_question_id: examQuestionId, title: q ? truncate(q.question_text, 60) : 'Written test' }
+        payload = { ...base, subtopic_id: q?.subtopic_id || null, exam_question_id: examQuestionId, title: q ? writtenTitle(q, subtopics) : 'Written test' }
       } else {
         payload = { ...base, title: pastPaperTitle.trim() }
       }
@@ -234,9 +241,12 @@ export default function AssignWork() {
                           <label className="field-label" htmlFor="assign-question">Question</label>
                           <select id="assign-question" className="field" value={examQuestionId} onChange={(e) => setExamQuestionId(e.target.value)}>
                             {examQuestionsForTopic.map((q) => (
-                              <option key={q.id} value={q.id}>{q.command_word} · {truncate(q.question_text, 40)} ({q.total_marks} marks)</option>
+                              <option key={q.id} value={q.id}>{subtopics.find((s) => s.id === q.subtopic_id)?.name || truncate(q.question_text, 40)} · {q.command_word} ({q.total_marks} marks)</option>
                             ))}
                           </select>
+                          {examQuestionsForTopic.find((q) => q.id === examQuestionId) && (
+                            <p className={styles.preview}>{examQuestionsForTopic.find((q) => q.id === examQuestionId).question_text}</p>
+                          )}
                         </div>
                       )
                     )}

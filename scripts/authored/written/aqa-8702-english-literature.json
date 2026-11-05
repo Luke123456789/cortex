@@ -1,0 +1,185 @@
+{
+  "subject": "English Literature",
+  "exam_board": "AQA",
+  "shared": {
+    "essay_levels": [
+      { "level": 6, "marks": [26, 30], "descriptor": "Convincing, critical and exploratory. A sustained, well-structured argument; quotations chosen precisely and woven in; perceptive analysis of the writer's methods and their effects, with subject terminology used judiciously; context explored and linked convincingly to the writer's ideas." },
+      { "level": 5, "marks": [21, 25], "descriptor": "Thoughtful and developed. A considered, coherent response; well-chosen references; examination of the writer's methods and effects with apt terminology; thoughtful links between context and the text." },
+      { "level": 4, "marks": [16, 20], "descriptor": "Clear and explained. A clear response to task and text; effective use of references; clear explanation of the writer's methods and their effects with relevant terminology; clear understanding of context linked to the text." },
+      { "level": 3, "marks": [11, 15], "descriptor": "Some explanation. Some explained response; references used to support points; some identification and explanation of methods; some awareness of context." },
+      { "level": 2, "marks": [6, 10], "descriptor": "Supported and relevant comments. Relevant comments backed by some reference; awareness of the writer making choices; some awareness of context." },
+      { "level": 1, "marks": [1, 5], "descriptor": "Simple, explicit comments. Simple comments with little reference to the text; little awareness of methods or context." }
+    ],
+    "paragraph_levels": [
+      { "level": 4, "marks": [7, 8], "descriptor": "Perceptive, detailed analysis of the writer's methods with precise references and apt terminology; ideas linked to the writer's purpose or context where relevant." },
+      { "level": 3, "marks": [5, 6], "descriptor": "Clear explanation of how methods create meaning, with well-chosen references and relevant terminology." },
+      { "level": 2, "marks": [3, 4], "descriptor": "Some explanation of meaning with some reference to the text; methods identified but only partly explained." },
+      { "level": 1, "marks": [1, 2], "descriptor": "Simple comments about the character or idea, mostly retelling, with little or no analysis." }
+    ],
+    "spag": "AO4 (4 marks), separate from the 30: 4 = consistently accurate spelling and punctuation and a wide range of vocabulary and sentence structures; 2-3 = considerable accuracy and a good range; 1 = reasonable accuracy and a reasonable range with errors that don't hinder meaning; 0 = errors hinder meaning or the answer is not relevant."
+  },
+  "questions": [
+    {
+      "topic": "Macbeth: Plot, Character & Context",
+      "subtopic": "Macbeth and Lady Macbeth as characters",
+      "spec_ref": "3.1.1",
+      "command_word": "explore",
+      "difficulty": "higher",
+      "total_marks": 34,
+      "spag_marks": 4,
+      "levels": "essay",
+      "ao_marks": { "AO1": 12, "AO2": 12, "AO3": 6, "AO4": 4 },
+      "question_text": "Read the following extract from Act 1 Scene 5 of Macbeth. Lady Macbeth has just read Macbeth's letter and learned that King Duncan will stay at their castle tonight.\n\nThe raven himself is hoarse\nThat croaks the fatal entrance of Duncan\nUnder my battlements. Come, you spirits\nThat tend on mortal thoughts, unsex me here,\nAnd fill me from the crown to the toe top-full\nOf direst cruelty! Make thick my blood;\nStop up the access and passage to remorse,\nThat no compunctious visitings of nature\nShake my fell purpose, nor keep peace between\nThe effect and it! Come to my woman's breasts,\nAnd take my milk for gall, you murd'ring ministers,\nWherever in your sightless substances\nYou wait on nature's mischief!\n\nStarting with this speech, explore how Shakespeare presents Lady Macbeth as a powerful woman.\n\nWrite about:\n• how Shakespeare presents Lady Macbeth in this speech\n• how Shakespeare presents Lady Macbeth in the play as a whole.\n\n[30 marks + 4 marks for spelling, punctuation and grammar]",
+      "indicative": [
+        "Her invocation of spirits ('Come, you spirits') links her to the supernatural and to the witches",
+        "'Unsex me here': she rejects the expectations of femininity to gain the cruelty she thinks power needs",
+        "Imagery of blood, poison ('milk for gall') and darkness presents her ambition as unnatural",
+        "Imperatives and exclamations show her control and determination",
+        "Elsewhere she dominates Macbeth: questioning his masculinity in Act 1 Scene 7, planning the murder, taking charge after it",
+        "Her power fades: excluded from Macbeth's later plans, then the sleepwalking scene (Act 5 Scene 1) and her death",
+        "Jacobean context: the Great Chain of Being, beliefs about witchcraft and the supernatural (James I), expectations of women as obedient wives",
+        "Power that defies the natural order is shown to be destructive and short-lived"
+      ]
+    },
+    {
+      "topic": "A Christmas Carol: Plot, Character & Context",
+      "subtopic": "Scrooge's character and transformation",
+      "spec_ref": "3.1.2",
+      "command_word": "explore",
+      "difficulty": "higher",
+      "total_marks": 30,
+      "levels": "essay",
+      "ao_marks": { "AO1": 12, "AO2": 12, "AO3": 6 },
+      "question_text": "Read the following extract from Stave 1 of A Christmas Carol, in which Scrooge is introduced.\n\nOh! But he was a tight-fisted hand at the grindstone, Scrooge! a squeezing, wrenching, grasping, scraping, clutching, covetous, old sinner! Hard and sharp as flint, from which no steel had ever struck out generous fire; secret, and self-contained, and solitary as an oyster. The cold within him froze his old features, nipped his pointed nose, shrivelled his cheek, stiffened his gait; made his eyes red, his thin lips blue; and spoke out shrewdly in his grating voice. A frosty rime was on his head, and on his eyebrows, and his wiry chin. He carried his own low temperature always about with him; he iced his office in the dog-days; and didn't thaw it one degree at Christmas.\n\nStarting with this extract, explore how Dickens presents Scrooge as an outsider in society.\n\nWrite about:\n• how Dickens presents Scrooge in this extract\n• how Dickens presents Scrooge as an outsider in the novel as a whole.\n\n[30 marks]",
+      "indicative": [
+        "The list of verbs ('squeezing, wrenching, grasping...') builds a picture of greed and isolation",
+        "Similes 'hard and sharp as flint' and 'solitary as an oyster' suggest he is closed off, though the oyster may hide a pearl, hinting at change",
+        "Cold imagery: he carries his 'own low temperature', so his coldness separates him from others",
+        "He rejects Fred's invitation and the charity collectors; people and even dogs avoid him",
+        "The Ghost of Christmas Past shows how he became isolated (lonely childhood, losing Belle)",
+        "By Stave 5 he is welcomed into family and society: the outsider is redeemed",
+        "Victorian context: the Poor Law and workhouses, Malthus ('decrease the surplus population'), Dickens's concern for social responsibility",
+        "Dickens uses Scrooge's isolation to criticise selfish attitudes to the poor"
+      ]
+    },
+    {
+      "topic": "An Inspector Calls: Plot, Character & Context",
+      "subtopic": "The Inspector as a dramatic device",
+      "spec_ref": "3.2.1",
+      "command_word": "explore",
+      "difficulty": "higher",
+      "total_marks": 34,
+      "spag_marks": 4,
+      "levels": "essay",
+      "ao_marks": { "AO1": 12, "AO2": 12, "AO3": 6, "AO4": 4 },
+      "question_text": "How does Priestley use the character of the Inspector to present his ideas about social responsibility in An Inspector Calls?\n\nWrite about:\n• what the Inspector says and does\n• how Priestley uses the Inspector to present his ideas about social responsibility.\n\n[30 marks + 4 marks for spelling, punctuation and grammar]",
+      "indicative": [
+        "The Inspector's interruption of Birling's speech about every man looking after himself",
+        "He controls the pace and structure of the play: one line of enquiry at a time, the photograph",
+        "His language is direct, blunt and morally charged; stage directions about 'massiveness, solidity and purposefulness'",
+        "The final speech: 'We are members of one body', 'fire and blood and anguish'",
+        "His name (Goole / ghoul) and mysterious status; possibly a supernatural or symbolic figure",
+        "He acts as Priestley's mouthpiece for socialist ideas",
+        "Contrast between the younger generation (Sheila, Eric) who learn and the older (Mr and Mrs Birling) who don't",
+        "Context: set in 1912, written in 1945; dramatic irony about the Titanic and war; post-war hope for a welfare state"
+      ]
+    },
+    {
+      "topic": "Power and Conflict Poetry: Comparing Poems & Techniques",
+      "subtopic": "Comparing presentations of power",
+      "spec_ref": "3.2.2",
+      "command_word": "compare",
+      "difficulty": "higher",
+      "total_marks": 30,
+      "levels": "essay",
+      "ao_marks": { "AO1": 12, "AO2": 12, "AO3": 6 },
+      "question_text": "Ozymandias, by Percy Bysshe Shelley\n\nI met a traveller from an antique land,\nWho said—\"Two vast and trunkless legs of stone\nStand in the desert. . . . Near them, on the sand,\nHalf sunk a shattered visage lies, whose frown,\nAnd wrinkled lip, and sneer of cold command,\nTell that its sculptor well those passions read\nWhich yet survive, stamped on these lifeless things,\nThe hand that mocked them, and the heart that fed;\nAnd on the pedestal, these words appear:\nMy name is Ozymandias, King of Kings;\nLook on my Works, ye Mighty, and despair!\nNothing beside remains. Round the decay\nOf that colossal Wreck, boundless and bare\nThe lone and level sands stretch far away.\"\n\nCompare how poets present the effects of power in 'Ozymandias' and in one other poem from 'Power and conflict'.\n\n[30 marks]",
+      "indicative": [
+        "Ozymandias: power is temporary; nature and time destroy human pride",
+        "The 'shattered visage' and 'sneer of cold command' show arrogance and cruelty",
+        "Irony of the inscription against 'Nothing beside remains'",
+        "Form: a sonnet with an irregular rhyme scheme, perhaps reflecting broken power; framed narrative distances the king",
+        "Good comparisons: My Last Duchess (controlling power of a man over a woman), London (power of institutions over people), Extract from The Prelude (power of nature), Storm on the Island",
+        "Comparison should cover ideas and methods (language, structure, form) for both poems",
+        "Context: Shelley's Romantic and revolutionary views, his hostility to tyranny",
+        "A strong answer compares throughout rather than writing about each poem separately"
+      ]
+    },
+    {
+      "topic": "Macbeth: Language, Themes & Quotations",
+      "subtopic": "Imagery and soliloquy",
+      "spec_ref": "3.1.1",
+      "command_word": "analyse",
+      "difficulty": "foundation",
+      "total_marks": 8,
+      "levels": "paragraph",
+      "ao_marks": { "AO1": 3, "AO2": 5 },
+      "question_text": "In Act 2 Scene 1, just before he murders Duncan, Macbeth says:\n\n\"Is this a dagger which I see before me,\nThe handle toward my hand? Come, let me clutch thee.\"\n\nAnalyse how Shakespeare uses this soliloquy to present Macbeth's state of mind. Write one or two developed paragraphs.\n\n[8 marks]",
+      "indicative": [
+        "The question shows confusion and doubt: he can't trust his own senses",
+        "The dagger may be a hallucination caused by guilt, or a supernatural temptation",
+        "'The handle toward my hand' suggests the murder is being offered to him; he is being drawn towards it",
+        "The imperative 'Come, let me clutch thee' shows a desperate, grasping ambition",
+        "A soliloquy lets the audience see his private fears, building tension before the murder",
+        "Links to the supernatural and to the witches' influence"
+      ]
+    },
+    {
+      "topic": "A Christmas Carol: Language, Themes & Quotations",
+      "subtopic": "Theme: poverty and social responsibility",
+      "spec_ref": "3.1.2",
+      "command_word": "analyse",
+      "difficulty": "foundation",
+      "total_marks": 8,
+      "levels": "paragraph",
+      "ao_marks": { "AO1": 3, "AO2": 3, "AO3": 2 },
+      "question_text": "In Stave 3, the Ghost of Christmas Present reveals two children, Ignorance and Want, hidden under his robe.\n\nAnalyse how Dickens uses Ignorance and Want to present his ideas about poverty. Write one or two developed paragraphs.\n\n[8 marks]",
+      "indicative": [
+        "They are allegorical figures, not real children, representing society's neglect",
+        "Descriptions such as 'wretched, abject, frightful, hideous, miserable' shock the reader",
+        "The warning about the boy (Ignorance) and 'Doom' shows Dickens believed ignorance was most dangerous",
+        "The Ghost throws Scrooge's own words back at him ('Are there no prisons? Are there no workhouses?')",
+        "Context: Dickens's concern about child poverty, the ragged schools and the 1834 Poor Law",
+        "The scene is a turning point in Scrooge's understanding of his responsibility"
+      ]
+    },
+    {
+      "topic": "An Inspector Calls: Language, Themes & Quotations",
+      "subtopic": "Theme: age and generational conflict",
+      "spec_ref": "3.2.1",
+      "command_word": "explain",
+      "difficulty": "foundation",
+      "total_marks": 8,
+      "levels": "paragraph",
+      "ao_marks": { "AO1": 4, "AO2": 2, "AO3": 2 },
+      "question_text": "Explain how Priestley presents Sheila as changing during An Inspector Calls. Use references to the play. Write one or two developed paragraphs.\n\n[8 marks]",
+      "indicative": [
+        "At the start she is excited about her engagement and childish ('mummy'); stage directions describe her as 'very pleased with life'",
+        "She feels genuine guilt about Eva's dismissal from Milwards",
+        "She sees through Gerald and understands the Inspector's methods ('he's giving us the rope')",
+        "By the end she rejects her parents' attitudes and accepts responsibility",
+        "Priestley uses her to show the younger generation's capacity to change and hope for the future",
+        "Context: changing roles of women and Priestley's socialist message"
+      ]
+    },
+    {
+      "topic": "Power and Conflict Poetry: Poem Knowledge & Context",
+      "subtopic": "The Charge of the Light Brigade and Exposure",
+      "spec_ref": "3.2.2",
+      "command_word": "analyse",
+      "difficulty": "foundation",
+      "total_marks": 8,
+      "levels": "paragraph",
+      "ao_marks": { "AO1": 3, "AO2": 3, "AO3": 2 },
+      "question_text": "Analyse how Wilfred Owen presents the suffering of soldiers in 'Exposure'. Write one or two developed paragraphs, using references to the poem.\n\n[8 marks]",
+      "indicative": [
+        "The weather is the real enemy: 'the merciless iced east winds that knive us'",
+        "The repeated refrain 'But nothing happens' shows boredom, waiting and futility",
+        "Half-rhymes and long, slow lines create unease and a sense of things not resolving",
+        "Present tense and collective 'we' make the suffering shared and immediate",
+        "Soldiers' minds drift home, but 'on us the doors are closed', showing despair",
+        "Context: Owen's own experience in the trenches in winter 1917; protest against the glorification of war"
+      ]
+    }
+  ]
+}

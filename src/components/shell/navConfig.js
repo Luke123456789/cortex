@@ -5,7 +5,7 @@ export const STUDENT_NAV = [
   { to: '/', label: 'Home', short: 'Home', icon: 'home', end: true },
   { to: '/quizzes', label: 'Quizzes', short: 'Quizzes', icon: 'quiz', match: ['/quiz/', '/play/'] },
   { to: '/tutor', label: 'Ask the tutor', short: 'Tutor', icon: 'tutor' },
-  { to: '/assignments', label: 'Your week', short: 'Week', icon: 'assignments' },
+  { to: '/assignments', label: 'Your week', short: 'Week', icon: 'assignments', match: ['/written/'] },
   { to: '/activity', label: 'Activity', short: 'Activity', icon: 'activity' },
 ]
 

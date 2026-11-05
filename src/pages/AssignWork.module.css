@@ -113,3 +113,17 @@
   color: var(--green);
   white-space: nowrap;
 }
+
+/* The full written question, so the parent sees what they're assigning. */
+.preview {
+  margin-top: var(--space-2);
+  max-height: 220px;
+  overflow-y: auto;
+  padding: var(--space-3);
+  background: var(--card);
+  border: 1px solid var(--rule);
+  border-radius: var(--radius-md);
+  font-size: var(--text-xs);
+  line-height: 1.5;
+  white-space: pre-wrap;
+}

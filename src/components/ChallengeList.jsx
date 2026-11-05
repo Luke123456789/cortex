@@ -7,8 +7,9 @@ const CHALLENGES = [
   {
     id: 'written-test',
     name: 'Written test',
-    desc: 'Answer past-paper style questions, marked against the scheme',
-    type: 'coming-soon',
+    desc: 'Exam-style questions set for you, marked against the scheme',
+    type: 'navigate',
+    to: '/assignments',
     icon: (
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" width="18" height="18">
         <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20" />

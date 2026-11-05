@@ -6,6 +6,7 @@ import ComparisonChart from '../components/analytics/ComparisonChart.jsx'
 import Sparkline from '../components/analytics/Sparkline.jsx'
 import SuggestedAssignments from '../components/analytics/SuggestedAssignments.jsx'
 import ProgressReview from '../components/analytics/ProgressReview.jsx'
+import WrittenWork from '../components/analytics/WrittenWork.jsx'
 import styles from './Analytics.module.css'
 
 const PERIODS = [
@@ -96,6 +97,8 @@ export default function Analytics() {
           </section>
 
           <SuggestedAssignments studentId={studentId} studentName={name} />
+
+          <WrittenWork studentId={studentId} studentName={name} />
 
           <section aria-labelledby="quality-title">
             <div className={styles.qualityHead}>
