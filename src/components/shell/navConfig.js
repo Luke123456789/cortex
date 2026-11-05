@@ -9,14 +9,14 @@ export const STUDENT_NAV = [
   { to: '/activity', label: 'Activity', short: 'Activity', icon: 'activity' },
 ]
 
-// Room for Goals and Reports later: add entries here.
+// Room for Goals later: add entries here.
 export const PARENT_NAV = [
   { to: '/parent', label: 'Overview', short: 'Overview', icon: 'overview', end: true },
   { to: '/parent/assign', label: 'Assign work', short: 'Assign', icon: 'assign' },
   { to: '/parent/locks', label: 'Subject locks', short: 'Locks', icon: 'lock' },
   { to: '/parent/redemptions', label: 'Redemptions', short: 'Requests', icon: 'redemptions' },
   { to: '/parent/tutor-sessions', label: 'Tutor transcripts', short: 'Chats', icon: 'transcripts' },
-  { to: '/parent/assessment', label: 'Assessment', short: 'Assess', icon: 'assessment' },
+  { to: '/parent/analytics', label: 'Analytics', short: 'Analytics', icon: 'assessment', match: ['/parent/assessment'] },
 ]
 
 export function isParentPath(pathname) {

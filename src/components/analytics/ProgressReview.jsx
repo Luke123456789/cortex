@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react'
-import { supabase } from '../lib/supabaseClient'
-import { useAuth } from '../hooks/useAuth.jsx'
-import { useAssessments } from '../hooks/useAssessments'
-import styles from './Assessment.module.css'
+import { supabase } from '../../lib/supabaseClient'
+import { useAuth } from '../../hooks/useAuth.jsx'
+import { useAssessments } from '../../hooks/useAssessments'
+import styles from './ProgressReview.module.css'
 
 const WINDOW_OPTIONS = [
   { value: '24h', label: 'Past 24 hours' },
@@ -24,13 +24,13 @@ function ResultCard({ result }) {
 
   return (
     <article className={`card card--strong ${styles.result}`}>
-      <h3 className={styles.resultHeadline}>{result.headline}</h3>
+      <h4 className={styles.resultHeadline}>{result.headline}</h4>
       <p className={styles.narrative}>{result.narrative}</p>
       {groups.length > 0 && (
         <div className={styles.groups}>
           {groups.map((g) => (
             <div key={g.key}>
-              <h4 className={`${styles.groupTitle} ${g.className}`}>{g.title}</h4>
+              <h5 className={`${styles.groupTitle} ${g.className}`}>{g.title}</h5>
               <ul className={styles.points}>
                 {g.items.map((item, i) => <li key={i}>{item}</li>)}
               </ul>
@@ -42,7 +42,9 @@ function ResultCard({ result }) {
   )
 }
 
-export default function Assessment() {
+// The on-demand AI progress review (formerly the Assessment page), now a
+// section of Analytics. Behaviour unchanged.
+export default function ProgressReview() {
   const { childStudent } = useAuth()
   const displayName = childStudent?.displayName
   const { assessments, loading: historyLoading, refresh } = useAssessments(childStudent?.id)
@@ -95,8 +97,8 @@ export default function Assessment() {
   }
 
   return (
-    <div className="page">
-      <h1 className="section-label">Assess {studentLabel}</h1>
+    <section aria-labelledby="review-title">
+      <h2 id="review-title" className="section-label">AI progress review</h2>
       <p className={styles.intro}>
         Pulls recent tutor sessions, quizzes and written tests and asks the model for an honest read on progress. Runs only when you ask — nothing here happens automatically.
       </p>
@@ -129,7 +131,7 @@ export default function Assessment() {
       {latestResult && <ResultCard result={latestResult} />}
 
       <section className={styles.history} aria-labelledby="assess-history">
-        <h2 id="assess-history" className="section-label">Past assessments</h2>
+        <h3 id="assess-history" className="section-label">Past reviews</h3>
         {historyLoading ? (
           <p className="empty">Loading…</p>
         ) : assessments.length === 0 ? (
@@ -165,6 +167,6 @@ export default function Assessment() {
           </ul>
         )}
       </section>
-    </div>
+    </section>
   )
 }

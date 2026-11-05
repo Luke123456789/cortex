@@ -43,7 +43,7 @@ const PAGES = [
   { name: 'parent-locks', path: '/parent/locks' },
   { name: 'parent-redemptions', path: '/parent/redemptions' },
   { name: 'parent-transcripts', path: '/parent/tutor-sessions' },
-  { name: 'parent-assessment', path: '/parent/assessment' },
+  { name: 'parent-analytics', path: '/parent/analytics' },
 ]
 
 const only = process.env.SHOTS_PAGES?.split(',').map((s) => s.trim()).filter(Boolean)

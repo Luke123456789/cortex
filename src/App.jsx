@@ -1,4 +1,4 @@
-import { Routes, Route } from 'react-router-dom'
+import { Routes, Route, Navigate } from 'react-router-dom'
 import { AuthProvider } from './hooks/useAuth.jsx'
 import ProtectedRoute from './components/ProtectedRoute.jsx'
 import AppShell from './components/shell/AppShell.jsx'
@@ -11,7 +11,7 @@ import TutorChat from './pages/TutorChat.jsx'
 import Activity from './pages/Activity.jsx'
 import RedemptionHistory from './pages/RedemptionHistory.jsx'
 import TutorSessions from './pages/TutorSessions.jsx'
-import Assessment from './pages/Assessment.jsx'
+import Analytics from './pages/Analytics.jsx'
 import AssignWork from './pages/AssignWork.jsx'
 import Assignments from './pages/Assignments.jsx'
 import PlayQuiz from './pages/PlayQuiz.jsx'
@@ -46,7 +46,9 @@ export default function App() {
           <Route path="/parent/locks" element={parentOnly(<SubjectLocksPage />)} />
           <Route path="/parent/redemptions" element={parentOnly(<RedemptionHistory />)} />
           <Route path="/parent/tutor-sessions" element={parentOnly(<TutorSessions />)} />
-          <Route path="/parent/assessment" element={parentOnly(<Assessment />)} />
+          <Route path="/parent/analytics" element={parentOnly(<Analytics />)} />
+          {/* Old address (the page was called Assessment). */}
+          <Route path="/parent/assessment" element={<Navigate to="/parent/analytics" replace />} />
         </Route>
       </Routes>
     </AuthProvider>

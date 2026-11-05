@@ -15,7 +15,6 @@ function formatTime(isoString) {
 export default function Parent() {
   const { childStudent } = useAuth()
   const { requests, refresh } = useRedemptions(childStudent?.id)
-  const studentName = childStudent?.displayName
   const [notifStatus, setNotifStatus] = useState('checking')
 
   useEffect(() => {
@@ -135,7 +134,7 @@ export default function Parent() {
           <h2 id="parent-actions" className={`section-label ${styles.actionsTitle}`}>Quick actions</h2>
           <ul className={styles.actions}>
             <li><Link to="/parent/assign" className="btn btn--primary">Assign work</Link></li>
-            <li><Link to="/parent/assessment" className="btn btn--primary">Assess {studentName || 'student'}</Link></li>
+            <li><Link to="/parent/analytics" className="btn btn--primary">Analytics</Link></li>
             <li><Link to="/parent/tutor-sessions" className="btn btn--secondary">Review tutor sessions</Link></li>
             <li><Link to="/parent/redemptions" className="btn btn--secondary">View Recent Redemptions</Link></li>
           </ul>

@@ -198,3 +198,38 @@ not a rebrand. No Tailwind, no component library.
   walkthrough: login by keyboard, skip link first, every focused element has
   a visible indicator, modal traps focus / Escape closes / focus returns,
   quiz keys work. `npx vitest run`: 57 passed.
+
+## Analytics (replaces Assessment), phase 1
+
+Luke's brief: rename Assessment to Analytics; a short summary of recent
+activity; a graph of the last 7 days against the previous 7 (questions and
+minutes, each on its own chart); AI-suggested assignments with a tick box and
+due date per item and an "Assign selected" button; quality over time and by
+subject. Grade estimates ("Chemistry ~5") are deferred: the only quality data
+is multiple-choice accuracy and tutor engagement ratings, which don't map to
+GCSE grades. That needs marked written answers (phase 2, to be discussed).
+
+- Route `/parent/analytics`; `/parent/assessment` redirects. Nav label
+  "Analytics"; Overview quick action "Analytics".
+- `src/lib/analytics.js` (pure, tested in `test/analytics.test.js`):
+  local-day buckets, 7 vs 7 summary + plain-English lines, per-subject quality
+  (accuracy vs previous window, higher-tier and applied/calculation accuracy,
+  tutor rating = minutes_earned / 30, 12-week weekly accuracy, trend with a
+  10-answer minimum and 5-point threshold).
+- `src/hooks/useAnalytics.js`: reads with the parent's session (RLS), pages
+  past PostgREST's 1000-row cap, never loads transcripts.
+- Charts (`components/analytics/ComparisonChart.jsx`): grouped columns,
+  current week brass / previous week #A39A86 (emphasis pattern; validated
+  with the dataviz script: CVD ΔE 14.9, normal 15.3; the gray is under 3:1
+  so the chart has a legend with totals, tooltips on hover and focus, and a
+  table view).
+- Suggestions: new edge function `suggest-assignments` (deployed, verify_jwt
+  on, read-only). Same auth as assess-student. Builds per-topic stats and a
+  candidate list (next undone quiz per topic, up to two untutored lessons,
+  excluding pending work and locked subjects), sends the model short refs
+  (q1, t1) only, and maps the answer back, dropping unknown refs. Logic in
+  `suggestion-logic.js`, tested in `test/suggestion-logic.test.js`. The page
+  inserts the ticked items as assignments with the same row shape as Assign
+  work.
+- The old Assessment page is now `components/analytics/ProgressReview.jsx`,
+  a section at the bottom of Analytics, behaviour unchanged.
