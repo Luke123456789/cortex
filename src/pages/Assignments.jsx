@@ -2,6 +2,7 @@ import { useMemo, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { useAssignments } from '../hooks/useAssignments'
 import { useAuth } from '../hooks/useAuth.jsx'
+import { useCatalogNames } from '../hooks/useCatalogNames'
 import { ASSIGNMENT_TYPE_LABELS, assignmentAction } from '../lib/assignments'
 import { dueLabel, groupWeek } from '../lib/week'
 import styles from './Assignments.module.css'
@@ -10,12 +11,13 @@ function formatTime(isoString) {
   return new Date(isoString).toLocaleString([], { day: '2-digit', month: 'short', hour: '2-digit', minute: '2-digit' })
 }
 
-function Item({ assignment, showDue = false }) {
+function Item({ assignment, where, showDue = false }) {
   const action = assignmentAction(assignment)
   return (
     <li className={`card ${styles.item}`}>
       <div className={styles.itemText}>
         <div className={styles.itemTitle}>{assignment.title}</div>
+        {where && <div className={styles.where}>{where}</div>}
         <div className="meta">
           {ASSIGNMENT_TYPE_LABELS[assignment.type] || assignment.type}
           {showDue && assignment.due_at ? ` · ${dueLabel(assignment.due_at)}` : ''}
@@ -39,6 +41,8 @@ function Item({ assignment, showDue = false }) {
 export default function Assignments() {
   const { studentId } = useAuth()
   const { assignments, loading } = useAssignments(studentId)
+  const names = useCatalogNames()
+  const whereOf = (a) => [names.subjects.get(a.subject_id), names.topics.get(a.topic_id)].filter(Boolean).join(' · ')
   const week = useMemo(() => groupWeek(assignments), [assignments])
   const completed = assignments.filter((a) => a.status === 'completed').slice(0, 10)
 
@@ -121,7 +125,7 @@ export default function Assignments() {
               <h2 id="week-earlier" className="section-label">From earlier</h2>
               <p className={styles.earlierNote}>These were due before today. Fit them in when you can.</p>
               <ul className={styles.list}>
-                {earlier.map((a) => <Item key={a.id} assignment={a} showDue />)}
+                {earlier.map((a) => <Item key={a.id} assignment={a} where={whereOf(a)} showDue />)}
               </ul>
             </section>
           )}
@@ -150,7 +154,7 @@ export default function Assignments() {
                       <span className="meta">{d.date.toLocaleDateString([], { day: 'numeric', month: 'short' })}</span>
                     </h2>
                     <ul className={styles.list}>
-                      {d.items.map((a) => <Item key={a.id} assignment={a} />)}
+                      {d.items.map((a) => <Item key={a.id} assignment={a} where={whereOf(a)} />)}
                     </ul>
                   </section>
                 ))}
@@ -167,13 +171,13 @@ export default function Assignments() {
             {anytime.length > 0 && (
               <details className={styles.fold}>
                 <summary>{anytime.length} with no due date</summary>
-                <ul className={styles.list}>{anytime.map((a) => <Item key={a.id} assignment={a} />)}</ul>
+                <ul className={styles.list}>{anytime.map((a) => <Item key={a.id} assignment={a} where={whereOf(a)} />)}</ul>
               </details>
             )}
             {later.length > 0 && (
               <details className={styles.fold}>
                 <summary>{later.length} due after this week</summary>
-                <ul className={styles.list}>{later.map((a) => <Item key={a.id} assignment={a} showDue />)}</ul>
+                <ul className={styles.list}>{later.map((a) => <Item key={a.id} assignment={a} where={whereOf(a)} showDue />)}</ul>
               </details>
             )}
             {completed.length > 0 && (
