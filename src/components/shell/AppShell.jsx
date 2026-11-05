@@ -4,6 +4,8 @@ import { useAuth } from '../../hooks/useAuth.jsx'
 import { useBalance } from '../../hooks/useLedger'
 import RoleSwitch from '../RoleSwitch.jsx'
 import Icon from './Icon.jsx'
+import { WallpaperContext } from './Wallpaper.jsx'
+import { wallpaperFor } from '../../lib/wallpapers'
 import { PARENT_NAV, STUDENT_NAV, isActive, isParentPath } from './navConfig'
 import styles from './AppShell.module.css'
 
@@ -49,6 +51,9 @@ export default function AppShell() {
   const { pathname } = useLocation()
   const { profile, signOut, studentId, isPractice, childStudent } = useAuth()
   const [sidebarOpen, setSidebarOpen] = useState(false)
+  // Subject wallpaper set by the page being shown (see useSubjectWallpaper).
+  const [wallpaperSubject, setWallpaperSubject] = useState(null)
+  const wallpaper = wallpaperFor(wallpaperSubject)
 
   const isParent = profile?.role === 'parent'
   const parentMode = isParent && isParentPath(pathname)
@@ -86,7 +91,15 @@ export default function AppShell() {
   const signOutLabel = profile?.display_name ? `Sign out (${profile.display_name})` : 'Sign out'
 
   return (
+    <WallpaperContext.Provider value={setWallpaperSubject}>
     <div className={styles.shell} data-sidebar-open={sidebarOpen || undefined}>
+      {/* Subject wallpaper: decorative, behind the page content. */}
+      <div
+        className={styles.wallpaper}
+        data-on={wallpaper ? '' : undefined}
+        style={wallpaper ? { backgroundImage: `url("${wallpaper}")` } : undefined}
+        aria-hidden="true"
+      />
       <a href="#main" className={styles.skip}>Skip to content</a>
 
       {/* Phone header */}
@@ -149,5 +162,6 @@ export default function AppShell() {
         <NavLinks items={items} pathname={pathname} className={styles.tabList} linkClassName={styles.tabLink} labelKey="short" />
       </nav>
     </div>
+    </WallpaperContext.Provider>
   )
 }

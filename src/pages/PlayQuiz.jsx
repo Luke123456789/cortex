@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from 'react'
 import { useParams, Link } from 'react-router-dom'
 import { supabase } from '../lib/supabaseClient'
 import { useAuth } from '../hooks/useAuth.jsx'
+import { useSubjectWallpaper } from '../components/shell/Wallpaper.jsx'
 import card from '../components/QuestionCard.module.css'
 import styles from './PlayQuiz.module.css'
 
@@ -18,6 +19,7 @@ export default function PlayQuiz() {
   const [submitting, setSubmitting] = useState(false)
   const [error, setError] = useState(null)
   const [result, setResult] = useState(null)
+  useSubjectWallpaper(quiz?.topics?.subjects?.name)
   // Which question is on screen. Presentation only: answers are still
   // collected for every question and submitted together, as before.
   const [current, setCurrent] = useState(0)
@@ -25,7 +27,7 @@ export default function PlayQuiz() {
   useEffect(() => {
     async function load() {
       setLoading(true)
-      const { data: quizRow } = await supabase.from('quizzes').select('id, title').eq('id', quizId).single()
+      const { data: quizRow } = await supabase.from('quizzes').select('id, title, topics (subjects (name))').eq('id', quizId).single()
       setQuiz(quizRow)
 
       // Deliberately omits correct_option/explanation — those only come back

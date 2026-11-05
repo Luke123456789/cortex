@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import { supabase } from '../lib/supabaseClient'
 import { useAuth } from '../hooks/useAuth.jsx'
+import { useSubjectWallpaper } from '../components/shell/Wallpaper.jsx'
 import { commandWordHint } from '../../supabase/functions/mark-written-answer/marking-logic.js'
 import styles from './WrittenTest.module.css'
 
@@ -129,6 +130,7 @@ export default function WrittenTest() {
   const [error, setError] = useState(null)
   const [timerStart, setTimerStart] = useState(null)
   const [pasteBlocked, setPasteBlocked] = useState(false)
+  useSubjectWallpaper(question?.topics?.subjects?.name)
   const [draftCleared, setDraftCleared] = useState(false)
   const [elapsed, setElapsed] = useState(0)
   const key = draftKey(studentId, questionId)

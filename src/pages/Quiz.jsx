@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { useParams, Link } from 'react-router-dom'
 import { supabase } from '../lib/supabaseClient'
+import { useSubjectWallpaper } from '../components/shell/Wallpaper.jsx'
 import card from '../components/QuestionCard.module.css'
 import styles from './Quiz.module.css'
 
@@ -13,13 +14,14 @@ export default function Quiz() {
   const [questions, setQuestions] = useState([])
   const [loading, setLoading] = useState(true)
   const [activeSubtopicId, setActiveSubtopicId] = useState('all')
+  useSubjectWallpaper(topic?.subjects?.name)
 
   useEffect(() => {
     async function load() {
       setLoading(true)
       const { data: topicRow } = await supabase
         .from('topics')
-        .select('id, name')
+        .select('id, name, subjects (name)')
         .eq('id', topicId)
         .single()
       setTopic(topicRow)

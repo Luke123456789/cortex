@@ -336,3 +336,17 @@ no date counts), done this week and on-time rate over 30 days; overdue list
 with days late; next 7 days by day; collapsed later / undated / recently
 completed (on time or N days late). Items show subject · topic
 (useAssignments now also selects subject_id, topic_id).
+
+## Subject wallpapers
+
+- Seven faint line-drawn SVG tiles in `src/assets/wallpapers/` (biology,
+  chemistry, physics, english, economics, business, pe), ink at 9% and brass
+  at 14% opacity, 240px tiles, under 1.4 KB each.
+- `src/lib/wallpapers.js` maps a subject name to its tile. The shell
+  (`AppShell`) renders a fixed layer at z-index -1 and provides
+  `WallpaperContext`; pages call `useSubjectWallpaper(subjectName)`
+  (`components/shell/Wallpaper.jsx`), which clears on leaving the page.
+- Used by TutorChat (follows the subject picker), PlayQuiz, Quiz (question
+  review) and WrittenTest. PlayQuiz and Quiz now also fetch the subject name.
+- Hidden in forced-colours mode; the fade respects reduced motion. Vite
+  inlines the SVGs as data URIs, so the url() must be quoted.

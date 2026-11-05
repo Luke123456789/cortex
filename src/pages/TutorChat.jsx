@@ -5,6 +5,7 @@ import { gradeAndClaimReward } from '../lib/gradeAndClaimReward'
 import { useAuth } from '../hooks/useAuth.jsx'
 import { useQuizCatalog } from '../hooks/useQuizCatalog'
 import { useFillViewport } from '../hooks/useFillViewport'
+import { useSubjectWallpaper } from '../components/shell/Wallpaper.jsx'
 import Modal from '../components/Modal.jsx'
 import styles from './TutorChat.module.css'
 
@@ -80,6 +81,7 @@ export default function TutorChat() {
   }, [subjects, subjectId, resolvingDeepLink])
 
   const selectedSubject = subjects.find((s) => s.id === subjectId)
+  useSubjectWallpaper(selectedSubject?.name)
   const topics = selectedSubject?.topics.filter((t) => t.questionCount > 0) || []
   const selectedTopic = topics.find((t) => t.id === topicId)
 

@@ -482,3 +482,27 @@
     align-self: flex-start;
   }
 }
+
+/* ---------- Subject wallpaper ----------
+   A faint tiled pattern behind the page while working on a subject. It sits
+   below everything (z-index -1); the header, sidebar and tab bar are opaque. */
+.wallpaper {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background-repeat: repeat;
+  background-size: 240px 240px;
+  opacity: 0;
+  transition: opacity 400ms var(--ease);
+}
+
+.wallpaper[data-on] {
+  opacity: 1;
+}
+
+@media (forced-colors: active) {
+  .wallpaper {
+    display: none;
+  }
+}
