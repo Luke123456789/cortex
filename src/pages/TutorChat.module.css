@@ -1,0 +1,222 @@
+/* ---------- Picker (before a session starts) ---------- */
+.picker {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.notice {
+  font-size: var(--text-sm);
+  color: var(--ink-soft);
+}
+
+.done {
+  margin-bottom: var(--space-5);
+}
+
+.doneText {
+  font-size: var(--text-base);
+}
+
+.feedback {
+  margin-top: var(--space-2);
+  font-size: var(--text-sm);
+  color: var(--ink-soft);
+}
+
+/* ---------- Chat ----------
+   Phone/tablet: one column; the lesson panel opens as a drawer.
+   Desktop: chat | lesson panel.                                       */
+.chatPage {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  width: 100%;
+  max-width: var(--content-wide);
+  margin-inline: auto;
+  padding: var(--space-3) var(--gutter) var(--space-3);
+  /* Height is set at runtime to fill the visible viewport. */
+  min-height: 240px;
+}
+
+.chat {
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  min-width: 0;
+  max-width: var(--content-reading);
+  width: 100%;
+  margin-inline: auto;
+}
+
+.chatBar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-2);
+  margin-bottom: var(--space-3);
+}
+
+.chatTitle {
+  min-width: 0;
+}
+
+.chatTitle :global(.section-label) {
+  margin-bottom: 0;
+}
+
+.chatSubtitle {
+  font-size: var(--text-sm);
+  font-weight: 600;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.chatActions {
+  display: flex;
+  gap: var(--space-2);
+  flex-shrink: 0;
+}
+
+.messages {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  padding: var(--space-1) 2px var(--space-3);
+}
+
+.bubble {
+  max-width: 85%;
+  align-self: flex-start;
+  background: var(--card);
+  color: var(--ink);
+  border: 1px solid var(--rule);
+  border-radius: var(--radius);
+  padding: var(--space-2) var(--space-3);
+  font-size: var(--text-sm);
+  line-height: 1.5;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+
+.user {
+  align-self: flex-end;
+  background: var(--ink);
+  color: var(--paper);
+  border-color: var(--ink);
+}
+
+.typing {
+  color: var(--ink-soft);
+  font-style: italic;
+}
+
+.errorRow {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  margin-bottom: var(--space-2);
+}
+
+.composer {
+  display: flex;
+  gap: var(--space-2);
+  align-items: flex-end;
+  padding-top: var(--space-2);
+  border-top: 1px solid var(--rule);
+}
+
+.composer textarea {
+  flex: 1;
+  resize: none;
+  background: var(--card);
+}
+
+.composerHint {
+  display: none;
+  margin-top: var(--space-1);
+}
+
+/* ---------- Lesson panel ---------- */
+.panel {
+  display: none;
+}
+
+.outline {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.outlineTitle {
+  font-size: var(--text-base);
+  font-weight: 600;
+  line-height: var(--leading-tight);
+}
+
+.outcomes {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  font-size: var(--text-sm);
+}
+
+.outcomes li {
+  display: flex;
+  gap: var(--space-2);
+}
+
+.outcomes li::before {
+  content: '';
+  flex-shrink: 0;
+  width: 6px;
+  height: 6px;
+  margin-top: 0.55em;
+  border-radius: 50%;
+  background: var(--brass);
+}
+
+.panelFinish {
+  margin-top: auto;
+}
+
+@media (min-width: 1024px) {
+  .chatPage {
+    grid-template-columns: minmax(0, 1fr) 300px;
+    gap: var(--space-6);
+    padding-top: var(--space-5);
+    padding-bottom: var(--space-5);
+  }
+
+  .chatActions .outlineButton,
+  .chatActions .barFinish {
+    display: none;
+  }
+
+  .panel {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
+    min-height: 0;
+    overflow-y: auto;
+    padding: var(--space-5);
+    background: var(--card);
+    border: 1px solid var(--rule);
+    border-radius: var(--radius);
+  }
+}
+
+@media (min-width: 1024px) and (hover: hover) and (pointer: fine) {
+  .composerHint {
+    display: block;
+  }
+}
+
+.outlineActions {
+  margin-top: var(--space-5);
+}

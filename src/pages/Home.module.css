@@ -1,0 +1,109 @@
+/* Phone: one column in the original order.
+   Tablet: exams and balance side by side.
+   Desktop: a dashboard grid -
+     balance | exams
+     ------- tear -------
+     assigned work | earn more
+     recent entries                                   */
+.banners {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  margin-bottom: var(--space-5);
+}
+
+.practice {
+  background: var(--brass-light);
+  border: 1px solid var(--brass);
+  border-radius: var(--radius-md);
+  padding: var(--space-3);
+  font-size: var(--text-xs);
+  color: var(--ink-soft);
+}
+
+.practiceTitle {
+  font-weight: 600;
+  color: var(--brass);
+  margin-bottom: var(--space-1);
+}
+
+.practiceReset {
+  margin-top: var(--space-2);
+}
+
+.dashboard {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: var(--space-5);
+}
+
+.headline {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: var(--space-4);
+}
+
+.panels {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: var(--space-5);
+}
+
+.panel {
+  min-width: 0;
+}
+
+.tear {
+  margin: 0;
+}
+
+/* Assigned work */
+.work {
+  list-style: none;
+  display: grid;
+  gap: var(--space-2);
+}
+
+.workItem {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.workTitle {
+  font-size: var(--text-sm);
+}
+
+.more {
+  display: inline-block;
+  margin-top: var(--space-3);
+}
+
+@media (min-width: 640px) {
+  .headline {
+    /* Balance first and wider on bigger screens. */
+    grid-template-columns: minmax(0, 3fr) minmax(0, 2fr);
+  }
+
+  .headline > :first-child {
+    order: 2;
+  }
+}
+
+@media (min-width: 1024px) {
+  .dashboard {
+    gap: var(--space-6);
+  }
+
+  .panels {
+    /* Two panels side by side; a lone panel takes the full row. */
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: var(--space-6);
+    align-items: start;
+  }
+
+  .recentTear {
+    display: none;
+  }
+}

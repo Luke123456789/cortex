@@ -11,6 +11,8 @@ import ExamCountdown from '../components/ExamCountdown.jsx'
 import LedgerList from '../components/LedgerList.jsx'
 import ChallengeList from '../components/ChallengeList.jsx'
 import RedeemModal from '../components/RedeemModal.jsx'
+import Tear from '../components/Tear.jsx'
+import styles from './Home.module.css'
 import { getExistingSubscription, subscribeToPush, ensureSubscriptionSaved, pushSupported } from '../lib/push.js'
 
 export default function Home() {
@@ -69,111 +71,85 @@ export default function Home() {
   }
 
   return (
-    <div className="device">
-      <div className="screen">
-        {isPractice && (
-          <div style={{ background: 'var(--brass-light)', border: '1px solid var(--brass)', borderRadius: '8px', padding: '10px 12px', marginBottom: '18px', fontSize: '12px', color: 'var(--ink-soft)' }}>
-            <div style={{ fontWeight: 600, color: 'var(--brass)', marginBottom: '4px' }}>Practice mode</div>
-            You're using the student view as a practice student. Nothing here touches the real student's data, and no screen time is earned.
-            <div style={{ marginTop: '8px' }}>
-              <button
-                onClick={handleResetPractice}
-                disabled={resetting}
-                style={{ background: 'none', border: 'none', padding: 0, fontSize: '11.5px', color: 'var(--brass)', textDecoration: 'underline' }}
-              >
-                {resetting ? 'Resetting…' : 'Reset practice data'}
-              </button>
+    <div className="page page--wide">
+      {(isPractice || notifStatus === 'disabled') && (
+        <div className={styles.banners}>
+          {isPractice && (
+            <div className={styles.practice}>
+              <div className={styles.practiceTitle}>Practice mode</div>
+              You're using the student view as a practice student. Nothing here touches the real student's data, and no screen time is earned.
+              <div className={styles.practiceReset}>
+                <button type="button" className="link" onClick={handleResetPractice} disabled={resetting}>
+                  {resetting ? 'Resetting…' : 'Reset practice data'}
+                </button>
+              </div>
             </div>
-          </div>
-        )}
+          )}
 
-        {notifStatus === 'disabled' && (
-          <button
-            onClick={handleEnableNotifications}
-            style={{
-              width: '100%',
-              background: 'var(--brass-light)',
-              color: 'var(--brass)',
-              border: 'none',
-              borderRadius: '8px',
-              padding: '10px',
-              fontSize: '12.5px',
-              fontWeight: 600,
-              marginBottom: '18px',
-            }}
-          >
-            Enable notifications on this device
-          </button>
-        )}
-        {loading ? (
-          <div style={{ fontSize: '13px', color: 'var(--ink-faint)' }}>Loading…</div>
-        ) : (
-          <>
+          {notifStatus === 'disabled' && (
+            <button type="button" className="btn btn--soft btn--block" onClick={handleEnableNotifications}>
+              Enable notifications on this device
+            </button>
+          )}
+        </div>
+      )}
+
+      {loading ? (
+        <p className="empty">Loading…</p>
+      ) : (
+        <div className={styles.dashboard}>
+          <div className={styles.headline}>
             <ExamCountdown />
-
             <BalanceCard balance={balance} pendingRequest={pending} onRedeemClick={() => setModalOpen(true)} />
+          </div>
 
+          <Tear className={styles.tear} />
+
+          <div className={styles.panels}>
             {pendingAssignments.length > 0 && (
-              <>
-                <div className="section-label">Assigned work</div>
-                <div style={{ display: 'grid', gap: '8px', marginBottom: '18px' }}>
+              <section className={styles.panel} aria-labelledby="home-work">
+                <h2 id="home-work" className="section-label">Assigned work</h2>
+                <ul className={styles.work}>
                   {pendingAssignments.slice(0, 3).map((a) => {
                     const action = assignmentAction(a)
                     return (
-                      <div
-                        key={a.id}
-                        style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: '10px', background: 'var(--card)', border: '1px solid var(--rule)', borderRadius: 'var(--radius)', padding: '11px 13px' }}
-                      >
+                      <li key={a.id} className={`card ${styles.workItem}`}>
                         <div>
-                          <div style={{ fontSize: '13.5px' }}>{a.title}</div>
-                          <span className="mono" style={{ fontSize: '9.5px', color: 'var(--ink-faint)' }}>{ASSIGNMENT_TYPE_LABELS[a.type] || a.type}</span>
+                          <div className={styles.workTitle}>{a.title}</div>
+                          <span className="meta">{ASSIGNMENT_TYPE_LABELS[a.type] || a.type}</span>
                         </div>
                         {action ? (
-                          <Link
-                            to={action.to}
-                            style={{ flexShrink: 0, background: 'var(--ink)', color: 'var(--paper)', borderRadius: '8px', padding: '7px 12px', fontSize: '12px', fontWeight: 600, textDecoration: 'none' }}
-                          >
-                            {action.label}
-                          </Link>
+                          <Link to={action.to} className="btn btn--primary btn--small">{action.label}</Link>
                         ) : (
-                          <span className="mono" style={{ flexShrink: 0, fontSize: '10px', fontWeight: 600, textTransform: 'uppercase', color: 'var(--ink-faint)' }}>Soon</span>
+                          <span className="tag">Soon</span>
                         )}
-                      </div>
+                      </li>
                     )
                   })}
-                </div>
+                </ul>
                 {pendingAssignments.length > 3 && (
-                  <Link to="/assignments" style={{ display: 'inline-block', fontSize: '12px', color: 'var(--brass)', textDecoration: 'underline', marginBottom: '18px' }}>
-                    View more
-                  </Link>
+                  <Link to="/assignments" className={`link ${styles.more}`}>View more</Link>
                 )}
-              </>
+              </section>
             )}
 
-            <div className="tear">
-              <div className="tear-hole" /><span /><div className="tear-hole" /><span /><div className="tear-hole" />
-            </div>
+            <section className={styles.panel} aria-labelledby="home-earn">
+              <h2 id="home-earn" className="section-label">Earn more</h2>
+              <ChallengeList />
+            </section>
+          </div>
 
-            <div className="section-label">Earn more</div>
-            <ChallengeList />
+          <Tear className={`${styles.tear} ${styles.recentTear}`} />
 
-            <div className="tear">
-              <div className="tear-hole" /><span /><div className="tear-hole" /><span /><div className="tear-hole" />
-            </div>
-
-            <div className="section-label">Recent entries</div>
+          <section className={styles.panel} aria-labelledby="home-recent">
+            <h2 id="home-recent" className="section-label">Recent entries</h2>
             <LedgerList entries={entries.slice(0, 3)} />
             {entries.length > 3 && (
-              <Link
-                to="/activity"
-                style={{ fontSize: '12px', color: 'var(--brass)', textDecoration: 'underline' }}
-              >
-                View more
-              </Link>
+              <Link to="/activity" className={`link ${styles.more}`}>View more</Link>
             )}
-          </>
-        )}
-      </div>
+          </section>
+        </div>
+      )}
 
       {modalOpen && (
         <RedeemModal

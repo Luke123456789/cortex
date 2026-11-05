@@ -1,0 +1,8 @@
+.note {
+  font-size: var(--text-sm);
+  color: var(--ink-soft);
+}
+
+.note a {
+  color: var(--ink);
+}

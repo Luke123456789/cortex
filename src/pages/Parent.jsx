@@ -176,7 +176,7 @@ export default function Parent() {
           </div>
         )}
 
-        <ExamCountdown detailed />
+        <div style={{ marginBottom: '18px' }}><ExamCountdown detailed /></div>
 
         <SubjectLocks studentId={childStudent?.id} />
 

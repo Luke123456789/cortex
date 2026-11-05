@@ -113,3 +113,38 @@ not a rebrand. No Tailwind, no component library.
    `SHOTS_OUT` changes the folder. Playwright is pinned to 1.63.0 to match
    the pre-installed Chromium — don't run `playwright install`.
 3. Show the screenshots by reading the PNGs / sending them to Luke.
+
+## Stage (a) follow-up
+
+- `22481aa`: SubjectLocks selects get `min-width: 0` (the page scrolled sideways
+  at 320–375px with long topic names). Stage (a) was pushed to `main` at
+  Luke's request after review.
+
+## What stage (b) built (student pages)
+
+- `src/styles/components.css`: shared `.card`, `.btn` (+ `--primary`,
+  `--secondary`, `--soft`, `--small`, `--block`), `.field`, `.field-label`,
+  `.tag`, `.meta`, `.empty`, `.error-text`, `.link`, `.chips`/`.chip`, `kbd`.
+  In a CSS Module, refer to these with `:global(.btn)` etc.
+- `Modal.jsx`: bottom sheet on phone, centred dialog from 640px; focus moves
+  in and is trapped, Escape/backdrop close, focus returns to the opener.
+  RedeemModal and the tutor's Lesson outline drawer use it.
+- Home: dashboard grid (balance | exams, then assigned work | earn more, then
+  recent entries). Tablet puts balance and exams side by side.
+- PlayQuiz: one question at a time in a centred card, numbered jump list,
+  Previous/Next, Submit on the last question. A–D / 1–4 pick, Enter = next /
+  submit (ignored when a button or field has focus). Answers are still
+  collected for every question and submitted together, as before.
+- Assignments: list on phone, card grid on desktop, filter chips by **type**
+  (assignments don't carry their subject; a subject filter needs a join).
+- TutorChat: desktop chat | lesson panel (subject, topic, subtopic, spec ref,
+  learning outcomes, Finish session); phone/tablet get a "Lesson outline"
+  drawer and Finish in the chat bar. `useFillViewport` sizes the chat to the
+  visual viewport so the composer stays above the on-screen keyboard.
+- Activity: `LedgerList layout="table"`: a real table with a sticky header
+  from 640px, stacked rows on phone.
+- Student pages no longer use `.device`/`.screen`. ExamCountdown lost its own
+  margin; Parent.jsx has a temporary inline wrapper until stage (c).
+- Review screenshots with sample rows: a throwaway script intercepted
+  Supabase requests in the browser (all writes answered locally, nothing hit
+  the database). Not committed.

@@ -124,7 +124,7 @@ export default function AppShell() {
       </main>
 
       {/* Phone tab bar */}
-      <nav aria-label={parentMode ? 'Parent' : 'Student'} className={styles.tabbar}>
+      <nav aria-label={parentMode ? 'Parent' : 'Student'} className={styles.tabbar} data-tabbar="">
         <NavLinks items={items} pathname={pathname} className={styles.tabList} linkClassName={styles.tabLink} labelKey="short" />
       </nav>
     </div>

@@ -1,0 +1,146 @@
+.head {
+  margin-bottom: var(--space-4);
+}
+
+.title {
+  margin-bottom: var(--space-1);
+}
+
+.progressRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: var(--space-3);
+  margin-bottom: var(--space-2);
+}
+
+.progress {
+  height: 4px;
+  border-radius: 2px;
+  background: var(--paper-3);
+  overflow: hidden;
+}
+
+.progressFill {
+  height: 100%;
+  background: var(--brass);
+  transition: width var(--dur) var(--ease);
+}
+
+.questionCard {
+  padding: var(--space-5);
+}
+
+@media (min-width: 640px) {
+  .questionCard {
+    padding: var(--space-6);
+    box-shadow: var(--shadow-1);
+  }
+}
+
+/* Numbered jump list: answered questions are filled in. */
+.jump {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-1);
+  margin: var(--space-4) 0;
+}
+
+.jumpBtn {
+  min-width: 32px;
+  height: 32px;
+  padding: 0 var(--space-1);
+  border: 1px solid var(--rule);
+  border-radius: var(--radius-sm);
+  background: transparent;
+  color: var(--ink-soft);
+  font-family: var(--font-mono);
+  font-size: var(--text-2xs);
+}
+
+.jumpBtn[data-answered] {
+  background: var(--paper-3);
+  border-color: var(--rule-strong);
+  color: var(--ink);
+}
+
+.jumpBtn[aria-current='step'] {
+  border-color: var(--ink);
+  box-shadow: inset 0 0 0 1px var(--ink);
+  color: var(--ink);
+  font-weight: 600;
+}
+
+.nav {
+  display: flex;
+  gap: var(--space-3);
+}
+
+.nav > :global(.btn) {
+  flex: 1;
+}
+
+@media (min-width: 640px) {
+  .nav {
+    justify-content: space-between;
+  }
+
+  .nav > :global(.btn) {
+    flex: 0 1 auto;
+    min-width: 140px;
+  }
+}
+
+.error {
+  margin-bottom: var(--space-3);
+}
+
+.status {
+  margin-top: var(--space-3);
+  text-align: center;
+}
+
+/* Keyboard hint: only where there's a real keyboard and pointer. */
+.hint {
+  display: none;
+  margin-top: var(--space-4);
+  text-align: center;
+}
+
+@media (min-width: 1024px) and (hover: hover) and (pointer: fine) {
+  .hint {
+    display: block;
+  }
+}
+
+/* Results */
+.score {
+  margin-bottom: var(--space-5);
+}
+
+.scoreValue {
+  font-size: var(--text-xl);
+  font-weight: 700;
+  margin-bottom: var(--space-1);
+}
+
+.earned {
+  font-family: var(--font-mono);
+  font-size: var(--text-sm);
+  font-weight: 600;
+  color: var(--green);
+}
+
+.results {
+  list-style: none;
+  display: grid;
+  gap: var(--space-3);
+  margin-bottom: var(--space-5);
+}
+
+.verdict {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  font-weight: 600;
+}

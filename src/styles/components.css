@@ -1,0 +1,187 @@
+/* Shared building blocks used across pages: cards, buttons, form fields,
+   tags and status text. Page-specific layout lives in Page.module.css. */
+
+/* ---- Cards ---- */
+.card {
+  background: var(--card);
+  border: 1px solid var(--rule);
+  border-radius: var(--radius);
+  padding: var(--space-3) var(--space-4);
+}
+
+/* The heavier "ticket" card used for headline numbers. */
+.card--strong {
+  border: 1.5px solid var(--rule-strong);
+  padding: var(--space-4) var(--space-5);
+}
+
+/* ---- Buttons ---- */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  min-height: var(--tap-min);
+  padding: var(--space-2) var(--space-4);
+  border: 1px solid transparent;
+  border-radius: var(--radius-md);
+  font-size: var(--text-sm);
+  font-weight: 600;
+  line-height: 1.2;
+  text-align: center;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: background var(--dur) var(--ease), opacity var(--dur) var(--ease);
+}
+
+.btn--primary {
+  background: var(--ink);
+  color: var(--paper);
+}
+
+.btn--primary:hover:not(:disabled) {
+  background: #2c3b4d;
+}
+
+.btn--secondary {
+  background: transparent;
+  border-color: var(--rule-strong);
+  color: var(--ink);
+}
+
+.btn--secondary:hover:not(:disabled) {
+  background: var(--paper-2);
+}
+
+.btn--soft {
+  background: var(--brass-light);
+  color: var(--brass);
+}
+
+.btn--small {
+  min-height: 36px;
+  padding: var(--space-1) var(--space-3);
+  font-size: var(--text-xs);
+}
+
+.btn--block {
+  display: flex;
+  width: 100%;
+}
+
+.btn:disabled {
+  opacity: 0.5;
+}
+
+/* Text-style button / link in brass. */
+.link {
+  padding: 0;
+  border: none;
+  background: none;
+  color: var(--brass);
+  font-size: var(--text-xs);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+/* ---- Form fields ---- */
+.field {
+  display: block;
+  width: 100%;
+  min-width: 0;
+  min-height: var(--tap-min);
+  background: var(--card);
+  border: 1px solid var(--rule);
+  border-radius: var(--radius-md);
+  padding: var(--space-2) var(--space-3);
+  font-family: var(--font-body);
+  font-size: var(--text-sm);
+  color: var(--ink);
+}
+
+textarea.field {
+  resize: vertical;
+  line-height: 1.4;
+}
+
+.field-label {
+  display: block;
+  font-size: var(--text-xs);
+  color: var(--ink-soft);
+  margin-bottom: var(--space-1);
+}
+
+/* ---- Tags ---- */
+.tag {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-size: var(--text-2xs);
+  font-weight: 600;
+  letter-spacing: 0.4px;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+  border: 1px solid var(--rule);
+  border-radius: var(--radius-pill);
+  padding: 2px 8px;
+  white-space: nowrap;
+}
+
+/* ---- Small text ---- */
+.meta {
+  font-family: var(--font-mono);
+  font-size: var(--text-2xs);
+  color: var(--ink-soft);
+}
+
+.empty {
+  font-size: var(--text-sm);
+  color: var(--ink-soft);
+}
+
+.error-text {
+  font-size: var(--text-xs);
+  color: var(--red);
+}
+
+.text-earn {
+  color: var(--green);
+}
+
+.text-spend {
+  color: var(--red);
+}
+
+/* ---- Filter chips (segmented list of toggles) ---- */
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+}
+
+.chip {
+  min-height: 36px;
+  padding: var(--space-1) var(--space-3);
+  border: 1px solid var(--rule-strong);
+  border-radius: var(--radius-pill);
+  background: transparent;
+  color: var(--ink-soft);
+  font-size: var(--text-xs);
+  font-weight: 600;
+}
+
+.chip[aria-pressed='true'] {
+  background: var(--ink);
+  border-color: var(--ink);
+  color: var(--paper);
+}
+
+/* Small keyboard key in hints. */
+kbd {
+  font-family: var(--font-mono);
+  font-size: 0.9em;
+  border: 1px solid var(--rule-strong);
+  border-bottom-width: 2px;
+  border-radius: 4px;
+  padding: 0 4px;
+  background: var(--card);
+}

@@ -4,18 +4,9 @@ import { supabase } from '../lib/supabaseClient'
 import { gradeAndClaimReward } from '../lib/gradeAndClaimReward'
 import { useAuth } from '../hooks/useAuth.jsx'
 import { useQuizCatalog } from '../hooks/useQuizCatalog'
-
-const selectStyle = {
-  width: '100%',
-  background: 'var(--card)',
-  border: '1px solid var(--rule)',
-  borderRadius: '8px',
-  padding: '10px 12px',
-  fontSize: '13px',
-  fontFamily: "'Space Grotesk', sans-serif",
-  color: 'var(--ink)',
-  marginBottom: '10px',
-}
+import { useFillViewport } from '../hooks/useFillViewport'
+import Modal from '../components/Modal.jsx'
+import styles from './TutorChat.module.css'
 
 // The edge functions may return a non-JSON body (e.g. a gateway timeout page),
 // so parse defensively and surface the server's own error message if present.
@@ -74,7 +65,11 @@ export default function TutorChat() {
   const [finishing, setFinishing] = useState(false)
   const [error, setError] = useState(null)
 
+  const [outlineOpen, setOutlineOpen] = useState(false)
+
   const scrollRef = useRef(null)
+  const chatPageRef = useRef(null)
+  useFillViewport(chatPageRef, started && !rewardClaimed)
   const messagesRef = useRef([])
   messagesRef.current = messages
   const finishedRef = useRef(false)
@@ -306,81 +301,66 @@ export default function TutorChat() {
 
   if (rewardClaimed) {
     return (
-      <div className="device">
-        <div className="screen">
-          <div className="section-label">Session complete</div>
-          <div style={{ marginBottom: '20px' }}>
-            <div style={{ fontSize: '15px', marginBottom: feedback ? '8px' : 0 }}>
-              {isPractice ? 'Practice session graded (practice sessions earn no minutes).' : `+${minutesAwarded} minutes earned for the chat.`}
-            </div>
-            {feedback && (
-              <div style={{ fontSize: '12.5px', color: 'var(--ink-faint)' }}>{feedback}</div>
-            )}
-          </div>
-          <Link
-            to="/"
-            style={{
-              display: 'inline-block', background: 'var(--ink)', color: 'var(--paper)',
-              borderRadius: '8px', padding: '10px 18px', fontSize: '13px', fontWeight: 600, textDecoration: 'none',
-            }}
-          >
-            Back to home
-          </Link>
+      <div className="page">
+        <h1 className="section-label">Session complete</h1>
+        <div className={`card card--strong ${styles.done}`} role="status">
+          <p className={styles.doneText}>
+            {isPractice ? 'Practice session graded (practice sessions earn no minutes).' : `+${minutesAwarded} minutes earned for the chat.`}
+          </p>
+          {feedback && <p className={styles.feedback}>{feedback}</p>}
         </div>
+        <Link to="/" className="btn btn--primary">Back to home</Link>
       </div>
     )
   }
 
   if (!started) {
     return (
-      <div className="device">
-        <div className="screen">
-          <div className="section-label">Ask the tutor</div>
+      <div className="page">
+        <h1 className="section-label">Ask the tutor</h1>
 
-          {catalogLoading ? (
-            <div style={{ fontSize: '12px', color: 'var(--ink-faint)' }}>Loading subjects…</div>
-          ) : (
-            <>
-              <select style={selectStyle} value={subjectId} onChange={(e) => setSubjectId(e.target.value)}>
+        {catalogLoading ? (
+          <p className="empty">Loading subjects…</p>
+        ) : (
+          <div className={styles.picker}>
+            <div>
+              <label className="field-label" htmlFor="tutor-subject">Subject</label>
+              <select id="tutor-subject" className="field" value={subjectId} onChange={(e) => setSubjectId(e.target.value)}>
                 {subjects.map((s) => <option key={s.id} value={s.id}>{s.name}{s.locked ? ' (locked)' : ''}</option>)}
               </select>
-              <select style={selectStyle} value={topicId} onChange={(e) => setTopicId(e.target.value)}>
+            </div>
+            <div>
+              <label className="field-label" htmlFor="tutor-topic">Topic</label>
+              <select id="tutor-topic" className="field" value={topicId} onChange={(e) => setTopicId(e.target.value)}>
                 {topics.map((t) => <option key={t.id} value={t.id}>{t.name}{t.locked ? ' (locked)' : ''}</option>)}
               </select>
+            </div>
 
-              {selectedTopic?.locked ? (
-                <div style={{ fontSize: '12.5px', color: 'var(--ink-faint)', background: 'var(--card)', border: '1px solid var(--rule)', borderRadius: 'var(--radius)', padding: '14px 15px' }}>
-                  A parent has locked {selectedSubject.locked ? 'this subject' : 'this topic'} until {selectedTopic.lockedUntil.toLocaleString([], { day: '2-digit', month: 'short', hour: '2-digit', minute: '2-digit' })} — try something else in the meantime.
-                </div>
-              ) : (
-                <>
-                  {subtopics.length === 0 ? (
-                    <div style={{ fontSize: '12.5px', color: 'var(--ink-faint)', marginBottom: '8px' }}>
-                      No tutor lessons for this topic yet — pick another topic.
-                    </div>
-                  ) : (
-                    <select style={selectStyle} value={subtopicId} onChange={(e) => setSubtopicId(e.target.value)}>
+            {selectedTopic?.locked ? (
+              <p className={`card ${styles.notice}`}>
+                A parent has locked {selectedSubject.locked ? 'this subject' : 'this topic'} until {selectedTopic.lockedUntil.toLocaleString([], { day: '2-digit', month: 'short', hour: '2-digit', minute: '2-digit' })} — try something else in the meantime.
+              </p>
+            ) : (
+              <>
+                {subtopics.length === 0 ? (
+                  <p className={styles.notice}>No tutor lessons for this topic yet — pick another topic.</p>
+                ) : (
+                  <div>
+                    <label className="field-label" htmlFor="tutor-subtopic">Lesson</label>
+                    <select id="tutor-subtopic" className="field" value={subtopicId} onChange={(e) => setSubtopicId(e.target.value)}>
                       {subtopics.map((st) => <option key={st.id} value={st.id}>{st.name}</option>)}
                     </select>
-                  )}
+                  </div>
+                )}
 
-                  <button
-                    onClick={startSession}
-                    disabled={!subtopicId || planLoading}
-                    style={{
-                      width: '100%', background: 'var(--ink)', color: 'var(--paper)', border: 'none',
-                      borderRadius: '8px', padding: '11px', fontSize: '13px', fontWeight: 600, marginTop: '4px',
-                      opacity: planLoading ? 0.6 : 1,
-                    }}
-                  >
-                    {planLoading ? 'Preparing your lesson…' : 'Start chat'}
-                  </button>
-                </>
-              )}
-              {error && <div style={{ fontSize: '11.5px', color: 'var(--red)', marginTop: '10px' }}>{error}</div>}
-            </>
-          )}
-        </div>
+                <button type="button" className="btn btn--primary btn--block" onClick={startSession} disabled={!subtopicId || planLoading}>
+                  {planLoading ? 'Preparing your lesson…' : 'Start chat'}
+                </button>
+              </>
+            )}
+            {error && <p className="error-text" role="alert">{error}</p>}
+          </div>
+        )}
       </div>
     )
   }
@@ -388,82 +368,100 @@ export default function TutorChat() {
   const lastMessage = messages[messages.length - 1]
   const canRetry = lastMessage?.role === 'user' && !thinking
   const inputRows = textInput.length > 120 || textInput.includes('\n') ? 5 : 2
+  const currentSubtopic = subtopics.find((st) => st.id === subtopicId)
+  const finishLabel = finishing ? 'Grading your session…' : 'Finish session'
+
+  const outline = (
+    <div className={styles.outline}>
+      <div>
+        <div className="meta">{selectedSubject?.name}{selectedTopic ? ` · ${selectedTopic.name}` : ''}</div>
+        <div className={styles.outlineTitle}>{currentSubtopic?.name}</div>
+        {currentSubtopic?.spec_ref && <div className="meta">Spec {currentSubtopic.spec_ref}</div>}
+      </div>
+      {lessonPlan?.learningOutcomes?.length > 0 && (
+        <div>
+          <h3 className="section-label">Learning outcomes</h3>
+          <ul className={styles.outcomes}>
+            {lessonPlan.learningOutcomes.map((o, i) => <li key={i}>{o}</li>)}
+          </ul>
+        </div>
+      )}
+    </div>
+  )
 
   return (
-    <div className="device">
-      <div className="screen" style={{ display: 'flex', flexDirection: 'column', height: '100%' }}>
-        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'flex-end', marginBottom: '12px' }}>
-          <button
-            onClick={finishSession}
-            disabled={finishing}
-            style={{
-              background: 'transparent', border: '1px solid var(--rule)', borderRadius: '20px',
-              padding: '5px 12px', fontSize: '11px', color: 'var(--ink-faint)',
-              opacity: finishing ? 0.6 : 1,
-            }}
-          >
-            {finishing ? 'Grading your session…' : 'Finish'}
-          </button>
+    <div className={styles.chatPage} ref={chatPageRef}>
+      <section className={styles.chat} aria-label="Tutor chat">
+        <div className={styles.chatBar}>
+          <div className={styles.chatTitle}>
+            <h1 className="section-label">Ask the tutor</h1>
+            <div className={styles.chatSubtitle}>{currentSubtopic?.name}</div>
+          </div>
+          <div className={styles.chatActions}>
+            <button type="button" className={`btn btn--secondary btn--small ${styles.outlineButton}`} onClick={() => setOutlineOpen(true)}>
+              Lesson outline
+            </button>
+            <button type="button" className={`btn btn--secondary btn--small ${styles.barFinish}`} onClick={finishSession} disabled={finishing}>
+              {finishing ? 'Grading…' : 'Finish'}
+            </button>
+          </div>
         </div>
 
-        <div ref={scrollRef} style={{ flex: 1, overflowY: 'auto', marginBottom: '12px', display: 'flex', flexDirection: 'column', gap: '8px' }}>
+        <div ref={scrollRef} className={styles.messages} role="log" aria-live="polite" aria-label="Messages">
           {messages.map((m, i) => (
-            <div
-              key={i}
-              style={{
-                alignSelf: m.role === 'user' ? 'flex-end' : 'flex-start',
-                maxWidth: '85%',
-                background: m.role === 'user' ? 'var(--ink)' : 'var(--card)',
-                color: m.role === 'user' ? 'var(--paper)' : 'var(--ink)',
-                border: m.role === 'user' ? 'none' : '1px solid var(--rule)',
-                borderRadius: '10px', padding: '9px 12px', fontSize: '13px', lineHeight: 1.45,
-              }}
-            >
+            <div key={i} className={`${styles.bubble} ${m.role === 'user' ? styles.user : ''}`}>
+              <span className="visually-hidden">{m.role === 'user' ? 'You: ' : 'Tutor: '}</span>
               {m.content}
             </div>
           ))}
-          {thinking && (
-            <div style={{ alignSelf: 'flex-start', maxWidth: '85%', background: 'var(--card)', color: 'var(--ink-faint)', border: '1px solid var(--rule)', borderRadius: '10px', padding: '9px 12px', fontSize: '13px', fontStyle: 'italic' }}>
-              Tutor is typing…
-            </div>
-          )}
+          {thinking && <div className={`${styles.bubble} ${styles.typing}`}>Tutor is typing…</div>}
         </div>
 
         {error && (
-          <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '8px' }}>
-            <div style={{ fontSize: '11px', color: 'var(--red)' }}>{error}</div>
+          <div className={styles.errorRow}>
+            <p className="error-text" role="alert">{error}</p>
             {canRetry && (
-              <button
-                onClick={retryLastMessage}
-                style={{
-                  background: 'none', border: '1px solid var(--rule)', borderRadius: '14px',
-                  padding: '3px 10px', fontSize: '10.5px', color: 'var(--ink)', flexShrink: 0,
-                }}
-              >
-                Retry
-              </button>
+              <button type="button" className="btn btn--secondary btn--small" onClick={retryLastMessage}>Retry</button>
             )}
           </div>
         )}
 
-        <div style={{ display: 'flex', gap: '8px', alignItems: 'flex-end' }}>
+        <div className={styles.composer}>
+          <label htmlFor="tutor-input" className="visually-hidden">Message</label>
           <textarea
+            id="tutor-input"
+            className="field"
             value={textInput}
             onChange={(e) => setTextInput(e.target.value)}
             onKeyDown={handleInputKeyDown}
             placeholder="Type your message…"
             rows={inputRows}
-            style={{ flex: 1, border: '1px solid var(--rule)', borderRadius: '8px', padding: '10px 12px', fontSize: '13px', fontFamily: "'Space Grotesk', sans-serif", resize: 'none', lineHeight: 1.4 }}
+            enterKeyHint="send"
           />
-          <button
-            onClick={() => submitMessage(textInput)}
-            disabled={thinking || !textInput.trim()}
-            style={{ background: 'var(--ink)', color: 'var(--paper)', border: 'none', borderRadius: '8px', padding: '10px 16px', fontSize: '13px', fontWeight: 600, opacity: thinking || !textInput.trim() ? 0.6 : 1 }}
-          >
+          <button type="button" className="btn btn--primary" onClick={() => submitMessage(textInput)} disabled={thinking || !textInput.trim()}>
             Send
           </button>
         </div>
-      </div>
+        <p className={`meta ${styles.composerHint}`}><kbd>Enter</kbd> to send · <kbd>Shift</kbd>+<kbd>Enter</kbd> for a new line</p>
+      </section>
+
+      <aside className={styles.panel} aria-label="Lesson outline">
+        <h2 className="section-label">Lesson outline</h2>
+        {outline}
+        <button type="button" className={`btn btn--primary btn--block ${styles.panelFinish}`} onClick={finishSession} disabled={finishing}>
+          {finishLabel}
+        </button>
+      </aside>
+
+      {outlineOpen && (
+        <Modal labelledBy="outline-title" onClose={() => setOutlineOpen(false)}>
+          <h2 id="outline-title" className="section-label">Lesson outline</h2>
+          {outline}
+          <div className={styles.outlineActions}>
+            <button type="button" className="btn btn--secondary btn--block" onClick={() => setOutlineOpen(false)}>Close</button>
+          </div>
+        </Modal>
+      )}
     </div>
   )
 }

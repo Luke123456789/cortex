@@ -1,54 +1,71 @@
+import styles from './LedgerList.module.css'
+
 function formatTime(isoString) {
   return new Date(isoString).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
 }
 
-export default function LedgerList({ entries }) {
+function Amount({ entry }) {
+  return (
+    <span className={styles.amount}>
+      {entry.type === 'earn' ? '+' : '−'}{entry.amount_minutes} min
+    </span>
+  )
+}
+
+// layout="list": compact rows (Home). layout="table": a real table from
+// tablet width up, stacked rows on a phone (Activity).
+export default function LedgerList({ entries, layout = 'list' }) {
   if (entries.length === 0) {
+    return <p className="empty">No entries yet — complete a challenge to start earning.</p>
+  }
+
+  if (layout === 'table') {
     return (
-      <div style={{ fontSize: '13px', color: 'var(--ink-faint)', paddingBottom: '4px' }}>
-        No entries yet — complete a challenge to start earning.
+      <div className={styles.scroller}>
+        <table className={styles.table}>
+          <thead>
+            <tr>
+              <th scope="col">Entry</th>
+              <th scope="col">Note</th>
+              <th scope="col">Time</th>
+              <th scope="col" className={styles.num}>Minutes</th>
+            </tr>
+          </thead>
+          <tbody>
+            {entries.map((entry) => (
+              <tr key={entry.id} className={entry.type === 'earn' ? styles.earn : undefined}>
+                <td className={styles.cellSource}>
+                  <span className={styles.dot} aria-hidden="true" />
+                  <span className={styles.source}>{entry.source}</span>
+                </td>
+                <td className={`meta ${styles.cellNote}`}>{entry.note || ''}</td>
+                <td className={`meta ${styles.cellTime}`}>{formatTime(entry.created_at)}</td>
+                <td className={styles.cellAmount}><Amount entry={entry} /></td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
       </div>
     )
   }
 
   return (
-    <div style={{ marginBottom: '8px' }}>
+    <ul className={styles.list}>
       {entries.map((entry) => (
-        <div
-          key={entry.id}
-          style={{
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'space-between',
-            padding: '10px 0',
-            borderBottom: '1px solid var(--rule)',
-          }}
-        >
-          <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-            <div
-              style={{
-                width: '7px',
-                height: '7px',
-                borderRadius: '50%',
-                background: entry.type === 'earn' ? 'var(--green)' : 'var(--red)',
-              }}
-            />
+        <li key={entry.id} className={`${styles.row} ${entry.type === 'earn' ? styles.earn : ''}`}>
+          <div className={styles.entry}>
+            <span className={styles.dot} aria-hidden="true" />
             <div>
-              <div style={{ fontSize: '13.5px' }}>{entry.source}</div>
-              <span className="mono" style={{ fontSize: '9.5px', color: 'var(--ink-faint)', display: 'block', marginTop: '1px' }}>
+              <div className={styles.source}>{entry.source}</div>
+              <span className={`meta ${styles.when}`}>
                 {formatTime(entry.created_at)}
                 {entry.note ? ` · ${entry.note}` : ''}
               </span>
             </div>
           </div>
-          <div
-            className="mono"
-            style={{ fontSize: '14px', fontWeight: 600, color: entry.type === 'earn' ? 'var(--green)' : 'var(--red)' }}
-          >
-            {entry.type === 'earn' ? '+' : '−'}{entry.amount_minutes} min
-          </div>
-        </div>
+          <Amount entry={entry} />
+        </li>
       ))}
-    </div>
+    </ul>
   )
 }

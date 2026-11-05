@@ -1,4 +1,5 @@
 import { useNavigate } from 'react-router-dom'
+import styles from './ChallengeList.module.css'
 
 // Rewards are written server-side by the grading edge functions; this list
 // only navigates.
@@ -9,7 +10,7 @@ const CHALLENGES = [
     desc: 'Answer past-paper style questions, marked against the scheme',
     type: 'coming-soon',
     icon: (
-      <svg viewBox="0 0 24 24" fill="none" stroke="var(--brass)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" width="18" height="18">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" width="18" height="18">
         <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20" />
         <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z" />
       </svg>
@@ -22,10 +23,10 @@ const CHALLENGES = [
     type: 'navigate',
     to: '/tutor',
     icon: (
-      <svg viewBox="0 0 24 24" fill="none" stroke="var(--brass)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" width="18" height="18">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" width="18" height="18">
         <circle cx="12" cy="12" r="10" />
         <path d="M9.5 9a2.5 2.5 0 0 1 5 0c0 1.5-2.5 2-2.5 3.5" />
-        <circle cx="12" cy="17" r="0.5" fill="var(--brass)" />
+        <circle cx="12" cy="17" r="0.5" fill="currentColor" />
       </svg>
     ),
   },
@@ -42,85 +43,39 @@ export default function ChallengeList() {
   }
 
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
+    <ul className={styles.list}>
       {CHALLENGES.map((challenge) => {
         const isComingSoon = challenge.type === 'coming-soon'
-        return (
-          <div
-            key={challenge.id}
-            onClick={() => handleClick(challenge)}
-            style={{
-              background: 'var(--card)',
-              border: '1px solid var(--rule)',
-              borderRadius: 'var(--radius)',
-              padding: '14px 15px',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'space-between',
-              cursor: isComingSoon ? 'not-allowed' : 'pointer',
-              opacity: isComingSoon ? 0.55 : 1,
-            }}
-          >
-            <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
-              <div
-                style={{
-                  width: '36px',
-                  height: '36px',
-                  borderRadius: '8px',
-                  background: 'var(--brass-light)',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  flexShrink: 0,
-                }}
-              >
-                {challenge.icon}
-              </div>
-              <div>
-                <div style={{ fontSize: '14px', fontWeight: 600 }}>{challenge.name}</div>
-                <div style={{ fontSize: '11.5px', color: 'var(--ink-soft)', marginTop: '1px' }}>{challenge.desc}</div>
-              </div>
-            </div>
+        const content = (
+          <>
+            <span className={styles.main}>
+              <span className={styles.icon} aria-hidden="true">{challenge.icon}</span>
+              <span>
+                <span className={styles.name}>{challenge.name}</span>
+                <span className={styles.desc}>{challenge.desc}</span>
+              </span>
+            </span>
             {isComingSoon ? (
-              <div
-                className="mono"
-                style={{
-                  fontSize: '10.5px',
-                  fontWeight: 600,
-                  textTransform: 'uppercase',
-                  letterSpacing: '0.4px',
-                  color: 'var(--ink-faint)',
-                  border: '1px solid var(--rule)',
-                  padding: '4px 9px',
-                  borderRadius: '20px',
-                  whiteSpace: 'nowrap',
-                }}
-              >
-                Coming soon
-              </div>
+              <span className="tag">Coming soon</span>
             ) : challenge.type === 'navigate' ? (
-              <svg viewBox="0 0 24 24" fill="none" stroke="var(--ink-faint)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" width="16" height="16">
+              <svg className={styles.chevron} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" width="16" height="16" aria-hidden="true">
                 <path d="m9 18 6-6-6-6" />
               </svg>
             ) : (
-              <div
-                className="mono"
-                style={{
-                  fontSize: '13px',
-                  fontWeight: 600,
-                  color: 'var(--green)',
-                  background: 'var(--green-bg)',
-                  padding: '4px 9px',
-                  borderRadius: '6px',
-                  whiteSpace: 'nowrap',
-                }}
-              >
-                +{challenge.minutes} min
-              </div>
+              <span className={styles.reward}>+{challenge.minutes} min</span>
             )}
-          </div>
+          </>
+        )
+        return (
+          <li key={challenge.id}>
+            {isComingSoon ? (
+              <div className={`${styles.item} ${styles.disabled}`} aria-disabled="true">{content}</div>
+            ) : (
+              <button type="button" className={styles.item} onClick={() => handleClick(challenge)}>{content}</button>
+            )}
+          </li>
         )
       })}
-    </div>
+    </ul>
   )
 }

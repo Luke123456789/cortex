@@ -1,7 +1,9 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { useParams, Link } from 'react-router-dom'
 import { supabase } from '../lib/supabaseClient'
 import { useAuth } from '../hooks/useAuth.jsx'
+import card from '../components/QuestionCard.module.css'
+import styles from './PlayQuiz.module.css'
 
 const optionKeys = ['a', 'b', 'c', 'd']
 
@@ -16,6 +18,9 @@ export default function PlayQuiz() {
   const [submitting, setSubmitting] = useState(false)
   const [error, setError] = useState(null)
   const [result, setResult] = useState(null)
+  // Which question is on screen. Presentation only: answers are still
+  // collected for every question and submitted together, as before.
+  const [current, setCurrent] = useState(0)
 
   useEffect(() => {
     async function load() {
@@ -76,10 +81,42 @@ export default function PlayQuiz() {
     }
   }
 
+  // Keyboard: A-D or 1-4 picks an option for the question on screen; Enter
+  // moves on once it's answered, and submits from the last question.
+  const keyState = useRef({})
+  keyState.current = { questions, current, answers, allAnswered, submitting, result, loading }
+  useEffect(() => {
+    function handleKeyDown(e) {
+      const st = keyState.current
+      if (st.loading || st.result || e.altKey || e.ctrlKey || e.metaKey) return
+      const target = e.target
+      if (target.closest && target.closest('input, textarea, select, [contenteditable="true"]')) return
+      const q = st.questions[st.current]
+      if (!q) return
+      const key = e.key.toLowerCase()
+      const index = 'abcd'.indexOf(key) >= 0 && key.length === 1 ? 'abcd'.indexOf(key) : '1234'.indexOf(key)
+      if (key.length === 1 && index >= 0) {
+        e.preventDefault()
+        selectAnswer(q.id, optionKeys[index])
+        return
+      }
+      if (e.key === 'Enter') {
+        // Let Enter activate a focused button or link normally.
+        if (target.closest && target.closest('button, a')) return
+        if (!st.answers[q.id]) return
+        e.preventDefault()
+        if (st.current < st.questions.length - 1) setCurrent(st.current + 1)
+        else if (st.allAnswered && !st.submitting) handleSubmit()
+      }
+    }
+    document.addEventListener('keydown', handleKeyDown)
+    return () => document.removeEventListener('keydown', handleKeyDown)
+  })
+
   if (loading) {
     return (
-      <div className="device">
-        <div className="screen" style={{ fontSize: '13px', color: 'var(--ink-faint)' }}>Loading…</div>
+      <div className="page">
+        <p className="empty">Loading…</p>
       </div>
     )
   }
@@ -89,133 +126,145 @@ export default function PlayQuiz() {
     for (const r of result.results) resultByQuestionId[r.questionId] = r
 
     return (
-      <div className="device">
-        <div className="screen">
-          <div className="section-label">Quiz complete</div>
-          <div style={{ background: 'var(--card)', border: '1.5px solid var(--rule-strong)', borderRadius: 'var(--radius)', padding: '16px', marginBottom: '18px' }}>
-            <div style={{ fontSize: '20px', fontWeight: 700, marginBottom: '4px' }}>{result.score} / {result.totalCount} correct</div>
-            {result.minutesAwarded > 0 ? (
-              <div className="mono" style={{ fontSize: '13px', fontWeight: 600, color: 'var(--green)' }}>+{result.minutesAwarded} min earned</div>
-            ) : (
-              <div className="mono" style={{ fontSize: '12px', color: 'var(--ink-faint)' }}>No minutes earned this time</div>
-            )}
-          </div>
+      <div className="page">
+        <h1 className="section-label">Quiz complete</h1>
+        <div className={`card card--strong ${styles.score}`} role="status">
+          <div className={styles.scoreValue}>{result.score} / {result.totalCount} correct</div>
+          {result.minutesAwarded > 0 ? (
+            <div className={styles.earned}>+{result.minutesAwarded} min earned</div>
+          ) : (
+            <div className="meta">No minutes earned this time</div>
+          )}
+        </div>
 
+        <ol className={styles.results}>
           {questions.map((q, i) => {
             const r = resultByQuestionId[q.id]
             return (
-              <div key={q.id} style={{ background: 'var(--card)', border: '1px solid var(--rule)', borderRadius: 'var(--radius)', padding: '13px 14px', marginBottom: '10px' }}>
-                <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '8px' }}>
-                  <span className="mono" style={{ fontSize: '9.5px', color: 'var(--ink-faint)' }}>Q{i + 1}</span>
-                  <span className="mono" style={{ fontSize: '10.5px', fontWeight: 600, color: r?.correct ? 'var(--green)' : 'var(--red)' }}>
+              <li key={q.id} className={`card ${card.card}`}>
+                <div className={card.top}>
+                  <span className="meta">Q{i + 1}</span>
+                  <span className={`${styles.verdict} ${r?.correct ? 'text-earn' : 'text-spend'}`}>
                     {r?.correct ? 'Correct' : 'Incorrect'}
                   </span>
                 </div>
-                <div style={{ fontSize: '13px', marginBottom: '9px', lineHeight: 1.5 }}>{q.question_text}</div>
-                <div style={{ display: 'grid', gap: '5px', marginBottom: r?.explanation ? '8px' : 0 }}>
+                <p className={card.text}>{q.question_text}</p>
+                <ul className={card.options}>
                   {optionKeys.map((k) => {
                     const letter = k.toUpperCase()
                     const isCorrect = r?.correctOption === letter
                     const isSelected = r?.selectedOption === letter
                     return (
-                      <div
-                        key={k}
-                        style={{
-                          fontSize: '12px',
-                          padding: '6px 9px',
-                          borderRadius: '6px',
-                          border: `1px solid ${isCorrect ? 'var(--green)' : isSelected ? 'var(--red)' : 'var(--rule)'}`,
-                          background: isCorrect ? 'var(--green-bg)' : 'transparent',
-                          color: isCorrect ? 'var(--green)' : isSelected ? 'var(--red)' : 'var(--ink-soft)',
-                        }}
-                      >
-                        <strong style={{ marginRight: '7px' }}>{letter}</strong>
-                        {q[`option_${k}`]}
-                      </div>
+                      <li key={k} className={`${card.option} ${isCorrect ? card.correct : isSelected ? card.wrong : ''}`}>
+                        <span className={card.letter}>{letter}</span>
+                        <span>{q[`option_${k}`]}</span>
+                        {isSelected && <span className="visually-hidden"> (your answer)</span>}
+                        {isCorrect && <span className="visually-hidden"> (correct answer)</span>}
+                      </li>
                     )
                   })}
-                </div>
-                {r?.explanation && (
-                  <div style={{ fontSize: '11px', color: 'var(--ink-faint)', fontStyle: 'italic', borderTop: '1px solid var(--rule)', paddingTop: '7px' }}>
-                    {r.explanation}
-                  </div>
-                )}
-              </div>
+                </ul>
+                {r?.explanation && <p className={card.explanation}>{r.explanation}</p>}
+              </li>
             )
           })}
+        </ol>
 
-          <Link
-            to="/"
-            style={{ display: 'block', textAlign: 'center', background: 'var(--ink)', color: 'var(--paper)', borderRadius: '8px', padding: '11px', fontSize: '13px', fontWeight: 600, textDecoration: 'none' }}
-          >
-            Done
-          </Link>
-        </div>
+        <Link to="/" className="btn btn--primary btn--block">Done</Link>
       </div>
     )
   }
 
+  const total = questions.length
+  const q = questions[current]
+  const isLast = current === total - 1
+  const answeredCount = questions.filter((x) => answers[x.id]).length
+  const unanswered = total - answeredCount
+
   return (
-    <div className="device">
-      <div className="screen">
-        <Link to="/" className="back-link">← Back</Link>
+    <div className="page">
+      <Link to="/" className="back-link">← Back</Link>
 
-        <div className="section-label">{quiz?.title || 'Quiz'}</div>
-        <div className="mono" style={{ fontSize: '10.5px', color: 'var(--ink-faint)', marginBottom: '14px' }}>
-          {questions.length} question(s)
+      <div className={styles.head}>
+        <h1 className={`section-label ${styles.title}`}>{quiz?.title || 'Quiz'}</h1>
+        <div className={styles.progressRow}>
+          <span className="meta">{total ? `Question ${current + 1} of ${total}` : '0 question(s)'}</span>
+          <span className="meta">{answeredCount} answered</span>
         </div>
-
-        {questions.map((q, i) => (
-          <div key={q.id} style={{ background: 'var(--card)', border: '1px solid var(--rule)', borderRadius: 'var(--radius)', padding: '13px 14px', marginBottom: '10px' }}>
-            <span className="mono" style={{ fontSize: '9.5px', color: 'var(--ink-faint)' }}>Q{i + 1}</span>
-            <div style={{ fontSize: '13px', margin: '6px 0 9px', lineHeight: 1.5 }}>{q.question_text}</div>
-            <div style={{ display: 'grid', gap: '5px' }}>
-              {optionKeys.map((k) => {
-                const letter = k.toUpperCase()
-                const isSelected = answers[q.id] === letter
-                return (
-                  <button
-                    key={k}
-                    onClick={() => selectAnswer(q.id, letter)}
-                    style={{
-                      textAlign: 'left',
-                      fontSize: '12px',
-                      padding: '8px 9px',
-                      borderRadius: '6px',
-                      border: `1px solid ${isSelected ? 'var(--ink)' : 'var(--rule)'}`,
-                      background: isSelected ? 'var(--ink)' : 'transparent',
-                      color: isSelected ? 'var(--paper)' : 'var(--ink-soft)',
-                    }}
-                  >
-                    <strong style={{ marginRight: '7px' }}>{letter}</strong>
-                    {q[`option_${k}`]}
-                  </button>
-                )
-              })}
-            </div>
-          </div>
-        ))}
-
-        {error && <div style={{ fontSize: '12.5px', color: 'var(--red)', marginBottom: '14px' }}>{error}</div>}
-
-        <button
-          onClick={handleSubmit}
-          disabled={!allAnswered || submitting}
-          style={{
-            width: '100%',
-            background: 'var(--ink)',
-            color: 'var(--paper)',
-            border: 'none',
-            borderRadius: '8px',
-            padding: '12px',
-            fontSize: '13px',
-            fontWeight: 600,
-            opacity: !allAnswered || submitting ? 0.5 : 1,
-          }}
-        >
-          {submitting ? 'Submitting…' : 'Submit answers'}
-        </button>
+        <div className={styles.progress} aria-hidden="true">
+          <div className={styles.progressFill} style={{ width: `${total ? (answeredCount / total) * 100 : 0}%` }} />
+        </div>
       </div>
+
+      {q && (
+        <section className={`card ${card.card} ${styles.questionCard}`} aria-labelledby="play-question">
+          <span className="meta">Q{current + 1}</span>
+          <p id="play-question" className={card.text}>{q.question_text}</p>
+          <div className={card.options} role="radiogroup" aria-labelledby="play-question">
+            {optionKeys.map((k) => {
+              const letter = k.toUpperCase()
+              const isSelected = answers[q.id] === letter
+              return (
+                <button
+                  key={k}
+                  type="button"
+                  role="radio"
+                  aria-checked={isSelected}
+                  className={`${card.option} ${card.choice}`}
+                  onClick={() => selectAnswer(q.id, letter)}
+                >
+                  <span className={card.letter} aria-hidden="true">{letter}</span>
+                  <span>{q[`option_${k}`]}</span>
+                </button>
+              )
+            })}
+          </div>
+        </section>
+      )}
+
+      {total > 1 && (
+        <ol className={styles.jump} aria-label="Questions">
+          {questions.map((x, i) => (
+            <li key={x.id}>
+              <button
+                type="button"
+                className={styles.jumpBtn}
+                data-answered={answers[x.id] ? '' : undefined}
+                aria-current={i === current ? 'step' : undefined}
+                aria-label={`Question ${i + 1}${answers[x.id] ? ', answered' : ''}`}
+                onClick={() => setCurrent(i)}
+              >
+                {i + 1}
+              </button>
+            </li>
+          ))}
+        </ol>
+      )}
+
+      {error && <p className={`error-text ${styles.error}`} role="alert">{error}</p>}
+
+      <div className={styles.nav}>
+        <button type="button" className="btn btn--secondary" onClick={() => setCurrent(current - 1)} disabled={current === 0}>
+          Previous
+        </button>
+        {isLast || total === 0 ? (
+          <button type="button" className="btn btn--primary" onClick={handleSubmit} disabled={!allAnswered || submitting}>
+            {submitting ? 'Submitting…' : 'Submit answers'}
+          </button>
+        ) : (
+          <button type="button" className="btn btn--primary" onClick={() => setCurrent(current + 1)}>
+            Next
+          </button>
+        )}
+      </div>
+
+      {isLast && unanswered > 0 && (
+        <p className={`meta ${styles.status}`}>{unanswered} question{unanswered === 1 ? '' : 's'} still to answer</p>
+      )}
+
+      <p className={`meta ${styles.hint}`}>
+        <kbd>A</kbd>–<kbd>D</kbd> or <kbd>1</kbd>–<kbd>4</kbd> to choose · <kbd>Enter</kbd> for next{isLast ? ' / submit' : ''}
+      </p>
     </div>
   )
 }

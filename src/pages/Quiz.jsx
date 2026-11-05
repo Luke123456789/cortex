@@ -1,6 +1,8 @@
 import { useEffect, useState } from 'react'
 import { useParams, Link } from 'react-router-dom'
 import { supabase } from '../lib/supabaseClient'
+import card from '../components/QuestionCard.module.css'
+import styles from './Quiz.module.css'
 
 const optionKeys = ['a', 'b', 'c', 'd']
 
@@ -46,104 +48,71 @@ export default function Quiz() {
     : questions.filter((q) => q.subtopic_id === activeSubtopicId)
 
   return (
-    <div className="device">
-      <div className="screen">
-        <Link to="/" className="back-link">← Back</Link>
+    <div className="page">
+      <Link to="/" className="back-link">← Back</Link>
 
-        {loading ? (
-          <div style={{ fontSize: '13px', color: 'var(--ink-faint)' }}>Loading…</div>
-        ) : (
-          <>
-            <div className="section-label">{topic?.name || 'Question bank'}</div>
-            <div className="mono" style={{ fontSize: '10.5px', color: 'var(--ink-faint)', marginBottom: '14px' }}>
-              {questions.length} question(s) loaded · review only, not the live quiz
-            </div>
+      {loading ? (
+        <p className="empty">Loading…</p>
+      ) : (
+        <>
+          <h1 className="section-label">{topic?.name || 'Question bank'}</h1>
+          <p className={`meta ${styles.count}`}>
+            {questions.length} question(s) loaded · review only, not the live quiz
+          </p>
 
-            <select
-              value={activeSubtopicId}
-              onChange={(e) => setActiveSubtopicId(e.target.value)}
-              style={{
-                width: '100%',
-                background: 'var(--card)',
-                border: '1px solid var(--rule)',
-                borderRadius: '8px',
-                padding: '9px 10px',
-                fontSize: '12.5px',
-                fontFamily: "'Space Grotesk', sans-serif",
-                color: 'var(--ink)',
-                marginBottom: '16px',
-              }}
-            >
-              <option value="all">All subtopics ({questions.length})</option>
-              {subtopics.map((st) => {
-                const count = questions.filter((q) => q.subtopic_id === st.id).length
-                return (
-                  <option key={st.id} value={st.id}>
-                    {st.spec_ref} {st.name} ({count})
-                  </option>
-                )
-              })}
-            </select>
+          <label htmlFor="quiz-subtopic" className="visually-hidden">Subtopic</label>
+          <select
+            id="quiz-subtopic"
+            className={`field ${styles.filter}`}
+            value={activeSubtopicId}
+            onChange={(e) => setActiveSubtopicId(e.target.value)}
+          >
+            <option value="all">All subtopics ({questions.length})</option>
+            {subtopics.map((st) => {
+              const count = questions.filter((q) => q.subtopic_id === st.id).length
+              return (
+                <option key={st.id} value={st.id}>
+                  {st.spec_ref} {st.name} ({count})
+                </option>
+              )
+            })}
+          </select>
 
-            {visibleQuestions.length === 0 ? (
-              <div style={{ fontSize: '12px', color: 'var(--ink-faint)' }}>No questions for this subtopic yet.</div>
-            ) : (
-              visibleQuestions.map((q, i) => (
-                <div
-                  key={q.id}
-                  style={{
-                    background: 'var(--card)',
-                    border: '1px solid var(--rule)',
-                    borderRadius: 'var(--radius)',
-                    padding: '13px 14px',
-                    marginBottom: '10px',
-                  }}
-                >
-                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '8px' }}>
-                    <span className="mono" style={{ fontSize: '9.5px', color: 'var(--ink-faint)' }}>Q{i + 1}</span>
-                    <div style={{ display: 'flex', gap: '5px' }}>
-                      <span className="mono" style={{ fontSize: '9px', textTransform: 'uppercase', color: q.difficulty === 'higher' ? 'var(--brass)' : 'var(--ink-faint)', border: '1px solid var(--rule)', borderRadius: '10px', padding: '2px 6px' }}>
-                        {q.difficulty}
-                      </span>
-                      <span className="mono" style={{ fontSize: '9px', textTransform: 'uppercase', color: 'var(--ink-faint)', border: '1px solid var(--rule)', borderRadius: '10px', padding: '2px 6px' }}>
-                        {q.question_type}
-                      </span>
+          {visibleQuestions.length === 0 ? (
+            <p className="empty">No questions for this subtopic yet.</p>
+          ) : (
+            <ol className={styles.list}>
+              {visibleQuestions.map((q, i) => (
+                <li key={q.id} className={`card ${card.card}`}>
+                  <div className={card.top}>
+                    <span className="meta">Q{i + 1}</span>
+                    <div className={card.tags}>
+                      <span className={`tag ${q.difficulty === 'higher' ? card.higher : ''}`}>{q.difficulty}</span>
+                      <span className="tag">{q.question_type}</span>
                     </div>
                   </div>
 
-                  <div style={{ fontSize: '13px', marginBottom: '9px', lineHeight: 1.5 }}>{q.question_text}</div>
+                  <p className={card.text}>{q.question_text}</p>
 
-                  <div style={{ display: 'grid', gap: '5px', marginBottom: '8px' }}>
+                  <ul className={card.options}>
                     {optionKeys.map((k) => {
                       const isCorrect = q.correct_option.toLowerCase() === k
                       return (
-                        <div
-                          key={k}
-                          style={{
-                            fontSize: '12px',
-                            padding: '6px 9px',
-                            borderRadius: '6px',
-                            border: `1px solid ${isCorrect ? 'var(--green)' : 'var(--rule)'}`,
-                            background: isCorrect ? 'var(--green-bg)' : 'transparent',
-                            color: isCorrect ? 'var(--green)' : 'var(--ink-soft)',
-                          }}
-                        >
-                          <strong style={{ marginRight: '7px' }}>{k.toUpperCase()}</strong>
-                          {q[`option_${k}`]}
-                        </div>
+                        <li key={k} className={`${card.option} ${isCorrect ? card.correct : ''}`}>
+                          <span className={card.letter}>{k.toUpperCase()}</span>
+                          <span>{q[`option_${k}`]}</span>
+                        </li>
                       )
                     })}
-                  </div>
+                  </ul>
 
-                  <div style={{ fontSize: '11px', color: 'var(--ink-faint)', fontStyle: 'italic', borderTop: '1px solid var(--rule)', paddingTop: '7px' }}>
-                    {q.explanation}
-                  </div>
-                </div>
-              ))
-            )}
-          </>
-        )}
-      </div>
+                  <p className={card.explanation}>{q.explanation}</p>
+                </li>
+              ))}
+            </ol>
+          )}
+        </>
+      )}
     </div>
   )
 }

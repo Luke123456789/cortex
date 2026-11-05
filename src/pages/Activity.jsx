@@ -9,17 +9,14 @@ export default function Activity() {
   const { entries, loading } = useLedger(studentId)
 
   return (
-    <div className="device">
-      <div className="screen">
+    <div className="page page--wide">
+      <h1 className="section-label">Activity</h1>
 
-        <div className="section-label">Activity</div>
-
-        {loading ? (
-          <div style={{ fontSize: '13px', color: 'var(--ink-faint)' }}>Loading…</div>
-        ) : (
-          <LedgerList entries={entries} />
-        )}
-      </div>
+      {loading ? (
+        <p className="empty">Loading…</p>
+      ) : (
+        <LedgerList entries={entries} layout="table" />
+      )}
     </div>
   )
 }

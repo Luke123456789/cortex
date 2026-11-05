@@ -1,0 +1,203 @@
+/* ---- List (Home) ---- */
+.list {
+  list-style: none;
+}
+
+.row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3);
+  padding: var(--space-3) 0;
+  border-bottom: 1px solid var(--rule);
+}
+
+.entry {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  min-width: 0;
+}
+
+.dot {
+  width: 7px;
+  height: 7px;
+  flex-shrink: 0;
+  border-radius: 50%;
+  background: var(--red);
+}
+
+.earn .dot {
+  background: var(--green);
+}
+
+.source {
+  font-size: var(--text-sm);
+  overflow-wrap: anywhere;
+}
+
+.when {
+  display: block;
+  margin-top: 1px;
+}
+
+.amount {
+  font-family: var(--font-mono);
+  font-size: var(--text-sm);
+  font-weight: 600;
+  white-space: nowrap;
+  color: var(--red);
+}
+
+.earn .amount {
+  color: var(--green);
+}
+
+/* ---- Table (Activity). Stacked rows on phone, a real table from 640px. ---- */
+.table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.table thead {
+  /* Visually hidden on phone; the stacked rows don't need column headings. */
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+}
+
+.table tr {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  grid-template-areas:
+    'source amount'
+    'note note'
+    'time time';
+  align-items: center;
+  column-gap: var(--space-3);
+  padding: var(--space-3) 0;
+  border-bottom: 1px solid var(--rule);
+}
+
+.table td {
+  display: block;
+}
+
+.cellSource {
+  grid-area: source;
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  min-width: 0;
+}
+
+.cellNote,
+.cellTime {
+  padding-left: calc(7px + var(--space-3));
+}
+
+.cellNote {
+  grid-area: note;
+}
+
+.cellNote:empty {
+  display: none;
+}
+
+.cellTime {
+  grid-area: time;
+}
+
+.cellAmount {
+  grid-area: amount;
+  text-align: right;
+}
+
+@media (min-width: 640px) {
+  .scroller {
+    max-height: calc(100dvh - var(--space-8) * 3);
+    overflow: auto;
+    border: 1px solid var(--rule);
+    border-radius: var(--radius);
+    background: var(--card);
+  }
+
+  .table thead {
+    position: static;
+    width: auto;
+    height: auto;
+    overflow: visible;
+    clip: auto;
+  }
+
+  .table tr {
+    display: table-row;
+    padding: 0;
+  }
+
+  .table td,
+  .table th {
+    display: table-cell;
+    padding: var(--space-3) var(--space-4);
+    border-bottom: 1px solid var(--rule);
+    vertical-align: middle;
+  }
+
+  .table tbody tr:last-child td {
+    border-bottom: none;
+  }
+
+  .table th {
+    position: sticky;
+    top: 0;
+    z-index: 1;
+    background: var(--paper-2);
+    font-family: var(--font-mono);
+    font-size: var(--text-2xs);
+    font-weight: 600;
+    letter-spacing: 0.8px;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    text-align: left;
+    white-space: nowrap;
+  }
+
+  .table th.num,
+  .cellAmount {
+    text-align: right;
+  }
+
+  .cellSource {
+    display: table-cell;
+  }
+
+  .cellSource .dot {
+    display: inline-block;
+    margin-right: var(--space-3);
+    vertical-align: middle;
+  }
+
+  .cellNote,
+  .cellTime {
+    padding-left: var(--space-4);
+  }
+
+  .cellNote {
+    font-size: var(--text-xs);
+    color: var(--ink-soft);
+  }
+
+  .cellNote:empty {
+    display: table-cell;
+  }
+
+  .cellTime {
+    white-space: nowrap;
+  }
+
+  .table tbody tr:hover {
+    background: #faf7ee;
+  }
+}

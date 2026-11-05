@@ -1,0 +1,13 @@
+.root {
+  height: 100%;
+}
+
+.value {
+  font-family: var(--font-mono);
+  font-size: var(--text-base);
+  font-weight: 600;
+}
+
+.label {
+  margin-bottom: var(--space-1);
+}

@@ -1,0 +1,13 @@
+.count {
+  margin-bottom: var(--space-4);
+}
+
+.filter {
+  margin-bottom: var(--space-4);
+}
+
+.list {
+  list-style: none;
+  display: grid;
+  gap: var(--space-3);
+}
