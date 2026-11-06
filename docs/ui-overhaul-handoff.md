@@ -350,3 +350,31 @@ completed (on time or N days late). Items show subject · topic
   review) and WrittenTest. PlayQuiz and Quiz now also fetch the subject name.
 - Hidden in forced-colours mode; the fade respects reduced motion. Vite
   inlines the SVGs as data URIs, so the url() must be quoted.
+
+## Quiz distractor rewrites (answers too easy to spot)
+
+Luke noticed quizzes were too easy: the correct answer was usually the
+longest and the others were implausible. Measured on 6 Nov: the correct
+option was the longest in 54% of active questions (fair is ~25%): English
+Literature 85%, Biology 64%, Economics 57%, Chemistry 56%, Physics 40%, PE 43%,
+Business 13% (fine). Wrong options often used absolutes ("always", "only
+ever", "no effect") or were throwaways, and the correct one was often the
+only one that hedged.
+
+- `supabase/functions/rewrite-distractors/option-quality.js` (tested):
+  per-question give-away check (length band, absolutes only in wrong
+  options, hedging only in the right one, throwaways, duplicates) and a batch
+  summary. `scripts/generate-subject.mjs` now reports and warns on it.
+- `question_option_revisions` table (migration): staged rewrites with the
+  old options kept, status draft/flagged/applied/rejected/rolled_back; RLS on,
+  no policies (service role only).
+- Edge function `rewrite-distractors` (parent-only, deployed): drafts 3 new
+  wrong answers per question (correct answer never changed), quality-checks
+  with one retry, then a separate call answers the rewritten question and
+  flags it if it picks another option or finds another defensible one.
+  Drafts only; nothing live changes there. Driven in batches of 8.
+- Apply / rollback SQL in `supabase/content-batches/2026-11-06-english-distractors-*.sql`;
+  apply only touches rows whose live options still match old_options.
+- Analytics shows a "Harder quizzes from 6 Nov" note for English Literature
+  (`src/lib/contentChanges.js`) so the expected score drop isn't read as
+  decline.

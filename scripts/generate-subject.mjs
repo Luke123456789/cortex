@@ -39,6 +39,7 @@
 // Every question row is tagged with one new generation_batch_id; the rollback
 // file deletes that batch plus any topics/subtopics/quizzes the batch created.
 
+import { summarise } from '../supabase/functions/rewrite-distractors/option-quality.js'
 import { createHash, randomUUID, randomInt } from 'node:crypto'
 import { readFileSync, writeFileSync, mkdirSync } from 'node:fs'
 import { join, dirname } from 'node:path'
@@ -523,8 +524,16 @@ async function main() {
   report.questions = allRows.length
   report.checksum = batchChecksum(allRows)
   report.checksum_sql = CHECKSUM_SQL(batchId)
+  // Answer give-away check: the correct option shouldn't stand out by length,
+  // absolutes, hedging or throwaway options. Fair is ~25% "correct is longest".
+  report.option_quality = summarise(allRows.map((r) => ({ options: { A: r.option_a, B: r.option_b, C: r.option_c, D: r.option_d }, correct: r.correct_option })))
   writeFileSync(`${base}.report.json`, JSON.stringify(report, null, 2))
   console.log(`\nWrote ${base}.sql (+ .rollback.sql, .report.json)`)
+  const oq = report.option_quality
+  console.log(`Option quality: correct answer is the longest in ${oq.correctIsLongestPct}% (fair is ~25%), ${oq.withIssuesPct}% of questions have give-aways.`)
+  if (oq.correctIsLongestPct > 40 || oq.withIssuesPct > 20) {
+    console.warn('WARNING: answers are too easy to spot. Fix the distractors before loading this batch.')
+  }
 }
 
 if (process.argv[1] === fileURLToPath(import.meta.url)) {

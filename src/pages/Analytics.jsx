@@ -8,6 +8,7 @@ import SuggestedAssignments from '../components/analytics/SuggestedAssignments.j
 import ProgressReview from '../components/analytics/ProgressReview.jsx'
 import WrittenWork from '../components/analytics/WrittenWork.jsx'
 import AssignedStatus from '../components/analytics/AssignedStatus.jsx'
+import { CONTENT_CHANGES, changesFor } from '../lib/contentChanges'
 import styles from './Analytics.module.css'
 
 const PERIODS = [
@@ -117,8 +118,13 @@ export default function Analytics() {
             <p className={styles.caveat}>
               Accuracy is from multiple-choice quizzes over the last {days} days, compared with the {days} days before. Higher tier and applied
               show how {name} does on the harder questions. Tutor rating is the AI marker's score for the tutor sessions. None of this is a GCSE
-              grade: that needs marked written answers, which aren't built yet.
+              grade: that needs marked written answers.
             </p>
+            {CONTENT_CHANGES.map((c) => (
+              <p key={`${c.subject}-${c.date}`} className={styles.caveat}>
+                <strong>{c.subject}, {new Date(c.date).toLocaleDateString([], { day: 'numeric', month: 'long' })}:</strong> {c.note}
+              </p>
+            ))}
             <table className={styles.quality}>
               <caption className="visually-hidden">Quality by subject, last {days} days</caption>
               <thead>
@@ -141,6 +147,11 @@ export default function Analytics() {
                       <th scope="row">
                         <span>{q.name}</span>
                         {q.examBoard && <span className={styles.board}>{q.examBoard}</span>}
+                        {changesFor(q.name).map((c) => (
+                          <span key={c.date} className={styles.change} title={c.note}>
+                            Harder quizzes from {new Date(c.date).toLocaleDateString([], { day: 'numeric', month: 'short' })}
+                          </span>
+                        ))}
                       </th>
                       <td data-label="Answers">
                         {q.current.answers}

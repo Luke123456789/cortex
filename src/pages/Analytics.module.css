@@ -272,3 +272,13 @@
     display: block;
   }
 }
+
+/* A content change that makes before/after scores not comparable. */
+.change {
+  display: block;
+  margin-top: 2px;
+  font-family: var(--font-mono);
+  font-size: var(--text-2xs);
+  font-weight: 400;
+  color: var(--brass-ink);
+}
