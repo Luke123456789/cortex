@@ -121,8 +121,8 @@ export default function Analytics() {
               grade: that needs marked written answers.
             </p>
             {CONTENT_CHANGES.map((c) => (
-              <p key={`${c.subject}-${c.date}`} className={styles.caveat}>
-                <strong>{c.subject}, {new Date(c.date).toLocaleDateString([], { day: 'numeric', month: 'long' })}:</strong> {c.note}
+              <p key={c.date} className={styles.caveat}>
+                <strong>{c.subjects.join(', ')}, {new Date(c.date).toLocaleDateString([], { day: 'numeric', month: 'long' })}:</strong> {c.note}
               </p>
             ))}
             <table className={styles.quality}>

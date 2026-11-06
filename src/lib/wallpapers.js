@@ -5,6 +5,7 @@ import business from '../assets/wallpapers/business.svg'
 import chemistry from '../assets/wallpapers/chemistry.svg'
 import economics from '../assets/wallpapers/economics.svg'
 import english from '../assets/wallpapers/english.svg'
+import maths from '../assets/wallpapers/maths.svg'
 import pe from '../assets/wallpapers/pe.svg'
 import physics from '../assets/wallpapers/physics.svg'
 
@@ -16,6 +17,7 @@ const BY_KEYWORD = [
   ['economics', economics],
   ['business', business],
   ['physical education', pe],
+  ['math', maths],
 ]
 
 // Subject name (e.g. "English Literature") -> wallpaper URL, or null.

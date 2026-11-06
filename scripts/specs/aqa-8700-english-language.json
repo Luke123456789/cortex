@@ -1,0 +1,32 @@
+{
+  "subject": "English Language",
+  "exam_board": "AQA",
+  "spec_code": "8700",
+  "notes": "AQA GCSE (9-1) English Language 8700 (top set). Paper 1 Explorations in Creative Reading and Writing; Paper 2 Writers' Viewpoints and Perspectives. Multiple choice covers terminology, techniques, what each question asks for, and technical accuracy; extended reading and writing need written answers.",
+  "topics": [
+    { "name": "Language Techniques and Terminology", "spec_ref": "L1", "paper": "Papers 1 and 2", "display_order": 1, "subtopics": [
+      { "name": "Word classes", "spec_ref": "L1.1" },
+      { "name": "Figurative language", "spec_ref": "L1.2" },
+      { "name": "Sound and rhetorical devices", "spec_ref": "L1.3" },
+      { "name": "Tone, register and connotation", "spec_ref": "L1.4" } ] },
+    { "name": "Structure and Sentence Forms", "spec_ref": "L2", "paper": "Papers 1 and 2", "display_order": 2, "subtopics": [
+      { "name": "Whole-text structure", "spec_ref": "L2.1" },
+      { "name": "Sentence forms and punctuation for effect", "spec_ref": "L2.2" } ] },
+    { "name": "Paper 1 Reading: Creative Reading", "spec_ref": "L3", "paper": "Paper 1", "display_order": 3, "subtopics": [
+      { "name": "Questions 1 and 2: retrieval and language", "spec_ref": "L3.1" },
+      { "name": "Question 3: structure", "spec_ref": "L3.2" },
+      { "name": "Question 4: evaluation", "spec_ref": "L3.3" } ] },
+    { "name": "Paper 2 Reading: Viewpoints and Perspectives", "spec_ref": "L4", "paper": "Paper 2", "display_order": 4, "subtopics": [
+      { "name": "Questions 1 and 2: true statements and summary", "spec_ref": "L4.1" },
+      { "name": "Question 3: language", "spec_ref": "L4.2" },
+      { "name": "Question 4: comparing perspectives", "spec_ref": "L4.3" } ] },
+    { "name": "Writing", "spec_ref": "L5", "paper": "Papers 1 and 2", "display_order": 5, "subtopics": [
+      { "name": "Paper 1 Question 5: descriptive and narrative writing", "spec_ref": "L5.1" },
+      { "name": "Paper 2 Question 5: writing to present a viewpoint", "spec_ref": "L5.2" },
+      { "name": "Form, audience and purpose", "spec_ref": "L5.3" } ] },
+    { "name": "Technical Accuracy", "spec_ref": "L6", "paper": "Papers 1 and 2", "display_order": 6, "subtopics": [
+      { "name": "Punctuation", "spec_ref": "L6.1" },
+      { "name": "Spelling and commonly confused words", "spec_ref": "L6.2" },
+      { "name": "Grammar and Standard English", "spec_ref": "L6.3" } ] }
+  ]
+}

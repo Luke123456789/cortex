@@ -1,0 +1,196 @@
+{
+  "subject": "Maths",
+  "exam_board": "Pearson Edexcel",
+  "spec_code": "1MA1",
+  "notes": "Pearson Edexcel GCSE (9-1) Mathematics 1MA1, Higher tier (top set). Paper 1 non-calculator, Papers 2 and 3 calculator.",
+  "topics": [
+    {
+      "name": "Number",
+      "spec_ref": "M1",
+      "paper": "All papers",
+      "display_order": 1,
+      "subtopics": [
+        {
+          "name": "Fractions, decimals and percentages",
+          "spec_ref": "M1.1"
+        },
+        {
+          "name": "Indices and standard form",
+          "spec_ref": "M1.2"
+        },
+        {
+          "name": "Surds",
+          "spec_ref": "M1.3"
+        },
+        {
+          "name": "Bounds, rounding and estimation",
+          "spec_ref": "M1.4"
+        }
+      ]
+    },
+    {
+      "name": "Algebra: Expressions and Equations",
+      "spec_ref": "M2",
+      "paper": "All papers",
+      "display_order": 2,
+      "subtopics": [
+        {
+          "name": "Expanding and factorising",
+          "spec_ref": "M2.1"
+        },
+        {
+          "name": "Linear and quadratic equations",
+          "spec_ref": "M2.2"
+        },
+        {
+          "name": "Simultaneous equations",
+          "spec_ref": "M2.3"
+        },
+        {
+          "name": "Inequalities and rearranging formulae",
+          "spec_ref": "M2.4"
+        }
+      ]
+    },
+    {
+      "name": "Algebra: Graphs, Sequences and Functions",
+      "spec_ref": "M3",
+      "paper": "All papers",
+      "display_order": 3,
+      "subtopics": [
+        {
+          "name": "Straight-line graphs",
+          "spec_ref": "M3.1"
+        },
+        {
+          "name": "Quadratic and other graphs",
+          "spec_ref": "M3.2"
+        },
+        {
+          "name": "Sequences",
+          "spec_ref": "M3.3"
+        },
+        {
+          "name": "Functions and iteration",
+          "spec_ref": "M3.4"
+        }
+      ]
+    },
+    {
+      "name": "Ratio, Proportion and Rates of Change",
+      "spec_ref": "M4",
+      "paper": "All papers",
+      "display_order": 4,
+      "subtopics": [
+        {
+          "name": "Ratio",
+          "spec_ref": "M4.1"
+        },
+        {
+          "name": "Direct and inverse proportion",
+          "spec_ref": "M4.2"
+        },
+        {
+          "name": "Compound measures",
+          "spec_ref": "M4.3"
+        },
+        {
+          "name": "Percentage change, growth and decay",
+          "spec_ref": "M4.4"
+        }
+      ]
+    },
+    {
+      "name": "Geometry: Shapes, Angles and Measures",
+      "spec_ref": "M5",
+      "paper": "All papers",
+      "display_order": 5,
+      "subtopics": [
+        {
+          "name": "Angles and polygons",
+          "spec_ref": "M5.1"
+        },
+        {
+          "name": "Area, volume and surface area",
+          "spec_ref": "M5.2"
+        },
+        {
+          "name": "Circle theorems",
+          "spec_ref": "M5.3"
+        },
+        {
+          "name": "Congruence and similarity",
+          "spec_ref": "M5.4"
+        }
+      ]
+    },
+    {
+      "name": "Geometry: Trigonometry, Vectors and Transformations",
+      "spec_ref": "M6",
+      "paper": "All papers",
+      "display_order": 6,
+      "subtopics": [
+        {
+          "name": "Pythagoras and right-angled trigonometry",
+          "spec_ref": "M6.1"
+        },
+        {
+          "name": "Sine rule, cosine rule and area of a triangle",
+          "spec_ref": "M6.2"
+        },
+        {
+          "name": "Vectors",
+          "spec_ref": "M6.3"
+        },
+        {
+          "name": "Transformations",
+          "spec_ref": "M6.4"
+        }
+      ]
+    },
+    {
+      "name": "Probability",
+      "spec_ref": "M7",
+      "paper": "All papers",
+      "display_order": 7,
+      "subtopics": [
+        {
+          "name": "Basic probability and expected outcomes",
+          "spec_ref": "M7.1"
+        },
+        {
+          "name": "Tree diagrams and conditional probability",
+          "spec_ref": "M7.2"
+        },
+        {
+          "name": "Venn diagrams and set notation",
+          "spec_ref": "M7.3"
+        }
+      ]
+    },
+    {
+      "name": "Statistics",
+      "spec_ref": "M8",
+      "paper": "All papers",
+      "display_order": 8,
+      "subtopics": [
+        {
+          "name": "Averages and spread",
+          "spec_ref": "M8.1"
+        },
+        {
+          "name": "Cumulative frequency and box plots",
+          "spec_ref": "M8.2"
+        },
+        {
+          "name": "Histograms",
+          "spec_ref": "M8.3"
+        },
+        {
+          "name": "Sampling and scatter graphs",
+          "spec_ref": "M8.4"
+        }
+      ]
+    }
+  ]
+}

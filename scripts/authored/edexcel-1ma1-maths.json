@@ -1,0 +1,2095 @@
+{
+ "M1": {
+  "M1.1": [
+   {
+    "question": "Write 0.454545… (0.45 recurring) as a fraction in its simplest form.",
+    "correct_answer": "5/11",
+    "distractors": [
+     "9/20",
+     "1/2",
+     "4/9"
+    ],
+    "explanation": "Let x = 0.4545…; 100x = 45.4545…, so 99x = 45 and x = 45/99 = 5/11.",
+    "difficulty": "hard",
+    "skill": "application",
+    "involves_calculation": true
+   },
+   {
+    "question": "Calculate 2 1/3 ÷ 1 3/4.",
+    "correct_answer": "1 1/3",
+    "distractors": [
+     "4 1/12",
+     "2 4/9",
+     "1 1/4"
+    ],
+    "explanation": "7/3 ÷ 7/4 = 7/3 × 4/7 = 4/3 = 1 1/3. Multiplying instead gives 49/12 = 4 1/12.",
+    "difficulty": "medium",
+    "skill": "application",
+    "involves_calculation": true
+   },
+   {
+    "question": "A coat costs £84 after a 30% reduction. What was the original price?",
+    "correct_answer": "£120",
+    "distractors": [
+     "£109.20",
+     "£114",
+     "£58.80"
+    ],
+    "explanation": "£84 is 70% of the original, so 84 ÷ 0.7 = £120. Adding 30% of £84 (£109.20) is the common mistake.",
+    "difficulty": "medium",
+    "skill": "application",
+    "involves_calculation": true
+   },
+   {
+    "question": "Which of these is the largest: 3/8, 0.37, 37.6% or 0.3737…?",
+    "correct_answer": "37.6%",
+    "distractors": [
+     "3/8",
+     "0.37",
+     "0.3737…"
+    ],
+    "explanation": "3/8 = 0.375, 37.6% = 0.376, 0.3737… and 0.37 are smaller. So 37.6% is largest.",
+    "difficulty": "medium",
+    "skill": "application",
+    "involves_calculation": true
+   },
+   {
+    "question": "Write 7/40 as a decimal.",
+    "correct_answer": "0.175",
+    "distractors": [
+     "0.0175",
+     "1.75",
+     "0.157"
+    ],
+    "explanation": "7 ÷ 40 = 0.175 (7/40 = 175/1000).",
+    "difficulty": "easy",
+    "skill": "application",
+    "involves_calculation": true
+   }
+  ],
+  "M1.2": [
+   {
+    "question": "Evaluate 27^(−2/3).",
+    "correct_answer": "1/9",
+    "distractors": [
+     "9",
+     "−9",
+     "−1/9"
+    ],
+    "explanation": "Cube root of 27 is 3, squared is 9, and the negative power gives the reciprocal: 1/9. A negative power never makes the answer negative.",
+    "difficulty": "hard",
+    "skill": "application",
+    "involves_calculation": true
+   },
+   {
+    "question": "Simplify (2x³)⁴.",
+    "correct_answer": "16x¹²",
+    "distractors": [
+     "8x¹²",
+     "16x⁷",
+     "2x¹²"
+    ],
+    "explanation": "Raise both parts to the power 4: 2⁴ = 16 and (x³)⁴ = x¹².",
+    "difficulty": "medium",
+    "skill": "application",
+    "involves_calculation": true
+   },
+   {
+    "question": "Work out (3 × 10⁵) × (6 × 10⁻²) in standard form.",
+    "correct_answer": "1.8 × 10⁴",
+    "distractors": [
+     "18 × 10³",
+     "1.8 × 10³",
+     "1.8 × 10⁻¹⁰"
+    ],
+    "explanation": "3 × 6 = 18 and 10⁵ × 10⁻² = 10³, so 18 × 10³ = 1.8 × 10⁴. 18 × 10³ is not in standard form.",
+    "difficulty": "medium",
+    "skill": "application",
+    "involves_calculation": true
+   },
+   {
+    "question": "Write 0.00052 in standard form.",
+    "correct_answer": "5.2 × 10⁻⁴",
+    "distractors": [
+     "5.2 × 10⁴",
+     "52 × 10⁻⁵",
+     "5.2 × 10⁻³"
+    ],
+    "explanation": "The decimal point moves 4 places to make 5.2, and the number is less than 1, so the power is −4.",
+    "difficulty": "easy",
+    "skill": "application",
+    "involves_calculation": true
+   },
+   {
+    "question": "What is the value of 16^(3/4)?",
+    "correct_answer": "8",
+    "distractors": [
+     "12",
+     "6",
+     "64"
+    ],
+    "explanation": "Fourth root of 16 is 2, and 2³ = 8. Multiplying 16 by 3/4 gives 12, which is wrong.",
+    "difficulty": "medium",
+    "skill": "application",
+    "involves_calculation": true
+   }
+  ],
+  "M1.3": [
+   {
+    "question": "Simplify √72.",
+    "correct_answer": "6√2",
+    "distractors": [
+     "4√2",
+     "6√3",
+     "9√2"
+    ],
+    "explanation": "72 = 36 × 2, so √72 = √36 × √2 = 6√2.",
+    "difficulty": "medium",
+    "skill": "application",
+    "involves_calculation": true
+   },
+   {
+    "question": "Rationalise the denominator of 10/√5 and simplify.",
+    "correct_answer": "2√5",
+    "distractors": [
+     "5√2",
+     "10√5",
+     "2√10"
+    ],
+    "explanation": "Multiply top and bottom by √5: 10√5/5 = 2√5.",
+    "difficulty": "medium",
+    "skill": "application",
+    "involves_calculation": true
+   },
+   {
+    "question": "Expand and simplify (3 + √2)(3 − √2).",
+    "correct_answer": "7",
+    "distractors": [
+     "11",
+     "9 − 2√2",
+     "5"
+    ],
+    "explanation": "Difference of two squares: 3² − (√2)² = 9 − 2 = 7.",
+    "difficulty": "medium",
+    "skill": "application",
+    "involves_calculation": true
+   },
+   {
+    "question": "Simplify √12 + √27.",
+    "correct_answer": "5√3",
+    "distractors": [
+     "√39",
+     "6√3",
+     "5√6"
+    ],
+    "explanation": "√12 = 2√3 and √27 = 3√3, so the sum is 5√3. Surds cannot be added under one root.",
+    "difficulty": "medium",
+    "skill": "application",
+    "involves_calculation": true
+   },
+   {
+    "question": "Expand and simplify (1 + √3)².",
+    "correct_answer": "4 + 2√3",
+    "distractors": [
+     "4",
+     "4 + √3",
+     "1 + 2√3"
+    ],
+    "explanation": "(1 + √3)(1 + √3) = 1 + 2√3 + 3 = 4 + 2√3. Squaring each term separately loses the 2√3.",
+    "difficulty": "hard",
+    "skill": "application",
+    "involves_calculation": true
+   }
+  ],
+  "M1.4": [
+   {
+    "question": "A length is 6.4 cm correct to 1 decimal place. What is its lower bound?",
+    "correct_answer": "6.35 cm",
+    "distractors": [
+     "6.3 cm",
+     "6.39 cm",
+     "6.45 cm"
+    ],
+    "explanation": "Half of 0.1 is 0.05, so the bounds are 6.35 and 6.45. The lower bound is 6.35 cm.",
+    "difficulty": "easy",
+    "skill": "application",
+    "involves_calculation": true
+   },
+   {
+    "question": "x = 8.6 and y = 2.4, both to 1 d.p. What is the upper bound of x − y?",
+    "correct_answer": "6.3",
+    "distractors": [
+     "6.2",
+     "6.1",
+     "6.25"
+    ],
+    "explanation": "Largest x minus smallest y: 8.65 − 2.35 = 6.3.",
+    "difficulty": "hard",
+    "skill": "application",
+    "involves_calculation": true
+   },
+   {
+    "question": "Estimate (49.7 × 3.08) ÷ 0.198.",
+    "correct_answer": "750",
+    "distractors": [
+     "75",
+     "30",
+     "7500"
+    ],
+    "explanation": "Round to 1 s.f.: (50 × 3) ÷ 0.2 = 150 ÷ 0.2 = 750.",
+    "difficulty": "medium",
+    "skill": "application",
+    "involves_calculation": true
+   },
+   {
+    "question": "Write 0.0060847 to 3 significant figures.",
+    "correct_answer": "0.00608",
+    "distractors": [
+     "0.00609",
+     "0.006",
+     "0.0061"
+    ],
+    "explanation": "The first significant figure is 6; the three are 6, 0, 8 and the next digit (4) rounds down.",
+    "difficulty": "medium",
+    "skill": "application",
+    "involves_calculation": true
+   },
+   {
+    "question": "A rectangle is 12 cm by 5 cm, both to the nearest cm. What is the lower bound of its area?",
+    "correct_answer": "51.75 cm²",
+    "distractors": [
+     "68.75 cm²",
+     "55 cm²",
+     "57.5 cm²"
+    ],
+    "explanation": "Lower bounds are 11.5 and 4.5, so 11.5 × 4.5 = 51.75 cm².",
+    "difficulty": "medium",
+    "skill": "application",
+    "involves_calculation": true
+   }
+  ]
+ },
+ "M2": {
+  "M2.1": [
+   {
+    "question": "Factorise fully 6x² − 15x.",
+    "correct_answer": "3x(2x − 5)",
+    "distractors": [
+     "3(2x² − 5x)",
+     "x(6x − 15)",
+     "3x(2x − 15)"
+    ],
+    "explanation": "The highest common factor is 3x: 6x² ÷ 3x = 2x and 15x ÷ 3x = 5.",
+    "difficulty": "easy",
+    "skill": "application",
+    "involves_calculation": false
+   },
+   {
+    "question": "Expand and simplify (2x − 3)(x + 4).",
+    "correct_answer": "2x² + 5x − 12",
+    "distractors": [
+     "2x² − 5x − 12",
+     "2x² + 11x − 12",
+     "2x² + 5x − 7"
+    ],
+    "explanation": "2x² + 8x − 3x − 12 = 2x² + 5x − 12.",
+    "difficulty": "medium",
+    "skill": "application",
+    "involves_calculation": false
+   },
+   {
+    "question": "Factorise 3x² + 10x − 8.",
+    "correct_answer": "(3x − 2)(x + 4)",
+    "distractors": [
+     "(3x + 2)(x − 4)",
+     "(3x − 4)(x + 2)",
+     "(3x + 4)(x − 2)"
+    ],
+    "explanation": "Check by expanding: 3x² + 12x − 2x − 8 = 3x² + 10x − 8.",
+    "difficulty": "hard",
+    "skill": "application",
+    "involves_calculation": false
+   },
+   {
+    "question": "Factorise 4x² − 25.",
+    "correct_answer": "(2x − 5)(2x + 5)",
+    "distractors": [
+     "(2x − 5)(2x − 5)",
+     "(4x − 5)(x + 5)",
+     "(x − 5)(4x + 5)"
+    ],
+    "explanation": "Difference of two squares: (2x)² − 5² = (2x − 5)(2x + 5).",
+    "difficulty": "medium",
+    "skill": "application",
+    "involves_calculation": false
+   },
+   {
+    "question": "Expand and simplify (x + 2)³.",
+    "correct_answer": "x³ + 6x² + 12x + 8",
+    "distractors": [
+     "x³ + 2x² + 4x + 8",
+     "x³ + 6x² + 6x + 8",
+     "x³ + 4x² + 12x + 8"
+    ],
+    "explanation": "(x + 2)² = x² + 4x + 4; times (x + 2) gives x³ + 6x² + 12x + 8.",
+    "difficulty": "hard",
+    "skill": "application",
+    "involves_calculation": false
+   }
+  ],
+  "M2.2": [
+   {
+    "question": "Solve 5(x − 3) = 2x + 9.",
+    "correct_answer": "x = 8",
+    "distractors": [
+     "x = 4",
+     "x = 2",
+     "x = −2"
+    ],
+    "explanation": "5x − 15 = 2x + 9, so 3x = 24 and x = 8. Not expanding the bracket fully gives x = 4.",
+    "difficulty": "easy",
+    "skill": "application",
+    "involves_calculation": true
+   },
+   {
+    "question": "Solve x² − 3x − 10 = 0.",
+    "correct_answer": "x = 5 or x = −2",
+    "distractors": [
+     "x = −5 or x = 2",
+     "x = 5 or x = 2",
+     "x = 10 or x = −1"
+    ],
+    "explanation": "(x − 5)(x + 2) = 0, so x = 5 or x = −2.",
+    "difficulty": "medium",
+    "skill": "application",
+    "involves_calculation": true
+   },
+   {
+    "question": "Solve 2x² + 3x − 4 = 0, giving answers to 2 d.p.",
+    "correct_answer": "x = 0.85 or x = −2.35",
+    "distractors": [
+     "x = 2.35 or x = −0.85",
+     "x = 1.70 or x = −4.70",
+     "x = 0.50 or x = −2.00"
+    ],
+    "explanation": "x = (−3 ± √(9 + 32)) ÷ 4 = (−3 ± 6.403) ÷ 4. Dividing by 2 instead of 2a gives 1.70 and −4.70.",
+    "difficulty": "hard",
+    "skill": "application",
+    "involves_calculation": true
+   },
+   {
+    "question": "Write x² + 6x − 5 in the form (x + a)² + b.",
+    "correct_answer": "(x + 3)² − 14",
+    "distractors": [
+     "(x + 3)² − 5",
+     "(x + 3)² + 4",
+     "(x + 6)² − 41"
+    ],
+    "explanation": "(x + 3)² = x² + 6x + 9, so subtract 9 and 5: (x + 3)² − 14.",
+    "difficulty": "hard",
+    "skill": "application",
+    "involves_calculation": false
+   },
+   {
+    "question": "Solve (x + 3)/2 + (x − 2)/3 = 4.",
+    "correct_answer": "x = 3.8",
+    "distractors": [
+     "x = −0.2",
+     "x = 2.2",
+     "x = 9.5"
+    ],
+    "explanation": "Multiply by 6: 3(x + 3) + 2(x − 2) = 24, so 5x + 5 = 24 and x = 3.8. Forgetting to multiply the 4 gives −0.2.",
+    "difficulty": "medium",
+    "skill": "application",
+    "involves_calculation": true
+   }
+  ],
+  "M2.3": [
+   {
+    "question": "Solve 3x + 2y = 16 and x − 2y = 0.",
+    "correct_answer": "x = 4, y = 2",
+    "distractors": [
+     "x = 2, y = 5",
+     "x = 4, y = −2",
+     "x = 3, y = 3.5"
+    ],
+    "explanation": "Add the equations: 4x = 16, x = 4. Then 4 − 2y = 0 gives y = 2.",
+    "difficulty": "easy",
+    "skill": "application",
+    "involves_calculation": true
+   },
+   {
+    "question": "Solve 2x + 3y = 13 and 5x − 3y = 1.",
+    "correct_answer": "x = 2, y = 3",
+    "distractors": [
+     "x = 3, y = 2",
+     "x = 2, y = −3",
+     "x = 5, y = 1"
+    ],
+    "explanation": "Add: 7x = 14, x = 2. Then 4 + 3y = 13, y = 3.",
+    "difficulty": "medium",
+    "skill": "application",
+    "involves_calculation": true
+   },
+   {
+    "question": "Solve y = x + 1 and x² + y² = 25.",
+    "correct_answer": "(3, 4) and (−4, −3)",
+    "distractors": [
+     "(3, 4) and (4, 3)",
+     "(−3, −2) and (4, 5)",
+     "(3, 4) and (−4, 3)"
+    ],
+    "explanation": "x² + (x + 1)² = 25 gives x² + x − 12 = 0, so x = 3 or −4, and y = x + 1.",
+    "difficulty": "hard",
+    "skill": "application",
+    "involves_calculation": true
+   },
+   {
+    "question": "2 adult and 3 child tickets cost £34. 1 adult and 2 child tickets cost £20. How much is a child ticket?",
+    "correct_answer": "£6",
+    "distractors": [
+     "£8",
+     "£4",
+     "£7"
+    ],
+    "explanation": "Double the second: 2a + 4c = 40. Subtract the first: c = 6 (and a = 8).",
+    "difficulty": "medium",
+    "skill": "application",
+    "involves_calculation": true
+   },
+   {
+    "question": "How many times does the line y = 2x + 1 meet the curve y = x² + 4?",
+    "correct_answer": "They do not meet",
+    "distractors": [
+     "Once, as a tangent",
+     "Twice, crossing it",
+     "Once, at (1, 3)"
+    ],
+    "explanation": "x² + 4 = 2x + 1 gives x² − 2x + 3 = 0. The discriminant is 4 − 12 < 0, so there are no solutions.",
+    "difficulty": "hard",
+    "skill": "application",
+    "involves_calculation": true
+   }
+  ],
+  "M2.4": [
+   {
+    "question": "Solve 3 − 2x < 11.",
+    "correct_answer": "x > −4",
+    "distractors": [
+     "x < −4",
+     "x > 4",
+     "x < 4"
+    ],
+    "explanation": "−2x < 8. Dividing by a negative number flips the sign: x > −4.",
+    "difficulty": "medium",
+    "skill": "application",
+    "involves_calculation": true
+   },
+   {
+    "question": "Make r the subject of V = (4/3)πr³.",
+    "correct_answer": "r = ∛(3V/(4π))",
+    "distractors": [
+     "r = ∛(4V/(3π))",
+     "r = (3V/(4π))³",
+     "r = √(3V/(4π))"
+    ],
+    "explanation": "Multiply by 3, divide by 4π to get r³ = 3V/(4π), then take the cube root.",
+    "difficulty": "hard",
+    "skill": "application",
+    "involves_calculation": false
+   },
+   {
+    "question": "Solve x² < 9.",
+    "correct_answer": "−3 < x < 3",
+    "distractors": [
+     "x < 3",
+     "x < −3 or x > 3",
+     "x < 9"
+    ],
+    "explanation": "x² < 9 when x is between −3 and 3. x < 3 alone would allow x = −5, where x² = 25.",
+    "difficulty": "medium",
+    "skill": "application",
+    "involves_calculation": true
+   },
+   {
+    "question": "Make x the subject of ax + b = cx + d.",
+    "correct_answer": "x = (d − b)/(a − c)",
+    "distractors": [
+     "x = (b − d)/(a − c)",
+     "x = (d − b)/(a + c)",
+     "x = (d + b)/(a − c)"
+    ],
+    "explanation": "ax − cx = d − b, so x(a − c) = d − b and x = (d − b)/(a − c).",
+    "difficulty": "hard",
+    "skill": "application",
+    "involves_calculation": false
+   },
+   {
+    "question": "List the integers n such that −3 ≤ 2n + 1 < 7.",
+    "correct_answer": "−2, −1, 0, 1, 2",
+    "distractors": [
+     "−1, 0, 1, 2",
+     "−2, −1, 0, 1, 2, 3",
+     "−3, −2, −1, 0, 1, 2"
+    ],
+    "explanation": "−4 ≤ 2n < 6, so −2 ≤ n < 3: n = −2, −1, 0, 1, 2.",
+    "difficulty": "medium",
+    "skill": "application",
+    "involves_calculation": true
+   }
+  ]
+ },
+ "M3": {
+  "M3.1": [
+   {
+    "question": "What is the gradient of the line through (2, 5) and (6, −3)?",
+    "correct_answer": "−2",
+    "distractors": [
+     "2",
+     "−1/2",
+     "−8"
+    ],
+    "explanation": "Change in y ÷ change in x = (−3 − 5) ÷ (6 − 2) = −8 ÷ 4 = −2.",
+    "difficulty": "easy",
+    "skill": "application",
+    "involves_calculation": true
+   },
+   {
+    "question": "Which line is parallel to y = 3x − 2?",
+    "correct_answer": "2y = 6x + 7",
+    "distractors": [
+     "3y = x + 2",
+     "y = −3x − 2",
+     "y = 2x + 3"
+    ],
+    "explanation": "Parallel lines have the same gradient. 2y = 6x + 7 rearranges to y = 3x + 3.5.",
+    "difficulty": "medium",
+    "skill": "application",
+    "involves_calculation": false
+   },
+   {
+    "question": "Find the line perpendicular to y = 2x + 1 that passes through (4, 3).",
+    "correct_answer": "y = −½x + 5",
+    "distractors": [
+     "y = 2x − 5",
+     "y = −½x + 1",
+     "y = ½x + 1"
+    ],
+    "explanation": "Perpendicular gradient is −½. 3 = −½(4) + c gives c = 5.",
+    "difficulty": "hard",
+    "skill": "application",
+    "involves_calculation": true
+   },
+   {
+    "question": "Where does the line 3x + 4y = 24 cross the y-axis?",
+    "correct_answer": "(0, 6)",
+    "distractors": [
+     "(0, 8)",
+     "(6, 0)",
+     "(0, 24)"
+    ],
+    "explanation": "On the y-axis x = 0, so 4y = 24 and y = 6.",
+    "difficulty": "easy",
+    "skill": "application",
+    "involves_calculation": true
+   },
+   {
+    "question": "What is the midpoint of (−2, 7) and (6, 1)?",
+    "correct_answer": "(2, 4)",
+    "distractors": [
+     "(4, 3)",
+     "(8, −6)",
+     "(4, 8)"
+    ],
+    "explanation": "Average the coordinates: ((−2 + 6) ÷ 2, (7 + 1) ÷ 2) = (2, 4).",
+    "difficulty": "easy",
+    "skill": "application",
+    "involves_calculation": true
+   }
+  ],
+  "M3.2": [
+   {
+    "question": "What are the coordinates of the turning point of y = (x − 3)² + 2?",
+    "correct_answer": "(3, 2)",
+    "distractors": [
+     "(−3, 2)",
+     "(3, −2)",
+     "(2, 3)"
+    ],
+    "explanation": "From completed-square form (x − a)² + b the turning point is (a, b) = (3, 2).",
+    "difficulty": "medium",
+    "skill": "application",
+    "involves_calculation": true
+   },
+   {
+    "question": "The graph of y = f(x) is translated 2 units to the right. What is the new equation?",
+    "correct_answer": "y = f(x − 2)",
+    "distractors": [
+     "y = f(x + 2)",
+     "y = f(x) + 2",
+     "y = f(x) − 2"
+    ],
+    "explanation": "Changes inside the bracket act on x in the opposite direction: f(x − 2) moves the graph right by 2.",
+    "difficulty": "hard",
+    "skill": "recall",
+    "involves_calculation": false
+   },
+   {
+    "question": "What are the roots of y = x² − 2x − 8?",
+    "correct_answer": "x = 4 and x = −2",
+    "distractors": [
+     "x = −4 and x = 2",
+     "x = 8 and x = −1",
+     "x = 2 and x = −8"
+    ],
+    "explanation": "x² − 2x − 8 = (x − 4)(x + 2), so the graph crosses the x-axis at 4 and −2.",
+    "difficulty": "medium",
+    "skill": "application",
+    "involves_calculation": true
+   },
+   {
+    "question": "A distance–time graph is curved. How do you estimate the speed at t = 5 s?",
+    "correct_answer": "Draw a tangent at t = 5 and find its gradient",
+    "distractors": [
+     "Divide the distance at t = 5 by 5 seconds",
+     "Find the area under the curve up to t = 5",
+     "Read the distance value off the graph at t = 5"
+    ],
+    "explanation": "Instantaneous speed is the gradient of the tangent. Distance ÷ time gives the average speed from 0 to 5 s.",
+    "difficulty": "hard",
+    "skill": "recall",
+    "involves_calculation": false
+   },
+   {
+    "question": "What are the centre and radius of the circle x² + y² = 49?",
+    "correct_answer": "Centre (0, 0), radius 7",
+    "distractors": [
+     "Centre (0, 0), radius 49",
+     "Centre (7, 7), radius 7",
+     "Centre (0, 0), radius 24.5"
+    ],
+    "explanation": "x² + y² = r² is a circle centred at the origin, so r = √49 = 7.",
+    "difficulty": "medium",
+    "skill": "recall",
+    "involves_calculation": false
+   }
+  ],
+  "M3.3": [
+   {
+    "question": "What is the nth term of 7, 11, 15, 19, …?",
+    "correct_answer": "4n + 3",
+    "distractors": [
+     "n + 4",
+     "4n + 7",
+     "3n + 4"
+    ],
+    "explanation": "The difference is 4, so 4n; 4 × 1 = 4 and the first term is 7, so add 3.",
+    "difficulty": "easy",
+    "skill": "application",
+    "involves_calculation": false
+   },
+   {
+    "question": "What is the nth term of the quadratic sequence 3, 9, 19, 33, …?",
+    "correct_answer": "2n² + 1",
+    "distractors": [
+     "4n² − 1",
+     "2n² + n",
+     "n² + 4n − 2"
+    ],
+    "explanation": "Second difference 4 means 2n². 2n² gives 2, 8, 18, 32; the sequence is 1 more each time.",
+    "difficulty": "hard",
+    "skill": "application",
+    "involves_calculation": false
+   },
+   {
+    "question": "Which term of 5, 8, 11, 14, … is 98?",
+    "correct_answer": "The 32nd",
+    "distractors": [
+     "The 33rd",
+     "The 31st",
+     "The 96th"
+    ],
+    "explanation": "nth term 3n + 2 = 98 gives n = 32.",
+    "difficulty": "medium",
+    "skill": "application",
+    "involves_calculation": true
+   },
+   {
+    "question": "In the geometric sequence 2, 6, 18, 54, …, what is the 7th term?",
+    "correct_answer": "1458",
+    "distractors": [
+     "486",
+     "4374",
+     "126"
+    ],
+    "explanation": "nth term 2 × 3ⁿ⁻¹, so the 7th is 2 × 3⁶ = 1458. 486 is the 6th term.",
+    "difficulty": "medium",
+    "skill": "application",
+    "involves_calculation": true
+   },
+   {
+    "question": "A sequence follows “add the previous two terms”. The 3rd term is 7 and the 5th term is 18. What is the 2nd term?",
+    "correct_answer": "4",
+    "distractors": [
+     "3",
+     "5",
+     "11"
+    ],
+    "explanation": "With terms a, b: a + b = 7 and 2a + 3b = 18. So 2a + 2b = 14, giving b = 4.",
+    "difficulty": "hard",
+    "skill": "application",
+    "involves_calculation": true
+   }
+  ],
+  "M3.4": [
+   {
+    "question": "f(x) = 3x − 1. Find f⁻¹(x).",
+    "correct_answer": "(x + 1)/3",
+    "distractors": [
+     "(x − 1)/3",
+     "1/(3x − 1)",
+     "3x + 1"
+    ],
+    "explanation": "Write y = 3x − 1, swap to x = 3y − 1 and solve: y = (x + 1)/3. 1/f(x) is not the inverse.",
+    "difficulty": "medium",
+    "skill": "application",
+    "involves_calculation": false
+   },
+   {
+    "question": "f(x) = x² and g(x) = x + 4. Find fg(2).",
+    "correct_answer": "36",
+    "distractors": [
+     "8",
+     "10",
+     "20"
+    ],
+    "explanation": "fg(2) means f(g(2)). g(2) = 6, then f(6) = 36. gf(2) would be 8.",
+    "difficulty": "medium",
+    "skill": "application",
+    "involves_calculation": true
+   },
+   {
+    "question": "f(x) = 2x + 5. Solve f(x) = 17.",
+    "correct_answer": "x = 6",
+    "distractors": [
+     "x = 39",
+     "x = 11",
+     "x = 3.5"
+    ],
+    "explanation": "2x + 5 = 17, so x = 6. f(17) = 39 is a different question.",
+    "difficulty": "easy",
+    "skill": "application",
+    "involves_calculation": true
+   },
+   {
+    "question": "Using xₙ₊₁ = √(xₙ + 5) with x₀ = 2, what is x₂ to 3 d.p.?",
+    "correct_answer": "2.765",
+    "distractors": [
+     "2.646",
+     "2.787",
+     "3.646"
+    ],
+    "explanation": "x₁ = √7 = 2.6458…, x₂ = √7.6458… = 2.765. 2.646 is only x₁.",
+    "difficulty": "hard",
+    "skill": "application",
+    "involves_calculation": true
+   },
+   {
+    "question": "f(x) = x² + 1 and g(x) = 2x. Which is gf(x)?",
+    "correct_answer": "2x² + 2",
+    "distractors": [
+     "4x² + 1",
+     "2x² + 1",
+     "2x³ + 2x"
+    ],
+    "explanation": "gf(x) = g(f(x)) = 2(x² + 1) = 2x² + 2. fg(x) would be 4x² + 1.",
+    "difficulty": "medium",
+    "skill": "application",
+    "involves_calculation": false
+   }
+  ]
+ },
+ "M4": {
+  "M4.1": [
+   {
+    "question": "Share £180 in the ratio 2 : 3 : 4.",
+    "correct_answer": "£40, £60, £80",
+    "distractors": [
+     "£20, £30, £40",
+     "£60, £90, £120",
+     "£36, £54, £72"
+    ],
+    "explanation": "9 parts, so one part is £20: 2 × 20, 3 × 20, 4 × 20.",
+    "difficulty": "easy",
+    "skill": "application",
+    "involves_calculation": true
+   },
+   {
+    "question": "Boys to girls is 3 : 5, and there are 24 more girls than boys. How many students are there?",
+    "correct_answer": "96",
+    "distractors": [
+     "64",
+     "120",
+     "72"
+    ],
+    "explanation": "The difference is 2 parts = 24, so one part is 12, and 8 parts make 96.",
+    "difficulty": "medium",
+    "skill": "application",
+    "involves_calculation": true
+   },
+   {
+    "question": "a : b = 2 : 3 and b : c = 4 : 5. Find a : c.",
+    "correct_answer": "8 : 15",
+    "distractors": [
+     "2 : 5",
+     "6 : 5",
+     "8 : 12"
+    ],
+    "explanation": "Make b match: a : b = 8 : 12 and b : c = 12 : 15, so a : c = 8 : 15.",
+    "difficulty": "hard",
+    "skill": "application",
+    "involves_calculation": true
+   },
+   {
+    "question": "A recipe for 4 people uses 300 g of flour. How much is needed for 10 people?",
+    "correct_answer": "750 g",
+    "distractors": [
+     "600 g",
+     "900 g",
+     "1200 g"
+    ],
+    "explanation": "300 ÷ 4 = 75 g per person, × 10 = 750 g.",
+    "difficulty": "easy",
+    "skill": "application",
+    "involves_calculation": true
+   },
+   {
+    "question": "Red to blue counters are in the ratio 2 : 7. What fraction are red?",
+    "correct_answer": "2/9",
+    "distractors": [
+     "2/7",
+     "7/9",
+     "1/9"
+    ],
+    "explanation": "There are 9 parts in total and 2 are red, so 2/9.",
+    "difficulty": "easy",
+    "skill": "application",
+    "involves_calculation": true
+   }
+  ],
+  "M4.2": [
+   {
+    "question": "y ∝ x². When x = 3, y = 36. Find y when x = 5.",
+    "correct_answer": "100",
+    "distractors": [
+     "60",
+     "144",
+     "20"
+    ],
+    "explanation": "y = kx²: 36 = 9k, so k = 4 and y = 4 × 25 = 100. 60 assumes y ∝ x.",
+    "difficulty": "medium",
+    "skill": "application",
+    "involves_calculation": true
+   },
+   {
+    "question": "y is inversely proportional to x. When x = 4, y = 15. Find y when x = 10.",
+    "correct_answer": "6",
+    "distractors": [
+     "37.5",
+     "9",
+     "1.5"
+    ],
+    "explanation": "y = k/x: k = 60, so y = 60 ÷ 10 = 6.",
+    "difficulty": "medium",
+    "skill": "application",
+    "involves_calculation": true
+   },
+   {
+    "question": "Which graph shows y directly proportional to x?",
+    "correct_answer": "A straight line through the origin",
+    "distractors": [
+     "A straight line with a positive y-intercept",
+     "A curve getting closer to both axes",
+     "A curve through the origin getting steeper"
+    ],
+    "explanation": "Direct proportion y = kx is a straight line through (0, 0). The curve near both axes is inverse proportion.",
+    "difficulty": "medium",
+    "skill": "recall",
+    "involves_calculation": false
+   },
+   {
+    "question": "y is inversely proportional to x². If x is doubled, what happens to y?",
+    "correct_answer": "It is divided by 4",
+    "distractors": [
+     "It is halved",
+     "It is multiplied by 4",
+     "It is multiplied by 2"
+    ],
+    "explanation": "y = k/x²; doubling x multiplies x² by 4, so y is divided by 4.",
+    "difficulty": "hard",
+    "skill": "application",
+    "involves_calculation": true
+   },
+   {
+    "question": "Six workers build a wall in 10 days. How long would 4 workers take at the same rate?",
+    "correct_answer": "15 days",
+    "distractors": [
+     "6⅔ days",
+     "12 days",
+     "8 days"
+    ],
+    "explanation": "Total work is 60 worker-days, so 60 ÷ 4 = 15 days. Fewer workers take longer.",
+    "difficulty": "medium",
+    "skill": "application",
+    "involves_calculation": true
+   }
+  ],
+  "M4.3": [
+   {
+    "question": "A car travels 150 km in 1 hour 15 minutes. What is its average speed?",
+    "correct_answer": "120 km/h",
+    "distractors": [
+     "130.4 km/h",
+     "100 km/h",
+     "187.5 km/h"
+    ],
+    "explanation": "1 h 15 min = 1.25 h, so 150 ÷ 1.25 = 120 km/h. Using 1.15 h gives 130.4.",
+    "difficulty": "medium",
+    "skill": "application",
+    "involves_calculation": true
+   },
+   {
+    "question": "A block has mass 540 g and volume 200 cm³. What is its density?",
+    "correct_answer": "2.7 g/cm³",
+    "distractors": [
+     "0.37 g/cm³",
+     "108 g/cm³",
+     "340 g/cm³"
+    ],
+    "explanation": "Density = mass ÷ volume = 540 ÷ 200 = 2.7 g/cm³.",
+    "difficulty": "easy",
+    "skill": "application",
+    "involves_calculation": true
+   },
+   {
+    "question": "A force of 60 N acts on an area of 0.2 m². What is the pressure?",
+    "correct_answer": "300 N/m²",
+    "distractors": [
+     "12 N/m²",
+     "120 N/m²",
+     "30 N/m²"
+    ],
+    "explanation": "Pressure = force ÷ area = 60 ÷ 0.2 = 300 N/m².",
+    "difficulty": "medium",
+    "skill": "application",
+    "involves_calculation": true
+   },
+   {
+    "question": "Convert 20 m/s to km/h.",
+    "correct_answer": "72 km/h",
+    "distractors": [
+     "5.56 km/h",
+     "1200 km/h",
+     "120 km/h"
+    ],
+    "explanation": "20 m/s × 3600 = 72 000 m/h = 72 km/h. Shortcut: × 3.6.",
+    "difficulty": "medium",
+    "skill": "application",
+    "involves_calculation": true
+   },
+   {
+    "question": "Convert 3.5 m² to cm².",
+    "correct_answer": "35 000 cm²",
+    "distractors": [
+     "350 cm²",
+     "3500 cm²",
+     "350 000 cm²"
+    ],
+    "explanation": "1 m² = 100 × 100 = 10 000 cm², so 3.5 m² = 35 000 cm².",
+    "difficulty": "medium",
+    "skill": "application",
+    "involves_calculation": true
+   }
+  ],
+  "M4.4": [
+   {
+    "question": "£2000 is invested at 3% compound interest per year. What is it worth after 4 years?",
+    "correct_answer": "£2251.02",
+    "distractors": [
+     "£2240.00",
+     "£2185.45",
+     "£2318.55"
+    ],
+    "explanation": "2000 × 1.03⁴ = £2251.02. Simple interest would give £2240.",
+    "difficulty": "medium",
+    "skill": "application",
+    "involves_calculation": true
+   },
+   {
+    "question": "A price rises from £40 to £46. What is the percentage increase?",
+    "correct_answer": "15%",
+    "distractors": [
+     "6%",
+     "13%",
+     "115%"
+    ],
+    "explanation": "Increase ÷ original = 6 ÷ 40 = 0.15 = 15%. Dividing by 46 gives 13%.",
+    "difficulty": "easy",
+    "skill": "application",
+    "involves_calculation": true
+   },
+   {
+    "question": "A car worth £12 000 depreciates by 15% a year. Which calculation gives its value after 3 years?",
+    "correct_answer": "12 000 × 0.85³",
+    "distractors": [
+     "12 000 × 0.15³",
+     "12 000 × 1.15³",
+     "12 000 × 0.85 × 3"
+    ],
+    "explanation": "Each year it keeps 85%, so multiply by 0.85 three times.",
+    "difficulty": "medium",
+    "skill": "recall",
+    "involves_calculation": false
+   },
+   {
+    "question": "After a 20% increase, a price is £54. What was it before?",
+    "correct_answer": "£45",
+    "distractors": [
+     "£43.20",
+     "£64.80",
+     "£50"
+    ],
+    "explanation": "£54 is 120% of the original: 54 ÷ 1.2 = £45. Taking 20% off £54 gives £43.20.",
+    "difficulty": "medium",
+    "skill": "application",
+    "involves_calculation": true
+   },
+   {
+    "question": "Bacteria double every hour. Starting with 500, how many are there after 6 hours?",
+    "correct_answer": "32 000",
+    "distractors": [
+     "6000",
+     "16 000",
+     "64 000"
+    ],
+    "explanation": "500 × 2⁶ = 500 × 64 = 32 000.",
+    "difficulty": "medium",
+    "skill": "application",
+    "involves_calculation": true
+   }
+  ]
+ },
+ "M5": {
+  "M5.1": [
+   {
+    "question": "What is each interior angle of a regular octagon?",
+    "correct_answer": "135°",
+    "distractors": [
+     "45°",
+     "120°",
+     "140°"
+    ],
+    "explanation": "Exterior angle 360 ÷ 8 = 45°, so the interior angle is 180 − 45 = 135°.",
+    "difficulty": "easy",
+    "skill": "application",
+    "involves_calculation": true
+   },
+   {
+    "question": "What is the sum of the interior angles of a 12-sided polygon?",
+    "correct_answer": "1800°",
+    "distractors": [
+     "2160°",
+     "1620°",
+     "1440°"
+    ],
+    "explanation": "(n − 2) × 180 = 10 × 180 = 1800°.",
+    "difficulty": "medium",
+    "skill": "application",
+    "involves_calculation": true
+   },
+   {
+    "question": "Each exterior angle of a regular polygon is 24°. How many sides does it have?",
+    "correct_answer": "15",
+    "distractors": [
+     "12",
+     "18",
+     "16"
+    ],
+    "explanation": "Exterior angles add to 360°: 360 ÷ 24 = 15.",
+    "difficulty": "medium",
+    "skill": "application",
+    "involves_calculation": true
+   },
+   {
+    "question": "Two parallel lines are crossed by a transversal. Which pair of angles are equal?",
+    "correct_answer": "Alternate angles",
+    "distractors": [
+     "Co-interior angles",
+     "Angles on a straight line",
+     "Supplementary angles"
+    ],
+    "explanation": "Alternate (Z) angles are equal. Co-interior angles add to 180°.",
+    "difficulty": "easy",
+    "skill": "recall",
+    "involves_calculation": false
+   },
+   {
+    "question": "In triangle ABC, angle A = 2x, B = 3x and C = 4x. What is angle C?",
+    "correct_answer": "80°",
+    "distractors": [
+     "20°",
+     "60°",
+     "90°"
+    ],
+    "explanation": "9x = 180, so x = 20 and C = 4 × 20 = 80°.",
+    "difficulty": "medium",
+    "skill": "application",
+    "involves_calculation": true
+   }
+  ],
+  "M5.2": [
+   {
+    "question": "Find the volume of a cone with radius 3 cm and height 8 cm, in terms of π.",
+    "correct_answer": "24π cm³",
+    "distractors": [
+     "72π cm³",
+     "12π cm³",
+     "48π cm³"
+    ],
+    "explanation": "V = ⅓πr²h = ⅓ × π × 9 × 8 = 24π. Forgetting the ⅓ gives 72π.",
+    "difficulty": "medium",
+    "skill": "application",
+    "involves_calculation": true
+   },
+   {
+    "question": "Find the area of a sector with radius 6 cm and angle 60°, in terms of π.",
+    "correct_answer": "6π cm²",
+    "distractors": [
+     "2π cm²",
+     "12π cm²",
+     "10π cm²"
+    ],
+    "explanation": "60/360 × π × 6² = ⅙ × 36π = 6π. 2π is the arc length.",
+    "difficulty": "medium",
+    "skill": "application",
+    "involves_calculation": true
+   },
+   {
+    "question": "What is the surface area of a sphere of radius 5 cm, in terms of π?",
+    "correct_answer": "100π cm²",
+    "distractors": [
+     "25π cm²",
+     "50π cm²",
+     "20π cm²"
+    ],
+    "explanation": "Surface area = 4πr² = 4 × 25π = 100π.",
+    "difficulty": "medium",
+    "skill": "application",
+    "involves_calculation": true
+   },
+   {
+    "question": "A trapezium has parallel sides 7 cm and 11 cm and height 4 cm. What is its area?",
+    "correct_answer": "36 cm²",
+    "distractors": [
+     "72 cm²",
+     "44 cm²",
+     "18 cm²"
+    ],
+    "explanation": "½(a + b)h = ½ × 18 × 4 = 36 cm².",
+    "difficulty": "easy",
+    "skill": "application",
+    "involves_calculation": true
+   },
+   {
+    "question": "Two similar cylinders have heights 4 cm and 12 cm. The smaller has volume 20 cm³. What is the larger volume?",
+    "correct_answer": "540 cm³",
+    "distractors": [
+     "60 cm³",
+     "180 cm³",
+     "80 cm³"
+    ],
+    "explanation": "Length scale factor 3, so volume scale factor 3³ = 27: 20 × 27 = 540.",
+    "difficulty": "hard",
+    "skill": "application",
+    "involves_calculation": true
+   }
+  ],
+  "M5.3": [
+   {
+    "question": "A triangle has one side as a diameter and its third corner on the circle. What is the angle at that corner?",
+    "correct_answer": "90°",
+    "distractors": [
+     "180°",
+     "45°",
+     "60°"
+    ],
+    "explanation": "The angle in a semicircle is a right angle.",
+    "difficulty": "easy",
+    "skill": "recall",
+    "involves_calculation": false
+   },
+   {
+    "question": "The angle at the centre is 140°. What is the angle at the circumference on the same arc?",
+    "correct_answer": "70°",
+    "distractors": [
+     "280°",
+     "40°",
+     "140°"
+    ],
+    "explanation": "The angle at the centre is twice the angle at the circumference: 140 ÷ 2 = 70°.",
+    "difficulty": "medium",
+    "skill": "application",
+    "involves_calculation": true
+   },
+   {
+    "question": "One angle of a cyclic quadrilateral is 105°. What is the opposite angle?",
+    "correct_answer": "75°",
+    "distractors": [
+     "105°",
+     "255°",
+     "95°"
+    ],
+    "explanation": "Opposite angles in a cyclic quadrilateral add to 180°: 180 − 105 = 75°.",
+    "difficulty": "medium",
+    "skill": "application",
+    "involves_calculation": true
+   },
+   {
+    "question": "What angle does a tangent make with the radius at the point of contact?",
+    "correct_answer": "90°",
+    "distractors": [
+     "45°",
+     "180°",
+     "60°"
+    ],
+    "explanation": "A tangent is perpendicular to the radius at the point where it touches.",
+    "difficulty": "easy",
+    "skill": "recall",
+    "involves_calculation": false
+   },
+   {
+    "question": "The angle between a tangent and a chord is equal to…",
+    "correct_answer": "the angle in the alternate segment",
+    "distractors": [
+     "the angle at the centre on that chord",
+     "half the angle in the alternate segment",
+     "the angle in the same segment"
+    ],
+    "explanation": "This is the alternate segment theorem.",
+    "difficulty": "hard",
+    "skill": "recall",
+    "involves_calculation": false
+   }
+  ],
+  "M5.4": [
+   {
+    "question": "Which condition does NOT prove that two triangles are congruent?",
+    "correct_answer": "AAA",
+    "distractors": [
+     "SSS",
+     "SAS",
+     "RHS"
+    ],
+    "explanation": "Three equal angles only shows the triangles are similar; they could be different sizes.",
+    "difficulty": "medium",
+    "skill": "recall",
+    "involves_calculation": false
+   },
+   {
+    "question": "Similar triangles have matching sides 5 cm and 15 cm. The smaller has area 12 cm². What is the larger area?",
+    "correct_answer": "108 cm²",
+    "distractors": [
+     "36 cm²",
+     "324 cm²",
+     "60 cm²"
+    ],
+    "explanation": "Length factor 3, area factor 3² = 9: 12 × 9 = 108.",
+    "difficulty": "hard",
+    "skill": "application",
+    "involves_calculation": true
+   },
+   {
+    "question": "Shapes A and B are similar. A side of 4 cm on A matches 10 cm on B. A side of 6 cm on A matches which length on B?",
+    "correct_answer": "15 cm",
+    "distractors": [
+     "12 cm",
+     "2.4 cm",
+     "9 cm"
+    ],
+    "explanation": "Scale factor 10 ÷ 4 = 2.5, so 6 × 2.5 = 15 cm. Adding 6 gives 12, which is wrong.",
+    "difficulty": "medium",
+    "skill": "application",
+    "involves_calculation": true
+   },
+   {
+    "question": "Two similar solids have surface areas in the ratio 4 : 9. What is the ratio of their volumes?",
+    "correct_answer": "8 : 27",
+    "distractors": [
+     "4 : 9",
+     "16 : 81",
+     "2 : 3"
+    ],
+    "explanation": "Area ratio 4 : 9 means length ratio 2 : 3, so volume ratio 2³ : 3³ = 8 : 27.",
+    "difficulty": "hard",
+    "skill": "application",
+    "involves_calculation": true
+   },
+   {
+    "question": "PQ = 6, QR = 8, angle Q = 50° and XY = 6, YZ = 8, angle Y = 50°. Why are the triangles congruent?",
+    "correct_answer": "SAS",
+    "distractors": [
+     "SSS",
+     "ASA",
+     "RHS"
+    ],
+    "explanation": "Two sides and the angle between them match: side-angle-side.",
+    "difficulty": "medium",
+    "skill": "recall",
+    "involves_calculation": false
+   }
+  ]
+ },
+ "M6": {
+  "M6.1": [
+   {
+    "question": "A right-angled triangle has shorter sides 7 cm and 24 cm. How long is the hypotenuse?",
+    "correct_answer": "25 cm",
+    "distractors": [
+     "31 cm",
+     "23.0 cm",
+     "17 cm"
+    ],
+    "explanation": "√(7² + 24²) = √625 = 25 cm. Subtracting the squares gives 23.0.",
+    "difficulty": "easy",
+    "skill": "application",
+    "involves_calculation": true
+   },
+   {
+    "question": "In a right-angled triangle the side opposite angle x is 5 cm and the hypotenuse is 10 cm. Find x.",
+    "correct_answer": "30°",
+    "distractors": [
+     "60°",
+     "26.6°",
+     "63.4°"
+    ],
+    "explanation": "sin x = 5/10 = 0.5, so x = 30°. tan⁻¹(0.5) = 26.6° uses the wrong ratio.",
+    "difficulty": "medium",
+    "skill": "application",
+    "involves_calculation": true
+   },
+   {
+    "question": "What is the exact value of tan 45°?",
+    "correct_answer": "1",
+    "distractors": [
+     "1/√2",
+     "√3",
+     "1/2"
+    ],
+    "explanation": "A right-angled isosceles triangle has equal opposite and adjacent sides, so tan 45° = 1.",
+    "difficulty": "easy",
+    "skill": "recall",
+    "involves_calculation": false
+   },
+   {
+    "question": "A 5 m ladder reaches 4.6 m up a wall. How far is its foot from the wall, to 1 d.p.?",
+    "correct_answer": "2.0 m",
+    "distractors": [
+     "6.8 m",
+     "0.4 m",
+     "1.9 m"
+    ],
+    "explanation": "√(5² − 4.6²) = √3.84 = 1.959… = 2.0 m. Adding the squares gives 6.8.",
+    "difficulty": "medium",
+    "skill": "application",
+    "involves_calculation": true
+   },
+   {
+    "question": "A cuboid is 3 cm by 4 cm by 12 cm. How long is its space diagonal?",
+    "correct_answer": "13 cm",
+    "distractors": [
+     "19 cm",
+     "12.6 cm",
+     "15 cm"
+    ],
+    "explanation": "√(3² + 4² + 12²) = √169 = 13 cm.",
+    "difficulty": "hard",
+    "skill": "application",
+    "involves_calculation": true
+   }
+  ],
+  "M6.2": [
+   {
+    "question": "Which formula gives the area of a triangle with sides a and b and included angle C?",
+    "correct_answer": "½ab sin C",
+    "distractors": [
+     "½ab cos C",
+     "ab sin C",
+     "½ab tan C"
+    ],
+    "explanation": "Area = ½ab sin C.",
+    "difficulty": "easy",
+    "skill": "recall",
+    "involves_calculation": false
+   },
+   {
+    "question": "In triangle ABC, a = 8, b = 11 and angle C = 60°. Find c to 1 d.p.",
+    "correct_answer": "9.8",
+    "distractors": [
+     "16.5",
+     "11.9",
+     "13.6"
+    ],
+    "explanation": "c² = 64 + 121 − 2 × 8 × 11 × cos 60° = 97, so c = 9.8. Adding instead of subtracting gives 16.5.",
+    "difficulty": "hard",
+    "skill": "application",
+    "involves_calculation": true
+   },
+   {
+    "question": "When should you use the sine rule rather than the cosine rule?",
+    "correct_answer": "When you know a side and its opposite angle",
+    "distractors": [
+     "When you know the three sides of the triangle",
+     "When you know two sides and the angle between",
+     "When the triangle has a right angle in it"
+    ],
+    "explanation": "The sine rule needs a matching side–angle pair. Three sides, or two sides and the included angle, need the cosine rule.",
+    "difficulty": "medium",
+    "skill": "recall",
+    "involves_calculation": false
+   },
+   {
+    "question": "Find the area of a triangle with sides 6 cm and 9 cm and an included angle of 30°.",
+    "correct_answer": "13.5 cm²",
+    "distractors": [
+     "27 cm²",
+     "23.4 cm²",
+     "15 cm²"
+    ],
+    "explanation": "½ × 6 × 9 × sin 30° = 13.5 cm². Forgetting the ½ gives 27.",
+    "difficulty": "medium",
+    "skill": "application",
+    "involves_calculation": true
+   },
+   {
+    "question": "In triangle ABC, a = 7, angle A = 40° and angle B = 65°. Find b to 1 d.p.",
+    "correct_answer": "9.9",
+    "distractors": [
+     "5.0",
+     "10.5",
+     "11.4"
+    ],
+    "explanation": "b = 7 × sin 65° ÷ sin 40° = 9.9. Flipping the fraction gives 5.0.",
+    "difficulty": "hard",
+    "skill": "application",
+    "involves_calculation": true
+   }
+  ],
+  "M6.3": [
+   {
+    "question": "a = (3, −2) and b = (−1, 5) as column vectors. Find 2a + b.",
+    "correct_answer": "(5, 1)",
+    "distractors": [
+     "(2, 3)",
+     "(7, −9)",
+     "(5, −1)"
+    ],
+    "explanation": "2a = (6, −4); add b: (6 − 1, −4 + 5) = (5, 1).",
+    "difficulty": "medium",
+    "skill": "application",
+    "involves_calculation": true
+   },
+   {
+    "question": "OA = a and OB = b. What is the vector AB?",
+    "correct_answer": "b − a",
+    "distractors": [
+     "a − b",
+     "a + b",
+     "½(a + b)"
+    ],
+    "explanation": "Go from A back to O (−a), then O to B (+b): AB = −a + b.",
+    "difficulty": "medium",
+    "skill": "recall",
+    "involves_calculation": false
+   },
+   {
+    "question": "M is the midpoint of AB, with OA = a and OB = b. What is OM?",
+    "correct_answer": "½(a + b)",
+    "distractors": [
+     "½(b − a)",
+     "a + b",
+     "½a + b"
+    ],
+    "explanation": "OM = a + ½AB = a + ½(b − a) = ½(a + b).",
+    "difficulty": "hard",
+    "skill": "recall",
+    "involves_calculation": false
+   },
+   {
+    "question": "What is the magnitude of the vector (6, −8)?",
+    "correct_answer": "10",
+    "distractors": [
+     "14",
+     "2",
+     "√28"
+    ],
+    "explanation": "√(6² + (−8)²) = √100 = 10.",
+    "difficulty": "medium",
+    "skill": "application",
+    "involves_calculation": true
+   },
+   {
+    "question": "Two vectors are parallel when…",
+    "correct_answer": "one is a multiple of the other",
+    "distractors": [
+     "they have the same magnitude",
+     "they start at the same point",
+     "their components add to zero"
+    ],
+    "explanation": "Parallel vectors point the same (or opposite) way: one is k times the other.",
+    "difficulty": "medium",
+    "skill": "recall",
+    "involves_calculation": false
+   }
+  ],
+  "M6.4": [
+   {
+    "question": "The point (2, 5) is reflected in the line y = x. Where does it go?",
+    "correct_answer": "(5, 2)",
+    "distractors": [
+     "(−2, 5)",
+     "(2, −5)",
+     "(−5, −2)"
+    ],
+    "explanation": "Reflecting in y = x swaps the coordinates.",
+    "difficulty": "easy",
+    "skill": "application",
+    "involves_calculation": true
+   },
+   {
+    "question": "(3, 1) is enlarged by scale factor −2, centre the origin. Where does it go?",
+    "correct_answer": "(−6, −2)",
+    "distractors": [
+     "(6, 2)",
+     "(−1.5, −0.5)",
+     "(−6, 2)"
+    ],
+    "explanation": "Multiply both coordinates by −2. A negative scale factor puts the image on the other side of the centre.",
+    "difficulty": "hard",
+    "skill": "application",
+    "involves_calculation": true
+   },
+   {
+    "question": "Rotate (4, 1) by 90° clockwise about the origin.",
+    "correct_answer": "(1, −4)",
+    "distractors": [
+     "(−1, 4)",
+     "(−4, −1)",
+     "(4, −1)"
+    ],
+    "explanation": "90° clockwise maps (x, y) to (y, −x). (−1, 4) is anticlockwise.",
+    "difficulty": "medium",
+    "skill": "application",
+    "involves_calculation": true
+   },
+   {
+    "question": "Translate (5, 1) by the vector (−3, 2).",
+    "correct_answer": "(2, 3)",
+    "distractors": [
+     "(8, −1)",
+     "(2, −1)",
+     "(−15, 2)"
+    ],
+    "explanation": "Add the vector: (5 − 3, 1 + 2) = (2, 3).",
+    "difficulty": "easy",
+    "skill": "application",
+    "involves_calculation": true
+   },
+   {
+    "question": "A shape is enlarged by scale factor 3. What happens to its area?",
+    "correct_answer": "It is multiplied by 9",
+    "distractors": [
+     "It is multiplied by 3",
+     "It is multiplied by 27",
+     "It is multiplied by 6"
+    ],
+    "explanation": "Area scale factor is the length scale factor squared: 3² = 9.",
+    "difficulty": "medium",
+    "skill": "application",
+    "involves_calculation": true
+   }
+  ]
+ },
+ "M7": {
+  "M7.1": [
+   {
+    "question": "P(red) = 0.35. What is P(not red)?",
+    "correct_answer": "0.65",
+    "distractors": [
+     "0.35",
+     "1.35",
+     "0.53"
+    ],
+    "explanation": "Probabilities of an event and its complement add to 1: 1 − 0.35 = 0.65.",
+    "difficulty": "easy",
+    "skill": "application",
+    "involves_calculation": true
+   },
+   {
+    "question": "A fair dice is rolled 120 times. How many 5s would you expect?",
+    "correct_answer": "20",
+    "distractors": [
+     "24",
+     "25",
+     "6"
+    ],
+    "explanation": "Expected = probability × trials = 1/6 × 120 = 20.",
+    "difficulty": "easy",
+    "skill": "application",
+    "involves_calculation": true
+   },
+   {
+    "question": "A spinner lands on A, B or C. P(A) = 0.2 and P(B) = 0.45. What is P(C)?",
+    "correct_answer": "0.35",
+    "distractors": [
+     "0.65",
+     "0.25",
+     "0.55"
+    ],
+    "explanation": "1 − 0.2 − 0.45 = 0.35.",
+    "difficulty": "medium",
+    "skill": "application",
+    "involves_calculation": true
+   },
+   {
+    "question": "A bag has 4 red and 6 blue beads. One is picked at random. What is P(blue)?",
+    "correct_answer": "3/5",
+    "distractors": [
+     "2/3",
+     "2/5",
+     "1/6"
+    ],
+    "explanation": "6 blue out of 10 beads = 6/10 = 3/5. 2/3 compares red with blue instead of with the total.",
+    "difficulty": "easy",
+    "skill": "application",
+    "involves_calculation": true
+   },
+   {
+    "question": "A coin lands heads 34 times in 50 throws. What is the estimated P(heads)?",
+    "correct_answer": "0.68",
+    "distractors": [
+     "0.5",
+     "0.34",
+     "0.32"
+    ],
+    "explanation": "Relative frequency = 34 ÷ 50 = 0.68. 0.5 is the theoretical value for a fair coin, not the estimate.",
+    "difficulty": "medium",
+    "skill": "application",
+    "involves_calculation": true
+   }
+  ],
+  "M7.2": [
+   {
+    "question": "Two fair coins are thrown. What is P(two heads)?",
+    "correct_answer": "1/4",
+    "distractors": [
+     "1/2",
+     "1/3",
+     "3/4"
+    ],
+    "explanation": "½ × ½ = ¼. The outcomes HH, HT, TH, TT are equally likely.",
+    "difficulty": "easy",
+    "skill": "application",
+    "involves_calculation": true
+   },
+   {
+    "question": "A bag has 5 red and 3 green counters. Two are taken without replacement. What is P(both red)?",
+    "correct_answer": "5/14",
+    "distractors": [
+     "25/64",
+     "5/16",
+     "9/14"
+    ],
+    "explanation": "5/8 × 4/7 = 20/56 = 5/14. 25/64 assumes the first counter is replaced.",
+    "difficulty": "hard",
+    "skill": "application",
+    "involves_calculation": true
+   },
+   {
+    "question": "A and B are independent. P(A) = 0.3 and P(B) = 0.5. What is P(A and B)?",
+    "correct_answer": "0.15",
+    "distractors": [
+     "0.8",
+     "0.65",
+     "0.2"
+    ],
+    "explanation": "For independent events multiply: 0.3 × 0.5 = 0.15. Adding gives 0.8.",
+    "difficulty": "medium",
+    "skill": "application",
+    "involves_calculation": true
+   },
+   {
+    "question": "P(rain) = 0.4. If it rains, P(late) = 0.7; if not, P(late) = 0.2. What is P(late)?",
+    "correct_answer": "0.4",
+    "distractors": [
+     "0.28",
+     "0.9",
+     "0.52"
+    ],
+    "explanation": "0.4 × 0.7 + 0.6 × 0.2 = 0.28 + 0.12 = 0.4.",
+    "difficulty": "hard",
+    "skill": "application",
+    "involves_calculation": true
+   },
+   {
+    "question": "Of 50 students, 30 study French and 12 of those also study Spanish. A French student is chosen. What is P(Spanish)?",
+    "correct_answer": "2/5",
+    "distractors": [
+     "6/25",
+     "3/5",
+     "9/25"
+    ],
+    "explanation": "Given French, the total is 30: 12/30 = 2/5. 12/50 ignores the condition.",
+    "difficulty": "hard",
+    "skill": "application",
+    "involves_calculation": true
+   }
+  ],
+  "M7.3": [
+   {
+    "question": "ξ = {1, 2, …, 10}, A = even numbers, B = multiples of 3. What is A ∩ B?",
+    "correct_answer": "{6}",
+    "distractors": [
+     "{3, 9}",
+     "{6, 9}",
+     "{2, 6}"
+    ],
+    "explanation": "A ∩ B is the numbers in both: even and a multiple of 3. Only 6 (12 is outside ξ).",
+    "difficulty": "medium",
+    "skill": "application",
+    "involves_calculation": true
+   },
+   {
+    "question": "In set notation, what does A′ mean?",
+    "correct_answer": "The elements not in A",
+    "distractors": [
+     "The elements in A and B",
+     "The elements in A but not B",
+     "The number of elements in A"
+    ],
+    "explanation": "A′ is the complement of A: everything in ξ outside A.",
+    "difficulty": "easy",
+    "skill": "recall",
+    "involves_calculation": false
+   },
+   {
+    "question": "12 people like tea only, 8 like both tea and coffee, 15 like coffee only and 5 like neither. What is P(likes tea)?",
+    "correct_answer": "1/2",
+    "distractors": [
+     "3/10",
+     "1/5",
+     "7/8"
+    ],
+    "explanation": "Tea = 12 + 8 = 20 out of 40 people = 1/2. 3/10 counts tea-only.",
+    "difficulty": "medium",
+    "skill": "application",
+    "involves_calculation": true
+   },
+   {
+    "question": "n(A) = 20, n(B) = 15 and n(A ∪ B) = 28. Find n(A ∩ B).",
+    "correct_answer": "7",
+    "distractors": [
+     "35",
+     "13",
+     "8"
+    ],
+    "explanation": "n(A ∪ B) = n(A) + n(B) − n(A ∩ B), so 28 = 35 − n(A ∩ B) and n(A ∩ B) = 7.",
+    "difficulty": "hard",
+    "skill": "application",
+    "involves_calculation": true
+   },
+   {
+    "question": "What does A ∪ B contain?",
+    "correct_answer": "Elements in A, in B, or in both",
+    "distractors": [
+     "Elements in both A and B",
+     "Elements in neither A nor B",
+     "Elements in A but not in B"
+    ],
+    "explanation": "∪ (union) means “or”: anything in at least one of the sets. ∩ is “and”.",
+    "difficulty": "medium",
+    "skill": "recall",
+    "involves_calculation": false
+   }
+  ]
+ },
+ "M8": {
+  "M8.1": [
+   {
+    "question": "What is the mean of 4, 7, 7, 9 and 13?",
+    "correct_answer": "8",
+    "distractors": [
+     "7",
+     "9",
+     "8.5"
+    ],
+    "explanation": "Sum 40 ÷ 5 = 8. 7 is the median and mode.",
+    "difficulty": "easy",
+    "skill": "application",
+    "involves_calculation": true
+   },
+   {
+    "question": "The mean of 5 numbers is 12. Four of them are 10, 11, 14 and 15. What is the fifth?",
+    "correct_answer": "10",
+    "distractors": [
+     "12",
+     "8",
+     "14"
+    ],
+    "explanation": "Total = 5 × 12 = 60; 60 − 50 = 10.",
+    "difficulty": "medium",
+    "skill": "application",
+    "involves_calculation": true
+   },
+   {
+    "question": "Estimate the mean: 0 < t ≤ 10 has frequency 4 and 10 < t ≤ 20 has frequency 6.",
+    "correct_answer": "11",
+    "distractors": [
+     "15",
+     "10",
+     "13"
+    ],
+    "explanation": "Use midpoints: (5 × 4 + 15 × 6) ÷ 10 = 110 ÷ 10 = 11.",
+    "difficulty": "medium",
+    "skill": "application",
+    "involves_calculation": true
+   },
+   {
+    "question": "What is the interquartile range of 3, 5, 6, 8, 10, 12, 15?",
+    "correct_answer": "7",
+    "distractors": [
+     "12",
+     "6",
+     "9"
+    ],
+    "explanation": "Lower quartile 5 (2nd value), upper quartile 12 (6th value): 12 − 5 = 7. 12 is the range.",
+    "difficulty": "medium",
+    "skill": "application",
+    "involves_calculation": true
+   },
+   {
+    "question": "Which average is usually best when the data has an extreme outlier?",
+    "correct_answer": "The median",
+    "distractors": [
+     "The mean",
+     "The mode",
+     "The modal class"
+    ],
+    "explanation": "The median is not pulled by one extreme value; the mean is.",
+    "difficulty": "easy",
+    "skill": "recall",
+    "involves_calculation": false
+   }
+  ],
+  "M8.2": [
+   {
+    "question": "On a cumulative frequency graph of 80 values, where do you read off the median?",
+    "correct_answer": "At a cumulative frequency of 40",
+    "distractors": [
+     "At a cumulative frequency of 80",
+     "Halfway along the horizontal axis",
+     "At a cumulative frequency of 20"
+    ],
+    "explanation": "The median is the middle value: n ÷ 2 = 40. 20 gives the lower quartile.",
+    "difficulty": "medium",
+    "skill": "recall",
+    "involves_calculation": false
+   },
+   {
+    "question": "On a box plot, what does the length of the box show?",
+    "correct_answer": "The interquartile range",
+    "distractors": [
+     "The range of the data",
+     "The median of the data",
+     "The mean of the data"
+    ],
+    "explanation": "The box runs from the lower to the upper quartile. The whiskers show the full range.",
+    "difficulty": "easy",
+    "skill": "recall",
+    "involves_calculation": false
+   },
+   {
+    "question": "A box plot has min 12, LQ 18, median 25, UQ 31 and max 40. What is the IQR?",
+    "correct_answer": "13",
+    "distractors": [
+     "28",
+     "6",
+     "19"
+    ],
+    "explanation": "IQR = UQ − LQ = 31 − 18 = 13. 28 is the range.",
+    "difficulty": "medium",
+    "skill": "application",
+    "involves_calculation": true
+   },
+   {
+    "question": "Group A: median 42, IQR 10. Group B: median 38, IQR 18. Which comparison is correct?",
+    "correct_answer": "A scored higher on average and more consistently",
+    "distractors": [
+     "B scored higher on average and more consistently",
+     "A scored higher on average but less consistently",
+     "B scored lower on average and more consistently"
+    ],
+    "explanation": "A has the higher median and the smaller IQR (less spread, so more consistent).",
+    "difficulty": "hard",
+    "skill": "recall",
+    "involves_calculation": false
+   },
+   {
+    "question": "On a cumulative frequency graph, each point is plotted at…",
+    "correct_answer": "the upper class boundary of its group",
+    "distractors": [
+     "the midpoint of the class interval",
+     "the lower class boundary of its group",
+     "the class width of its group"
+    ],
+    "explanation": "Cumulative frequency counts everything up to the end of the group, so plot at the upper boundary.",
+    "difficulty": "medium",
+    "skill": "recall",
+    "involves_calculation": false
+   }
+  ],
+  "M8.3": [
+   {
+    "question": "What does the vertical axis of a histogram show?",
+    "correct_answer": "Frequency density",
+    "distractors": [
+     "Frequency",
+     "Cumulative frequency",
+     "Relative frequency"
+    ],
+    "explanation": "Histograms with unequal class widths plot frequency density, so area shows frequency.",
+    "difficulty": "easy",
+    "skill": "recall",
+    "involves_calculation": false
+   },
+   {
+    "question": "The class 20 < x ≤ 30 has frequency 45. What is its frequency density?",
+    "correct_answer": "4.5",
+    "distractors": [
+     "450",
+     "1.5",
+     "2.25"
+    ],
+    "explanation": "Frequency ÷ class width = 45 ÷ 10 = 4.5.",
+    "difficulty": "medium",
+    "skill": "application",
+    "involves_calculation": true
+   },
+   {
+    "question": "A histogram bar for 10 < x ≤ 25 has frequency density 2.4. What is its frequency?",
+    "correct_answer": "36",
+    "distractors": [
+     "60",
+     "6.25",
+     "24"
+    ],
+    "explanation": "Frequency = density × width = 2.4 × 15 = 36.",
+    "difficulty": "medium",
+    "skill": "application",
+    "involves_calculation": true
+   },
+   {
+    "question": "How is frequency density calculated?",
+    "correct_answer": "frequency ÷ class width",
+    "distractors": [
+     "class width ÷ frequency",
+     "frequency × class width",
+     "frequency ÷ total frequency"
+    ],
+    "explanation": "Frequency density = frequency ÷ class width.",
+    "difficulty": "easy",
+    "skill": "recall",
+    "involves_calculation": false
+   },
+   {
+    "question": "In a histogram, which part of a bar is proportional to the frequency?",
+    "correct_answer": "Its area",
+    "distractors": [
+     "Its height",
+     "Its width",
+     "Its midpoint"
+    ],
+    "explanation": "With unequal widths, the area (density × width) represents the frequency.",
+    "difficulty": "medium",
+    "skill": "recall",
+    "involves_calculation": false
+   }
+  ],
+  "M8.4": [
+   {
+    "question": "A school of 600 has 240 students in Year 7. A stratified sample of 50 is taken. How many should be from Year 7?",
+    "correct_answer": "20",
+    "distractors": [
+     "24",
+     "10",
+     "40"
+    ],
+    "explanation": "240/600 × 50 = 20.",
+    "difficulty": "medium",
+    "skill": "application",
+    "involves_calculation": true
+   },
+   {
+    "question": "As temperature rises, ice-cream sales rise. What type of correlation is this?",
+    "correct_answer": "Positive correlation",
+    "distractors": [
+     "Negative correlation",
+     "No correlation",
+     "Inverse correlation"
+    ],
+    "explanation": "Both go up together, so the correlation is positive.",
+    "difficulty": "easy",
+    "skill": "recall",
+    "involves_calculation": false
+   },
+   {
+    "question": "Why is predicting far outside the data range with a line of best fit unreliable?",
+    "correct_answer": "The trend is not known to continue past the data",
+    "distractors": [
+     "The line has to pass through the origin",
+     "Outliers are removed from the graph first",
+     "The axes scale is not linear beyond it"
+    ],
+    "explanation": "Extrapolation assumes the pattern carries on, which may not be true.",
+    "difficulty": "medium",
+    "skill": "recall",
+    "involves_calculation": false
+   },
+   {
+    "question": "Which sampling method gives every member an equal chance of being chosen?",
+    "correct_answer": "Numbering everyone and picking at random",
+    "distractors": [
+     "Asking the first 20 people you meet",
+     "Asking people to volunteer online",
+     "Choosing everyone in one class"
+    ],
+    "explanation": "Random sampling (e.g. numbering everyone and using a random number generator) gives equal chances.",
+    "difficulty": "medium",
+    "skill": "recall",
+    "involves_calculation": false
+   },
+   {
+    "question": "40 fish are tagged. Later 50 are caught and 8 are tagged. Estimate the population.",
+    "correct_answer": "250",
+    "distractors": [
+     "320",
+     "98",
+     "400"
+    ],
+    "explanation": "Capture–recapture: 40 × 50 ÷ 8 = 250.",
+    "difficulty": "hard",
+    "skill": "application",
+    "involves_calculation": true
+   }
+  ]
+ }
+}

@@ -1,0 +1,52 @@
+{
+  "batchId": "c9bc9009-7cb9-44b2-b893-15655325f079",
+  "subject": "English Language",
+  "model": "hand-authored",
+  "topics": [
+    {
+      "name": "Language Techniques and Terminology",
+      "spec_ref": "L1",
+      "kept": 20,
+      "dropped": []
+    },
+    {
+      "name": "Structure and Sentence Forms",
+      "spec_ref": "L2",
+      "kept": 20,
+      "dropped": []
+    },
+    {
+      "name": "Paper 1 Reading: Creative Reading",
+      "spec_ref": "L3",
+      "kept": 20,
+      "dropped": []
+    },
+    {
+      "name": "Paper 2 Reading: Viewpoints and Perspectives",
+      "spec_ref": "L4",
+      "kept": 20,
+      "dropped": []
+    },
+    {
+      "name": "Writing",
+      "spec_ref": "L5",
+      "kept": 20,
+      "dropped": []
+    },
+    {
+      "name": "Technical Accuracy",
+      "spec_ref": "L6",
+      "kept": 20,
+      "dropped": []
+    }
+  ],
+  "questions": 120,
+  "checksum": "cb25b1b084f3775285cd9d9c283bd20a",
+  "checksum_sql": "select count(*) as n, md5(string_agg(concat_ws('|', question_text, option_a, option_b, option_c, option_d, correct_option, explanation, difficulty, question_type, ao_weighting), E'\\n' order by convert_to(concat_ws('|', question_text, option_a, option_b, option_c, option_d, correct_option, explanation, difficulty, question_type, ao_weighting), 'UTF8'))) as checksum from questions where generation_batch_id = 'c9bc9009-7cb9-44b2-b893-15655325f079';",
+  "option_quality": {
+    "questions": 120,
+    "correctIsLongestPct": 35,
+    "avgRatio": 1.05,
+    "withIssuesPct": 4
+  }
+}

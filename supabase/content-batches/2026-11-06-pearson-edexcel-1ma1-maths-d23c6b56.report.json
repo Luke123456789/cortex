@@ -1,0 +1,64 @@
+{
+  "batchId": "d23c6b56-339f-4b85-912e-ff6ec10be0f8",
+  "subject": "Maths",
+  "model": "hand-authored",
+  "topics": [
+    {
+      "name": "Number",
+      "spec_ref": "M1",
+      "kept": 20,
+      "dropped": []
+    },
+    {
+      "name": "Algebra: Expressions and Equations",
+      "spec_ref": "M2",
+      "kept": 20,
+      "dropped": []
+    },
+    {
+      "name": "Algebra: Graphs, Sequences and Functions",
+      "spec_ref": "M3",
+      "kept": 20,
+      "dropped": []
+    },
+    {
+      "name": "Ratio, Proportion and Rates of Change",
+      "spec_ref": "M4",
+      "kept": 20,
+      "dropped": []
+    },
+    {
+      "name": "Geometry: Shapes, Angles and Measures",
+      "spec_ref": "M5",
+      "kept": 20,
+      "dropped": []
+    },
+    {
+      "name": "Geometry: Trigonometry, Vectors and Transformations",
+      "spec_ref": "M6",
+      "kept": 20,
+      "dropped": []
+    },
+    {
+      "name": "Probability",
+      "spec_ref": "M7",
+      "kept": 15,
+      "dropped": []
+    },
+    {
+      "name": "Statistics",
+      "spec_ref": "M8",
+      "kept": 20,
+      "dropped": []
+    }
+  ],
+  "questions": 155,
+  "checksum": "c721bf51d9ba6b8bdd9e33f332942a70",
+  "checksum_sql": "select count(*) as n, md5(string_agg(concat_ws('|', question_text, option_a, option_b, option_c, option_d, correct_option, explanation, difficulty, question_type, ao_weighting), E'\\n' order by convert_to(concat_ws('|', question_text, option_a, option_b, option_c, option_d, correct_option, explanation, difficulty, question_type, ao_weighting), 'UTF8'))) as checksum from questions where generation_batch_id = 'd23c6b56-339f-4b85-912e-ff6ec10be0f8';",
+  "option_quality": {
+    "questions": 155,
+    "correctIsLongestPct": 5,
+    "avgRatio": 0.97,
+    "withIssuesPct": 0
+  }
+}
