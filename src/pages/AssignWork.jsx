@@ -3,6 +3,8 @@ import { supabase } from '../lib/supabaseClient'
 import { useAuth } from '../hooks/useAuth.jsx'
 import { useAssignableCatalog } from '../hooks/useAssignableCatalog'
 import { useAssignments } from '../hooks/useAssignments'
+import { useDoneBefore } from '../hooks/useDoneBefore'
+import { doneSentence } from '../lib/doneBefore'
 import styles from './AssignWork.module.css'
 
 const TYPES = [
@@ -40,6 +42,8 @@ export default function AssignWork() {
   const studentName = target ? (target.isPractice ? 'practice student' : target.displayName) : null
   const { subjects, topics, subtopics, quizzes, examQuestions, loading: catalogLoading } = useAssignableCatalog()
   const { assignments, refresh } = useAssignments(studentId)
+  const done = useDoneBefore(studentId)
+  const DONE_MARK = ' ✓ done'
 
   const [type, setType] = useState('quiz')
   const [subjectId, setSubjectId] = useState('')
@@ -151,6 +155,17 @@ export default function AssignWork() {
     (type === 'past_paper' && a.title === pastPaperTitle.trim())
   ))
   const completed = assignments.filter((a) => a.status === 'completed').slice(0, 6)
+  // The picked item has been finished before (assigned or self-started).
+  const doneEntry = !done ? null
+    : type === 'quiz' ? done.quiz.get(quizId)
+    : type === 'written_test' ? done.written.get(examQuestionId)
+    : type === 'tutor_session' ? done.tutor.get(subtopicId)
+    : (() => {
+        const title = pastPaperTitle.trim()
+        const papers = title ? assignments.filter((a) => a.type === 'past_paper' && a.status === 'completed' && a.title === title) : []
+        return papers.length ? { count: papers.length, lastAt: papers[0].completed_at, lastResult: null } : null
+      })()
+  const who = target?.isPractice ? 'The practice student' : studentName || 'They'
 
   return (
     <div className="page page--wide">
@@ -228,7 +243,7 @@ export default function AssignWork() {
                           <label className="field-label" htmlFor="assign-quiz">Quiz</label>
                           <select id="assign-quiz" className="field" value={quizId} onChange={(e) => setQuizId(e.target.value)}>
                             {quizzesForTopic.map((q) => (
-                              <option key={q.id} value={q.id}>{q.title} ({q.question_count})</option>
+                              <option key={q.id} value={q.id}>{q.title} ({q.question_count}){done?.quiz.has(q.id) ? DONE_MARK : ''}</option>
                             ))}
                           </select>
                         </div>
@@ -243,7 +258,7 @@ export default function AssignWork() {
                           <label className="field-label" htmlFor="assign-subtopic">Lesson</label>
                           <select id="assign-subtopic" className="field" value={subtopicId} onChange={(e) => setSubtopicId(e.target.value)}>
                             {subtopicsForTopic.map((s) => (
-                              <option key={s.id} value={s.id}>{s.name}</option>
+                              <option key={s.id} value={s.id}>{s.name}{done?.tutor.has(s.id) ? DONE_MARK : ''}</option>
                             ))}
                           </select>
                         </div>
@@ -258,7 +273,7 @@ export default function AssignWork() {
                           <label className="field-label" htmlFor="assign-question">Question</label>
                           <select id="assign-question" className="field" value={examQuestionId} onChange={(e) => setExamQuestionId(e.target.value)}>
                             {examQuestionsForTopic.map((q) => (
-                              <option key={q.id} value={q.id}>{subtopics.find((s) => s.id === q.subtopic_id)?.name || truncate(q.question_text, 40)} · {q.command_word} ({q.total_marks} marks)</option>
+                              <option key={q.id} value={q.id}>{subtopics.find((s) => s.id === q.subtopic_id)?.name || truncate(q.question_text, 40)} · {q.command_word} ({q.total_marks} marks){done?.written.has(q.id) ? DONE_MARK : ''}</option>
                             ))}
                           </select>
                           {examQuestionsForTopic.find((q) => q.id === examQuestionId) && (
@@ -284,6 +299,10 @@ export default function AssignWork() {
                     onChange={(e) => setNote(e.target.value)}
                   />
                 </div>
+
+                {doneEntry && !success && (
+                  <p className={styles.doneBefore} role="status">{doneSentence(doneEntry, who)}</p>
+                )}
 
                 {alreadyPending && !success && (
                   <p className={styles.duplicate}>This is already in {target?.isPractice ? 'the practice student' : studentName || 'the student'}’s pending work. Pushing it again will set it twice.</p>

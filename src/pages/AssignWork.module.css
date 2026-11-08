@@ -59,6 +59,15 @@
   font-size: var(--text-sm);
 }
 
+.doneBefore {
+  margin: 0;
+  padding: var(--space-2) var(--space-3);
+  border-left: 3px solid var(--brass);
+  background: var(--brass-light);
+  color: var(--ink);
+  font-size: var(--text-sm);
+}
+
 .duplicate {
   margin: 0;
   font-size: var(--text-xs);
