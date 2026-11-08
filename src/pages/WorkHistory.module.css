@@ -1,0 +1,234 @@
+.student {
+  max-width: 280px;
+  margin-bottom: var(--space-4);
+}
+
+.tiles {
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--space-2);
+  margin-bottom: var(--space-5);
+}
+
+@media (min-width: 640px) {
+  .tiles {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+
+.tile {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: var(--space-3);
+}
+
+.tileLabel {
+  font-size: var(--text-xs);
+  color: var(--ink-soft);
+}
+
+.tileValue {
+  font-size: var(--text-xl);
+  font-weight: 600;
+  line-height: 1.2;
+}
+
+.tileSub {
+  font-family: var(--font-mono);
+  font-size: var(--text-2xs);
+  color: var(--ink-soft);
+}
+
+.overdueTile {
+  border-color: var(--red);
+}
+
+.filters {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  margin-bottom: var(--space-4);
+}
+
+.filterFields {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: var(--space-3);
+}
+
+.filterFields > div:first-child {
+  grid-column: 1 / -1;
+}
+
+@media (min-width: 640px) {
+  .filterFields {
+    grid-template-columns: minmax(0, 2fr) minmax(0, 1fr) minmax(0, 1fr);
+    max-width: 720px;
+  }
+
+  .filterFields > div:first-child {
+    grid-column: auto;
+  }
+}
+
+.actions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3);
+}
+
+/* Stacked cards on phone; a table with a sticky header from 768px. */
+.table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.table thead {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+}
+
+.table tr {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  grid-template-areas:
+    'work work'
+    'set due'
+    'status status'
+    'result result';
+  gap: var(--space-1) var(--space-3);
+  padding: var(--space-3) 0;
+  border-bottom: 1px solid var(--rule);
+}
+
+.table td {
+  display: block;
+  min-width: 0;
+}
+
+.work { grid-area: work; }
+.set { grid-area: set; }
+.due { grid-area: due; text-align: right; }
+.status { grid-area: status; }
+.result { grid-area: result; font-size: var(--text-sm); }
+
+.title {
+  font-size: var(--text-sm);
+  font-weight: 600;
+  overflow-wrap: anywhere;
+}
+
+.note {
+  margin-top: 2px;
+  font-size: var(--text-xs);
+  color: var(--ink-soft);
+  overflow-wrap: anywhere;
+}
+
+.cellLabel {
+  font-weight: 600;
+}
+
+.statusSub {
+  display: block;
+  margin-top: 2px;
+}
+
+.badge {
+  display: inline-block;
+  padding: 1px var(--space-2);
+  border-radius: var(--radius-sm);
+  font-family: var(--font-mono);
+  font-size: var(--text-2xs);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.on_time,
+.done {
+  background: var(--green-bg);
+  color: var(--green);
+}
+
+.late {
+  background: var(--brass-light);
+  color: var(--brass-ink);
+}
+
+.overdue {
+  background: var(--red-bg);
+  color: var(--red);
+}
+
+.pending {
+  border: 1px solid var(--rule-strong);
+  color: var(--ink-soft);
+}
+
+.cancelled {
+  color: var(--ink-faint);
+  text-decoration: line-through;
+}
+
+.footnote {
+  margin-top: var(--space-4);
+}
+
+@media (min-width: 768px) {
+  .scroller {
+    overflow: clip;
+    border: 1px solid var(--rule);
+    border-radius: var(--radius);
+    background: var(--card);
+  }
+
+  .table thead {
+    position: static;
+    width: auto;
+    height: auto;
+    overflow: visible;
+    clip: auto;
+  }
+
+  .table tr {
+    display: table-row;
+    padding: 0;
+  }
+
+  .table td,
+  .table th {
+    display: table-cell;
+    padding: var(--space-3) var(--space-4);
+    border-bottom: 1px solid var(--rule);
+    text-align: left;
+    vertical-align: top;
+  }
+
+  .due { text-align: left; }
+  .cellLabel { display: none; }
+  .set, .due { white-space: nowrap; }
+
+  .table tbody tr:last-child td {
+    border-bottom: none;
+  }
+
+  .table th {
+    position: sticky;
+    top: 0;
+    z-index: 1;
+    background: var(--paper-2);
+    font-family: var(--font-mono);
+    font-size: var(--text-2xs);
+    font-weight: 600;
+    letter-spacing: 0.8px;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+  }
+}

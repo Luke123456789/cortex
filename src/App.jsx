@@ -13,6 +13,7 @@ import RedemptionHistory from './pages/RedemptionHistory.jsx'
 import TutorSessions from './pages/TutorSessions.jsx'
 import Analytics from './pages/Analytics.jsx'
 import AssignWork from './pages/AssignWork.jsx'
+import WorkHistory from './pages/WorkHistory.jsx'
 import Assignments from './pages/Assignments.jsx'
 import PlayQuiz from './pages/PlayQuiz.jsx'
 import WrittenTest from './pages/WrittenTest.jsx'
@@ -45,6 +46,7 @@ export default function App() {
 
           <Route path="/parent" element={parentOnly(<Parent />)} />
           <Route path="/parent/assign" element={parentOnly(<AssignWork />)} />
+          <Route path="/parent/history" element={parentOnly(<WorkHistory />)} />
           <Route path="/parent/locks" element={parentOnly(<SubjectLocksPage />)} />
           <Route path="/parent/redemptions" element={parentOnly(<RedemptionHistory />)} />
           <Route path="/parent/tutor-sessions" element={parentOnly(<TutorSessions />)} />

@@ -130,7 +130,7 @@ export default function AssignedStatus({ studentId, studentName, subjects = [], 
             </details>
           )}
 
-          <p className={styles.footer}><Link to="/parent/assign" className="link">Assign or cancel work</Link></p>
+          <p className={styles.footer}><Link to="/parent/history" className="link">Full work history</Link> · <Link to="/parent/assign" className="link">Assign or cancel work</Link></p>
         </>
       )}
     </section>

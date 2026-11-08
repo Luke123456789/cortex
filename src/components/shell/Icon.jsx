@@ -8,6 +8,7 @@ const PATHS = {
   activity: <><path d="M3 12h4l3-8 4 16 3-8h4" /></>,
   overview: <><rect x="3" y="3" width="7.5" height="7.5" rx="1.5" /><rect x="13.5" y="3" width="7.5" height="7.5" rx="1.5" /><rect x="3" y="13.5" width="7.5" height="7.5" rx="1.5" /><rect x="13.5" y="13.5" width="7.5" height="7.5" rx="1.5" /></>,
   assign: <><rect x="4" y="4" width="16" height="16" rx="2" /><path d="M12 8v8M8 12h8" /></>,
+  history: <><path d="M9 6h11M9 12h11M9 18h11" /><path d="m3.5 6 1 1 2-2" /><path d="m3.5 12 1 1 2-2" /><path d="M4 18h2" /></>,
   lock: <><rect x="5" y="11" width="14" height="10" rx="2" /><path d="M8 11V7a4 4 0 0 1 8 0v4" /></>,
   redemptions: <><circle cx="12" cy="12" r="9" /><path d="M12 7v5l3 2" /></>,
   transcripts: <><path d="M4 5h16v11H9l-5 4Z" /><path d="M8 9h8M8 12.5h5" /></>,
