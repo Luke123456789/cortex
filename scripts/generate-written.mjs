@@ -2,6 +2,8 @@
 // questions (fm_exam_questions) and their mark schemes (fm_mark_schemes).
 //
 //   node scripts/generate-written.mjs scripts/authored/written/<file>.json [...] > out.sql
+//   (also takes scripts/authored/papers/<file>.json: adds the fm_papers row and
+//   numbers the questions within the paper)
 //
 // Topics and subtopics are looked up by name; a question whose text already
 // exists is skipped, so the output is safe to re-run.
@@ -39,6 +41,16 @@ select id, ${lit(style)}, ${json(scheme)}, ${json(q.ao_marks || {})}, ${q.spag_m
 `
 }
 
+// The paper itself, for a mock paper file (skipped if it already exists).
+export function paperRowSql(file) {
+  const p = file.paper
+  return `insert into public.fm_papers (ref, subject_id, title, exam_board, duration_minutes, calculator, total_marks, instructions)
+select ${lit(p.ref)}, s.id, ${lit(p.title)}, ${lit(file.exam_board)}, ${p.duration_minutes}, ${p.calculator}, ${p.total_marks}, ${lit(p.instructions)}
+from public.subjects s where s.name = ${lit(file.subject)}
+on conflict (ref) do nothing;
+`
+}
+
 // One statement per subject: the questions travel as a JSON array, so the SQL
 // is about half the size of one statement per question. Same skip-if-exists rule.
 export function subjectSql(file) {
@@ -48,16 +60,17 @@ export function subjectSql(file) {
       topic: q.topic, subtopic: q.subtopic, spec_ref: q.spec_ref ?? null, command_word: q.command_word,
       difficulty: q.difficulty ?? null, total_marks: q.total_marks, question_text: q.question_text,
       marking_style: style, scheme, ao_marks: q.ao_marks || {}, spag_marks: q.spag_marks || 0,
+      paper_ref: file.paper?.ref ?? null, paper_number: file.paper ? q.number : null,
     }
   })
   const data = JSON.stringify(rows)
   if (data.includes('$q$')) throw new Error('question data contains the $q$ quote marker')
-  return `with src as (
-  select * from jsonb_to_recordset($q$${data}$q$::jsonb) as x(topic text, subtopic text, spec_ref text, command_word text, difficulty text, total_marks int, question_text text, marking_style text, scheme jsonb, ao_marks jsonb, spag_marks int)
+  return `${file.paper ? paperRowSql(file) : ''}with src as (
+  select * from jsonb_to_recordset($q$${data}$q$::jsonb) as x(topic text, subtopic text, spec_ref text, command_word text, difficulty text, total_marks int, question_text text, marking_style text, scheme jsonb, ao_marks jsonb, spag_marks int, paper_ref text, paper_number int)
 ),
 ins as (
-  insert into public.fm_exam_questions (subtopic_id, topic_id, question_text, command_word, total_marks, difficulty, exam_board, spec_ref, active)
-  select st.id, t.id, src.question_text, src.command_word, src.total_marks, src.difficulty, ${lit(file.exam_board)}, src.spec_ref, true
+  insert into public.fm_exam_questions (subtopic_id, topic_id, question_text, command_word, total_marks, difficulty, exam_board, spec_ref, active, paper_ref, paper_number)
+  select st.id, t.id, src.question_text, src.command_word, src.total_marks, src.difficulty, ${lit(file.exam_board)}, src.spec_ref, true, src.paper_ref, src.paper_number
   from src
   join public.subjects s on s.name = ${lit(file.subject)}
   join public.topics t on t.subject_id = s.id and t.name = src.topic

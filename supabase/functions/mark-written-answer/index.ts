@@ -2,7 +2,9 @@
 // markings are combined (mean, rounded down); if they disagree by more than
 // 10% of the marks the attempt is flagged for a parent to check. Saving the
 // attempt completes the written_test assignment (DB trigger) and the reward
-// goes to the ledger here (none for the practice student).
+// goes to the ledger here (none for the practice student). Mock paper
+// answers name their paper assignment; the paper completes when every
+// question is answered (DB trigger), and pay 1 minute per mark.
 import { createClient } from 'npm:@supabase/supabase-js@2.45.0'
 import { getCaller, resolveWritableStudent } from '../_shared/access.ts'
 import {
@@ -55,7 +57,7 @@ Deno.serve(async (req) => {
   const caller = await getCaller(req)
   if (!caller) return json({ error: 'Please sign in again.' }, 401)
 
-  const { questionId, answer, studentId, telemetry } = await req.json().catch(() => ({}))
+  const { questionId, answer, studentId, telemetry, assignmentId } = await req.json().catch(() => ({}))
   if (!questionId) return json({ error: 'questionId required' }, 400)
   const checked = validateAnswer(answer)
   if (!checked.ok) return json({ error: checked.error }, 400)
@@ -69,26 +71,45 @@ Deno.serve(async (req) => {
 
   const admin = createClient(SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY)
 
-  // Written work is parent-assigned: there must be a pending assignment.
-  const { data: assignment, error: assignmentErr } = await admin
-    .from('assignments')
-    .select('id')
-    .eq('type', 'written_test')
-    .eq('exam_question_id', questionId)
-    .eq('student_id', student.id)
-    .eq('status', 'pending')
-    .order('assigned_at', { ascending: true })
-    .limit(1)
-    .maybeSingle()
-  if (assignmentErr) {
-    console.error('mark-written-answer: assignment check failed', assignmentErr)
-    return json({ error: 'failed to check assignment' }, 500)
+  // Written work is parent-assigned: there must be a pending assignment,
+  // either for this question or a mock paper that contains it.
+  let assignment: { id: string; type: string; paper_ref: string | null } | null = null
+  if (assignmentId) {
+    const { data, error } = await admin
+      .from('assignments')
+      .select('id, type, paper_ref, exam_question_id')
+      .eq('id', assignmentId)
+      .eq('student_id', student.id)
+      .eq('status', 'pending')
+      .maybeSingle()
+    if (error) {
+      console.error('mark-written-answer: assignment check failed', error)
+      return json({ error: 'failed to check assignment' }, 500)
+    }
+    if (data && (data.type === 'mock_paper' || (data.type === 'written_test' && data.exam_question_id === questionId))) assignment = data
+  } else {
+    const { data, error } = await admin
+      .from('assignments')
+      .select('id, type, paper_ref')
+      .eq('type', 'written_test')
+      .eq('exam_question_id', questionId)
+      .eq('student_id', student.id)
+      .eq('status', 'pending')
+      .order('assigned_at', { ascending: true })
+      .limit(1)
+      .maybeSingle()
+    if (error) {
+      console.error('mark-written-answer: assignment check failed', error)
+      return json({ error: 'failed to check assignment' }, 500)
+    }
+    assignment = data
   }
   if (!assignment) return json({ error: 'This question has not been assigned, or it has already been answered.' }, 403)
+  const inPaper = assignment.type === 'mock_paper'
 
   const { data: question, error: questionErr } = await admin
     .from('fm_exam_questions')
-    .select('id, question_text, command_word, total_marks, exam_board, topics (name, subjects (name))')
+    .select('id, question_text, command_word, total_marks, exam_board, paper_ref, paper_number, topics (name, subjects (name))')
     .eq('id', questionId)
     .single()
   const { data: scheme, error: schemeErr } = await admin
@@ -99,6 +120,16 @@ Deno.serve(async (req) => {
   if (questionErr || schemeErr || !question || !scheme) {
     console.error('mark-written-answer: question or scheme missing', questionErr, schemeErr)
     return json({ error: 'This question has no mark scheme yet.' }, 500)
+  }
+  if (inPaper) {
+    // The question must be on this paper, and each question is answered once.
+    if (question.paper_ref !== assignment.paper_ref) return json({ error: 'That question is not on this paper.' }, 403)
+    const { count } = await admin
+      .from('fm_attempts')
+      .select('id', { count: 'exact', head: true })
+      .eq('assignment_id', assignment.id)
+      .eq('question_id', questionId)
+    if ((count ?? 0) > 0) return json({ error: 'You have already answered this question on the paper.' }, 409)
   }
   if (!ANTHROPIC_API_KEY) return json({ error: 'ANTHROPIC_API_KEY not configured' }, 500)
 
@@ -118,7 +149,7 @@ Deno.serve(async (req) => {
   const integrity = buildIntegrity({ telemetry, answer: checked.text, runs: result.runs })
 
   // A flagged answer's minutes are held until a parent releases them.
-  const earned = computeMinutes(result.marks, question.total_marks, student.isPractice)
+  const earned = computeMinutes(result.marks, question.total_marks, student.isPractice, { bonus: !inPaper })
   const minutes = integrity.flagged ? 0 : earned
   const minutesHeld = integrity.flagged ? earned : 0
   const now = new Date().toISOString()
@@ -160,8 +191,8 @@ Deno.serve(async (req) => {
       student_id: student.id,
       type: 'earn',
       amount_minutes: minutes,
-      source: 'Written test',
-      note: `${result.marks}/${question.total_marks}`,
+      source: inPaper ? 'Mock paper' : 'Written test',
+      note: inPaper ? `Q${question.paper_number}: ${result.marks}/${question.total_marks}` : `${result.marks}/${question.total_marks}`,
     })
     if (ledgerErr) console.error('mark-written-answer: failed to log reward', ledgerErr)
   }

@@ -17,6 +17,7 @@ import WorkHistory from './pages/WorkHistory.jsx'
 import Assignments from './pages/Assignments.jsx'
 import PlayQuiz from './pages/PlayQuiz.jsx'
 import WrittenTest from './pages/WrittenTest.jsx'
+import MockPaper from './pages/MockPaper.jsx'
 import SubjectLocksPage from './pages/SubjectLocksPage.jsx'
 
 const parentOnly = (element) => <ProtectedRoute requireRole="parent">{element}</ProtectedRoute>
@@ -40,6 +41,7 @@ export default function App() {
           <Route path="/quiz/:topicId" element={<Quiz />} />
           <Route path="/play/:quizId" element={<PlayQuiz />} />
           <Route path="/written/:questionId" element={<WrittenTest />} />
+          <Route path="/paper/:assignmentId" element={<MockPaper />} />
           <Route path="/tutor" element={<TutorChat />} />
           <Route path="/assignments" element={<Assignments />} />
           <Route path="/activity" element={<Activity />} />

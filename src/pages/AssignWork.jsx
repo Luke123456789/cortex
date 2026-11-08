@@ -11,6 +11,7 @@ const TYPES = [
   { value: 'quiz', label: 'Quiz' },
   { value: 'tutor_session', label: 'Tutor session' },
   { value: 'written_test', label: 'Written test' },
+  { value: 'mock_paper', label: 'Mock paper' },
   { value: 'past_paper', label: 'Past paper' },
 ]
 
@@ -40,7 +41,7 @@ export default function AssignWork() {
   const studentId = targetId || practiceStudent?.id || childStudent?.id
   const target = linkedStudents.find((s) => s.id === studentId)
   const studentName = target ? (target.isPractice ? 'practice student' : target.displayName) : null
-  const { subjects, topics, subtopics, quizzes, examQuestions, loading: catalogLoading } = useAssignableCatalog()
+  const { subjects, topics, subtopics, quizzes, examQuestions, papers, loading: catalogLoading } = useAssignableCatalog()
   const { assignments, refresh } = useAssignments(studentId)
   const done = useDoneBefore(studentId)
   const DONE_MARK = ' ✓ done'
@@ -51,6 +52,7 @@ export default function AssignWork() {
   const [subtopicId, setSubtopicId] = useState('')
   const [quizId, setQuizId] = useState('')
   const [examQuestionId, setExamQuestionId] = useState('')
+  const [paperRef, setPaperRef] = useState('')
   const [pastPaperTitle, setPastPaperTitle] = useState('')
   const [note, setNote] = useState('')
   const [dueDate, setDueDate] = useState('')
@@ -61,7 +63,7 @@ export default function AssignWork() {
 
   useEffect(() => {
     setSuccess(null)
-  }, [studentId, type, topicId, subtopicId, quizId, examQuestionId])
+  }, [studentId, type, topicId, subtopicId, quizId, examQuestionId, paperRef])
 
   useEffect(() => {
     if (subjects.length && !subjectId) setSubjectId(subjects[0].id)
@@ -78,6 +80,11 @@ export default function AssignWork() {
   const subtopicsForTopic = subtopics.filter((s) => s.topic_id === topicId)
   const quizzesForTopic = quizzes.filter((q) => q.topic_id === topicId)
   const examQuestionsForTopic = examQuestions.filter((q) => q.topic_id === topicId)
+  const papersForSubject = papers.filter((p) => p.subject_id === subjectId)
+
+  useEffect(() => {
+    if (!papersForSubject.some((p) => p.ref === paperRef)) setPaperRef(papersForSubject[0]?.ref || '')
+  }, [papersForSubject, paperRef])
 
   useEffect(() => {
     setSubtopicId(subtopicsForTopic[0]?.id || '')
@@ -92,6 +99,7 @@ export default function AssignWork() {
     if (type === 'tutor_session') return !!subtopicId
     if (type === 'written_test') return !!examQuestionId
     if (type === 'past_paper') return pastPaperTitle.trim().length > 0
+    if (type === 'mock_paper') return !!paperRef
     return false
   }
 
@@ -120,6 +128,9 @@ export default function AssignWork() {
       } else if (type === 'written_test') {
         const q = examQuestions.find((eq) => eq.id === examQuestionId)
         payload = { ...base, subtopic_id: q?.subtopic_id || null, exam_question_id: examQuestionId, title: q ? writtenTitle(q, subtopics) : 'Written test' }
+      } else if (type === 'mock_paper') {
+        const paper = papers.find((p) => p.ref === paperRef)
+        payload = { ...base, topic_id: null, paper_ref: paperRef, title: paper?.title || 'Mock paper' }
       } else {
         payload = { ...base, title: pastPaperTitle.trim() }
       }
@@ -152,7 +163,8 @@ export default function AssignWork() {
     (type === 'quiz' && a.quiz_id === quizId) ||
     (type === 'written_test' && a.exam_question_id === examQuestionId) ||
     (type === 'tutor_session' && a.subtopic_id === subtopicId) ||
-    (type === 'past_paper' && a.title === pastPaperTitle.trim())
+    (type === 'past_paper' && a.title === pastPaperTitle.trim()) ||
+    (type === 'mock_paper' && a.paper_ref === paperRef)
   ))
   const completed = assignments.filter((a) => a.status === 'completed').slice(0, 6)
   // The picked item has been finished before (assigned or self-started).
@@ -162,8 +174,10 @@ export default function AssignWork() {
     : type === 'tutor_session' ? done.tutor.get(subtopicId)
     : (() => {
         const title = pastPaperTitle.trim()
-        const papers = title ? assignments.filter((a) => a.type === 'past_paper' && a.status === 'completed' && a.title === title) : []
-        return papers.length ? { count: papers.length, lastAt: papers[0].completed_at, lastResult: null } : null
+        const doneOnes = type === 'mock_paper'
+          ? assignments.filter((a) => a.type === 'mock_paper' && a.status === 'completed' && a.paper_ref === paperRef)
+          : title ? assignments.filter((a) => a.type === 'past_paper' && a.status === 'completed' && a.title === title) : []
+        return doneOnes.length ? { count: doneOnes.length, lastAt: doneOnes[0].completed_at, lastResult: null } : null
       })()
   const who = target?.isPractice ? 'The practice student' : studentName || 'They'
 
@@ -214,6 +228,33 @@ export default function AssignWork() {
                       onChange={(e) => setPastPaperTitle(e.target.value)}
                     />
                   </div>
+                ) : type === 'mock_paper' ? (
+                  <>
+                    <div>
+                      <label className="field-label" htmlFor="assign-paper-subject">Subject</label>
+                      <select id="assign-paper-subject" className="field" value={subjectId} onChange={(e) => setSubjectId(e.target.value)}>
+                        {subjects.map((s) => (
+                          <option key={s.id} value={s.id}>{s.name}</option>
+                        ))}
+                      </select>
+                    </div>
+                    {papersForSubject.length === 0 ? (
+                      <p className={styles.notice}>No mock papers for this subject yet.</p>
+                    ) : (
+                      <div>
+                        <label className="field-label" htmlFor="assign-mock">Paper</label>
+                        <select id="assign-mock" className="field" value={paperRef} onChange={(e) => setPaperRef(e.target.value)}>
+                          {papersForSubject.map((p) => (
+                            <option key={p.ref} value={p.ref}>{p.title}</option>
+                          ))}
+                        </select>
+                        {papersForSubject.find((p) => p.ref === paperRef) && (() => {
+                          const p = papersForSubject.find((x) => x.ref === paperRef)
+                          return <p className={styles.preview}>{p.total_marks} marks · {p.duration_minutes} minutes · {p.calculator ? 'calculator allowed' : 'no calculator'}. Worked through question by question in one sitting; each answer is AI-marked.</p>
+                        })()}
+                      </div>
+                    )}
+                  </>
                 ) : (
                   <>
                     <div className={styles.twoUp}>

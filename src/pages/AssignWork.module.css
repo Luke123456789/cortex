@@ -25,10 +25,10 @@
   gap: var(--space-3);
 }
 
-/* Type picker: four equal segments. */
+/* Type picker: five equal segments. */
 .types {
   display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
+  grid-template-columns: repeat(5, minmax(0, 1fr));
   gap: var(--space-1);
 }
 

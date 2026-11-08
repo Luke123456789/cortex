@@ -127,4 +127,8 @@ describe('computeMinutes', () => {
   it('pays nothing for the practice student', () => {
     expect(computeMinutes(6, 6, true)).toBe(0)
   })
+  it('pays a minute per mark with no bonus for a mock paper question', () => {
+    expect(computeMinutes(5, 6, false, { bonus: false })).toBe(5)
+    expect(computeMinutes(5, 6, true, { bonus: false })).toBe(0)
+  })
 })

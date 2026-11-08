@@ -40,20 +40,31 @@ export function useWorkHistory(studentId) {
     try {
       const [assignments, subjects, topics] = await Promise.all([
         readAll(() => supabase.from('assignments')
-          .select('id, type, title, note, due_at, assigned_at, status, completed_at, subject_id, topic_id, quiz_session_id, fm_attempt_id, tutor_session_id')
+          .select('id, type, title, note, due_at, assigned_at, status, completed_at, subject_id, topic_id, quiz_session_id, fm_attempt_id, tutor_session_id, paper_ref')
           .eq('student_id', studentId)
           .order('assigned_at', { ascending: false })),
         readAll(() => supabase.from('subjects').select('id, name').order('name')),
         readAll(() => supabase.from('topics').select('id, name').order('id')),
       ])
-      const [quizSessions, attempts, tutorSessions] = await Promise.all([
+      const paperIds = assignments.filter((a) => a.type === 'mock_paper').map((a) => a.id)
+      const [quizSessions, attempts, tutorSessions, paperAttempts, papers] = await Promise.all([
         byIds('quiz_sessions', 'id, score, question_count', assignments.map((a) => a.quiz_session_id)),
         byIds('fm_attempts', 'id, marks_awarded, parent_marks, total_marks, needs_review, reward_decision', assignments.map((a) => a.fm_attempt_id)),
         byIds('tutor_sessions', 'id, message_count, minutes_earned', assignments.map((a) => a.tutor_session_id)),
+        paperIds.length ? readAll(() => supabase.from('fm_attempts').select('assignment_id, marks_awarded, parent_marks').in('assignment_id', paperIds).order('id')) : [],
+        readAll(() => supabase.from('fm_papers').select('ref, total_marks').order('ref')),
       ])
+      // Paper totals: marks so far and questions answered, per paper assignment.
+      const paperTotals = new Map()
+      for (const a of paperAttempts) {
+        const t = paperTotals.get(a.assignment_id) || { marks: 0, answered: 0 }
+        t.marks += a.parent_marks ?? a.marks_awarded ?? 0
+        t.answered += 1
+        paperTotals.set(a.assignment_id, t)
+      }
       setData({
         assignments,
-        results: { quizSessions, attempts, tutorSessions },
+        results: { quizSessions, attempts, tutorSessions, paperTotals, paperMarks: new Map(papers.map((p) => [p.ref, p.total_marks])) },
         names: { subjects: new Map(subjects.map((s) => [s.id, s.name])), topics: new Map(topics.map((t) => [t.id, t.name])) },
       })
     } catch (err) {

@@ -75,3 +75,13 @@ describe('history rows, summary, filter and CSV', () => {
     expect(csv[5]).toContain('"Say ""hi"", then go"')
   })
 })
+
+describe('mock paper result', () => {
+  it('totals the marks across the paper', () => {
+    const r = resultOf({ id: 'p1', type: 'mock_paper', status: 'completed', paper_ref: 'm1' }, {
+      quizSessions: new Map(), attempts: new Map(), tutorSessions: new Map(),
+      paperTotals: new Map([['p1', { marks: 52, answered: 23 }]]), paperMarks: new Map([['m1', 80]]),
+    })
+    expect(r).toEqual({ text: '52/80 marks (65%), 23 questions answered', pct: 65 })
+  })
+})

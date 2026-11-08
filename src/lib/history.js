@@ -25,8 +25,14 @@ export function stateOf(a, now = new Date()) {
 const pct = (n, d) => (d ? Math.round((n / d) * 100) : null)
 
 // What the student got for it, as a short phrase plus a number for sorting.
-export function resultOf(a, { quizSessions, attempts, tutorSessions }) {
+export function resultOf(a, { quizSessions, attempts, tutorSessions, paperTotals = new Map(), paperMarks = new Map() }) {
   if (a.status !== 'completed') return null
+  if (a.type === 'mock_paper') {
+    const total = paperMarks.get(a.paper_ref)
+    const t = paperTotals.get(a.id) || { marks: 0, answered: 0 }
+    if (!total) return null
+    return { text: `${t.marks}/${total} marks (${pct(t.marks, total)}%), ${t.answered} questions answered`, pct: pct(t.marks, total) }
+  }
   if (a.type === 'quiz') {
     const s = quizSessions.get(a.quiz_session_id)
     if (!s || !s.question_count) return null

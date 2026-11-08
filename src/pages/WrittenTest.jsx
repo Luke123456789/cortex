@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
-import { Link, useParams } from 'react-router-dom'
+import { Link, useParams, useSearchParams } from 'react-router-dom'
 import { supabase } from '../lib/supabaseClient'
 import { useAuth } from '../hooks/useAuth.jsx'
 import { useSubjectWallpaper } from '../components/shell/Wallpaper.jsx'
@@ -45,7 +45,7 @@ const fmtClock = (s) => `${Math.floor(s / 60)}:${String(s % 60).padStart(2, '0')
 // Exam pace: AQA papers allow roughly 1 to 1.3 minutes per mark.
 const suggestedMinutes = (marks) => Math.max(2, Math.round(marks * 1.2))
 
-function Result({ attempt, question }) {
+function Result({ attempt, question, paperId }) {
   const marks = attempt.parent_marks ?? attempt.marks_awarded
   const credited = attempt.credited || []
   const missing = attempt.missing || []
@@ -112,7 +112,9 @@ function Result({ attempt, question }) {
         <p>{question.question_text}</p>
       </details>
 
-      <Link to="/assignments" className="btn btn--primary">Back to your week</Link>
+      {paperId
+        ? <Link to={`/paper/${paperId}`} className="btn btn--primary">Back to the paper</Link>
+        : <Link to="/assignments" className="btn btn--primary">Back to your week</Link>}
     </section>
   )
 }
@@ -120,6 +122,9 @@ function Result({ attempt, question }) {
 // Answer a written (exam-style) question and see the AI marking.
 export default function WrittenTest() {
   const { questionId } = useParams()
+  // Answering as part of a mock paper: ?paper=<assignment id>.
+  const [searchParams] = useSearchParams()
+  const paperId = searchParams.get('paper')
   const { studentId } = useAuth()
   const [question, setQuestion] = useState(null)
   const [pending, setPending] = useState(false)
@@ -145,15 +150,21 @@ export default function WrittenTest() {
     async function load() {
       setLoading(true)
       const [q, a, latest] = await Promise.all([
-        supabase.from('fm_exam_questions').select('id, question_text, command_word, total_marks, topics (name, subjects (name))').eq('id', questionId).single(),
-        supabase.from('assignments').select('id').eq('student_id', studentId).eq('type', 'written_test').eq('exam_question_id', questionId).eq('status', 'pending').limit(1),
-        supabase.from('fm_attempts').select('*').eq('student_id', studentId).eq('question_id', questionId).order('submitted_at', { ascending: false }).limit(1),
+        supabase.from('fm_exam_questions').select('id, question_text, command_word, total_marks, paper_ref, paper_number, topics (name, subjects (name))').eq('id', questionId).single(),
+        paperId
+          ? supabase.from('assignments').select('id').eq('id', paperId).eq('student_id', studentId).eq('type', 'mock_paper').eq('status', 'pending').limit(1)
+          : supabase.from('assignments').select('id').eq('student_id', studentId).eq('type', 'written_test').eq('exam_question_id', questionId).eq('status', 'pending').limit(1),
+        paperId
+          ? supabase.from('fm_attempts').select('*').eq('assignment_id', paperId).eq('question_id', questionId).limit(1)
+          : supabase.from('fm_attempts').select('*').eq('student_id', studentId).eq('question_id', questionId).order('submitted_at', { ascending: false }).limit(1),
       ])
       if (cancelled) return
       if (q.error) console.error('Failed to load question', q.error)
       setQuestion(q.data || null)
-      setPending((a.data || []).length > 0)
-      setAttempt((latest.data || [])[0] || null)
+      const done = (latest.data || [])[0] || null
+      // On a paper, a question that already has an answer shows its result.
+      setPending((a.data || []).length > 0 && !(paperId && done))
+      setAttempt(done)
       if (!loaded.current) {
         const restored = readTelemetry(key)
         if (restored.pastedChars > 0 || restored.droppedChars > 0) {
@@ -172,7 +183,7 @@ export default function WrittenTest() {
     }
     load()
     return () => { cancelled = true }
-  }, [questionId, studentId, key])
+  }, [questionId, studentId, key, paperId])
 
   // Record how text arrives in the answer box: typed (including phone
   // keyboards and autocorrect), pasted or dropped, plus active time and tab
@@ -244,7 +255,7 @@ export default function WrittenTest() {
 
   async function handleSubmit() {
     const words = wordCount(answer)
-    if (words < question.total_marks * 5 &&
+    if (!paperId && words < question.total_marks * 5 &&
       !window.confirm(`That's quite short for a ${question.total_marks}-mark question. Submit it for marking anyway?`)) return
     setSubmitting(true)
     setError(null)
@@ -253,7 +264,7 @@ export default function WrittenTest() {
       const res = await fetch(`${import.meta.env.VITE_SUPABASE_URL}/functions/v1/mark-written-answer`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${session.access_token}` },
-        body: JSON.stringify({ questionId, answer, studentId, telemetry: telemetry.current }),
+        body: JSON.stringify({ questionId, answer, studentId, telemetry: telemetry.current, assignmentId: paperId || undefined }),
       })
       const data = await res.json().catch(() => ({}))
       if (!res.ok) throw new Error(data.error || 'Marking failed. Try again in a moment.')
@@ -272,7 +283,10 @@ export default function WrittenTest() {
   }
 
   if (loading) return <div className="page"><p className="empty">Loading…</p></div>
-  if (!question) return <div className="page"><p className="empty">This question isn't available.</p><Link to="/assignments" className="back-link">← Your week</Link></div>
+  const back = paperId
+    ? <Link to={`/paper/${paperId}`} className="back-link">← Back to the paper</Link>
+    : <Link to="/assignments" className="back-link">← Your week</Link>
+  if (!question) return <div className="page"><p className="empty">This question isn't available.</p>{back}</div>
 
   const subject = question.topics?.subjects?.name
   const hint = commandWordHint(question.command_word)
@@ -281,15 +295,17 @@ export default function WrittenTest() {
 
   return (
     <div className="page">
-      <Link to="/assignments" className="back-link">← Your week</Link>
+      {back}
       <div className={styles.head}>
-        <h1 className="section-label">Written answer{subject ? ` · ${subject}` : ''}</h1>
+        <h1 className="section-label">
+          {paperId && question.paper_number ? `Question ${question.paper_number}` : 'Written answer'}{subject ? ` · ${subject}` : ''}
+        </h1>
       </div>
 
       {!pending && attempt ? (
-        <Result attempt={attempt} question={question} />
+        <Result attempt={attempt} question={question} paperId={paperId} />
       ) : !pending ? (
-        <p className="empty">This question hasn't been set for you.</p>
+        <p className="empty">{paperId ? 'This paper has been handed in, so this question can no longer be answered.' : "This question hasn't been set for you."}</p>
       ) : (
         <>
           <article className={`card ${styles.question}`}>
@@ -310,8 +326,8 @@ export default function WrittenTest() {
           <div className={styles.timerRow}>
             <label htmlFor="written-answer" className="field-label">Your answer</label>
             <span className="meta">
-              Suggested time: about {minutes} minutes{' · '}
-              {timerStart ? (
+              Suggested time: about {minutes} minutes{paperId ? '' : ' · '}
+              {paperId ? null : timerStart ? (
                 <span className={`${styles.timer} ${elapsed > minutes * 60 ? styles.over : ''}`} aria-live="off">{fmtClock(elapsed)}</span>
               ) : (
                 <button type="button" className="link" onClick={() => { setTimerStart(Date.now()); setElapsed(0) }}>start timer</button>

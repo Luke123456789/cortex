@@ -162,7 +162,9 @@ export function reconcile(a, b, totalMarks) {
 }
 
 // 1 minute per mark, plus 5 for 70% or more. Practice students earn nothing.
-export function computeMinutes(marks, totalMarks, isPractice = false) {
+// 1 minute per mark, plus 5 for 70%+ on a single written question. Questions
+// in a mock paper pay 1 per mark only (no per-question bonus).
+export function computeMinutes(marks, totalMarks, isPractice = false, { bonus = true } = {}) {
   if (isPractice || totalMarks <= 0) return 0
-  return marks + (marks / totalMarks >= 0.7 ? 5 : 0)
+  return marks + (bonus && marks / totalMarks >= 0.7 ? 5 : 0)
 }

@@ -9,7 +9,7 @@ export function useAssignments(studentId) {
   const fetchAssignments = useCallback(async () => {
     const { data, error } = await supabase
       .from('assignments')
-      .select('id, type, title, note, due_at, assigned_at, status, completed_at, quiz_id, subtopic_id, exam_question_id, fm_attempt_id, subject_id, topic_id')
+      .select('id, type, title, note, due_at, assigned_at, status, completed_at, quiz_id, subtopic_id, exam_question_id, fm_attempt_id, subject_id, topic_id, paper_ref, started_at')
       .eq('student_id', studentId)
       .order('assigned_at', { ascending: false })
       .limit(100)
