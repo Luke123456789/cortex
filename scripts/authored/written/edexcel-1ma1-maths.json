@@ -19,7 +19,7 @@
           "Method: 68 ÷ 0.85, or 68 ÷ 85 × 100",
           "£80"
         ],
-        "guidance": "A correct answer of £80 with no working scores all 3 marks. Finding 15% of £68 and adding it (giving £78.20) scores 0."
+        "guidance": "Finding 15% of £68 and adding it (giving £78.20) scores 0. This question asks for working. A correct final answer with no working scores only the mark(s) for the answer itself, not the method marks. Award each method mark when that step is shown. If the working has a slip (e.g. a wrong number copied) but the final answer is correct, withhold only the mark(s) for the step that is wrong."
       }
     },
     {
@@ -39,7 +39,7 @@
           "Simplifies: √45 = √9 × √5 = 3√5",
           "5√5"
         ],
-        "guidance": "Each step can be credited independently. 5√5 with no working scores 1 mark only, because the question asks for working."
+        "guidance": "Each step can be credited independently. This question asks for working. A correct final answer with no working scores only the mark(s) for the answer itself, not the method marks. Award each method mark when that step is shown. If the working has a slip (e.g. a wrong number copied) but the final answer is correct, withhold only the mark(s) for the step that is wrong."
       }
     },
     {
@@ -59,7 +59,7 @@
           "Simplifies to x = (−4 ± √40) ÷ 6",
           "x = 0.39 and x = −1.72"
         ],
-        "guidance": "Both solutions are needed for the final mark. Completing the square is an acceptable method. Answers only (from a calculator's equation solver) score 1 mark."
+        "guidance": "Both solutions are needed for the final mark. Completing the square is an acceptable method. This question asks for working. A correct final answer with no working scores only the mark(s) for the answer itself, not the method marks. Award each method mark when that step is shown. If the working has a slip (e.g. a wrong number copied) but the final answer is correct, withhold only the mark(s) for the step that is wrong."
       }
     },
     {
@@ -81,7 +81,7 @@
           "x = 3 and x = −1",
           "y = 6 and y = −2, correctly paired: (3, 6) and (−1, −2)"
         ],
-        "guidance": "The final mark requires both pairs, correctly matched. Trial and improvement with no algebra scores at most 1 mark for each correct pair found."
+        "guidance": "The final mark requires both pairs, correctly matched. Trial and improvement with no algebra scores at most 1 mark for each correct pair found. This question asks for working. A correct final answer with no working scores only the mark(s) for the answer itself, not the method marks. Award each method mark when that step is shown. If the working has a slip (e.g. a wrong number copied) but the final answer is correct, withhold only the mark(s) for the step that is wrong."
       }
     },
     {
@@ -101,7 +101,7 @@
           "Substitutes (4, 3): 3 = −1/2 × 4 + c, so c = 5",
           "y = −½x + 5 (or equivalent, e.g. x + 2y = 10)"
         ],
-        "guidance": "Allow error carried forward from a wrong gradient for the substitution mark only."
+        "guidance": "Allow error carried forward from a wrong gradient for the substitution mark only. This question asks for working. A correct final answer with no working scores only the mark(s) for the answer itself, not the method marks. Award each method mark when that step is shown. If the working has a slip (e.g. a wrong number copied) but the final answer is correct, withhold only the mark(s) for the step that is wrong."
       }
     },
     {
@@ -121,7 +121,7 @@
           "Subtracts 2n² (2, 8, 18, 32, 50) to get the remaining linear sequence 2, 1, 0, −1, −2, i.e. −n + 3",
           "2n² − n + 3"
         ],
-        "guidance": "A correct expression with no working scores all 3 marks. 2n² + bn + c with b or c wrong scores 1 for 2n²."
+        "guidance": "2n² + bn + c with b or c wrong scores 1 for 2n². This question asks for working. A correct final answer with no working scores only the mark(s) for the answer itself, not the method marks. Award each method mark when that step is shown. If the working has a slip (e.g. a wrong number copied) but the final answer is correct, withhold only the mark(s) for the step that is wrong."
       }
     },
     {
@@ -142,7 +142,7 @@
           "Substitutes y = 1.25: x² = 80 ÷ 1.25 = 64",
           "x = 8"
         ],
-        "guidance": "Using y = k/x (not squared) scores 0 for part (a) but allow error carried forward in part (b) for the method mark only."
+        "guidance": "Using y = k/x (not squared) scores 0 for part (a) but allow error carried forward in part (b) for the method mark only. This question asks for working. A correct final answer with no working scores only the mark(s) for the answer itself, not the method marks. Award each method mark when that step is shown. If the working has a slip (e.g. a wrong number copied) but the final answer is correct, withhold only the mark(s) for the step that is wrong."
       }
     },
     {
@@ -162,7 +162,7 @@
           "5000 × 1.035⁴",
           "£5737.62"
         ],
-        "guidance": "Year-by-year calculations that reach £5737.62 score full marks. Simple interest (£5700) scores 1 for the 3.5% idea only."
+        "guidance": "Year-by-year calculations that reach £5737.62 score full marks. Simple interest (£5700) scores 1 for the 3.5% idea only. This question asks for working. A correct final answer with no working scores only the mark(s) for the answer itself, not the method marks. Award each method mark when that step is shown. If the working has a slip (e.g. a wrong number copied) but the final answer is correct, withhold only the mark(s) for the step that is wrong."
       }
     },
     {
@@ -205,7 +205,7 @@
           "Uses area = ½ × 8 × 11 × sin 40°",
           "Area = 28.3 cm²"
         ],
-        "guidance": "Accept answers that round to 7.08 and 28.3. Calculator in radians (giving different values) loses the accuracy marks only."
+        "guidance": "Accept answers that round to 7.08 and 28.3. Calculator in radians (giving different values) loses the accuracy marks only. This question asks for working. A correct final answer with no working scores only the mark(s) for the answer itself, not the method marks. Award each method mark when that step is shown. If the working has a slip (e.g. a wrong number copied) but the final answer is correct, withhold only the mark(s) for the step that is wrong."
       }
     },
     {
@@ -226,7 +226,7 @@
           "P(blue, blue) = 3/8 × 2/7 = 6/56",
           "Adds: 26/56 = 13/28"
         ],
-        "guidance": "Accept 0.464 or equivalent fractions. With replacement (34/64) scores 1 mark only for adding two products."
+        "guidance": "Accept 0.464 or equivalent fractions. With replacement (34/64) scores 1 mark only for adding two products. This question asks for working. A correct final answer with no working scores only the mark(s) for the answer itself, not the method marks. Award each method mark when that step is shown. If the working has a slip (e.g. a wrong number copied) but the final answer is correct, withhold only the mark(s) for the step that is wrong."
       }
     },
     {
@@ -247,7 +247,7 @@
           "380 ÷ 20 = 19 minutes",
           "It is an estimate because the exact times are not known; the midpoint of each group is used instead"
         ],
-        "guidance": "Using the upper or lower class boundaries consistently can score the second mark only. Dividing by 4 (number of groups) loses the third mark."
+        "guidance": "Using the upper or lower class boundaries consistently can score the second mark only. Dividing by 4 (number of groups) loses the third mark. This question asks for working. A correct final answer with no working scores only the mark(s) for the answer itself, not the method marks. Award each method mark when that step is shown. If the working has a slip (e.g. a wrong number copied) but the final answer is correct, withhold only the mark(s) for the step that is wrong."
       }
     }
   ]

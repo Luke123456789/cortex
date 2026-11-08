@@ -73,6 +73,14 @@ describe('authored written questions', () => {
           }
         }
 
+        if (/show your working/i.test(q.question_text)) {
+          it(`${label}: asks for working, so an answer alone can't get the method marks`, () => {
+            const guidance = q.scheme?.guidance || ''
+            expect(guidance).toContain('A correct final answer with no working scores only the mark(s) for the answer itself')
+            expect(guidance).not.toMatch(/no working scores? (all|full)/i)
+          })
+        }
+
         it(`${label}: generates SQL`, () => {
           const sql = questionSql(file, q)
           expect(sql).toContain('insert into public.fm_exam_questions')

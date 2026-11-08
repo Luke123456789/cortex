@@ -42,7 +42,7 @@
           "6 ÷ 400 = 0.015 mm",
           "Converts to micrometres: 0.015 × 1000 = 15 µm"
         ],
-        "guidance": "A correct final answer of 15 µm with no working scores all 3 marks. 0.015 mm (not converted) scores 2. Allow error carried forward from a wrong first step for the conversion mark."
+        "guidance": "0.015 mm (not converted) scores 2. Allow error carried forward from a wrong first step for the conversion mark. This question asks for working. A correct final answer with no working scores only the mark(s) for the answer itself, not the method marks. Award each method mark when that step is shown. If the working has a slip (e.g. a wrong number copied) but the final answer is correct, withhold only the mark(s) for the step that is wrong."
       }
     },
     {

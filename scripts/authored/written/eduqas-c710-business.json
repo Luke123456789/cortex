@@ -152,7 +152,7 @@
           "= 750 coffees",
           "Margin of safety = 1000 − 750 = 250 coffees"
         ],
-        "guidance": "Correct answers with no working score full marks. Allow error carried forward from a wrong break-even for the margin of safety."
+        "guidance": "Allow error carried forward from a wrong break-even for the margin of safety. This question asks for working. A correct final answer with no working scores only the mark(s) for the answer itself, not the method marks. Award each method mark when that step is shown. If the working has a slip (e.g. a wrong number copied) but the final answer is correct, withhold only the mark(s) for the step that is wrong."
       }
     },
     {
