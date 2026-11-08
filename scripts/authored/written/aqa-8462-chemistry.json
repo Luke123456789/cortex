@@ -1,0 +1,289 @@
+{
+  "subject": "Chemistry",
+  "exam_board": "AQA",
+  "questions": [
+    {
+      "topic": "Atomic Structure and the Periodic Table",
+      "subtopic": "Development of the model of the atom",
+      "spec_ref": "4.1.1.3",
+      "command_word": "describe",
+      "difficulty": "foundation",
+      "total_marks": 4,
+      "question_text": "The model of the atom has changed over time.\n\nDescribe how the results of the alpha particle scattering experiment changed the model of the atom from the plum pudding model to the nuclear model.",
+      "marking_style": "points",
+      "ao_marks": { "AO1": 4 },
+      "scheme": {
+        "max": 4,
+        "points": [
+          "The plum pudding model: the atom is a ball of positive charge with negative electrons embedded in it",
+          "Most alpha particles passed straight through the gold foil, so most of the atom is empty space",
+          "Some alpha particles were deflected, so the centre of the atom (nucleus) is positively charged",
+          "A very few bounced back, so the mass of the atom is concentrated in a tiny nucleus",
+          "In the nuclear model, electrons are outside the nucleus / orbit the nucleus"
+        ],
+        "guidance": "Max 4. Each observation must be linked to what it shows about the atom to score. Credit 'repelled' for deflected."
+      }
+    },
+    {
+      "topic": "Atomic Structure and the Periodic Table",
+      "subtopic": "Group 0, Group 1 and Group 7",
+      "spec_ref": "4.1.2.5",
+      "command_word": "explain",
+      "difficulty": "higher",
+      "total_marks": 4,
+      "question_text": "Potassium reacts more vigorously with water than sodium does.\n\nExplain why the reactivity of Group 1 elements increases going down the group.",
+      "marking_style": "points",
+      "ao_marks": { "AO1": 2, "AO2": 2 },
+      "scheme": {
+        "max": 4,
+        "points": [
+          "Going down the group the atoms get bigger / have more electron shells",
+          "The outer electron is further from the nucleus (and more shielded by inner shells)",
+          "So there is a weaker attraction between the nucleus and the outer electron",
+          "So the outer electron is lost more easily (when the metal reacts)"
+        ],
+        "guidance": "'More shells' and 'further away' can be credited separately. Do not credit 'gains electrons more easily'. Ignore references to melting point."
+      }
+    },
+    {
+      "topic": "Bonding, Structure and Properties",
+      "subtopic": "States of matter and properties of ionic compounds",
+      "spec_ref": "4.2.2.3",
+      "command_word": "explain",
+      "difficulty": "foundation",
+      "total_marks": 4,
+      "question_text": "Sodium chloride has a high melting point. It does not conduct electricity as a solid, but it does conduct when molten.\n\nExplain these properties in terms of structure and bonding.",
+      "marking_style": "points",
+      "ao_marks": { "AO1": 2, "AO2": 2 },
+      "scheme": {
+        "max": 4,
+        "points": [
+          "Sodium chloride has a giant ionic lattice",
+          "There are strong electrostatic forces of attraction between oppositely charged ions (in all directions)",
+          "A lot of energy is needed to overcome these forces, so the melting point is high",
+          "In the solid the ions are fixed in place and cannot move",
+          "When molten the ions are free to move and carry charge"
+        ],
+        "guidance": "Max 4. Any mention of molecules, intermolecular forces or electrons moving to carry the current loses the relevant mark."
+      }
+    },
+    {
+      "topic": "Bonding, Structure and Properties",
+      "subtopic": "Diamond, graphite, graphene and fullerenes",
+      "spec_ref": "4.2.3.1-4.2.3.2",
+      "command_word": "compare",
+      "difficulty": "higher",
+      "total_marks": 6,
+      "question_text": "Diamond and graphite are both forms of carbon.\n\nCompare the structure and bonding of diamond and graphite, and use this to explain why they have different properties.",
+      "marking_style": "levels",
+      "ao_marks": { "AO1": 3, "AO2": 3 },
+      "scheme": {
+        "levels": [
+          { "level": 3, "marks": [5, 6], "descriptor": "A detailed comparison of the structures of both, with properties clearly and correctly linked to structure and bonding for both substances." },
+          { "level": 2, "marks": [3, 4], "descriptor": "Some comparison of structure, with at least one property linked to structure for one or both substances." },
+          { "level": 1, "marks": [1, 2], "descriptor": "Simple statements about the structure or properties of diamond or graphite, with little linking." }
+        ],
+        "indicative": [
+          "Both are giant covalent structures with strong covalent bonds, so both have very high melting points",
+          "In diamond each carbon atom forms four covalent bonds; in graphite each forms three",
+          "Diamond is a rigid 3D lattice, so it is very hard",
+          "Graphite has layers of hexagonal rings with weak forces between the layers, so the layers slide and graphite is soft and slippery",
+          "In graphite each carbon has one delocalised electron, so graphite conducts electricity",
+          "Diamond has no delocalised electrons, so it does not conduct"
+        ],
+        "guidance": "To reach Level 3 both substances must be covered. 'Graphite has weak bonds' (rather than weak forces between layers) is wrong."
+      }
+    },
+    {
+      "topic": "Quantitative Chemistry",
+      "subtopic": "Moles, reacting masses and limiting reactants",
+      "spec_ref": "4.3.2.2",
+      "command_word": "calculate",
+      "difficulty": "higher",
+      "total_marks": 4,
+      "question_text": "Calcium carbonate decomposes when heated:\n\nCaCO₃ → CaO + CO₂\n\nCalculate the mass of calcium oxide made when 25.0 g of calcium carbonate is heated until it has fully decomposed.\n\nRelative atomic masses (Ar): Ca = 40, C = 12, O = 16. Show your working.",
+      "marking_style": "points",
+      "ao_marks": { "AO2": 4 },
+      "scheme": {
+        "max": 4,
+        "points": [
+          "Mr of CaCO₃ = 100",
+          "Moles of CaCO₃ = 25.0 ÷ 100 = 0.25 mol",
+          "Mr of CaO = 56 (and 1 : 1 ratio, so 0.25 mol of CaO)",
+          "Mass of CaO = 0.25 × 56 = 14 g"
+        ],
+        "guidance": "A correct final answer of 14 g with no working scores all 4 marks. Allow error carried forward from a wrong Mr. A ratio method (100 g gives 56 g, so 25 g gives 14 g) can score full marks."
+      }
+    },
+    {
+      "topic": "Quantitative Chemistry",
+      "subtopic": "Concentrations of solutions and titration calculations",
+      "spec_ref": "4.3.4",
+      "command_word": "calculate",
+      "difficulty": "higher",
+      "total_marks": 4,
+      "question_text": "25.0 cm³ of sodium hydroxide solution was exactly neutralised by 20.0 cm³ of 0.100 mol/dm³ hydrochloric acid.\n\nNaOH + HCl → NaCl + H₂O\n\nCalculate the concentration of the sodium hydroxide solution in mol/dm³. Show your working.",
+      "marking_style": "points",
+      "ao_marks": { "AO2": 4 },
+      "scheme": {
+        "max": 4,
+        "points": [
+          "Moles of HCl = 0.100 × (20.0 ÷ 1000) = 0.00200 mol",
+          "Moles of NaOH = 0.00200 mol (1 : 1 ratio)",
+          "Concentration = moles ÷ volume in dm³ = 0.00200 ÷ 0.0250",
+          "= 0.0800 mol/dm³"
+        ],
+        "guidance": "A correct final answer of 0.08 mol/dm³ with no working scores all 4 marks. Not converting cm³ to dm³ can still score the ratio mark. Allow error carried forward."
+      }
+    },
+    {
+      "topic": "Chemical Changes",
+      "subtopic": "Electrolysis",
+      "spec_ref": "4.4.3.4",
+      "command_word": "explain",
+      "difficulty": "higher",
+      "total_marks": 6,
+      "question_text": "Aluminium is extracted by the electrolysis of aluminium oxide dissolved in molten cryolite. The positive electrodes are made of carbon.\n\nExplain how aluminium is produced in this process, and why the positive electrodes have to be replaced regularly.",
+      "marking_style": "levels",
+      "ao_marks": { "AO1": 4, "AO2": 2 },
+      "scheme": {
+        "levels": [
+          { "level": 3, "marks": [5, 6], "descriptor": "A clear, logical explanation of what happens at both electrodes, including why cryolite is used and why the anodes are replaced. Correct use of oxidation/reduction or half equations." },
+          { "level": 2, "marks": [3, 4], "descriptor": "Some explanation of what happens at one or both electrodes, or a partial explanation of why the anodes wear away." },
+          { "level": 1, "marks": [1, 2], "descriptor": "Simple statements, e.g. aluminium forms at the negative electrode, with little explanation." }
+        ],
+        "indicative": [
+          "Aluminium oxide is dissolved in molten cryolite to lower the melting point, so less energy is needed",
+          "The ions are free to move in the molten mixture",
+          "Al³⁺ ions move to the negative electrode (cathode), gain electrons and are reduced to aluminium: Al³⁺ + 3e⁻ → Al",
+          "O²⁻ ions move to the positive electrode (anode), lose electrons and are oxidised to oxygen: 2O²⁻ → O₂ + 4e⁻",
+          "The oxygen reacts with the hot carbon anode to make carbon dioxide",
+          "So the anode burns away and has to be replaced",
+          "Electrolysis is used because aluminium is more reactive than carbon, so it can't be extracted by reduction with carbon"
+        ],
+        "guidance": "Level 3 needs both electrodes and the reason the anode is replaced."
+      }
+    },
+    {
+      "topic": "Energy Changes",
+      "subtopic": "Bond energies",
+      "spec_ref": "4.5.1.3",
+      "command_word": "calculate",
+      "difficulty": "higher",
+      "total_marks": 4,
+      "question_text": "Hydrogen reacts with chlorine to make hydrogen chloride:\n\nH–H + Cl–Cl → 2 H–Cl\n\nBond energies (kJ/mol): H–H = 436, Cl–Cl = 243, H–Cl = 432.\n\nCalculate the overall energy change for this reaction and state whether it is exothermic or endothermic. Show your working.",
+      "marking_style": "points",
+      "ao_marks": { "AO2": 4 },
+      "scheme": {
+        "max": 4,
+        "points": [
+          "Energy needed to break bonds = 436 + 243 = 679 kJ/mol",
+          "Energy released making bonds = 2 × 432 = 864 kJ/mol",
+          "Overall energy change = 679 − 864 = −185 kJ/mol",
+          "Exothermic, because more energy is released making bonds than is needed to break bonds"
+        ],
+        "guidance": "Allow 185 kJ/mol released for the third mark. The 'exothermic' mark needs a reason, or follows from a correctly signed answer. Allow error carried forward."
+      }
+    },
+    {
+      "topic": "Rate and Extent of Chemical Change",
+      "subtopic": "Factors affecting rate, collision theory and catalysts",
+      "spec_ref": "4.6.1.3",
+      "command_word": "explain",
+      "difficulty": "foundation",
+      "total_marks": 4,
+      "question_text": "Marble chips react with hydrochloric acid. A student finds the reaction is faster when the acid is warmer.\n\nUse collision theory to explain why increasing the temperature increases the rate of reaction.",
+      "marking_style": "points",
+      "ao_marks": { "AO1": 2, "AO2": 2 },
+      "scheme": {
+        "max": 4,
+        "points": [
+          "Particles have more (kinetic) energy / move faster",
+          "So they collide more often / there are more frequent collisions",
+          "More of the collisions have energy greater than or equal to the activation energy",
+          "So there are more successful collisions per second"
+        ],
+        "guidance": "'More collisions' without a time reference can score the second mark but not the fourth. Do not credit 'particles vibrate more' in a liquid."
+      }
+    },
+    {
+      "topic": "Rate and Extent of Chemical Change",
+      "subtopic": "Reversible reactions and equilibrium",
+      "spec_ref": "4.6.2.4-4.6.2.6",
+      "command_word": "explain",
+      "difficulty": "higher",
+      "total_marks": 6,
+      "question_text": "Ammonia is made in the Haber process:\n\nN₂(g) + 3H₂(g) ⇌ 2NH₃(g)   The forward reaction is exothermic.\n\nThe conditions used are 450 °C and 200 atmospheres pressure, with an iron catalyst.\n\nExplain why these conditions are used. Refer to yield and rate in your answer.",
+      "marking_style": "levels",
+      "ao_marks": { "AO1": 2, "AO2": 2, "AO3": 2 },
+      "scheme": {
+        "levels": [
+          { "level": 3, "marks": [5, 6], "descriptor": "Clear explanation of the effect of both temperature and pressure on yield and rate, with the idea of a compromise, and the role of the catalyst." },
+          { "level": 2, "marks": [3, 4], "descriptor": "Explains the effect of temperature or pressure on yield or rate, with some reasoning based on equilibrium." },
+          { "level": 1, "marks": [1, 2], "descriptor": "Simple statements about the conditions with little or no explanation." }
+        ],
+        "indicative": [
+          "The forward reaction is exothermic, so a lower temperature would give a higher yield (equilibrium shifts right)",
+          "But a low temperature would make the rate too slow",
+          "450 °C is a compromise between a reasonable yield and a fast enough rate",
+          "There are 4 molecules of gas on the left and 2 on the right, so high pressure shifts the equilibrium to the right, increasing yield",
+          "High pressure also increases the rate (particles closer together, more frequent collisions)",
+          "Higher pressures are very expensive and dangerous, so 200 atm is a compromise",
+          "The iron catalyst increases the rate but does not change the yield / position of equilibrium"
+        ],
+        "guidance": "Level 3 needs both temperature and pressure with the compromise idea."
+      }
+    },
+    {
+      "topic": "Organic Chemistry",
+      "subtopic": "Crude oil, alkanes, fractional distillation and combustion",
+      "spec_ref": "4.7.1.2",
+      "command_word": "describe",
+      "difficulty": "foundation",
+      "total_marks": 4,
+      "question_text": "Describe how crude oil is separated into fractions by fractional distillation.",
+      "marking_style": "points",
+      "ao_marks": { "AO1": 4 },
+      "scheme": {
+        "max": 4,
+        "points": [
+          "Crude oil is heated until it evaporates / turns into a gas",
+          "The vapour enters the column, which is hot at the bottom and cooler at the top",
+          "The vapours rise up the column",
+          "Each fraction condenses at a different height, where the temperature is below its boiling point",
+          "Hydrocarbons with longer chains / higher boiling points condense near the bottom; short chains rise higher (or leave as gases at the top)"
+        ],
+        "guidance": "Max 4. 'Boiled' is acceptable for heated and evaporated. Do not credit 'the fractions are separated by their melting points'."
+      }
+    },
+    {
+      "topic": "Chemistry of the Atmosphere",
+      "subtopic": "Composition and evolution of the atmosphere",
+      "spec_ref": "4.9.1.2-4.9.1.4",
+      "command_word": "describe",
+      "difficulty": "higher",
+      "total_marks": 6,
+      "question_text": "Scientists think that the Earth's early atmosphere was mainly carbon dioxide, with little or no oxygen.\n\nDescribe how the atmosphere changed to the one we have today, with about 80% nitrogen, about 20% oxygen and only about 0.04% carbon dioxide.",
+      "marking_style": "levels",
+      "ao_marks": { "AO1": 6 },
+      "scheme": {
+        "levels": [
+          { "level": 3, "marks": [5, 6], "descriptor": "A detailed, logically ordered description of how carbon dioxide decreased and oxygen increased, with several processes described accurately." },
+          { "level": 2, "marks": [3, 4], "descriptor": "Describes at least one way carbon dioxide decreased and how oxygen increased, with some detail." },
+          { "level": 1, "marks": [1, 2], "descriptor": "Simple statements, e.g. plants made oxygen, with little detail." }
+        ],
+        "indicative": [
+          "Volcanoes released carbon dioxide, water vapour and nitrogen (and small amounts of methane and ammonia)",
+          "Water vapour condensed to form the oceans",
+          "Carbon dioxide dissolved in the oceans",
+          "Dissolved carbon dioxide formed carbonate precipitates, making sediments",
+          "Algae and then plants used carbon dioxide in photosynthesis, producing oxygen",
+          "Carbon was locked up in sedimentary rocks such as limestone, and in fossil fuels",
+          "Nitrogen built up because it is unreactive",
+          "Oxygen built up gradually over billions of years, allowing animals to evolve"
+        ],
+        "guidance": "Accept 6CO₂ + 6H₂O → C₆H₁₂O₆ + 6O₂ as part of a description of photosynthesis."
+      }
+    }
+  ]
+}

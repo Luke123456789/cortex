@@ -1,0 +1,280 @@
+{
+  "subject": "Physics",
+  "exam_board": "AQA",
+  "questions": [
+    {
+      "topic": "Energy",
+      "subtopic": "Specific heat capacity",
+      "spec_ref": "4.1.1.3",
+      "command_word": "calculate",
+      "difficulty": "foundation",
+      "total_marks": 3,
+      "question_text": "A kettle heats 0.50 kg of water from 20 °C to 100 °C.\n\nThe specific heat capacity of water is 4200 J/kg °C.\n\nCalculate the energy transferred to the water. Use the equation ΔE = m c Δθ. Show your working.",
+      "marking_style": "points",
+      "ao_marks": { "AO2": 3 },
+      "scheme": {
+        "max": 3,
+        "points": [
+          "Temperature change Δθ = 100 − 20 = 80 °C",
+          "ΔE = 0.50 × 4200 × 80",
+          "= 168 000 J (168 kJ)"
+        ],
+        "guidance": "A correct final answer with no working scores all 3 marks. Using 100 °C instead of the change scores 1 at most (for substitution). Allow 1.68 × 10⁵ J."
+      }
+    },
+    {
+      "topic": "Energy",
+      "subtopic": "National and global energy resources",
+      "spec_ref": "4.1.3",
+      "command_word": "evaluate",
+      "difficulty": "higher",
+      "total_marks": 6,
+      "question_text": "A town is deciding whether to build a wind farm or a gas-fired power station to meet its growing need for electricity.\n\nEvaluate the use of wind turbines and gas-fired power stations for generating electricity.",
+      "marking_style": "levels",
+      "ao_marks": { "AO1": 2, "AO3": 4 },
+      "scheme": {
+        "levels": [
+          { "level": 3, "marks": [5, 6], "descriptor": "A detailed comparison of advantages and disadvantages of both, including reliability, and a reasoned judgement." },
+          { "level": 2, "marks": [3, 4], "descriptor": "Some advantages and disadvantages of both, or a detailed account of one. Judgement missing or unsupported." },
+          { "level": 1, "marks": [1, 2], "descriptor": "Simple, relevant statements about one or both resources." }
+        ],
+        "indicative": [
+          "Wind is renewable; gas is non-renewable and will run out",
+          "Wind turbines produce no carbon dioxide when running; burning gas releases carbon dioxide, contributing to climate change",
+          "Wind is unreliable: no electricity when there is no wind or it is too strong",
+          "Gas power stations are reliable and can be started quickly to meet changes in demand",
+          "Wind farms have no fuel costs but take up a lot of land, can be noisy and some people think they spoil the view",
+          "Gas power stations have fuel costs and gas prices can rise, but they produce a lot of power from a small site",
+          "Judgement, e.g. wind farm with gas as back-up, or a reason one is better for this town"
+        ],
+        "guidance": "Evaluate needs a judgement for Level 3."
+      }
+    },
+    {
+      "topic": "Electricity",
+      "subtopic": "Series and parallel circuits",
+      "spec_ref": "4.2.2",
+      "command_word": "calculate",
+      "difficulty": "higher",
+      "total_marks": 4,
+      "question_text": "A 6.0 V battery is connected to two resistors in series. One resistor is 4.0 Ω and the other is 8.0 Ω.\n\nCalculate the current in the circuit and the potential difference across the 8.0 Ω resistor. Show your working.",
+      "marking_style": "points",
+      "ao_marks": { "AO2": 4 },
+      "scheme": {
+        "max": 4,
+        "points": [
+          "Total resistance = 4.0 + 8.0 = 12 Ω",
+          "I = V ÷ R = 6.0 ÷ 12 = 0.50 A",
+          "V = I × R = 0.50 × 8.0",
+          "= 4.0 V"
+        ],
+        "guidance": "Correct answers with no working score full marks. Allow error carried forward from a wrong current. Accept the ratio method (8/12 of 6 V = 4 V) for the last two marks."
+      }
+    },
+    {
+      "topic": "Electricity",
+      "subtopic": "Domestic uses and safety",
+      "spec_ref": "4.2.3.2",
+      "command_word": "explain",
+      "difficulty": "foundation",
+      "total_marks": 4,
+      "question_text": "A metal toaster is connected to the mains with a three-core cable. A fault makes the live wire touch the metal case.\n\nExplain how the earth wire and the fuse protect the user.",
+      "marking_style": "points",
+      "ao_marks": { "AO1": 2, "AO2": 2 },
+      "scheme": {
+        "max": 4,
+        "points": [
+          "The earth wire connects the metal case to the ground / earth",
+          "When the fault happens a large current flows through the live and earth wires",
+          "The large current makes the fuse wire melt",
+          "This breaks the circuit / disconnects the live wire, so the case is no longer live and the user can't get an electric shock"
+        ],
+        "guidance": "'The fuse blows' is acceptable for melts. Do not credit 'the earth wire stops the current'."
+      }
+    },
+    {
+      "topic": "Particle Model of Matter",
+      "subtopic": "Particle motion in gases and gas pressure",
+      "spec_ref": "4.3.3.1-4.3.3.2",
+      "command_word": "explain",
+      "difficulty": "higher",
+      "total_marks": 4,
+      "question_text": "A sealed metal can of gas is heated. The volume of the can does not change.\n\nExplain, in terms of particles, why the pressure of the gas inside the can increases.",
+      "marking_style": "points",
+      "ao_marks": { "AO1": 2, "AO2": 2 },
+      "scheme": {
+        "max": 4,
+        "points": [
+          "The particles gain kinetic energy / move faster (the temperature is a measure of average kinetic energy)",
+          "They collide with the walls of the can more often",
+          "Each collision exerts a larger force (larger change in momentum)",
+          "So the total force on the walls per unit area increases, so pressure increases"
+        ],
+        "guidance": "Do not credit 'the particles expand' or 'particles get bigger'. 'More collisions' alone without frequency idea can score the second mark."
+      }
+    },
+    {
+      "topic": "Atomic Structure",
+      "subtopic": "Half-life, contamination and irradiation",
+      "spec_ref": "4.4.2.4",
+      "command_word": "calculate",
+      "difficulty": "higher",
+      "total_marks": 3,
+      "question_text": "A radioactive sample has an activity of 1600 Bq. Its half-life is 6 hours.\n\nCalculate the activity of the sample after 24 hours. Show your working.",
+      "marking_style": "points",
+      "ao_marks": { "AO2": 3 },
+      "scheme": {
+        "max": 3,
+        "points": [
+          "24 ÷ 6 = 4 half-lives",
+          "1600 → 800 → 400 → 200 → 100 (or 1600 ÷ 2⁴)",
+          "100 Bq"
+        ],
+        "guidance": "A correct final answer of 100 Bq with no working scores all 3 marks. 400 Bq (dividing by 4) scores 1 for the number of half-lives only."
+      }
+    },
+    {
+      "topic": "Atomic Structure",
+      "subtopic": "Background radiation, uses of radiation, fission and fusion",
+      "spec_ref": "4.4.4.1",
+      "command_word": "describe",
+      "difficulty": "higher",
+      "total_marks": 4,
+      "question_text": "Describe the process of nuclear fission in a nuclear reactor, including how a chain reaction happens.",
+      "marking_style": "points",
+      "ao_marks": { "AO1": 4 },
+      "scheme": {
+        "max": 4,
+        "points": [
+          "A neutron is absorbed by a large, unstable nucleus such as uranium-235",
+          "The nucleus splits into two smaller nuclei (daughter nuclei)",
+          "Two or three neutrons are released, along with gamma rays and energy",
+          "These neutrons are absorbed by other uranium nuclei, causing further fission (chain reaction)",
+          "In a reactor, control rods absorb some neutrons to control the rate of the chain reaction"
+        ],
+        "guidance": "Max 4. Do not credit 'atoms split' with no mention of the nucleus for the second point, and do not credit descriptions of fusion."
+      }
+    },
+    {
+      "topic": "Forces",
+      "subtopic": "Stopping distances",
+      "spec_ref": "4.5.6.3",
+      "command_word": "explain",
+      "difficulty": "higher",
+      "total_marks": 6,
+      "question_text": "The stopping distance of a car is the sum of the thinking distance and the braking distance.\n\nExplain how different factors can increase the stopping distance of a car, and why stopping distance increases a lot at higher speeds.",
+      "marking_style": "levels",
+      "ao_marks": { "AO1": 3, "AO2": 3 },
+      "scheme": {
+        "levels": [
+          { "level": 3, "marks": [5, 6], "descriptor": "Factors affecting both thinking and braking distance explained clearly, with a clear explanation of the effect of speed linked to kinetic energy or work done." },
+          { "level": 2, "marks": [3, 4], "descriptor": "Factors affecting thinking and/or braking distance identified, with some explanation." },
+          { "level": 1, "marks": [1, 2], "descriptor": "One or two factors named with little or no explanation." }
+        ],
+        "indicative": [
+          "Thinking distance increases if the driver's reaction time is longer: tiredness, alcohol, drugs, distractions such as a phone",
+          "Braking distance increases with wet or icy roads (less friction between tyres and road)",
+          "Worn tyres or worn brakes increase braking distance",
+          "A heavier car (more mass) has a longer braking distance",
+          "At higher speed the car travels further during the reaction time, so thinking distance increases in proportion to speed",
+          "Kinetic energy depends on speed squared, so doubling speed means four times the work done by the brakes, so braking distance increases a lot",
+          "Large decelerations can cause brakes to overheat or the car to skid"
+        ],
+        "guidance": "Level 3 needs both thinking and braking distance and a reason for the effect of speed."
+      }
+    },
+    {
+      "topic": "Forces",
+      "subtopic": "Momentum",
+      "spec_ref": "4.5.7.2",
+      "command_word": "calculate",
+      "difficulty": "higher",
+      "total_marks": 4,
+      "question_text": "A 1200 kg car moving at 15 m/s collides with a stationary 800 kg car. The two cars stick together after the collision.\n\nCalculate the velocity of the two cars just after the collision. Show your working.",
+      "marking_style": "points",
+      "ao_marks": { "AO2": 4 },
+      "scheme": {
+        "max": 4,
+        "points": [
+          "Momentum before = 1200 × 15 = 18 000 kg m/s",
+          "Momentum is conserved, so momentum after = 18 000 kg m/s",
+          "Total mass after = 1200 + 800 = 2000 kg",
+          "v = 18 000 ÷ 2000 = 9.0 m/s"
+        ],
+        "guidance": "A correct final answer of 9 m/s with no working scores all 4 marks. Allow error carried forward."
+      }
+    },
+    {
+      "topic": "Waves",
+      "subtopic": "Electromagnetic waves: properties, uses and hazards",
+      "spec_ref": "4.6.2.3-4.6.2.4",
+      "command_word": "explain",
+      "difficulty": "foundation",
+      "total_marks": 4,
+      "question_text": "Microwaves are used to cook food and to communicate with satellites.\n\nExplain why microwaves are suitable for each of these uses.",
+      "marking_style": "points",
+      "ao_marks": { "AO1": 2, "AO2": 2 },
+      "scheme": {
+        "max": 4,
+        "points": [
+          "Cooking: microwaves are absorbed by water molecules in food",
+          "This increases the energy of the water molecules, heating the food",
+          "Satellites: microwaves pass through the atmosphere (are not absorbed or reflected by it)",
+          "So they can travel to satellites in space and back"
+        ],
+        "guidance": "Do not credit 'microwaves heat food from the inside out'. 'They travel in straight lines' is neutral."
+      }
+    },
+    {
+      "topic": "Magnetism and Electromagnetism",
+      "subtopic": "Induced potential, generators and transformers",
+      "spec_ref": "4.7.3.4",
+      "command_word": "explain",
+      "difficulty": "higher",
+      "total_marks": 6,
+      "question_text": "The National Grid uses step-up transformers near power stations and step-down transformers near homes.\n\nExplain how a transformer works and why the National Grid transmits electricity at a very high potential difference.",
+      "marking_style": "levels",
+      "ao_marks": { "AO1": 4, "AO2": 2 },
+      "scheme": {
+        "levels": [
+          { "level": 3, "marks": [5, 6], "descriptor": "A clear explanation of how an alternating current in the primary induces a p.d. in the secondary, and a clear explanation of why high p.d. reduces energy losses, including the step-down transformers." },
+          { "level": 2, "marks": [3, 4], "descriptor": "Some explanation of how a transformer works or of why high p.d. is used, with some correct physics." },
+          { "level": 1, "marks": [1, 2], "descriptor": "Simple statements about transformers or the National Grid." }
+        ],
+        "indicative": [
+          "A transformer has primary and secondary coils wound on an iron core",
+          "An alternating current in the primary coil produces a changing magnetic field in the iron core",
+          "The changing field induces an alternating potential difference across the secondary coil",
+          "A step-up transformer has more turns on the secondary than the primary",
+          "For the same power, a higher p.d. means a lower current (P = VI)",
+          "Lower current means less heating of the cables, so less energy is wasted (P = I²R)",
+          "Step-down transformers reduce the p.d. to a safe 230 V for homes",
+          "Transformers only work with alternating current"
+        ],
+        "guidance": "Level 3 needs both parts of the question."
+      }
+    },
+    {
+      "topic": "Space Physics",
+      "subtopic": "Red-shift and the Big Bang",
+      "spec_ref": "4.8.2",
+      "command_word": "explain",
+      "difficulty": "higher",
+      "total_marks": 4,
+      "question_text": "Light from distant galaxies is red-shifted.\n\nExplain how observations of red-shift provide evidence for the Big Bang theory.",
+      "marking_style": "points",
+      "ao_marks": { "AO1": 2, "AO2": 2 },
+      "scheme": {
+        "max": 4,
+        "points": [
+          "Red-shift is an increase in the observed wavelength of light (shift towards the red end of the spectrum) because the galaxy is moving away from us",
+          "Almost all distant galaxies show red-shift, so they are moving away from us",
+          "The further away a galaxy is, the greater its red-shift, so the faster it is moving away",
+          "This means the universe is expanding",
+          "So the universe must once have been much smaller, hotter and denser, starting from a very small region (the Big Bang)"
+        ],
+        "guidance": "Max 4. Do not credit 'the light turns red' or 'galaxies are getting redder'."
+      }
+    }
+  ]
+}

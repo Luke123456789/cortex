@@ -378,3 +378,24 @@ only one that hedged.
 - Analytics shows a "Harder quizzes from 6 Nov" note for English Literature
   (`src/lib/contentChanges.js`) so the expected score drop isn't read as
   decline.
+
+## Written answers: the remaining subjects
+
+- Authored in `scripts/authored/written/`: Chemistry (12), Physics (12),
+  Economics (10), Business (9), PE (10), Maths (12), English Language (11),
+  76 in all. At least one per topic (PE's inactive "Use of Data" excepted).
+  Each follows its board: AQA sciences 4/6-mark, Economics 9-mark evaluate,
+  Eduqas Business 8-mark evaluate, OCR PE 6-mark extended response,
+  Edexcel Maths method marks, English Language paper-style questions with
+  original source texts written for them.
+- English Language Q5 (40 marks) stores AO6 technical accuracy as the
+  separate SPaG marks (16), so content is marked out of 24.
+- `supabase/content-batches/2026-11-08-written-remaining-subjects.sql` (+
+  `.rollback.sql`, which refuses if any question has an attempt). All topic
+  and subtopic names were checked against the live database. **Not yet
+  applied.** To apply, split at each `-- <Subject> (...)` line, drop
+  `begin;`/`commit;`, one migration per subject (e.g.
+  `written_chemistry`).
+- `test/written-content.test.js` checks every authored file: DB constraints,
+  AO marks add up to the total, points max equals content marks, levels run
+  1..content with no gaps, no duplicate question text.

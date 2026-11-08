@@ -1,0 +1,259 @@
+{
+  "subject": "Economics",
+  "exam_board": "AQA",
+  "questions": [
+    {
+      "topic": "Economic Foundations & Resource Allocation",
+      "subtopic": "Making choices: opportunity cost",
+      "spec_ref": "3.1.1.3",
+      "command_word": "explain",
+      "difficulty": "foundation",
+      "total_marks": 4,
+      "question_text": "The government has £2 billion to spend. It is deciding whether to spend it on building a new hospital or on new roads.\n\nUsing this example, explain what is meant by opportunity cost and why it arises.",
+      "marking_style": "points",
+      "ao_marks": { "AO1": 2, "AO2": 2 },
+      "scheme": {
+        "max": 4,
+        "points": [
+          "Opportunity cost is the next best alternative given up when a choice is made",
+          "It arises because resources are scarce / limited while wants are unlimited, so choices have to be made",
+          "Applied: if the government builds the hospital, the opportunity cost is the roads (or the benefits of the roads) it can no longer build",
+          "Applied: the £2 billion can only be spent once, so spending it on one means sacrificing the other"
+        ],
+        "guidance": "Two marks for knowledge and two for applying it to the hospital and roads. 'The cost of something' alone does not define opportunity cost."
+      }
+    },
+    {
+      "topic": "Supply and Demand",
+      "subtopic": "Equilibrium price",
+      "spec_ref": "3.1.3.3",
+      "command_word": "analyse",
+      "difficulty": "higher",
+      "total_marks": 6,
+      "question_text": "A poor harvest in Brazil has reduced the world supply of coffee beans. At the same time, coffee has become more popular in China.\n\nAnalyse the likely effects of these two changes on the equilibrium price and quantity of coffee beans. You may describe a supply and demand diagram in words.",
+      "marking_style": "levels",
+      "ao_marks": { "AO2": 2, "AO3": 4 },
+      "scheme": {
+        "levels": [
+          { "level": 3, "marks": [5, 6], "descriptor": "Clear chains of reasoning for both changes, correctly identifying the effect on price and a reasoned conclusion about quantity (which depends on the relative size of the shifts)." },
+          { "level": 2, "marks": [3, 4], "descriptor": "Correct analysis of one change, or both changes with limited development." },
+          { "level": 1, "marks": [1, 2], "descriptor": "Simple statements, e.g. price will rise, with little explanation." }
+        ],
+        "indicative": [
+          "The poor harvest shifts the supply curve to the left (decrease in supply)",
+          "The decrease in supply causes excess demand at the old price, so the price rises and quantity falls",
+          "Greater popularity in China shifts the demand curve to the right (increase in demand)",
+          "The increase in demand causes excess demand, so the price rises and quantity rises",
+          "Both changes push the price up, so the equilibrium price will definitely rise",
+          "The effect on quantity is uncertain: it depends on whether the supply shift or the demand shift is bigger",
+          "Price acts as a rationing signal: higher price reduces quantity demanded and encourages other producers to supply"
+        ],
+        "guidance": "Shifts must be distinguished from movements along a curve for Level 3. Credit a clearly described diagram."
+      }
+    },
+    {
+      "topic": "Elasticity & Intermarket Relationships",
+      "subtopic": "Price elasticity of demand",
+      "spec_ref": "3.1.3.5",
+      "command_word": "calculate",
+      "difficulty": "higher",
+      "total_marks": 4,
+      "question_text": "A cinema raises the price of a ticket from £8.00 to £10.00. The number of tickets sold each week falls from 2000 to 1700.\n\nCalculate the price elasticity of demand (PED) for cinema tickets, and state whether demand is price elastic or price inelastic. Show your working.",
+      "marking_style": "points",
+      "ao_marks": { "AO2": 4 },
+      "scheme": {
+        "max": 4,
+        "points": [
+          "Percentage change in quantity demanded = (1700 − 2000) ÷ 2000 × 100 = −15%",
+          "Percentage change in price = (10 − 8) ÷ 8 × 100 = +25%",
+          "PED = −15 ÷ 25 = −0.6",
+          "Demand is price inelastic because the PED is less than 1 (ignoring the sign)"
+        ],
+        "guidance": "Accept 0.6 without the minus sign. A correct answer of −0.6 with no working scores the first three marks. Allow error carried forward for the elastic/inelastic judgement."
+      }
+    },
+    {
+      "topic": "Costs, Revenue and Profit",
+      "subtopic": "Economies of scale",
+      "spec_ref": "3.1.4.3",
+      "command_word": "explain",
+      "difficulty": "foundation",
+      "total_marks": 4,
+      "question_text": "A small bakery is growing into a large bakery chain with shops across the country.\n\nExplain two economies of scale the bakery chain might benefit from as it grows.",
+      "marking_style": "points",
+      "ao_marks": { "AO1": 2, "AO2": 2 },
+      "scheme": {
+        "max": 4,
+        "points": [
+          "Purchasing / bulk-buying economies: buying flour and ingredients in large quantities at a lower price per unit",
+          "Technical economies: using larger, more efficient ovens or machinery, so the cost per loaf falls",
+          "Financial economies: larger firms can borrow more cheaply / at lower interest rates",
+          "Marketing economies: the cost of advertising is spread over more shops and output",
+          "Managerial economies: hiring specialist managers, increasing efficiency",
+          "Each economy explained as lowering the average cost (cost per unit)"
+        ],
+        "guidance": "Max 4: up to 2 marks for each economy, one for identifying it and one for explaining how it lowers average cost in the bakery's context."
+      }
+    },
+    {
+      "topic": "Market Structures & the Labour Market",
+      "subtopic": "Non-competitive markets: monopoly/oligopoly",
+      "spec_ref": "3.1.5.3",
+      "command_word": "evaluate",
+      "difficulty": "higher",
+      "total_marks": 9,
+      "question_text": "Two companies supply most of the UK's train tickets on a popular route, after one bought the other's rival.\n\nEvaluate whether a monopoly is always bad for consumers.",
+      "marking_style": "levels",
+      "ao_marks": { "AO1": 1, "AO2": 2, "AO3": 3, "AO4": 3 },
+      "scheme": {
+        "levels": [
+          { "level": 3, "marks": [7, 9], "descriptor": "Good knowledge applied well; developed chains of reasoning showing both costs and benefits of monopoly; a supported judgement that answers 'always'." },
+          { "level": 2, "marks": [4, 6], "descriptor": "Reasonable knowledge with some analysis of costs and benefits; evaluation is limited or one-sided." },
+          { "level": 1, "marks": [1, 3], "descriptor": "Limited knowledge with simple points; little or no analysis or evaluation." }
+        ],
+        "indicative": [
+          "A monopoly is a single seller with a large share of the market (legal definition 25%+)",
+          "Monopolies may charge higher prices because consumers have no alternative",
+          "Less choice and less incentive to improve quality or customer service",
+          "Possible inefficiency because there is no competitive pressure to keep costs down",
+          "But monopolies can gain economies of scale, which could lower prices",
+          "Supernormal profits may be invested in research and development and innovation",
+          "Natural monopolies (e.g. rail track, water) may be more efficient with one firm",
+          "Government regulation (e.g. the Competition and Markets Authority, price caps) can protect consumers",
+          "Judgement: depends on regulation, barriers to entry and how the firm uses its profits, so not always bad"
+        ],
+        "guidance": "Level 3 requires a justified conclusion that addresses 'always'."
+      }
+    },
+    {
+      "topic": "Market Failure & Externalities",
+      "subtopic": "Externalities",
+      "spec_ref": "3.1.6.2",
+      "command_word": "explain",
+      "difficulty": "foundation",
+      "total_marks": 4,
+      "question_text": "A factory releases smoke that pollutes the air in a nearby town.\n\nExplain why this is an example of market failure.",
+      "marking_style": "points",
+      "ao_marks": { "AO1": 2, "AO2": 2 },
+      "scheme": {
+        "max": 4,
+        "points": [
+          "This is a negative externality: a cost to a third party not involved in the transaction",
+          "The town's residents suffer costs such as health problems or cleaning costs that the factory doesn't pay for",
+          "The factory doesn't take the external cost into account, so the price of its product is too low",
+          "So too much of the product is produced / consumed: resources are misallocated, which is market failure"
+        ],
+        "guidance": "The final mark needs the idea of overproduction or misallocation of resources."
+      }
+    },
+    {
+      "topic": "National Economy Basics",
+      "subtopic": "Interest rates, saving, borrowing, spending, investment",
+      "spec_ref": "3.2.1.1",
+      "command_word": "explain",
+      "difficulty": "foundation",
+      "total_marks": 4,
+      "question_text": "Explain how a rise in interest rates is likely to affect households' spending and saving.",
+      "marking_style": "points",
+      "ao_marks": { "AO1": 2, "AO3": 2 },
+      "scheme": {
+        "max": 4,
+        "points": [
+          "Saving becomes more attractive because savers earn more interest",
+          "So households save more and spend less",
+          "Borrowing becomes more expensive (e.g. loans, credit cards), so households borrow less to spend",
+          "Mortgage repayments rise for households with variable-rate mortgages, leaving less disposable income to spend"
+        ],
+        "guidance": "Max 4. Each mark needs a link between the interest rate and the behaviour, not just a statement."
+      }
+    },
+    {
+      "topic": "Government Economic Objectives",
+      "subtopic": "Inflation and price stability",
+      "spec_ref": "3.2.2.4",
+      "command_word": "explain",
+      "difficulty": "higher",
+      "total_marks": 6,
+      "question_text": "UK inflation rose above 10% in 2022.\n\nExplain the possible effects of high inflation on consumers and on businesses.",
+      "marking_style": "levels",
+      "ao_marks": { "AO1": 2, "AO3": 4 },
+      "scheme": {
+        "levels": [
+          { "level": 3, "marks": [5, 6], "descriptor": "Developed chains of reasoning explaining effects on both consumers and businesses." },
+          { "level": 2, "marks": [3, 4], "descriptor": "Some explained effects on consumers or businesses, or both with limited development." },
+          { "level": 1, "marks": [1, 2], "descriptor": "Simple statements, e.g. prices go up, with little explanation." }
+        ],
+        "indicative": [
+          "Inflation is a sustained rise in the general price level, measured by the CPI",
+          "Consumers' real incomes fall if wages rise more slowly than prices, so they can buy less",
+          "People on fixed incomes, e.g. some pensioners, are hit hardest",
+          "The real value of savings falls if inflation is higher than the interest rate",
+          "Businesses face higher costs of raw materials, energy and wages, reducing profit",
+          "Uncertainty makes businesses less likely to invest",
+          "UK exports become less price competitive abroad",
+          "Borrowers may gain because the real value of debt falls"
+        ],
+        "guidance": "Level 3 needs both consumers and businesses."
+      }
+    },
+    {
+      "topic": "Government Policy Tools",
+      "subtopic": "Fiscal policy",
+      "spec_ref": "3.2.3.1",
+      "command_word": "evaluate",
+      "difficulty": "higher",
+      "total_marks": 9,
+      "question_text": "The UK economy is in a recession and unemployment is rising.\n\nEvaluate whether the government should increase its spending to reduce unemployment.",
+      "marking_style": "levels",
+      "ao_marks": { "AO1": 1, "AO2": 2, "AO3": 3, "AO4": 3 },
+      "scheme": {
+        "levels": [
+          { "level": 3, "marks": [7, 9], "descriptor": "Good knowledge applied well; developed chains of reasoning on how spending affects unemployment and its drawbacks; a supported judgement." },
+          { "level": 2, "marks": [4, 6], "descriptor": "Reasonable knowledge with some analysis; evaluation limited or one-sided." },
+          { "level": 1, "marks": [1, 3], "descriptor": "Limited knowledge with simple points; little analysis or evaluation." }
+        ],
+        "indicative": [
+          "Increasing government spending is expansionary fiscal policy",
+          "Spending on infrastructure, e.g. building projects, creates jobs directly",
+          "It increases total demand in the economy, so firms need more workers (derived demand for labour)",
+          "There may be a multiplier effect as newly employed workers spend their incomes",
+          "But it increases the budget deficit and national debt, which must be repaid with interest or higher taxes later",
+          "It may take time for projects to start (time lags)",
+          "It could cause inflation if the economy is near full capacity",
+          "It may not help structural unemployment if the jobs created don't match workers' skills",
+          "Alternatives: cut interest rates (monetary policy), training schemes (supply-side), tax cuts",
+          "Judgement: depends on the type of unemployment, size of existing debt and how the money is spent"
+        ],
+        "guidance": "Level 3 requires a justified conclusion."
+      }
+    },
+    {
+      "topic": "International Trade, Exchange Rates & Money",
+      "subtopic": "Exchange rates",
+      "spec_ref": "3.2.4.2",
+      "command_word": "analyse",
+      "difficulty": "higher",
+      "total_marks": 6,
+      "question_text": "The value of the pound has fallen from £1 = $1.40 to £1 = $1.20.\n\nAnalyse how this fall in the value of the pound might affect UK exporters and UK consumers.",
+      "marking_style": "levels",
+      "ao_marks": { "AO2": 2, "AO3": 4 },
+      "scheme": {
+        "levels": [
+          { "level": 3, "marks": [5, 6], "descriptor": "Developed chains of reasoning covering both exporters and consumers, using the exchange rate context." },
+          { "level": 2, "marks": [3, 4], "descriptor": "Some analysis of effects on exporters or consumers, or both with limited development." },
+          { "level": 1, "marks": [1, 2], "descriptor": "Simple statements with little analysis." }
+        ],
+        "indicative": [
+          "The pound has depreciated: each pound buys fewer dollars",
+          "UK exports become cheaper in dollars, e.g. a £100 item falls from $140 to $120",
+          "So demand for UK exports rises, increasing exporters' revenue and possibly jobs",
+          "Imports become more expensive in pounds, e.g. a $120 item rises from about £86 to £100",
+          "UK consumers pay more for imported goods, e.g. holidays abroad, fuel and electronics, reducing real incomes",
+          "Exporters that use imported raw materials face higher costs",
+          "Higher import prices can cause inflation"
+        ],
+        "guidance": "Credit worked numerical examples as application."
+      }
+    }
+  ]
+}

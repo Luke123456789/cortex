@@ -1,0 +1,254 @@
+{
+  "subject": "Maths",
+  "exam_board": "Pearson Edexcel",
+  "questions": [
+    {
+      "topic": "Number",
+      "subtopic": "Fractions, decimals and percentages",
+      "spec_ref": "M1.1",
+      "command_word": "calculate",
+      "difficulty": "foundation",
+      "total_marks": 3,
+      "question_text": "In a sale, all prices are reduced by 15%. The sale price of a coat is £68.\n\nCalculate the price of the coat before the sale. Show your working.",
+      "marking_style": "points",
+      "ao_marks": { "AO1": 1, "AO3": 2 },
+      "scheme": {
+        "max": 3,
+        "points": [
+          "Recognises that £68 is 85% of the original price (100% − 15%)",
+          "Method: 68 ÷ 0.85, or 68 ÷ 85 × 100",
+          "£80"
+        ],
+        "guidance": "A correct answer of £80 with no working scores all 3 marks. Finding 15% of £68 and adding it (giving £78.20) scores 0."
+      }
+    },
+    {
+      "topic": "Number",
+      "subtopic": "Surds",
+      "spec_ref": "M1.3",
+      "command_word": "determine",
+      "difficulty": "higher",
+      "total_marks": 3,
+      "question_text": "Simplify fully\n\n10/√5 + √45\n\nGive your answer in the form a√5, where a is an integer. Show your working.",
+      "marking_style": "points",
+      "ao_marks": { "AO1": 3 },
+      "scheme": {
+        "max": 3,
+        "points": [
+          "Rationalises: 10/√5 = 10√5/5 = 2√5",
+          "Simplifies: √45 = √9 × √5 = 3√5",
+          "5√5"
+        ],
+        "guidance": "Each step can be credited independently. 5√5 with no working scores 1 mark only, because the question asks for working."
+      }
+    },
+    {
+      "topic": "Algebra: Expressions and Equations",
+      "subtopic": "Linear and quadratic equations",
+      "spec_ref": "M2.2",
+      "command_word": "determine",
+      "difficulty": "higher",
+      "total_marks": 3,
+      "question_text": "Solve 3x² + 4x − 2 = 0\n\nGive your solutions correct to 2 decimal places. Show your working.",
+      "marking_style": "points",
+      "ao_marks": { "AO1": 3 },
+      "scheme": {
+        "max": 3,
+        "points": [
+          "Correct substitution into the quadratic formula: x = (−4 ± √(4² − 4 × 3 × −2)) ÷ (2 × 3)",
+          "Simplifies to x = (−4 ± √40) ÷ 6",
+          "x = 0.39 and x = −1.72"
+        ],
+        "guidance": "Both solutions are needed for the final mark. Completing the square is an acceptable method. Answers only (from a calculator's equation solver) score 1 mark."
+      }
+    },
+    {
+      "topic": "Algebra: Expressions and Equations",
+      "subtopic": "Simultaneous equations",
+      "spec_ref": "M2.3",
+      "command_word": "determine",
+      "difficulty": "higher",
+      "total_marks": 5,
+      "question_text": "Solve the simultaneous equations\n\ny = x² − 3\ny = 2x\n\nShow your working.",
+      "marking_style": "points",
+      "ao_marks": { "AO1": 5 },
+      "scheme": {
+        "max": 5,
+        "points": [
+          "Substitutes to eliminate y: x² − 3 = 2x",
+          "Rearranges to x² − 2x − 3 = 0",
+          "Solves, e.g. factorises to (x − 3)(x + 1) = 0",
+          "x = 3 and x = −1",
+          "y = 6 and y = −2, correctly paired: (3, 6) and (−1, −2)"
+        ],
+        "guidance": "The final mark requires both pairs, correctly matched. Trial and improvement with no algebra scores at most 1 mark for each correct pair found."
+      }
+    },
+    {
+      "topic": "Algebra: Graphs, Sequences and Functions",
+      "subtopic": "Straight-line graphs",
+      "spec_ref": "M3.1",
+      "command_word": "determine",
+      "difficulty": "higher",
+      "total_marks": 3,
+      "question_text": "Line L has equation y = 2x + 1.\n\nFind the equation of the line that is perpendicular to L and passes through the point (4, 3). Show your working.",
+      "marking_style": "points",
+      "ao_marks": { "AO1": 1, "AO2": 2 },
+      "scheme": {
+        "max": 3,
+        "points": [
+          "Gradient of the perpendicular line = −1/2 (negative reciprocal of 2)",
+          "Substitutes (4, 3): 3 = −1/2 × 4 + c, so c = 5",
+          "y = −½x + 5 (or equivalent, e.g. x + 2y = 10)"
+        ],
+        "guidance": "Allow error carried forward from a wrong gradient for the substitution mark only."
+      }
+    },
+    {
+      "topic": "Algebra: Graphs, Sequences and Functions",
+      "subtopic": "Sequences",
+      "spec_ref": "M3.3",
+      "command_word": "determine",
+      "difficulty": "higher",
+      "total_marks": 3,
+      "question_text": "Here are the first five terms of a quadratic sequence:\n\n4, 9, 18, 31, 48\n\nFind an expression, in terms of n, for the nth term of the sequence. Show your working.",
+      "marking_style": "points",
+      "ao_marks": { "AO1": 3 },
+      "scheme": {
+        "max": 3,
+        "points": [
+          "Finds the second difference of 4, so the sequence starts 2n²",
+          "Subtracts 2n² (2, 8, 18, 32, 50) to get the remaining linear sequence 2, 1, 0, −1, −2, i.e. −n + 3",
+          "2n² − n + 3"
+        ],
+        "guidance": "A correct expression with no working scores all 3 marks. 2n² + bn + c with b or c wrong scores 1 for 2n²."
+      }
+    },
+    {
+      "topic": "Ratio, Proportion and Rates of Change",
+      "subtopic": "Direct and inverse proportion",
+      "spec_ref": "M4.2",
+      "command_word": "determine",
+      "difficulty": "higher",
+      "total_marks": 4,
+      "question_text": "y is inversely proportional to the square of x. When x = 4, y = 5.\n\n(a) Find a formula for y in terms of x.\n(b) Find the positive value of x when y = 1.25.\n\nShow your working.",
+      "marking_style": "points",
+      "ao_marks": { "AO1": 2, "AO2": 2 },
+      "scheme": {
+        "max": 4,
+        "points": [
+          "Writes y = k/x² and substitutes: 5 = k/16",
+          "k = 80, so y = 80/x²",
+          "Substitutes y = 1.25: x² = 80 ÷ 1.25 = 64",
+          "x = 8"
+        ],
+        "guidance": "Using y = k/x (not squared) scores 0 for part (a) but allow error carried forward in part (b) for the method mark only."
+      }
+    },
+    {
+      "topic": "Ratio, Proportion and Rates of Change",
+      "subtopic": "Percentage change, growth and decay",
+      "spec_ref": "M4.4",
+      "command_word": "calculate",
+      "difficulty": "foundation",
+      "total_marks": 3,
+      "question_text": "Sam invests £5000 in a savings account that pays 3.5% compound interest per year.\n\nCalculate the value of Sam's investment after 4 years. Give your answer to the nearest penny. Show your working.",
+      "marking_style": "points",
+      "ao_marks": { "AO1": 1, "AO3": 2 },
+      "scheme": {
+        "max": 3,
+        "points": [
+          "Uses the multiplier 1.035",
+          "5000 × 1.035⁴",
+          "£5737.62"
+        ],
+        "guidance": "Year-by-year calculations that reach £5737.62 score full marks. Simple interest (£5700) scores 1 for the 3.5% idea only."
+      }
+    },
+    {
+      "topic": "Geometry: Shapes, Angles and Measures",
+      "subtopic": "Circle theorems",
+      "spec_ref": "M5.3",
+      "command_word": "determine",
+      "difficulty": "higher",
+      "total_marks": 4,
+      "question_text": "A, B, C and D are points on a circle with centre O, in that order, so ABCD is a cyclic quadrilateral. B is on the major arc AC and D is on the minor arc AC.\n\nAngle AOC = 130°.\n\nFind the size of angle ABC and the size of angle ADC. Give a reason for each step of your working.",
+      "marking_style": "points",
+      "ao_marks": { "AO2": 4 },
+      "scheme": {
+        "max": 4,
+        "points": [
+          "Angle ABC = 130 ÷ 2 = 65°",
+          "Reason: the angle at the centre is twice the angle at the circumference (subtended by the same arc)",
+          "Angle ADC = 180 − 65 = 115°",
+          "Reason: opposite angles in a cyclic quadrilateral add up to 180°"
+        ],
+        "guidance": "Reasons must use correct circle theorem wording to score. Allow error carried forward from a wrong angle ABC."
+      }
+    },
+    {
+      "topic": "Geometry: Trigonometry, Vectors and Transformations",
+      "subtopic": "Sine rule, cosine rule and area of a triangle",
+      "spec_ref": "M6.2",
+      "command_word": "calculate",
+      "difficulty": "higher",
+      "total_marks": 5,
+      "question_text": "In triangle ABC, AB = 8 cm, AC = 11 cm and angle BAC = 40°.\n\n(a) Calculate the length of BC. Give your answer to 3 significant figures.\n(b) Calculate the area of triangle ABC. Give your answer to 3 significant figures.\n\nShow your working.",
+      "marking_style": "points",
+      "ao_marks": { "AO1": 3, "AO3": 2 },
+      "scheme": {
+        "max": 5,
+        "points": [
+          "Uses the cosine rule: BC² = 8² + 11² − 2 × 8 × 11 × cos 40°",
+          "BC² = 50.2 (to 3 s.f.)",
+          "BC = 7.08 cm",
+          "Uses area = ½ × 8 × 11 × sin 40°",
+          "Area = 28.3 cm²"
+        ],
+        "guidance": "Accept answers that round to 7.08 and 28.3. Calculator in radians (giving different values) loses the accuracy marks only."
+      }
+    },
+    {
+      "topic": "Probability",
+      "subtopic": "Tree diagrams and conditional probability",
+      "spec_ref": "M7.2",
+      "command_word": "calculate",
+      "difficulty": "higher",
+      "total_marks": 4,
+      "question_text": "A bag contains 5 red counters and 3 blue counters. Jo takes a counter at random and does not replace it. She then takes a second counter at random.\n\nCalculate the probability that both counters are the same colour. Show your working; you may describe a tree diagram in words.",
+      "marking_style": "points",
+      "ao_marks": { "AO1": 1, "AO3": 3 },
+      "scheme": {
+        "max": 4,
+        "points": [
+          "Second-pick probabilities out of 7 (without replacement)",
+          "P(red, red) = 5/8 × 4/7 = 20/56",
+          "P(blue, blue) = 3/8 × 2/7 = 6/56",
+          "Adds: 26/56 = 13/28"
+        ],
+        "guidance": "Accept 0.464 or equivalent fractions. With replacement (34/64) scores 1 mark only for adding two products."
+      }
+    },
+    {
+      "topic": "Statistics",
+      "subtopic": "Averages and spread",
+      "spec_ref": "M8.1",
+      "command_word": "calculate",
+      "difficulty": "foundation",
+      "total_marks": 4,
+      "question_text": "The table shows the time, t minutes, that 20 students spent on homework one evening.\n\n0 < t ≤ 10: 4 students\n10 < t ≤ 20: 7 students\n20 < t ≤ 30: 6 students\n30 < t ≤ 40: 3 students\n\n(a) Calculate an estimate of the mean time. Show your working.\n(b) Explain why your answer is only an estimate.",
+      "marking_style": "points",
+      "ao_marks": { "AO1": 3, "AO2": 1 },
+      "scheme": {
+        "max": 4,
+        "points": [
+          "Uses midpoints 5, 15, 25, 35",
+          "Multiplies by frequencies and adds: 20 + 105 + 150 + 105 = 380",
+          "380 ÷ 20 = 19 minutes",
+          "It is an estimate because the exact times are not known; the midpoint of each group is used instead"
+        ],
+        "guidance": "Using the upper or lower class boundaries consistently can score the second mark only. Dividing by 4 (number of groups) loses the third mark."
+      }
+    }
+  ]
+}

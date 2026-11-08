@@ -1,0 +1,239 @@
+{
+  "subject": "Business",
+  "exam_board": "WJEC Eduqas",
+  "questions": [
+    {
+      "topic": "Business Activity",
+      "subtopic": "Stakeholders",
+      "spec_ref": "B1.6",
+      "command_word": "explain",
+      "difficulty": "foundation",
+      "total_marks": 4,
+      "question_text": "Greenway Foods is a large supermarket chain. It plans to close its store in a small town and open a bigger store on the edge of a nearby city.\n\nExplain how two different stakeholders might be affected by this decision.",
+      "marking_style": "points",
+      "ao_marks": { "AO1": 2, "AO2": 2 },
+      "scheme": {
+        "max": 4,
+        "points": [
+          "Employees at the town store may lose their jobs or have to travel further to work",
+          "Customers in the town will have to travel further to shop / have less choice locally",
+          "Customers in the city get a bigger store with more choice",
+          "Shareholders/owners may gain higher profits from the bigger store",
+          "Local community in the town may lose a service and footfall for other shops",
+          "Suppliers may get larger orders",
+          "Government/local council: change in business rates or local employment"
+        ],
+        "guidance": "Max 4: up to 2 marks per stakeholder, one for identifying a relevant stakeholder and one for explaining the effect in this context. Two different stakeholders are needed for full marks."
+      }
+    },
+    {
+      "topic": "Business Activity",
+      "subtopic": "Business ownership",
+      "spec_ref": "B1.7",
+      "command_word": "evaluate",
+      "difficulty": "higher",
+      "total_marks": 8,
+      "question_text": "Priya runs a successful hair salon as a sole trader. She wants to open a second salon and is thinking about becoming a private limited company (Ltd).\n\nEvaluate whether Priya should change her business to a private limited company.",
+      "marking_style": "levels",
+      "ao_marks": { "AO1": 2, "AO2": 2, "AO3": 4 },
+      "scheme": {
+        "levels": [
+          { "level": 4, "marks": [7, 8], "descriptor": "Detailed knowledge applied well to Priya's salon; balanced analysis of advantages and disadvantages; a well-supported judgement, e.g. saying what it depends on." },
+          { "level": 3, "marks": [5, 6], "descriptor": "Good knowledge applied to the context; some analysis of both sides; a judgement that is only partly supported." },
+          { "level": 2, "marks": [3, 4], "descriptor": "Some knowledge with limited application; one-sided or undeveloped analysis; little or no judgement." },
+          { "level": 1, "marks": [1, 2], "descriptor": "Limited knowledge of sole traders or private limited companies, with little reference to the context." }
+        ],
+        "indicative": [
+          "Limited liability: Priya's personal assets (e.g. her house) would be protected if the salons failed, which matters more as she takes on bigger risks",
+          "She could raise finance by selling shares to family and friends, helping pay for the second salon",
+          "A company may find it easier to get bank loans and may look more established",
+          "But she would have to share control and profits with other shareholders",
+          "More paperwork and legal requirements, e.g. registering with Companies House, publishing accounts",
+          "Accounts are public, so some privacy is lost",
+          "Judgement: depends on how much finance she needs, how much risk is involved and whether she is willing to share control"
+        ],
+        "guidance": "An answer with no judgement cannot go above Level 3."
+      }
+    },
+    {
+      "topic": "Influences on Business",
+      "subtopic": "Technological influence, e-commerce and business software",
+      "spec_ref": "B2.1",
+      "command_word": "analyse",
+      "difficulty": "foundation",
+      "total_marks": 6,
+      "question_text": "Thread & Co is a small clothing shop on a high street. The owner is thinking about starting to sell online through its own website.\n\nAnalyse the benefits and drawbacks to Thread & Co of selling online.",
+      "marking_style": "levels",
+      "ao_marks": { "AO1": 2, "AO2": 2, "AO3": 2 },
+      "scheme": {
+        "levels": [
+          { "level": 3, "marks": [5, 6], "descriptor": "Clear knowledge applied to Thread & Co, with developed analysis of both benefits and drawbacks." },
+          { "level": 2, "marks": [3, 4], "descriptor": "Some knowledge and application; analysis of benefits or drawbacks with limited development." },
+          { "level": 1, "marks": [1, 2], "descriptor": "Simple points about e-commerce with little reference to the business." }
+        ],
+        "indicative": [
+          "Reaches a wider market, nationally or internationally, increasing sales revenue",
+          "Open 24 hours a day, so customers can buy at any time",
+          "Can gather customer data to target promotions",
+          "Fewer staff and premises costs per sale compared with expanding the shop",
+          "Costs of building and maintaining a website and taking good product photos",
+          "Delivery costs and handling returns, which are common for clothing",
+          "Customers can't try clothes on, so there may be more returns",
+          "Stronger competition from large online retailers; risk of cyber security problems"
+        ],
+        "guidance": "Level 3 needs both benefits and drawbacks applied to a clothing shop."
+      }
+    },
+    {
+      "topic": "Influences on Business",
+      "subtopic": "Economic influence",
+      "spec_ref": "B2.4",
+      "command_word": "explain",
+      "difficulty": "higher",
+      "total_marks": 4,
+      "question_text": "Explain how a rise in interest rates could affect a small business that sells new kitchens.",
+      "marking_style": "points",
+      "ao_marks": { "AO1": 1, "AO2": 1, "AO3": 2 },
+      "scheme": {
+        "max": 4,
+        "points": [
+          "Customers often buy kitchens with loans or credit, which become more expensive, so demand falls",
+          "Homeowners with mortgages face higher repayments, so have less disposable income for luxury purchases like kitchens",
+          "So the business's sales revenue and profit may fall",
+          "If the business has loans or an overdraft, its interest payments rise, increasing costs",
+          "Higher interest rates make it more expensive to borrow to expand or invest"
+        ],
+        "guidance": "Max 4. Marks need to link the interest rate change to the kitchen business, not just state general effects."
+      }
+    },
+    {
+      "topic": "Business Operations",
+      "subtopic": "Quality",
+      "spec_ref": "B3.2",
+      "command_word": "compare",
+      "difficulty": "higher",
+      "total_marks": 6,
+      "question_text": "A furniture manufacturer currently uses quality control, with inspectors checking finished products at the end of the production line. The managing director wants to switch to quality assurance.\n\nCompare quality control and quality assurance, and analyse which would be better for the manufacturer.",
+      "marking_style": "levels",
+      "ao_marks": { "AO1": 2, "AO2": 1, "AO3": 3 },
+      "scheme": {
+        "levels": [
+          { "level": 3, "marks": [5, 6], "descriptor": "Accurate comparison of both methods applied to the manufacturer, with a supported conclusion about which is better." },
+          { "level": 2, "marks": [3, 4], "descriptor": "Some knowledge of both methods with limited comparison or application; conclusion unsupported." },
+          { "level": 1, "marks": [1, 2], "descriptor": "Simple descriptions of one or both methods." }
+        ],
+        "indicative": [
+          "Quality control: checking products at the end of production (inspection) to find faults",
+          "Quality control is simpler to set up but faults are found late, so faulty products are wasted or reworked, increasing costs",
+          "Quality assurance: checking quality at every stage of production, aiming to prevent faults",
+          "Quality assurance gives workers responsibility for quality, which can motivate them",
+          "Quality assurance needs training and a change in culture, so it costs more to introduce",
+          "Fewer faulty products reach customers, protecting the manufacturer's reputation",
+          "Judgement: quality assurance is likely better in the long term if the firm can afford the training"
+        ],
+        "guidance": "Compare means similarities and differences throughout."
+      }
+    },
+    {
+      "topic": "Finance",
+      "subtopic": "Break-even",
+      "spec_ref": "B4.3",
+      "command_word": "calculate",
+      "difficulty": "foundation",
+      "total_marks": 4,
+      "question_text": "Bean There is a coffee van. Its fixed costs are £1500 per month. Each coffee sells for £3.00 and has variable costs of £1.00.\n\n(a) Calculate the number of coffees Bean There must sell each month to break even.\n(b) Last month it sold 1000 coffees. Calculate its margin of safety.\n\nShow your working.",
+      "marking_style": "points",
+      "ao_marks": { "AO2": 4 },
+      "scheme": {
+        "max": 4,
+        "points": [
+          "Contribution per unit = £3.00 − £1.00 = £2.00",
+          "Break-even = fixed costs ÷ contribution = 1500 ÷ 2",
+          "= 750 coffees",
+          "Margin of safety = 1000 − 750 = 250 coffees"
+        ],
+        "guidance": "Correct answers with no working score full marks. Allow error carried forward from a wrong break-even for the margin of safety."
+      }
+    },
+    {
+      "topic": "Finance",
+      "subtopic": "Cash-flow",
+      "spec_ref": "B4.6",
+      "command_word": "explain",
+      "difficulty": "foundation",
+      "total_marks": 4,
+      "question_text": "A new toy shop expects most of its sales in November and December, but must pay suppliers in September and October.\n\nExplain why the shop might have cash-flow problems, and one way it could solve them.",
+      "marking_style": "points",
+      "ao_marks": { "AO1": 1, "AO2": 2, "AO3": 1 },
+      "scheme": {
+        "max": 4,
+        "points": [
+          "Cash outflows to suppliers come before the cash inflows from sales",
+          "So the shop may have a negative net cash flow / not enough cash to pay its bills in September and October",
+          "Arrange an overdraft to cover the shortfall until sales come in",
+          "Negotiate trade credit / longer payment terms with suppliers so payments come after the Christmas sales",
+          "Other valid solution, e.g. owner's capital, a short-term loan, or holding less stock"
+        ],
+        "guidance": "Max 4: up to 2 for explaining the problem and up to 2 for one explained solution. Do not credit 'make more profit'; profit is not cash."
+      }
+    },
+    {
+      "topic": "Marketing",
+      "subtopic": "Product and the product life cycle",
+      "spec_ref": "B5.4",
+      "command_word": "explain",
+      "difficulty": "higher",
+      "total_marks": 6,
+      "question_text": "FizzUp energy drink was launched eight years ago. Sales grew quickly but have now started to fall.\n\nExplain which stage of the product life cycle FizzUp is in, and two extension strategies the business could use.",
+      "marking_style": "levels",
+      "ao_marks": { "AO1": 2, "AO2": 2, "AO3": 2 },
+      "scheme": {
+        "levels": [
+          { "level": 3, "marks": [5, 6], "descriptor": "Correctly identifies the stage with a reason, and two extension strategies clearly explained and applied to FizzUp." },
+          { "level": 2, "marks": [3, 4], "descriptor": "Identifies the stage and explains one strategy, or two strategies with limited application." },
+          { "level": 1, "marks": [1, 2], "descriptor": "Identifies the stage or names strategies with no explanation." }
+        ],
+        "indicative": [
+          "FizzUp is at the start of decline (or late saturation/maturity), because sales have stopped growing and are falling",
+          "New flavours or a sugar-free version to attract new customers",
+          "New packaging or rebranding to refresh the image",
+          "Selling in new markets, e.g. abroad or new retailers",
+          "Promotions or price cuts to boost sales",
+          "New uses, e.g. marketing it as a sports drink",
+          "Explanation of how each strategy extends the life of the product and increases sales"
+        ],
+        "guidance": "Accept maturity, saturation or decline if justified with the information given."
+      }
+    },
+    {
+      "topic": "Human Resources",
+      "subtopic": "Motivation",
+      "spec_ref": "B6.3",
+      "command_word": "evaluate",
+      "difficulty": "higher",
+      "total_marks": 8,
+      "question_text": "A call centre has a high staff turnover and poor customer service ratings. The manager is considering either paying staff a bonus for meeting targets or introducing more non-financial motivators.\n\nEvaluate which approach would be better for motivating staff at the call centre.",
+      "marking_style": "levels",
+      "ao_marks": { "AO1": 2, "AO2": 2, "AO3": 4 },
+      "scheme": {
+        "levels": [
+          { "level": 4, "marks": [7, 8], "descriptor": "Detailed knowledge of financial and non-financial methods applied to the call centre; balanced analysis; well-supported judgement." },
+          { "level": 3, "marks": [5, 6], "descriptor": "Good knowledge applied to the context; analysis of both approaches; a judgement only partly supported." },
+          { "level": 2, "marks": [3, 4], "descriptor": "Some knowledge with limited application; one-sided analysis; little or no judgement." },
+          { "level": 1, "marks": [1, 2], "descriptor": "Limited knowledge of motivation methods with little reference to the context." }
+        ],
+        "indicative": [
+          "Bonuses give a clear, direct incentive to meet targets such as number of calls",
+          "But bonuses are costly and may encourage rushing calls, making customer service worse",
+          "Motivation from money may be short-lived",
+          "Non-financial: job rotation, job enrichment, training, praise and recognition, team working, flexible hours",
+          "These can increase job satisfaction and reduce staff turnover, saving recruitment and training costs",
+          "Better-motivated staff are likely to give better customer service",
+          "Non-financial methods may take time and depend on good management",
+          "Judgement: a combination may work best; depends on what is causing staff to leave and the call centre's budget"
+        ],
+        "guidance": "An answer with no judgement cannot go above Level 3."
+      }
+    }
+  ]
+}

@@ -1,0 +1,256 @@
+{
+  "subject": "Physical Education",
+  "exam_board": "OCR",
+  "questions": [
+    {
+      "topic": "Skeletal and Muscular Systems",
+      "subtopic": "Major muscle groups and the roles of muscles",
+      "spec_ref": "1.1.b",
+      "command_word": "explain",
+      "difficulty": "foundation",
+      "total_marks": 4,
+      "question_text": "A footballer bends their knee before kicking the ball.\n\nUsing this example, explain how muscles work as an antagonistic pair.",
+      "marking_style": "points",
+      "ao_marks": { "AO1": 2, "AO2": 2 },
+      "scheme": {
+        "max": 4,
+        "points": [
+          "Muscles can only pull / contract, so they work in pairs",
+          "The agonist (prime mover) contracts to cause the movement while the antagonist relaxes",
+          "Bending the knee (flexion): the hamstrings are the agonist",
+          "The quadriceps are the antagonist, relaxing / lengthening",
+          "When the leg straightens to kick (extension), the roles reverse: the quadriceps contract and the hamstrings relax"
+        ],
+        "guidance": "Max 4. Two marks for knowledge, two for correct application to the knee. Do not credit muscles 'pushing'."
+      }
+    },
+    {
+      "topic": "Movement Analysis: Levers, Planes & Axes",
+      "subtopic": "Lever systems: first, second and third class",
+      "spec_ref": "1.1.c",
+      "command_word": "explain",
+      "difficulty": "higher",
+      "total_marks": 4,
+      "question_text": "A basketball player rises onto their toes (plantar flexion at the ankle) before jumping.\n\nIdentify the class of lever used at the ankle and explain the advantage this lever gives the player.",
+      "marking_style": "points",
+      "ao_marks": { "AO1": 2, "AO2": 2 },
+      "scheme": {
+        "max": 4,
+        "points": [
+          "Second class lever",
+          "The load (body weight) is between the fulcrum (ball of the foot) and the effort (calf muscle / gastrocnemius pulling on the heel via the Achilles tendon)",
+          "The effort arm is longer than the load arm, so it has a high mechanical advantage",
+          "So a large load (the body's weight) can be moved with relatively little effort, helping the player push off powerfully"
+        ],
+        "guidance": "The first mark is for the class. Do not credit the third or fourth point if the lever is identified as third class."
+      }
+    },
+    {
+      "topic": "Cardiovascular and Respiratory Systems & Effects of Exercise",
+      "subtopic": "Short- and long-term effects of exercise",
+      "spec_ref": "1.1.e",
+      "command_word": "describe",
+      "difficulty": "foundation",
+      "total_marks": 4,
+      "question_text": "Describe four long-term effects of regular aerobic training on the cardiovascular and respiratory systems.",
+      "marking_style": "points",
+      "ao_marks": { "AO1": 4 },
+      "scheme": {
+        "max": 4,
+        "points": [
+          "Heart becomes bigger and stronger (cardiac hypertrophy)",
+          "Increased stroke volume",
+          "Lower resting heart rate (bradycardia)",
+          "Increased cardiac output during maximal exercise",
+          "More capillaries (capillarisation) around muscles and alveoli",
+          "Increased number of red blood cells",
+          "Stronger respiratory muscles (intercostals and diaphragm), so increased vital capacity / tidal volume during exercise",
+          "Faster recovery / lower blood pressure"
+        ],
+        "guidance": "One mark per correct long-term effect, max 4. Short-term effects such as increased heart rate during exercise score nothing."
+      }
+    },
+    {
+      "topic": "Cardiovascular and Respiratory Systems & Effects of Exercise",
+      "subtopic": "Aerobic and anaerobic exercise",
+      "spec_ref": "1.1.d",
+      "command_word": "compare",
+      "difficulty": "higher",
+      "total_marks": 6,
+      "question_text": "Compare aerobic and anaerobic exercise. Use examples from a game of netball or another team game in your answer.",
+      "marking_style": "levels",
+      "ao_marks": { "AO1": 2, "AO2": 2, "AO3": 2 },
+      "scheme": {
+        "levels": [
+          { "level": 3, "marks": [5, 6], "descriptor": "Detailed, accurate comparison of both types, using equations or by-products, intensity and duration, with well-applied examples from the game. Accurate terminology." },
+          { "level": 2, "marks": [3, 4], "descriptor": "Some accurate comparison, with at least one relevant example. Some terminology." },
+          { "level": 1, "marks": [1, 2], "descriptor": "Basic descriptions of aerobic or anaerobic exercise, with little comparison or application." }
+        ],
+        "indicative": [
+          "Aerobic: with oxygen; glucose + oxygen → energy + carbon dioxide + water",
+          "Anaerobic: without oxygen; glucose → energy + lactic acid",
+          "Aerobic is low to moderate intensity and can be sustained for a long time",
+          "Anaerobic is high intensity and short duration",
+          "Lactic acid causes muscle fatigue and an oxygen debt (EPOC) after anaerobic work",
+          "Example aerobic: jogging back into position or moving around the court during a match",
+          "Example anaerobic: a sprint to intercept a pass or a jump to catch the ball",
+          "Team games use both; players switch between them"
+        ],
+        "guidance": "Compare means both similarities/differences should be referred to throughout. Level 3 needs examples from a game."
+      }
+    },
+    {
+      "topic": "Components of Fitness & Fitness Testing",
+      "subtopic": "Fitness tests for each component",
+      "spec_ref": "1.2.a",
+      "command_word": "describe",
+      "difficulty": "foundation",
+      "total_marks": 4,
+      "question_text": "Describe how to carry out the multi-stage fitness test (bleep test), and state which component of fitness it measures.",
+      "marking_style": "points",
+      "ao_marks": { "AO1": 4 },
+      "scheme": {
+        "max": 4,
+        "points": [
+          "It measures cardiovascular endurance (aerobic endurance)",
+          "Two lines/cones are set 20 m apart",
+          "The performer runs between the lines in time with the bleeps",
+          "The time between bleeps gets shorter as the levels increase",
+          "The test ends when the performer can no longer keep up with the bleeps (e.g. misses two in a row); the level and shuttle reached is recorded"
+        ],
+        "guidance": "Max 4. Do not credit 'muscular endurance' or 'speed' for the component."
+      }
+    },
+    {
+      "topic": "Principles of Training, Optimising Training & Preventing Injury",
+      "subtopic": "Principles of training and FITT",
+      "spec_ref": "1.2.b",
+      "command_word": "explain",
+      "difficulty": "higher",
+      "total_marks": 6,
+      "question_text": "A 400 m runner wants to improve their performance over the next season.\n\nExplain how the runner could apply the principles of training, including FITT, to their training programme.",
+      "marking_style": "levels",
+      "ao_marks": { "AO1": 2, "AO2": 2, "AO3": 2 },
+      "scheme": {
+        "levels": [
+          { "level": 3, "marks": [5, 6], "descriptor": "Several principles accurately explained and clearly applied to a 400 m runner, with practical examples. Accurate terminology." },
+          { "level": 2, "marks": [3, 4], "descriptor": "Some principles explained, with some application to the runner." },
+          { "level": 1, "marks": [1, 2], "descriptor": "Principles named or described with little or no application." }
+        ],
+        "indicative": [
+          "Specificity: training must match the demands of 400 m, e.g. anaerobic interval sprints",
+          "Progressive overload: gradually increase the training load, e.g. more repetitions or faster times",
+          "Reversibility: fitness is lost if training stops, e.g. through injury",
+          "Tedium: vary training to avoid boredom, e.g. hill sprints, track intervals, circuits",
+          "Frequency: e.g. train 4–5 times a week with rest days",
+          "Intensity: high intensity, e.g. 80–90% of maximum heart rate for interval work",
+          "Time: duration of each session, e.g. 45–60 minutes",
+          "Type: the method of training, e.g. interval or fartlek training"
+        ],
+        "guidance": "Level 3 needs application to the 400 m runner, not just definitions."
+      }
+    },
+    {
+      "topic": "Engagement Patterns & Commercialisation",
+      "subtopic": "Commercialisation: media and sponsorship",
+      "spec_ref": "2.1.b",
+      "command_word": "evaluate",
+      "difficulty": "higher",
+      "total_marks": 6,
+      "question_text": "Top-level football is heavily commercialised, with large sponsorship deals and media coverage.\n\nEvaluate the impact of commercialisation on football.",
+      "marking_style": "levels",
+      "ao_marks": { "AO1": 2, "AO2": 1, "AO3": 3 },
+      "scheme": {
+        "levels": [
+          { "level": 3, "marks": [5, 6], "descriptor": "Detailed knowledge with a balanced evaluation of positive and negative impacts on different groups, and a supported conclusion." },
+          { "level": 2, "marks": [3, 4], "descriptor": "Some positive and negative impacts with some explanation; evaluation limited." },
+          { "level": 1, "marks": [1, 2], "descriptor": "Simple points about sponsorship or the media, with little evaluation." }
+        ],
+        "indicative": [
+          "Positive: more money for clubs, facilities, wages and grassroots football",
+          "Positive: more media coverage increases the sport's profile and may increase participation",
+          "Positive: players earn more and can train full-time",
+          "Negative: kick-off times changed to suit TV, inconvenient for fans",
+          "Negative: high ticket prices and subscription costs exclude some fans",
+          "Negative: pressure to win can lead to deviance; sponsors may withdraw after bad behaviour",
+          "Negative: wealth gap between top clubs and smaller clubs, and between men's and women's football (although commercialisation has grown women's football)",
+          "Judgement weighing the overall effect"
+        ],
+        "guidance": "Evaluate needs both sides and a conclusion for Level 3."
+      }
+    },
+    {
+      "topic": "Ethics, Drugs and Violence in Sport",
+      "subtopic": "Drugs in sport",
+      "spec_ref": "2.1.c",
+      "command_word": "explain",
+      "difficulty": "foundation",
+      "total_marks": 4,
+      "question_text": "Explain why a sprinter might take anabolic steroids, and two risks of taking them.",
+      "marking_style": "points",
+      "ao_marks": { "AO1": 2, "AO2": 2 },
+      "scheme": {
+        "max": 4,
+        "points": [
+          "Steroids increase muscle mass / strength / power, helping the sprinter run faster",
+          "They allow the sprinter to train harder and recover more quickly",
+          "Health risks, e.g. liver damage, heart problems, high blood pressure, infertility",
+          "Mood swings / aggression ('roid rage')",
+          "Being caught leads to a ban, loss of reputation, medals and sponsorship"
+        ],
+        "guidance": "Max 4: up to 2 for why, up to 2 for risks. Two risks are needed for full marks."
+      }
+    },
+    {
+      "topic": "Sports Psychology",
+      "subtopic": "Guidance and feedback",
+      "spec_ref": "2.2",
+      "command_word": "evaluate",
+      "difficulty": "higher",
+      "total_marks": 6,
+      "question_text": "A coach is teaching a beginner how to perform a tennis serve.\n\nEvaluate the use of visual, verbal and manual guidance for this beginner.",
+      "marking_style": "levels",
+      "ao_marks": { "AO1": 2, "AO2": 2, "AO3": 2 },
+      "scheme": {
+        "levels": [
+          { "level": 3, "marks": [5, 6], "descriptor": "Accurate knowledge of all three types, applied to the tennis serve, with advantages and disadvantages weighed and a supported judgement for a beginner." },
+          { "level": 2, "marks": [3, 4], "descriptor": "Some knowledge of two or more types with some application and evaluation." },
+          { "level": 1, "marks": [1, 2], "descriptor": "Simple descriptions of guidance types with little application." }
+        ],
+        "indicative": [
+          "Visual: a demonstration or video of the serve; good for beginners as they can copy a picture of the whole movement",
+          "Visual: demonstration must be accurate; may not show fine detail such as grip or timing",
+          "Verbal: the coach explains key points, e.g. 'toss the ball high'; useful with visual guidance",
+          "Verbal: too much information can overload a beginner; harder to understand complex movements",
+          "Manual: the coach physically moves the player's arm through the serve; helps the beginner get the feel of the movement and builds confidence",
+          "Manual: the player may rely on it; it doesn't feel the same as the real movement at full speed",
+          "Judgement: visual guidance supported by brief verbal points is usually best for a beginner"
+        ],
+        "guidance": "Level 3 needs all three types considered and a judgement."
+      }
+    },
+    {
+      "topic": "Health, Fitness, Well-being & Diet",
+      "subtopic": "Consequences of a sedentary lifestyle",
+      "spec_ref": "2.3",
+      "command_word": "explain",
+      "difficulty": "foundation",
+      "total_marks": 4,
+      "question_text": "Explain the possible consequences of a sedentary lifestyle on a person's health and well-being.",
+      "marking_style": "points",
+      "ao_marks": { "AO1": 2, "AO2": 2 },
+      "scheme": {
+        "max": 4,
+        "points": [
+          "Weight gain / obesity, because energy intake is greater than energy used",
+          "Increased risk of heart disease, high blood pressure or stroke",
+          "Increased risk of type 2 diabetes",
+          "Loss of muscle tone, poor posture and weaker bones (e.g. osteoporosis)",
+          "Emotional effects: low self-esteem, depression, stress",
+          "Social effects: fewer chances to meet people and make friends through activity"
+        ],
+        "guidance": "Max 4. Each point needs to be a consequence, not just a description of being inactive."
+      }
+    }
+  ]
+}

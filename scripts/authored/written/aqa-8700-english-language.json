@@ -1,0 +1,561 @@
+{
+  "subject": "English Language",
+  "exam_board": "AQA",
+  "questions": [
+    {
+      "topic": "Language Techniques and Terminology",
+      "subtopic": "Figurative language",
+      "spec_ref": "L1.2",
+      "command_word": "analyse",
+      "difficulty": "foundation",
+      "total_marks": 4,
+      "question_text": "Read this sentence from a story:\n\n\"The city was a sleeping animal, its streetlights blinking like tired eyes, its traffic a low growl that never quite stopped.\"\n\nIdentify one technique the writer uses and analyse the effect it creates. Use a quotation and a subject term in your answer.",
+      "marking_style": "points",
+      "ao_marks": {
+        "AO2": 4
+      },
+      "scheme": {
+        "max": 4,
+        "points": [
+          "Identifies a technique correctly, e.g. metaphor ('The city was a sleeping animal'), simile ('blinking like tired eyes') or personification ('a low growl')",
+          "Supports with a relevant quotation",
+          "Explains the meaning: the city is presented as alive, resting but not fully asleep",
+          "Analyses the effect on the reader, e.g. creates a sense of quiet threat or unease, as if the city could wake at any moment; or makes the city feel tired and worn out",
+          "Comments on a specific word, e.g. 'growl' suggests danger; 'never quite stopped' suggests restlessness"
+        ],
+        "guidance": "Max 4. 'It makes the reader want to read on' or 'it creates a picture in your head' is too general to score the analysis marks."
+      }
+    },
+    {
+      "topic": "Structure and Sentence Forms",
+      "subtopic": "Sentence forms and punctuation for effect",
+      "spec_ref": "L2.2",
+      "command_word": "analyse",
+      "difficulty": "foundation",
+      "total_marks": 4,
+      "question_text": "Read this extract:\n\n\"She ran. Past the bins, past the broken gate, past the dog that barked and barked and would not stop barking, down the alley where the light gave up and the dark took over. Then she stopped. Silence.\"\n\nAnalyse how the writer uses sentence forms to create tension.",
+      "marking_style": "points",
+      "ao_marks": {
+        "AO2": 4
+      },
+      "scheme": {
+        "max": 4,
+        "points": [
+          "Short simple sentence 'She ran.' is abrupt, creating urgency at the start",
+          "Long sentence with a list / repetition of 'past' builds pace and shows how far and fast she is running",
+          "Repetition of 'barked and barked' makes the noise feel relentless and panicky",
+          "Contrast between the long sentence and the short 'Then she stopped.' creates a sudden halt",
+          "One-word minor sentence 'Silence.' creates suspense: the reader waits to find out what happens next",
+          "Uses accurate terms (simple sentence, minor sentence, complex/compound sentence, listing, repetition)"
+        ],
+        "guidance": "Max 4. Feature-spotting without explaining the effect scores at most 1."
+      }
+    },
+    {
+      "topic": "Paper 1 Reading: Creative Reading",
+      "subtopic": "Questions 1 and 2: retrieval and language",
+      "spec_ref": "L3.1",
+      "command_word": "analyse",
+      "difficulty": "higher",
+      "total_marks": 8,
+      "question_text": "This extract is from the opening of a short story written for this question.\n\nThe storm arrived before anyone was ready for it. All afternoon the sky had been a bruise, swollen and purple over the harbour, and the fishermen had muttered and dragged their boats higher up the shingle. Then, at six o'clock, the wind tore loose. It screamed down the narrow streets, rattling every shutter like a fist on a door. Rain came sideways, hard as gravel. Old Mrs Penrose, who had seen sixty winters on this coast, stood at her window and watched the sea rear up and hurl itself against the wall, again and again, as though it had a grudge against the town and meant to settle it tonight.\n\nHow does the writer use language here to describe the storm?\n\nYou could include the writer's choice of:\n• words and phrases\n• language features and techniques\n• sentence forms.\n\n[8 marks]",
+      "marking_style": "levels",
+      "ao_marks": {
+        "AO2": 8
+      },
+      "scheme": {
+        "levels": [
+          {
+            "level": 4,
+            "marks": [
+              7,
+              8
+            ],
+            "descriptor": "Perceptive, detailed analysis of the effects of language; judicious, well-chosen quotations; sophisticated and accurate use of subject terminology."
+          },
+          {
+            "level": 3,
+            "marks": [
+              5,
+              6
+            ],
+            "descriptor": "Clear explanation of the effects of language; relevant quotations; clear and accurate use of subject terminology."
+          },
+          {
+            "level": 2,
+            "marks": [
+              3,
+              4
+            ],
+            "descriptor": "Some attempt to comment on the effect of language; some appropriate textual detail; some use of subject terminology, not always accurately."
+          },
+          {
+            "level": 1,
+            "marks": [
+              1,
+              2
+            ],
+            "descriptor": "Simple comments on the effect of language; simple references; simple mention of subject terminology."
+          }
+        ],
+        "indicative": [
+          "Metaphor 'the sky had been a bruise, swollen and purple' suggests pain and injury; the storm feels like an attack waiting to happen",
+          "Personification 'the wind tore loose. It screamed' presents the storm as a violent, uncontrollable creature",
+          "Simile 'like a fist on a door' suggests aggression and threat, as if something is trying to get in",
+          "Simile 'hard as gravel' makes the rain painful and physical",
+          "Personification of the sea: 'rear up and hurl itself', 'had a grudge against the town' makes nature seem vengeful and deliberate",
+          "Short sentence 'Then, at six o'clock, the wind tore loose.' marks the sudden start of the storm",
+          "Repetition 'again and again' shows the relentless force of the sea",
+          "Contrast with Mrs Penrose's calm, experienced watching makes the storm seem even more extreme"
+        ],
+        "guidance": "Focus is on language only; comments on structure are not credited. Level 3 and above need explanation of effects, not just identification."
+      }
+    },
+    {
+      "topic": "Paper 1 Reading: Creative Reading",
+      "subtopic": "Question 3: structure",
+      "spec_ref": "L3.2",
+      "command_word": "analyse",
+      "difficulty": "higher",
+      "total_marks": 8,
+      "question_text": "This is the whole of a very short story written for this question.\n\nThe station was empty except for Lena. She checked the board for the third time: the last train, delayed. She sat on the cold bench, pulled her coat tighter and counted the pigeons picking at a crust by the bin. Seven. Then six, as one flapped away.\n\nAcross the tracks a light flickered on in the signal box. A shape moved behind the dirty glass. Lena told herself it was the signalman, of course it was, and looked back at her phone. No signal.\n\nFootsteps. Slow, unhurried, on the metal bridge above the platform. They stopped directly over her head.\n\nLena did not look up.\n\nThe board above her clicked and changed: CANCELLED.\n\nHow has the writer structured the text to interest you as a reader?\n\nYou could write about:\n• what the writer focuses your attention on at the beginning\n• how and why the writer changes this focus as the text develops\n• any other structural features that interest you.\n\n[8 marks]",
+      "marking_style": "levels",
+      "ao_marks": {
+        "AO2": 8
+      },
+      "scheme": {
+        "levels": [
+          {
+            "level": 4,
+            "marks": [
+              7,
+              8
+            ],
+            "descriptor": "Perceptive, detailed analysis of the effects of structural features; judicious examples; sophisticated and accurate subject terminology."
+          },
+          {
+            "level": 3,
+            "marks": [
+              5,
+              6
+            ],
+            "descriptor": "Clear explanation of the effects of structural features; relevant examples; clear and accurate terminology."
+          },
+          {
+            "level": 2,
+            "marks": [
+              3,
+              4
+            ],
+            "descriptor": "Some attempt to comment on structural features; some appropriate examples; some terminology."
+          },
+          {
+            "level": 1,
+            "marks": [
+              1,
+              2
+            ],
+            "descriptor": "Simple comments on structure; simple references."
+          }
+        ],
+        "indicative": [
+          "Opens with a focus on setting and isolation: 'The station was empty except for Lena', establishing her vulnerability",
+          "Slow, mundane details at the start (counting pigeons) create a calm, ordinary mood that is later disrupted",
+          "Shift of focus outward to the signal box and the shape behind the glass introduces a possible threat",
+          "Her phone having 'No signal' cuts her off and increases tension",
+          "One-word paragraph 'Footsteps.' marks a turning point and sharpens the focus to sound",
+          "Single-line paragraph 'Lena did not look up.' slows the pace and creates suspense",
+          "The ending returns to the departure board from the opening (cyclical structure), but now 'CANCELLED', trapping her",
+          "Open, unresolved ending leaves the reader uncertain and uneasy"
+        ],
+        "guidance": "Focus is on structure; comments only on individual words score at most Level 1."
+      }
+    },
+    {
+      "topic": "Paper 1 Reading: Creative Reading",
+      "subtopic": "Question 4: evaluation",
+      "spec_ref": "L3.3",
+      "command_word": "evaluate",
+      "difficulty": "higher",
+      "total_marks": 20,
+      "question_text": "This extract is from a story written for this question. Tom, aged twelve, is starting at a new school.\n\nThe corridor smelled of floor polish and somebody else's lunch. Tom kept his eyes on the lino, on the black scuffs left by a thousand trainers that weren't his. Around him the noise rose and broke like a wave: shrieks, laughter, a locker slammed so hard it rang. Everyone seemed to know exactly where they were going.\n\nHe checked the timetable in his hand. Room 14. The numbers on the doors went 9, 10, 11 and then, for no reason at all, 22.\n\n\"You lost?\" A girl with a plaster on her chin was looking at him. Not unkindly. Just looking.\n\nTom opened his mouth. Nothing came out. His face burned.\n\n\"Fourteen's upstairs,\" she said. \"Everyone gets lost. I cried on my first day. In the toilets. Don't tell anyone.\" She grinned, and the corridor seemed, very slightly, to shrink.\n\nA student said: \"In this part of the story, the writer makes you really feel Tom's nervousness, and then shows how one small act of kindness changes everything.\"\n\nTo what extent do you agree?\n\nIn your response, you could:\n• consider your own impressions of Tom\n• evaluate how the writer creates these impressions\n• support your response with references to the text.\n\n[20 marks]",
+      "marking_style": "levels",
+      "ao_marks": {
+        "AO4": 20
+      },
+      "scheme": {
+        "levels": [
+          {
+            "level": 4,
+            "marks": [
+              16,
+              20
+            ],
+            "descriptor": "Critical, detailed evaluation of the effect on the reader; shows perceptive understanding of the writer's methods; convincing, critical response to the statement; judicious, wide-ranging references."
+          },
+          {
+            "level": 3,
+            "marks": [
+              11,
+              15
+            ],
+            "descriptor": "Clear, relevant evaluation of the effect on the reader; clear understanding of the writer's methods; clear response to the statement; relevant references."
+          },
+          {
+            "level": 2,
+            "marks": [
+              6,
+              10
+            ],
+            "descriptor": "Some evaluative comments on the effect on the reader; some understanding of methods; some response to the statement; some appropriate references."
+          },
+          {
+            "level": 1,
+            "marks": [
+              1,
+              5
+            ],
+            "descriptor": "Simple evaluative comments; limited understanding of methods; simple response to the statement; simple references."
+          }
+        ],
+        "indicative": [
+          "Sensory detail ('floor polish and somebody else's lunch') makes the place feel unfamiliar and not his",
+          "Downcast eyes 'on the lino' and 'trainers that weren't his' show shyness and not belonging",
+          "Simile 'rose and broke like a wave' suggests the noise is overwhelming, as if he might be swept away",
+          "'Everyone seemed to know exactly where they were going' contrasts others' confidence with his confusion",
+          "The illogical room numbers (11 then 22) add a touch of humour and frustration",
+          "Short sentences 'Nothing came out. His face burned.' show his panic and embarrassment physically",
+          "The girl's dialogue is short and casual; her confession 'I cried on my first day' builds a connection",
+          "'the corridor seemed, very slightly, to shrink' uses the setting to show his fear easing; 'very slightly' suggests the change is small, so 'changes everything' may be an overstatement",
+          "Evaluation of the extent of agreement, e.g. agree about nervousness but the change is gradual rather than complete"
+        ],
+        "guidance": "Top-level answers engage critically with the statement, including its wording ('changes everything'), rather than simply agreeing."
+      }
+    },
+    {
+      "topic": "Paper 2 Reading: Viewpoints and Perspectives",
+      "subtopic": "Questions 1 and 2: true statements and summary",
+      "spec_ref": "L4.1",
+      "command_word": "compare",
+      "difficulty": "foundation",
+      "total_marks": 8,
+      "question_text": "Both sources below were written for this question.\n\nSource A (a modern blog post): \"Our school day starts at 8.40 and finishes at 3.20. Most of us get the bus, and by the time I'm home I've got an hour of homework before tea. Clubs are optional, and loads of people do sport or drama. We have a forty-minute lunch break, which is never long enough when the queue goes past the hall doors.\"\n\nSource B (written in the style of a letter from 1870, by a boy at a boarding school): \"We rise at six by the bell and wash in cold water, for there is no other. Prayers, then Latin until breakfast, which is bread and weak tea. Lessons continue until four, save for half an hour at noon. In the evening we write our exercises by candlelight under the eye of the master, and woe betide any boy caught talking. I have not been home since Michaelmas.\"\n\nYou need to refer to Source A and Source B for this question.\n\nThe students in the two sources have different experiences of the school day. Use details from both sources to write a summary of the differences.\n\n[8 marks]",
+      "marking_style": "levels",
+      "ao_marks": {
+        "AO1": 8
+      },
+      "scheme": {
+        "levels": [
+          {
+            "level": 4,
+            "marks": [
+              7,
+              8
+            ],
+            "descriptor": "Perceptive synthesis and interpretation of both texts; judicious references; perceptive differences between the students' experiences."
+          },
+          {
+            "level": 3,
+            "marks": [
+              5,
+              6
+            ],
+            "descriptor": "Clear synthesis and relevant interpretation; relevant references from both texts; clear statements of difference."
+          },
+          {
+            "level": 2,
+            "marks": [
+              3,
+              4
+            ],
+            "descriptor": "Some interpretation from one or both texts; some appropriate references; some difference identified."
+          },
+          {
+            "level": 1,
+            "marks": [
+              1,
+              2
+            ],
+            "descriptor": "Simple awareness of differences; simple references or paraphrase."
+          }
+        ],
+        "indicative": [
+          "Length of day: A starts at 8.40 and ends 3.20; B rises at six and lessons run until four, suggesting a far longer, harsher day",
+          "Home: A goes home every day on the bus; B is a boarder who 'has not been home since Michaelmas', suggesting loneliness and separation",
+          "Freedom: A's clubs are 'optional' and lots of choice; B's day is controlled by the bell and the master, suggesting strict discipline",
+          "Comfort: B washes in cold water and works by candlelight, inferring hardship; A's complaints (lunch queue) are minor",
+          "Food: B has 'bread and weak tea'; A complains only about the queue, implying plenty of food",
+          "Tone: A is relaxed and conversational; B's 'woe betide' suggests fear of punishment"
+        ],
+        "guidance": "This question tests inference and synthesis, not language analysis. Level 3+ needs inferences about both sources, not just copied facts."
+      }
+    },
+    {
+      "topic": "Paper 2 Reading: Viewpoints and Perspectives",
+      "subtopic": "Question 3: language",
+      "spec_ref": "L4.2",
+      "command_word": "analyse",
+      "difficulty": "higher",
+      "total_marks": 12,
+      "question_text": "This source was written for this question, in the style of an 1890s newspaper report on a new invention.\n\n\"Never before has the public been offered so wondrous a machine as the motor-car now exhibited at the Crystal Palace. It glides along without horse or harness, puffing modestly, at a speed that would shame a galloping hunter. Ladies gasped; gentlemen removed their hats in astonishment. Yet I confess a creeping dread. What shall become of our quiet lanes when every reckless young fellow may roar through them at twelve miles an hour? What of the poor horse, the farrier, the coachman? Progress, it seems, is a hungry beast, and it will not ask our permission before it eats.\"\n\nHow does the writer use language to present his feelings about the motor-car?\n\n[12 marks]",
+      "marking_style": "levels",
+      "ao_marks": {
+        "AO2": 12
+      },
+      "scheme": {
+        "levels": [
+          {
+            "level": 4,
+            "marks": [
+              10,
+              12
+            ],
+            "descriptor": "Perceptive, detailed analysis of the effects of language; judicious quotations; sophisticated and accurate subject terminology."
+          },
+          {
+            "level": 3,
+            "marks": [
+              7,
+              9
+            ],
+            "descriptor": "Clear explanation of the effects of language; relevant quotations; clear and accurate terminology."
+          },
+          {
+            "level": 2,
+            "marks": [
+              4,
+              6
+            ],
+            "descriptor": "Some attempt to comment on the effect of language; some appropriate references; some terminology."
+          },
+          {
+            "level": 1,
+            "marks": [
+              1,
+              3
+            ],
+            "descriptor": "Simple comments on the effect of language; simple references."
+          }
+        ],
+        "indicative": [
+          "Superlative/hyperbole 'Never before... so wondrous' shows initial amazement",
+          "'glides' and 'puffing modestly' make the car seem gentle and harmless at first",
+          "Comparison 'would shame a galloping hunter' emphasises its speed with admiration",
+          "Crowd reactions 'Ladies gasped; gentlemen removed their hats' show public wonder",
+          "'Yet' marks a shift (volta) to anxiety: 'a creeping dread'",
+          "Rhetorical questions show worry about the effect on lanes, horses and jobs",
+          "'reckless young fellow may roar' contrasts with 'glides', showing danger and noise",
+          "Extended metaphor 'Progress... is a hungry beast' presents change as unstoppable and destructive",
+          "Mixed feelings: admiration combined with fear; first-person 'I confess' gives a personal, honest tone"
+        ],
+        "guidance": "Level 3+ should recognise that the writer's feelings change or are mixed."
+      }
+    },
+    {
+      "topic": "Paper 2 Reading: Viewpoints and Perspectives",
+      "subtopic": "Question 4: comparing perspectives",
+      "spec_ref": "L4.3",
+      "command_word": "compare",
+      "difficulty": "higher",
+      "total_marks": 16,
+      "question_text": "Both sources were written for this question.\n\nSource A (a modern opinion article): \"Smartphones have handed young people the world. A teenager can learn a language, start a business or organise a protest from their bedroom. Yes, there are dangers, but the panic from adults is nothing new: they said the same about television, and about the novel before that. Instead of banning phones, we should teach young people to use them wisely.\"\n\nSource B (written in the style of an 1850s magazine article about novels): \"I view with the gravest alarm the craze for cheap novels among the young. Girls sit up half the night devouring these tales of murder and romance, and come down to breakfast pale, idle and full of foolish notions. Their minds, which ought to be strengthened by improving books, are softened like wax. Parents must remove such poison from the house.\"\n\nCompare how the two writers convey their different perspectives on young people and new forms of entertainment.\n\nIn your answer, you could:\n• compare their different perspectives\n• compare the methods the writers use to convey their perspectives\n• support your response with references to both texts.\n\n[16 marks]",
+      "marking_style": "levels",
+      "ao_marks": {
+        "AO3": 16
+      },
+      "scheme": {
+        "levels": [
+          {
+            "level": 4,
+            "marks": [
+              13,
+              16
+            ],
+            "descriptor": "Compares ideas and perspectives in a perceptive way; analyses how methods convey perspectives; judicious references to both texts."
+          },
+          {
+            "level": 3,
+            "marks": [
+              9,
+              12
+            ],
+            "descriptor": "Compares ideas and perspectives in a clear and relevant way; explains clearly how methods convey them; relevant references to both texts."
+          },
+          {
+            "level": 2,
+            "marks": [
+              5,
+              8
+            ],
+            "descriptor": "Attempts to compare ideas and perspectives; some comment on methods; some references from one or both texts."
+          },
+          {
+            "level": 1,
+            "marks": [
+              1,
+              4
+            ],
+            "descriptor": "Simple awareness of ideas and perspectives; simple identification of methods; simple references."
+          }
+        ],
+        "indicative": [
+          "A is positive and trusting of young people; B is alarmed and sees them as weak and easily corrupted",
+          "A: 'handed young people the world' is a hyperbolic metaphor of opportunity; B: 'devouring' and 'poison' present entertainment as dangerous",
+          "A uses a list of positive possibilities (language, business, protest); B lists negative effects ('pale, idle and full of foolish notions')",
+          "A concedes ('Yes, there are dangers') to appear balanced; B is absolute ('gravest alarm')",
+          "A uses historical comparison to dismiss moral panic, which ironically includes the kind of fear seen in B",
+          "B's simile 'softened like wax' suggests minds being shaped by bad influences",
+          "Solutions differ: A wants education ('teach young people'); B wants banning ('remove such poison')",
+          "Tone: A is conversational and reasonable; B is formal, moralising and authoritative"
+        ],
+        "guidance": "Level 3+ needs comparison of methods as well as perspectives, using both sources."
+      }
+    },
+    {
+      "topic": "Writing",
+      "subtopic": "Paper 1 Question 5: descriptive and narrative writing",
+      "spec_ref": "L5.1",
+      "command_word": "describe",
+      "difficulty": "higher",
+      "total_marks": 40,
+      "spag_marks": 16,
+      "question_text": "You are going to enter a creative writing competition run by your local library.\n\nWrite a description of a busy market as it closes at the end of the day.\n\n(24 marks for content and organisation, 16 marks for technical accuracy)\n\n[40 marks]",
+      "marking_style": "levels",
+      "ao_marks": {
+        "AO5": 24,
+        "AO6": 16
+      },
+      "scheme": {
+        "levels": [
+          {
+            "level": 4,
+            "marks": [
+              19,
+              24
+            ],
+            "descriptor": "Compelling, convincing communication. Register convincingly matched to purpose; extensive, ambitious vocabulary; a range of conscious, crafted linguistic devices. Organisation: varied and inventive structural features; fluently linked paragraphs with seamlessly integrated discourse markers."
+          },
+          {
+            "level": 3,
+            "marks": [
+              13,
+              18
+            ],
+            "descriptor": "Consistent, clear communication. Register consistently matched to purpose; increasingly sophisticated vocabulary; a range of linguistic devices used successfully. Organisation: effective structural features; coherent paragraphs with integrated discourse markers."
+          },
+          {
+            "level": 2,
+            "marks": [
+              7,
+              12
+            ],
+            "descriptor": "Some sustained communication. Some attempt to match register; vocabulary chosen for effect; some linguistic devices. Organisation: some structural features; some paragraphs, some discourse markers."
+          },
+          {
+            "level": 1,
+            "marks": [
+              1,
+              6
+            ],
+            "descriptor": "Simple communication. Simple awareness of register; simple vocabulary and devices. Organisation: evidence of simple structural features; random or unlinked paragraphs."
+          }
+        ],
+        "indicative": [
+          "Writes a description, not a story; any narrative is minimal and serves the description",
+          "Sensory detail: the smell of bruised fruit, the clatter of dismantled stalls, cold air as the light fades",
+          "A shift in atmosphere from busy to empty, e.g. structured around time passing",
+          "Zooming in on small details (a lost glove, a pigeon pecking at crumbs) and back out to the whole scene",
+          "Figurative language, varied sentence forms and an ending that links back to the opening"
+        ],
+        "guidance": "Content and organisation are marked out of 24 using the levels. A narrative with little description should not go above Level 2 for content.",
+        "spag": "AO6 technical accuracy, out of 16, marked separately: 13-16 = sentence demarcation consistently secure and accurate; wide range of punctuation used with a high level of accuracy; full range of sentence forms for effect; Standard English used consistently with secure control of complex grammar; high level of accuracy in spelling including ambitious vocabulary; extensive and ambitious vocabulary. 9-12 = sentence demarcation mostly secure; range of punctuation mostly accurate; variety of sentence forms for effect; Standard English mostly controlled; generally accurate spelling including complex words; increasingly sophisticated vocabulary. 5-8 = sentence demarcation mostly secure and sometimes accurate; some control of a range of punctuation; attempts a variety of sentence forms; some use of Standard English; some accurate spelling of more complex words; varied vocabulary. 1-4 = occasional sentence demarcation; some evidence of conscious punctuation; simple sentence forms; occasional Standard English; accurate basic spelling; simple vocabulary. 0 = no evidence of these skills."
+      }
+    },
+    {
+      "topic": "Writing",
+      "subtopic": "Paper 2 Question 5: writing to present a viewpoint",
+      "spec_ref": "L5.2",
+      "command_word": "justify",
+      "difficulty": "higher",
+      "total_marks": 40,
+      "spag_marks": 16,
+      "question_text": "\"Mobile phones should be banned from school completely. They do far more harm than good.\"\n\nWrite an article for a broadsheet newspaper in which you argue for or against this statement.\n\n(24 marks for content and organisation, 16 marks for technical accuracy)\n\n[40 marks]",
+      "marking_style": "levels",
+      "ao_marks": {
+        "AO5": 24,
+        "AO6": 16
+      },
+      "scheme": {
+        "levels": [
+          {
+            "level": 4,
+            "marks": [
+              19,
+              24
+            ],
+            "descriptor": "Compelling, convincing communication. Register, tone and style convincingly matched to a broadsheet article and to arguing; extensive, ambitious vocabulary; crafted rhetorical devices. Organisation: varied and inventive structure; highly structured and developed ideas, complex and connected; fluently linked paragraphs."
+          },
+          {
+            "level": 3,
+            "marks": [
+              13,
+              18
+            ],
+            "descriptor": "Consistent, clear communication. Register consistently matched to purpose and audience; increasingly sophisticated vocabulary; a range of successful devices. Organisation: effective structure; engaging, connected ideas; coherent paragraphs with integrated discourse markers."
+          },
+          {
+            "level": 2,
+            "marks": [
+              7,
+              12
+            ],
+            "descriptor": "Some sustained communication. Some attempt to match register to purpose and audience; vocabulary chosen for effect; some devices. Organisation: some structural features; increasingly varied and linked ideas; some paragraphs and discourse markers."
+          },
+          {
+            "level": 1,
+            "marks": [
+              1,
+              6
+            ],
+            "descriptor": "Simple communication. Simple awareness of purpose and audience; simple vocabulary and devices. Organisation: simple structural features; one or two relevant ideas, simply linked; random paragraphing."
+          }
+        ],
+        "indicative": [
+          "A clear position sustained throughout (for or against, or a nuanced position)",
+          "Article conventions: a headline, possibly a strapline, an engaging opening, a formal but lively broadsheet register",
+          "Arguments, e.g. distraction and cyberbullying versus safety, learning tools and teaching responsible use",
+          "Counter-argument acknowledged and rebutted",
+          "Rhetorical devices: rhetorical questions, statistics or expert opinion, anecdote, direct address, rule of three",
+          "A strong conclusion, e.g. a call to action or a link back to the opening"
+        ],
+        "guidance": "Content and organisation are marked out of 24 using the levels. Writing that does not argue a view, or ignores the article form, should not go above Level 2 for content.",
+        "spag": "AO6 technical accuracy, out of 16, marked separately: 13-16 = sentence demarcation consistently secure and accurate; wide range of punctuation used with a high level of accuracy; full range of sentence forms for effect; Standard English used consistently with secure control of complex grammar; high level of accuracy in spelling including ambitious vocabulary; extensive and ambitious vocabulary. 9-12 = sentence demarcation mostly secure; range of punctuation mostly accurate; variety of sentence forms for effect; Standard English mostly controlled; generally accurate spelling including complex words; increasingly sophisticated vocabulary. 5-8 = sentence demarcation mostly secure and sometimes accurate; some control of a range of punctuation; attempts a variety of sentence forms; some use of Standard English; some accurate spelling of more complex words; varied vocabulary. 1-4 = occasional sentence demarcation; some evidence of conscious punctuation; simple sentence forms; occasional Standard English; accurate basic spelling; simple vocabulary. 0 = no evidence of these skills."
+      }
+    },
+    {
+      "topic": "Technical Accuracy",
+      "subtopic": "Grammar and Standard English",
+      "spec_ref": "L6.3",
+      "command_word": "determine",
+      "difficulty": "foundation",
+      "total_marks": 6,
+      "question_text": "This paragraph from a student's letter to a headteacher contains six errors in spelling, punctuation or grammar.\n\n\"Their are many reasons why the school should of kept the library open at lunch. Students who doesn't have computers at home needs somewhere to work, the library is also a quiet place for people who find the playground stressfull.\"\n\nFind and correct the six errors. You can rewrite the paragraph, or list each error with its correction.",
+      "marking_style": "points",
+      "ao_marks": {
+        "AO6": 6
+      },
+      "scheme": {
+        "max": 6,
+        "points": [
+          "'Their' corrected to 'There'",
+          "'should of' corrected to 'should have'",
+          "'doesn't' corrected to 'don't' (agreement with plural 'Students')",
+          "'needs' corrected to 'need' (agreement with plural 'Students')",
+          "Comma splice fixed: full stop or semicolon before 'the library' (or a conjunction added)",
+          "'stressfull' corrected to 'stressful'"
+        ],
+        "guidance": "One mark per error correctly fixed. Accept any correct fix for the comma splice (full stop, semicolon, or a conjunction such as 'and'). Do not award a mark if the fix introduces a new error."
+      }
+    }
+  ]
+}
