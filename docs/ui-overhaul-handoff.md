@@ -391,11 +391,13 @@ only one that hedged.
 - English Language Q5 (40 marks) stores AO6 technical accuracy as the
   separate SPaG marks (16), so content is marked out of 24.
 - `supabase/content-batches/2026-11-08-written-remaining-subjects.sql` (+
-  `.rollback.sql`, which refuses if any question has an attempt). All topic
-  and subtopic names were checked against the live database. **Not yet
-  applied.** To apply, split at each `-- <Subject> (...)` line, drop
-  `begin;`/`commit;`, one migration per subject (e.g.
-  `written_chemistry`).
+  `.rollback.sql`, which refuses if any question has an attempt). The
+  generator now writes one statement per subject with the questions as a
+  JSON array. **Applied** as migrations `written_chemistry`,
+  `written_physics`, `written_economics`, `written_business`, `written_pe`,
+  `written_maths`, `written_english_language`. Verified against a local dry
+  run: every question's row and mark scheme hash identically (whole-subject
+  checksums can differ only by collation order).
 - `test/written-content.test.js` checks every authored file: DB constraints,
   AO marks add up to the total, points max equals content marks, levels run
   1..content with no gaps, no duplicate question text.
