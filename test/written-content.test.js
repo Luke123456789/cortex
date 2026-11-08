@@ -8,7 +8,12 @@ import { questionSql } from '../scripts/generate-written.mjs'
 
 const DIR = join(import.meta.dirname, '..', 'scripts', 'authored', 'written')
 const COMMAND_WORDS = ['state', 'describe', 'explain', 'evaluate', 'compare', 'justify', 'calculate', 'analyse', 'determine', 'explore']
-const files = readdirSync(DIR).filter((f) => f.endsWith('.json')).map((name) => ({ name, file: JSON.parse(readFileSync(join(DIR, name), 'utf8')) }))
+const PAPERS = join(import.meta.dirname, '..', 'scripts', 'authored', 'papers')
+const load = (dir) => readdirSync(dir).filter((f) => f.endsWith('.json')).map((name) => ({ name, file: JSON.parse(readFileSync(join(dir, name), 'utf8')) }))
+const written = load(DIR)
+const papers = load(PAPERS)
+// Paper questions get every per-question check too.
+const files = [...written, ...papers]
 
 // The scheme the generator would store, resolving shared English Literature levels.
 function resolvedLevels(file, q) {
@@ -18,7 +23,7 @@ function resolvedLevels(file, q) {
 
 describe('authored written questions', () => {
   it('covers every subject', () => {
-    const subjects = files.map((f) => f.file.subject).sort()
+    const subjects = written.map((f) => f.file.subject).sort()
     expect(subjects).toEqual(['Biology', 'Business', 'Chemistry', 'Economics', 'English Language', 'English Literature', 'Maths', 'Physical Education', 'Physics'])
   })
 
@@ -86,6 +91,27 @@ describe('authored written questions', () => {
           expect(sql).toContain('insert into public.fm_exam_questions')
           expect(sql).toContain('insert into public.fm_mark_schemes')
         })
+      })
+    })
+  }
+})
+
+describe('mock papers', () => {
+  for (const { name, file } of papers) {
+    describe(name, () => {
+      const { paper, questions } = file
+      it('has the paper details', () => {
+        expect(paper.ref).toMatch(/^[a-z0-9-]+$/)
+        expect(paper.title).toBeTruthy()
+        expect(paper.duration_minutes).toBeGreaterThan(0)
+        expect(typeof paper.calculator).toBe('boolean')
+        expect(paper.instructions).toBeTruthy()
+      })
+      it('question marks add up to the paper total', () => {
+        expect(questions.reduce((n, q) => n + q.total_marks, 0)).toBe(paper.total_marks)
+      })
+      it('numbers the questions 1, 2, 3... in order', () => {
+        expect(questions.map((q) => q.number)).toEqual(questions.map((_, i) => i + 1))
       })
     })
   }
