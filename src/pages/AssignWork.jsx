@@ -80,11 +80,15 @@ export default function AssignWork() {
   const subtopicsForTopic = subtopics.filter((s) => s.topic_id === topicId)
   const quizzesForTopic = quizzes.filter((q) => q.topic_id === topicId)
   const examQuestionsForTopic = examQuestions.filter((q) => q.topic_id === topicId)
-  const papersForSubject = papers.filter((p) => p.subject_id === subjectId)
+  // Mock papers are picked from one list of every paper, grouped by subject.
+  const subjectName = (id) => subjects.find((x) => x.id === id)?.name || 'Other'
+  const papersBySubject = [...new Set(papers.map((p) => subjectName(p.subject_id)))].sort()
+    .map((name) => ({ name, papers: papers.filter((p) => subjectName(p.subject_id) === name) }))
+  const selectedPaper = papers.find((p) => p.ref === paperRef)
 
   useEffect(() => {
-    if (!papersForSubject.some((p) => p.ref === paperRef)) setPaperRef(papersForSubject[0]?.ref || '')
-  }, [papersForSubject, paperRef])
+    if (!papers.some((p) => p.ref === paperRef)) setPaperRef(papers[0]?.ref || '')
+  }, [papers, paperRef])
 
   useEffect(() => {
     setSubtopicId(subtopicsForTopic[0]?.id || '')
@@ -130,7 +134,7 @@ export default function AssignWork() {
         payload = { ...base, subtopic_id: q?.subtopic_id || null, exam_question_id: examQuestionId, title: q ? writtenTitle(q, subtopics) : 'Written test' }
       } else if (type === 'mock_paper') {
         const paper = papers.find((p) => p.ref === paperRef)
-        payload = { ...base, topic_id: null, paper_ref: paperRef, title: paper?.title || 'Mock paper' }
+        payload = { ...base, subject_id: paper?.subject_id || null, topic_id: null, paper_ref: paperRef, title: paper?.title || 'Mock paper' }
       } else {
         payload = { ...base, title: pastPaperTitle.trim() }
       }
@@ -229,32 +233,25 @@ export default function AssignWork() {
                     />
                   </div>
                 ) : type === 'mock_paper' ? (
-                  <>
+                  papers.length === 0 ? (
+                    <p className={styles.notice}>No mock papers yet.</p>
+                  ) : (
                     <div>
-                      <label className="field-label" htmlFor="assign-paper-subject">Subject</label>
-                      <select id="assign-paper-subject" className="field" value={subjectId} onChange={(e) => setSubjectId(e.target.value)}>
-                        {subjects.map((s) => (
-                          <option key={s.id} value={s.id}>{s.name}</option>
+                      <label className="field-label" htmlFor="assign-mock">Paper</label>
+                      <select id="assign-mock" className="field" value={paperRef} onChange={(e) => setPaperRef(e.target.value)}>
+                        {papersBySubject.map((g) => (
+                          <optgroup key={g.name} label={g.name}>
+                            {g.papers.map((p) => <option key={p.ref} value={p.ref}>{p.title}</option>)}
+                          </optgroup>
                         ))}
                       </select>
+                      {selectedPaper && (
+                        <p className={styles.preview}>
+                          {subjectName(selectedPaper.subject_id)} · {selectedPaper.total_marks} marks · {selectedPaper.duration_minutes} minutes · {selectedPaper.calculator ? 'calculator allowed' : 'no calculator'}. Worked through question by question in one sitting; each answer is AI-marked.
+                        </p>
+                      )}
                     </div>
-                    {papersForSubject.length === 0 ? (
-                      <p className={styles.notice}>No mock papers for this subject yet.</p>
-                    ) : (
-                      <div>
-                        <label className="field-label" htmlFor="assign-mock">Paper</label>
-                        <select id="assign-mock" className="field" value={paperRef} onChange={(e) => setPaperRef(e.target.value)}>
-                          {papersForSubject.map((p) => (
-                            <option key={p.ref} value={p.ref}>{p.title}</option>
-                          ))}
-                        </select>
-                        {papersForSubject.find((p) => p.ref === paperRef) && (() => {
-                          const p = papersForSubject.find((x) => x.ref === paperRef)
-                          return <p className={styles.preview}>{p.total_marks} marks · {p.duration_minutes} minutes · {p.calculator ? 'calculator allowed' : 'no calculator'}. Worked through question by question in one sitting; each answer is AI-marked.</p>
-                        })()}
-                      </div>
-                    )}
-                  </>
+                  )
                 ) : (
                   <>
                     <div className={styles.twoUp}>
