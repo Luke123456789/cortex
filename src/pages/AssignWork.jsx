@@ -12,7 +12,8 @@ const TYPES = [
   { value: 'tutor_session', label: 'Tutor session' },
   { value: 'written_test', label: 'Written test' },
   { value: 'mock_paper', label: 'Mock paper' },
-  { value: 'past_paper', label: 'Past paper' },
+  // 'past_paper' is hidden until there's a way to do one (it was only a typed
+  // title the student couldn't open). Its handling below is kept for then.
 ]
 
 function formatTime(isoString) {
