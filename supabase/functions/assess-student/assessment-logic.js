@@ -61,15 +61,30 @@ function toStringArray(value) {
   return Array.isArray(value) ? value.filter((item) => typeof item === 'string') : []
 }
 
+// The model sometimes garbles a tool call, writing the remaining fields as
+// raw '<parameter name="...">' text inside one string field. Such output is
+// rejected (and retried) rather than saved.
+const LEAKED_MARKUP = /<\/?parameter\b|<\/?invoke\b/i
+function garbled(value) {
+  if (typeof value === 'string') return LEAKED_MARKUP.test(value)
+  if (Array.isArray(value)) return value.some(garbled)
+  return false
+}
+
 // Parses the Anthropic Messages API response, expecting a forced tool_use
 // block from submit_assessment. Returns null if the response doesn't contain
-// a well-formed result (missing tool_use block, missing headline/narrative).
+// a well-formed result (missing tool_use block, missing headline/narrative,
+// a list field that isn't a list, or leaked tool-call markup).
 export function extractAssessmentFromResponse(anthropicResponseJson) {
   const toolUse = anthropicResponseJson?.content?.find((block) => block.type === 'tool_use')
   const input = toolUse?.input
   if (!input || typeof input.headline !== 'string' || typeof input.narrative !== 'string') {
     return null
   }
+  if (!input.headline.trim() || !input.narrative.trim()) return null
+  const lists = [input.strengths, input.areasToImprove, input.recommendedActions]
+  if (lists.some((v) => v != null && !Array.isArray(v))) return null
+  if ([input.headline, input.narrative, ...lists].some(garbled)) return null
   return {
     headline: input.headline,
     strengths: toStringArray(input.strengths),

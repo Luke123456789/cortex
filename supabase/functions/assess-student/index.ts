@@ -202,6 +202,11 @@ Deno.serve(async (req) => {
     bundle,
   })
 
+  // A garbled tool call is occasional and random, so try up to 3 times.
+  const MAX_ATTEMPTS = 3
+  let result = null
+  let callFailed = false
+  for (let attempt = 1; attempt <= MAX_ATTEMPTS && !result; attempt++) {
   const assessRes = await fetch('https://api.anthropic.com/v1/messages', {
     method: 'POST',
     headers: {
@@ -211,7 +216,7 @@ Deno.serve(async (req) => {
     },
     body: JSON.stringify({
       model: 'claude-sonnet-5',
-      max_tokens: 1200,
+      max_tokens: 2500,
       messages: [{ role: 'user', content: prompt }],
       tools: [
         {
@@ -235,16 +240,18 @@ Deno.serve(async (req) => {
   })
 
   if (!assessRes.ok) {
-    console.error('Anthropic assessment error', assessRes.status, await assessRes.text())
-    return saveAndRespond('error', null, 'assessment call failed')
+    console.error(`Anthropic assessment error (attempt ${attempt})`, assessRes.status, await assessRes.text())
+    callFailed = true
+    continue
   }
 
   const assessData = await assessRes.json()
-  const result = extractAssessmentFromResponse(assessData)
+  result = extractAssessmentFromResponse(assessData)
+  if (!result) console.error(`Malformed assessment response (attempt ${attempt})`, JSON.stringify(assessData))
+  }
 
   if (!result) {
-    console.error('Malformed assessment response', JSON.stringify(assessData))
-    return saveAndRespond('error', null, 'assessment response malformed')
+    return saveAndRespond('error', null, callFailed ? 'assessment call failed' : 'assessment response malformed')
   }
 
   return saveAndRespond('complete', result)

@@ -146,3 +146,34 @@ describe('extractAssessmentFromResponse — malformed output handling', () => {
     expect(extractAssessmentFromResponse(null)).toBeNull()
   })
 })
+
+describe('extractAssessmentFromResponse: garbled tool calls (seen in production)', () => {
+  const respond = (input) => ({ content: [{ type: 'tool_use', name: 'submit_assessment', input }] })
+
+  it('rejects the remaining fields leaked into one string as <parameter> markup', () => {
+    // 8 Nov: strengths came back as a string holding the other fields.
+    expect(extractAssessmentFromResponse(respond({
+      headline: 'James shows solid underlying maths ability.',
+      strengths: '\n<parameter name="areasToImprove">\n<parameter name="recommendedActions">\n<parameter name="narrative">Across 27 written questions...',
+    }))).toBeNull()
+  })
+
+  it('rejects leaked markup even when a narrative is present', () => {
+    expect(extractAssessmentFromResponse(respond({
+      headline: 'h', strengths: ['fine'], areasToImprove: ['<parameter name="x">oops'], recommendedActions: [], narrative: 'n',
+    }))).toBeNull()
+  })
+
+  it('rejects a list field sent as a plain string', () => {
+    expect(extractAssessmentFromResponse(respond({ headline: 'h', strengths: 'not a list', narrative: 'n' }))).toBeNull()
+  })
+
+  it('rejects a blank headline or narrative', () => {
+    expect(extractAssessmentFromResponse(respond({ headline: ' ', narrative: 'n' }))).toBeNull()
+    expect(extractAssessmentFromResponse(respond({ headline: 'h', narrative: '' }))).toBeNull()
+  })
+
+  it('still accepts ordinary text that mentions angle brackets', () => {
+    expect(extractAssessmentFromResponse(respond({ headline: 'h', strengths: ['Knows x < 3 means less than'], narrative: 'n' }))).not.toBeNull()
+  })
+})
