@@ -52,6 +52,12 @@ export default function AssignWork() {
   const [dueDate, setDueDate] = useState('')
   const [busy, setBusy] = useState(false)
   const [error, setError] = useState(null)
+  // Confirmation after a successful push; cleared as soon as the form changes.
+  const [success, setSuccess] = useState(null)
+
+  useEffect(() => {
+    setSuccess(null)
+  }, [studentId, type, topicId, subtopicId, quizId, examQuestionId])
 
   useEffect(() => {
     if (subjects.length && !subjectId) setSubjectId(subjects[0].id)
@@ -88,6 +94,7 @@ export default function AssignWork() {
   async function handlePush() {
     setBusy(true)
     setError(null)
+    setSuccess(null)
     try {
       const base = {
         student_id: studentId,
@@ -119,6 +126,7 @@ export default function AssignWork() {
       setNote('')
       setDueDate('')
       setPastPaperTitle('')
+      setSuccess(`Assigned “${payload.title}” to ${target?.isPractice ? 'the practice student' : studentName || 'the student'}.`)
       refresh()
     } catch (err) {
       console.error('Failed to push assignment', err)
@@ -135,6 +143,13 @@ export default function AssignWork() {
   }
 
   const pending = assignments.filter((a) => a.status === 'pending')
+  // The item currently picked in the form is already waiting for this student.
+  const alreadyPending = pending.some((a) => a.type === type && (
+    (type === 'quiz' && a.quiz_id === quizId) ||
+    (type === 'written_test' && a.exam_question_id === examQuestionId) ||
+    (type === 'tutor_session' && a.subtopic_id === subtopicId) ||
+    (type === 'past_paper' && a.title === pastPaperTitle.trim())
+  ))
   const completed = assignments.filter((a) => a.status === 'completed').slice(0, 6)
 
   return (
@@ -270,11 +285,16 @@ export default function AssignWork() {
                   />
                 </div>
 
+                {alreadyPending && !success && (
+                  <p className={styles.duplicate}>This is already in {target?.isPractice ? 'the practice student' : studentName || 'the student'}’s pending work. Pushing it again will set it twice.</p>
+                )}
+
                 <button type="button" className="btn btn--primary btn--block" onClick={handlePush} disabled={busy || !canPush()}>
-                  {busy ? 'Pushing…' : 'Push to student'}
+                  {busy ? 'Pushing…' : alreadyPending && !success ? 'Push again' : 'Push to student'}
                 </button>
 
                 {error && <p className="error-text" role="alert">{error}</p>}
+                {success && <p className={styles.success} role="status">{success}</p>}
               </>
             )}
           </div>
