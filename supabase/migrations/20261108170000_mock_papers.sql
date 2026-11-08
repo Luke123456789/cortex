@@ -9,10 +9,12 @@
 --   mock_paper it completes only once every question has an answer.
 -- * start_paper / finish_paper: the student starts the timer, or hands the
 --   paper in early (unanswered questions score 0).
+-- * Allowing the new type is in the next file (it replaces a constraint, so
+--   it is kept apart from these purely additive changes).
 
 create table if not exists public.fm_papers (
   ref text primary key,
-  subject_id uuid references public.subjects (id) on delete set null,
+  subject_id uuid references public.subjects (id),
   title text not null,
   exam_board text,
   duration_minutes integer not null check (duration_minutes > 0),
@@ -25,13 +27,12 @@ create table if not exists public.fm_papers (
 
 alter table public.fm_papers enable row level security;
 
-drop policy if exists "fm_papers: read" on public.fm_papers;
 create policy "fm_papers: read"
   on public.fm_papers for select to authenticated
   using (true);
 
 alter table public.fm_exam_questions
-  add column if not exists paper_ref text references public.fm_papers (ref) on delete set null,
+  add column if not exists paper_ref text references public.fm_papers (ref),
   add column if not exists paper_number integer;
 
 create unique index if not exists fm_exam_questions_paper_number
@@ -39,16 +40,8 @@ create unique index if not exists fm_exam_questions_paper_number
   where paper_ref is not null;
 
 alter table public.assignments
-  add column if not exists paper_ref text references public.fm_papers (ref) on delete set null,
+  add column if not exists paper_ref text references public.fm_papers (ref),
   add column if not exists started_at timestamptz;
-
-alter table public.assignments drop constraint if exists assignments_type_check;
-alter table public.assignments add constraint assignments_type_check
-  check (type = any (array['quiz', 'tutor_session', 'written_test', 'past_paper', 'mock_paper']));
-
-alter table public.assignments drop constraint if exists assignments_mock_paper_ref;
-alter table public.assignments add constraint assignments_mock_paper_ref
-  check (type <> 'mock_paper' or paper_ref is not null);
 
 create or replace function public.complete_assignment_on_fm_attempt()
 returns trigger
@@ -95,11 +88,8 @@ begin
 end;
 $$;
 
--- Restated so this file stands alone (same trigger as written_marking).
-drop trigger if exists on_fm_attempt_marked on public.fm_attempts;
-create trigger on_fm_attempt_marked
-  after insert or update on public.fm_attempts
-  for each row execute function public.complete_assignment_on_fm_attempt();
+-- The existing on_fm_attempt_marked trigger (written_marking) calls the
+-- function above, so it picks up the new behaviour without being recreated.
 
 -- The student (or a parent for their practice student) starts the clock.
 create or replace function public.start_paper(p_assignment uuid)
@@ -142,7 +132,5 @@ begin
 end;
 $$;
 
-revoke all on function public.start_paper(uuid) from public, anon;
-revoke all on function public.finish_paper(uuid) from public, anon;
 grant execute on function public.start_paper(uuid) to authenticated;
 grant execute on function public.finish_paper(uuid) to authenticated;
