@@ -176,4 +176,26 @@ describe('extractAssessmentFromResponse: garbled tool calls (seen in production)
   it('still accepts ordinary text that mentions angle brackets', () => {
     expect(extractAssessmentFromResponse(respond({ headline: 'h', strengths: ['Knows x < 3 means less than'], narrative: 'n' }))).not.toBeNull()
   })
+  it('recovers a list field sent as a string of <item> entries (9 Nov)', () => {
+    const result = extractAssessmentFromResponse(respond({
+      headline: 'h',
+      strengths: '\n<item>Full marks on moles.</item>\n<item>3/4 on bond energy.</item>\n',
+      areasToImprove: [],
+      recommendedActions: ['Revisit ionic bonding'],
+      narrative: 'n',
+    }))
+    expect(result.strengths).toEqual(['Full marks on moles.', '3/4 on bond energy.'])
+  })
+
+  it('rejects an <item> string with other fields leaked after it (9 Nov)', () => {
+    expect(extractAssessmentFromResponse(respond({
+      headline: 'h',
+      strengths: '<item>a</item>\n</strengths>\n<areasToImprove>\n<item>b</item>',
+      narrative: 'n',
+    }))).toBeNull()
+  })
+
+  it('rejects stray field tags left in the narrative', () => {
+    expect(extractAssessmentFromResponse(respond({ headline: 'h', narrative: 'Overall fine.</narrative>\n' }))).toBeNull()
+  })
 })

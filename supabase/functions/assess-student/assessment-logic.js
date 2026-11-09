@@ -61,14 +61,29 @@ function toStringArray(value) {
   return Array.isArray(value) ? value.filter((item) => typeof item === 'string') : []
 }
 
-// The model sometimes garbles a tool call, writing the remaining fields as
-// raw '<parameter name="...">' text inside one string field. Such output is
-// rejected (and retried) rather than saved.
-const LEAKED_MARKUP = /<\/?parameter\b|<\/?invoke\b/i
+// The model sometimes garbles a tool call: writing the remaining fields as
+// raw '<parameter name="...">' text inside one string field, or leaving
+// stray field tags like '</narrative>' in the text. Such output is rejected
+// (and retried) rather than saved.
+const FIELD_TAGS = 'parameter|invoke|item|headline|strengths|areasToImprove|recommendedActions|narrative'
+const LEAKED_MARKUP = new RegExp(`</?(?:${FIELD_TAGS})\\b`, 'i')
 function garbled(value) {
   if (typeof value === 'string') return LEAKED_MARKUP.test(value)
   if (Array.isArray(value)) return value.some(garbled)
   return false
+}
+
+// A list field sometimes arrives as one string of '<item>...</item>' entries
+// instead of a JSON array. Recover the entries when that's all it is;
+// otherwise return null so the reply is rejected.
+function salvageList(value) {
+  if (value == null || Array.isArray(value)) return value
+  if (typeof value !== 'string') return null
+  const items = [...value.matchAll(/<item>([\s\S]*?)<\/item>/g)].map((m) => m[1].trim()).filter(Boolean)
+  if (items.length === 0) return null
+  const leftover = value.replace(/<item>[\s\S]*?<\/item>/g, '').trim()
+  if (leftover) return null
+  return items
 }
 
 // Parses the Anthropic Messages API response, expecting a forced tool_use
@@ -82,14 +97,15 @@ export function extractAssessmentFromResponse(anthropicResponseJson) {
     return null
   }
   if (!input.headline.trim() || !input.narrative.trim()) return null
-  const lists = [input.strengths, input.areasToImprove, input.recommendedActions]
-  if (lists.some((v) => v != null && !Array.isArray(v))) return null
+  const lists = [input.strengths, input.areasToImprove, input.recommendedActions].map(salvageList)
+  if (lists.some((v) => v === null)) return null
   if ([input.headline, input.narrative, ...lists].some(garbled)) return null
+  const [strengths, areasToImprove, recommendedActions] = lists
   return {
     headline: input.headline,
-    strengths: toStringArray(input.strengths),
-    areasToImprove: toStringArray(input.areasToImprove),
-    recommendedActions: toStringArray(input.recommendedActions),
+    strengths: toStringArray(strengths),
+    areasToImprove: toStringArray(areasToImprove),
+    recommendedActions: toStringArray(recommendedActions),
     narrative: input.narrative,
   }
 }

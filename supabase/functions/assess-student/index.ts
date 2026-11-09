@@ -222,6 +222,9 @@ Deno.serve(async (req) => {
         {
           name: 'submit_assessment',
           description: 'Submit a structured progress assessment for the student',
+          // strict: the API enforces the schema, so list fields come back as
+          // real JSON arrays rather than strings of <item>/<parameter> markup.
+          strict: true,
           input_schema: {
             type: 'object',
             properties: {
@@ -232,6 +235,7 @@ Deno.serve(async (req) => {
               narrative: { type: 'string', description: 'A short paragraph (3-5 sentences) giving the fuller picture' },
             },
             required: ['headline', 'strengths', 'areasToImprove', 'recommendedActions', 'narrative'],
+            additionalProperties: false,
           },
         },
       ],
