@@ -73,6 +73,8 @@ export default function ProgressReview() {
     setRunning(true)
     setError(null)
     setLatestResult(null)
+    // A little slack for a phone clock that runs ahead of the server.
+    const startedAt = new Date(Date.now() - 2 * 60 * 1000).toISOString()
     try {
       const { data: { session } } = await supabase.auth.getSession()
       const res = await fetch(`${import.meta.env.VITE_SUPABASE_URL}/functions/v1/assess-student`, {
@@ -90,7 +92,23 @@ export default function ProgressReview() {
       refresh()
     } catch (err) {
       console.error(err)
-      setError('Could not run the assessment right now. Try again in a moment.')
+      // The review can take ~30s; on a phone the response is sometimes lost
+      // even though the server finished and saved it. Show that one if so.
+      const { data: saved } = await supabase
+        .from('assessments')
+        .select('result')
+        .eq('student_id', childStudent?.id)
+        .eq('status', 'complete')
+        .gte('requested_at', startedAt)
+        .order('requested_at', { ascending: false })
+        .limit(1)
+        .maybeSingle()
+      if (saved?.result) {
+        setLatestResult(saved.result)
+        refresh()
+      } else {
+        setError('Could not run the assessment right now. Try again in a moment.')
+      }
     } finally {
       setRunning(false)
     }

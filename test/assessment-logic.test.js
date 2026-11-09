@@ -195,7 +195,9 @@ describe('extractAssessmentFromResponse: garbled tool calls (seen in production)
     }))).toBeNull()
   })
 
-  it('rejects stray field tags left in the narrative', () => {
-    expect(extractAssessmentFromResponse(respond({ headline: 'h', narrative: 'Overall fine.</narrative>\n' }))).toBeNull()
+  it('strips a stray closing tag left at the end of the narrative (9 Nov)', () => {
+    const result = extractAssessmentFromResponse(respond({ headline: 'h', strengths: ['a</item>'], narrative: 'Overall fine.</narrative>\n' }))
+    expect(result.narrative).toBe('Overall fine.')
+    expect(result.strengths).toEqual(['a'])
   })
 })

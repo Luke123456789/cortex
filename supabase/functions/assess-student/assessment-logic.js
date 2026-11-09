@@ -61,12 +61,15 @@ function toStringArray(value) {
   return Array.isArray(value) ? value.filter((item) => typeof item === 'string') : []
 }
 
-// The model sometimes garbles a tool call: writing the remaining fields as
-// raw '<parameter name="...">' text inside one string field, or leaving
-// stray field tags like '</narrative>' in the text. Such output is rejected
-// (and retried) rather than saved.
-const FIELD_TAGS = 'parameter|invoke|item|headline|strengths|areasToImprove|recommendedActions|narrative'
-const LEAKED_MARKUP = new RegExp(`</?(?:${FIELD_TAGS})\\b`, 'i')
+// The model sometimes garbles a tool call. Stray field tags left in the
+// text (e.g. a trailing '</narrative>') are stripped; leaked
+// '<parameter name="...">' / '<invoke>' markup means other fields were
+// swallowed into this one, so that output is rejected (and retried).
+const STRAY_TAGS = /<\/?(?:item|headline|strengths|areasToImprove|recommendedActions|narrative)>/gi
+const LEAKED_MARKUP = /<\/?(?:parameter|invoke)\b/i
+function clean(text) {
+  return text.replace(STRAY_TAGS, '').trim()
+}
 function garbled(value) {
   if (typeof value === 'string') return LEAKED_MARKUP.test(value)
   if (Array.isArray(value)) return value.some(garbled)
@@ -96,16 +99,12 @@ export function extractAssessmentFromResponse(anthropicResponseJson) {
   if (!input || typeof input.headline !== 'string' || typeof input.narrative !== 'string') {
     return null
   }
-  if (!input.headline.trim() || !input.narrative.trim()) return null
   const lists = [input.strengths, input.areasToImprove, input.recommendedActions].map(salvageList)
   if (lists.some((v) => v === null)) return null
   if ([input.headline, input.narrative, ...lists].some(garbled)) return null
-  const [strengths, areasToImprove, recommendedActions] = lists
-  return {
-    headline: input.headline,
-    strengths: toStringArray(strengths),
-    areasToImprove: toStringArray(areasToImprove),
-    recommendedActions: toStringArray(recommendedActions),
-    narrative: input.narrative,
-  }
+  const headline = clean(input.headline)
+  const narrative = clean(input.narrative)
+  if (!headline || !narrative) return null
+  const [strengths, areasToImprove, recommendedActions] = lists.map((list) => toStringArray(list).map(clean).filter(Boolean))
+  return { headline, strengths, areasToImprove, recommendedActions, narrative }
 }
