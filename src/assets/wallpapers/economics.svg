@@ -1,11 +1,13 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="240" height="240" viewBox="0 0 240 240" fill="none" stroke-linecap="round" stroke-linejoin="round">
 <g stroke="#1E2A38" stroke-opacity="0.09" stroke-width="2">
-<path d="M28 24 L28 124 L132 124"/><path d="M40 40 L120 112"/><path d="M40 112 L120 40"/>
-<path d="M150 210 L170 186 L190 196 L216 156"/><path d="M204 156 L216 156 L216 168"/>
-<ellipse cx="190" cy="92" rx="20" ry="6"/><path d="M170 92 L170 104 A20 6 0 0 0 210 104 L210 92"/><path d="M170 104 L170 116 A20 6 0 0 0 210 116 L210 104"/>
+<path d="M26 22 L26 120 L128 120"/><path d="M38 34 Q62 96 120 106"/><path d="M38 108 Q92 98 116 34"/>
+<path d="M180 36 L180 108 M164 108 L196 108 M146 50 L214 50"/><path d="M146 50 L136 78 M146 50 L156 78 M214 50 L204 78 M214 50 L224 78"/><path d="M134 78 Q146 90 158 78 Z M202 78 Q214 90 226 78 Z"/>
+<circle cx="62" cy="182" r="28"/><ellipse cx="62" cy="182" rx="12" ry="28"/><path d="M34 182 L90 182 M38 168 L86 168 M38 196 L86 196"/>
+<path d="M148 146 L148 222 L224 222"/>
 </g>
-<g stroke="#8C6A2F" stroke-opacity="0.14" stroke-width="2">
-<circle cx="80" cy="76" r="4"/>
-</g><g fill="#8C6A2F" fill-opacity="0.16" stroke="none" font-family="Georgia, 'Times New Roman', serif" font-size="44"><text x="48" y="212">£</text><text x="168" y="58">£</text>
+<g stroke="#8C6A2F" stroke-opacity="0.16" stroke-width="2">
+<circle cx="69" cy="90" r="3.5"/><path d="M69 94 L69 120 M65 90 L26 90" stroke-dasharray="3 5"/>
+<path d="M148 160 Q208 164 212 222"/><circle cx="178" cy="196" r="3.5"/>
+<path d="M28 146 Q62 120 100 150"/><path d="M92 142 L100 150 L90 154"/>
 </g>
 </svg>
