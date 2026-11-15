@@ -42,10 +42,15 @@ select id, ${lit(style)}, ${json(scheme)}, ${json(q.ao_marks || {})}, ${q.spag_m
 }
 
 // The paper itself, for a mock paper file (skipped if it already exists).
+// paper.topic (optional) marks a short paper covering one topic, such as the
+// exam practice set at the end of a study pack.
 export function paperRowSql(file) {
   const p = file.paper
-  return `insert into public.fm_papers (ref, subject_id, title, exam_board, duration_minutes, calculator, total_marks, instructions)
-select ${lit(p.ref)}, s.id, ${lit(p.title)}, ${lit(file.exam_board)}, ${p.duration_minutes}, ${p.calculator}, ${p.total_marks}, ${lit(p.instructions)}
+  const topic = p.topic
+    ? `(select t.id from public.topics t where t.subject_id = s.id and t.name = ${lit(p.topic)})`
+    : 'null'
+  return `insert into public.fm_papers (ref, subject_id, topic_id, title, exam_board, duration_minutes, calculator, total_marks, instructions)
+select ${lit(p.ref)}, s.id, ${topic}, ${lit(p.title)}, ${lit(file.exam_board)}, ${p.duration_minutes}, ${p.calculator}, ${p.total_marks}, ${lit(p.instructions)}
 from public.subjects s where s.name = ${lit(file.subject)}
 on conflict (ref) do nothing;
 `

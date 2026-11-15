@@ -284,3 +284,26 @@ button.stripDay:hover {
   font-size: var(--text-xs);
   color: var(--ink-soft);
 }
+
+/* ---- Study pack card ---- */
+.packItem {
+  border-left: 3px solid var(--brass);
+}
+
+.packItem[data-queued] {
+  border-left-color: var(--rule-strong);
+}
+
+.packBar {
+  height: 4px;
+  margin: var(--space-1) 0;
+  max-width: 220px;
+  border-radius: 2px;
+  background: var(--paper-3);
+  overflow: hidden;
+}
+
+.packBarFill {
+  height: 100%;
+  background: var(--green);
+}

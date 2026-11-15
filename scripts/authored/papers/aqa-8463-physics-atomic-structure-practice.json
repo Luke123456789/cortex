@@ -1,0 +1,149 @@
+{
+  "subject": "Physics",
+  "exam_board": "AQA",
+  "paper": {
+    "ref": "aqa-8463-atomic-structure-practice",
+    "title": "Atomic Structure: exam practice",
+    "topic": "Atomic Structure",
+    "duration_minutes": 30,
+    "calculator": true,
+    "total_marks": 25,
+    "instructions": "Exam practice for one topic: about 30 minutes. You may use a calculator. Answer all the questions. Use g = 9.8 N/kg. Equations you are not expected to remember are given in the question. Show your working in calculations: you can get marks for method even if your final answer is wrong. Questions marked 6 marks are extended answers: write in full sentences and organise your ideas."
+  },
+  "questions": [
+    {
+      "number": 1,
+      "topic": "Atomic Structure",
+      "subtopic": "Radioactive decay, nuclear radiation and nuclear equations",
+      "spec_ref": "4.4.2.1",
+      "command_word": "compare",
+      "difficulty": "foundation",
+      "total_marks": 6,
+      "question_text": "Compare alpha, beta and gamma radiation.\n\nYour answer should include what each type of radiation is, how ionising it is and how penetrating it is.\n\n(6 marks)",
+      "marking_style": "levels",
+      "ao_marks": {
+        "AO1": 6
+      },
+      "scheme": {
+        "levels": [
+          {
+            "level": 3,
+            "marks": [
+              5,
+              6
+            ],
+            "descriptor": "A detailed comparison of all three types covering what each is, ionising power and penetration (with typical absorbers or range in air), with clear comparative statements."
+          },
+          {
+            "level": 2,
+            "marks": [
+              3,
+              4
+            ],
+            "descriptor": "A description of at least two types with some comparison of ionising power or penetration."
+          },
+          {
+            "level": 1,
+            "marks": [
+              1,
+              2
+            ],
+            "descriptor": "Simple statements about one or more types of radiation."
+          }
+        ],
+        "indicative": [
+          "Alpha: two protons and two neutrons (a helium nucleus)",
+          "Beta: a high-speed electron from the nucleus",
+          "Gamma: electromagnetic radiation (a wave) from the nucleus",
+          "Alpha is the most ionising, beta less, gamma the least",
+          "Alpha is the least penetrating: stopped by paper or a few centimetres of air",
+          "Beta is stopped by a few millimetres of aluminium",
+          "Gamma is the most penetrating: only reduced by thick lead or concrete",
+          "The more ionising the radiation, the less penetrating it is"
+        ],
+        "guidance": "Level 3 needs all three types and both ionising and penetrating power."
+      }
+    },
+    {
+      "number": 2,
+      "topic": "Atomic Structure",
+      "subtopic": "Half-life, contamination and irradiation",
+      "spec_ref": "4.4.2.4",
+      "command_word": "calculate",
+      "difficulty": "higher",
+      "total_marks": 7,
+      "question_text": "The activity of a radioactive sample was measured every 2 hours:\n\n0 h: 1200 Bq\n2 h: 849 Bq\n4 h: 600 Bq\n6 h: 424 Bq\n8 h: 300 Bq\n\n(a) Give the half-life of the sample. (1 mark)\n\n(b) Calculate the activity of the sample after 12 hours. Show your working. (2 marks)\n\n(c) Calculate the net decline in activity after two half-lives, as a ratio of the starting activity. (2 marks)\n\n(d) Explain why scientists describe a radioactive isotope by its half-life, not by the time it takes for all of it to decay. (2 marks)",
+      "marking_style": "points",
+      "ao_marks": {
+        "AO1": 2,
+        "AO2": 4,
+        "AO3": 1
+      },
+      "scheme": {
+        "max": 7,
+        "points": [
+          "(a) 4 hours",
+          "(b) 12 hours = 3 half-lives",
+          "(b) 1200 → 600 → 300 → 150 Bq",
+          "(c) After two half-lives the activity is 300 Bq, so the decline is 900 Bq",
+          "(c) 900 : 1200 = 3 : 4 (0.75)",
+          "(d) Radioactive decay is random, so you cannot predict when a particular nucleus will decay",
+          "(d) The activity never reaches zero (the time for all of it to decay can't be measured), but the time for half to decay is always the same"
+        ],
+        "guidance": "In (b), allow an error carried forward from (a). This question asks for working. A correct final answer with no working scores only the mark(s) for the answer itself, not the method marks. Award each method mark when that step is shown. If the working has a slip (e.g. a wrong number copied) but the final answer is correct, withhold only the mark(s) for the step that is wrong."
+      }
+    },
+    {
+      "number": 3,
+      "topic": "Atomic Structure",
+      "subtopic": "Radioactive decay, nuclear radiation and nuclear equations",
+      "spec_ref": "4.4.2.2-4.4.2.3",
+      "command_word": "determine",
+      "difficulty": "higher",
+      "total_marks": 6,
+      "question_text": "This question is about nuclear equations.\n\n(a) Polonium-210 has an atomic number of 84. It decays by emitting an alpha particle to become an isotope of lead (Pb). Give the mass number and atomic number of the lead isotope. (2 marks)\n\n(b) Iodine-131 has an atomic number of 53. It decays by emitting a beta particle to become an isotope of xenon (Xe). Give the mass number and atomic number of the xenon isotope. (2 marks)\n\n(c) Some nuclei emit a neutron. Describe how this changes the nucleus. (2 marks)",
+      "marking_style": "points",
+      "ao_marks": {
+        "AO1": 2,
+        "AO2": 4
+      },
+      "scheme": {
+        "max": 6,
+        "points": [
+          "(a) Mass number 206",
+          "(a) Atomic number 82",
+          "(b) Mass number 131",
+          "(b) Atomic number 54",
+          "(c) The mass number decreases by 1",
+          "(c) The atomic number stays the same, so it becomes a different isotope of the same element"
+        ]
+      }
+    },
+    {
+      "number": 4,
+      "topic": "Atomic Structure",
+      "subtopic": "Background radiation, uses of radiation, fission and fusion",
+      "spec_ref": "4.4.3.1, 4.4.4.1-4.4.4.2",
+      "command_word": "explain",
+      "difficulty": "higher",
+      "total_marks": 6,
+      "question_text": "This question is about nuclear energy and radiation.\n\n(a) Give two differences between nuclear fission and nuclear fusion. (2 marks)\n\n(b) Explain why the chain reaction in a nuclear reactor must be controlled, and how this is done. (2 marks)\n\n(c) Radon is a radioactive gas that emits alpha particles. Explain why breathing in radon is a health risk, even though alpha particles cannot pass through skin. (2 marks)",
+      "marking_style": "points",
+      "ao_marks": {
+        "AO1": 3,
+        "AO2": 3
+      },
+      "scheme": {
+        "max": 6,
+        "points": [
+          "(a) Fission splits a large (heavy) nucleus; fusion joins two small (light) nuclei",
+          "(a) Fission is used in nuclear power stations; fusion happens in stars (or fission needs a neutron to be absorbed; fusion needs very high temperature and pressure)",
+          "(b) Without control, the number of fissions would increase rapidly, releasing too much energy (an explosion)",
+          "(b) Control rods absorb some of the neutrons, so fewer go on to cause fission",
+          "(c) Once breathed in, the source is inside the body (internal contamination), next to the cells of the lungs",
+          "(c) Alpha particles are strongly ionising, so they damage cells / DNA, increasing the risk of cancer"
+        ]
+      }
+    }
+  ]
+}

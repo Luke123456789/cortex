@@ -22,7 +22,7 @@ Deno.serve(async (req) => {
   const caller = await getCaller(req)
   if (!caller) return new Response(JSON.stringify({ error: 'Please sign in again.' }), { status: 401, headers: { ...corsHeaders, 'Content-Type': 'application/json' } })
 
-  const { quizId, answers, studentId } = await req.json()
+  const { quizId, answers, studentId, assignmentId } = await req.json()
   if (!quizId || !Array.isArray(answers)) {
     return new Response(JSON.stringify({ error: 'quizId and answers required' }), { status: 400, headers: { ...corsHeaders, 'Content-Type': 'application/json' } })
   }
@@ -44,16 +44,25 @@ Deno.serve(async (req) => {
   // replaces the old client-side cooldown-lock as the anti-grinding control,
   // and it's enforced here, not just hidden in the UI, so it can't be
   // bypassed by calling this function directly.
-  const { data: assignment, error: assignmentErr } = await admin
+  // If the student started from a particular assignment (e.g. a study pack
+  // step) and it still fits, that one is used; otherwise the oldest pending.
+  const pendingQuiz = () => admin
     .from('assignments')
     .select('id')
     .eq('type', 'quiz')
     .eq('quiz_id', quizId)
     .eq('student_id', student.id)
     .eq('status', 'pending')
-    .order('assigned_at', { ascending: true })
-    .limit(1)
-    .maybeSingle()
+  const wanted = typeof assignmentId === 'string' && /^[0-9a-f-]{36}$/i.test(assignmentId) ? assignmentId : null
+  let { data: assignment, error: assignmentErr } = wanted
+    ? await pendingQuiz().eq('id', wanted).maybeSingle()
+    : { data: null, error: null }
+  if (!assignment && !assignmentErr) {
+    ;({ data: assignment, error: assignmentErr } = await pendingQuiz()
+      .order('assigned_at', { ascending: true })
+      .limit(1)
+      .maybeSingle())
+  }
 
   if (assignmentErr) {
     console.error('Failed to check quiz assignment', assignmentErr)
@@ -101,6 +110,7 @@ Deno.serve(async (req) => {
       topic_id: quiz.topic_id,
       quiz_id: quiz.id,
       quiz_format: 'standard',
+      assignment_id: assignment.id,
       question_count: totalCount,
       score: correctCount,
       started_at: now,

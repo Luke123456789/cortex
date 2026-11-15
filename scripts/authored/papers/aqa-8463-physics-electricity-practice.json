@@ -1,0 +1,150 @@
+{
+  "subject": "Physics",
+  "exam_board": "AQA",
+  "paper": {
+    "ref": "aqa-8463-electricity-practice",
+    "title": "Electricity: exam practice",
+    "topic": "Electricity",
+    "duration_minutes": 30,
+    "calculator": true,
+    "total_marks": 25,
+    "instructions": "Exam practice for one topic: about 30 minutes. You may use a calculator. Answer all the questions. Use g = 9.8 N/kg. Equations you are not expected to remember are given in the question. Show your working in calculations: you can get marks for method even if your final answer is wrong. Questions marked 6 marks are extended answers: write in full sentences and organise your ideas."
+  },
+  "questions": [
+    {
+      "number": 1,
+      "topic": "Electricity",
+      "subtopic": "Series and parallel circuits",
+      "spec_ref": "4.2.2",
+      "command_word": "calculate",
+      "difficulty": "higher",
+      "total_marks": 7,
+      "question_text": "A 4.0 Ω resistor and a 12 Ω resistor are connected in parallel to a 6.0 V battery.\n\n(a) Calculate the current in the 4.0 Ω resistor. Show your working. (2 marks)\n\n(b) Calculate the current in the 12 Ω resistor. (1 mark)\n\n(c) Give the current from the battery. (1 mark)\n\n(d) Calculate the total resistance of the circuit. Show your working. (2 marks)\n\n(e) Explain why the total resistance is less than the resistance of either resistor on its own. (1 mark)",
+      "marking_style": "points",
+      "ao_marks": {
+        "AO1": 2,
+        "AO2": 5
+      },
+      "scheme": {
+        "max": 7,
+        "points": [
+          "(a) I = V ÷ R = 6.0 ÷ 4.0 (pd across each branch is 6.0 V)",
+          "(a) 1.5 A",
+          "(b) 0.50 A",
+          "(c) 2.0 A",
+          "(d) R = V ÷ I = 6.0 ÷ 2.0",
+          "(d) 3.0 Ω",
+          "(e) Adding a second branch gives the charge another path, so more current flows for the same potential difference"
+        ],
+        "guidance": "In (c) and (d), allow an error carried forward. This question asks for working. A correct final answer with no working scores only the mark(s) for the answer itself, not the method marks. Award each method mark when that step is shown. If the working has a slip (e.g. a wrong number copied) but the final answer is correct, withhold only the mark(s) for the step that is wrong."
+      }
+    },
+    {
+      "number": 2,
+      "topic": "Electricity",
+      "subtopic": "Resistance and I-V characteristics",
+      "spec_ref": "4.2.1.3",
+      "command_word": "describe",
+      "difficulty": "higher",
+      "total_marks": 6,
+      "question_text": "A student wants to investigate how the resistance of a piece of wire depends on its length.\n\nDescribe a method the student could use. Include the circuit (you can describe it in words), the measurements she should take and how she should use them.\n\n(6 marks)",
+      "marking_style": "levels",
+      "ao_marks": {
+        "AO1": 4,
+        "AO2": 2
+      },
+      "scheme": {
+        "levels": [
+          {
+            "level": 3,
+            "marks": [
+              5,
+              6
+            ],
+            "descriptor": "A clear, logically ordered method that would produce valid results, including what is measured, how it is controlled and how the results are used to reach a conclusion."
+          },
+          {
+            "level": 2,
+            "marks": [
+              3,
+              4
+            ],
+            "descriptor": "A method with most of the key steps that could produce results, with some idea of how they would be used."
+          },
+          {
+            "level": 1,
+            "marks": [
+              1,
+              2
+            ],
+            "descriptor": "Some relevant steps, but the method would not produce valid results."
+          }
+        ],
+        "indicative": [
+          "Tape the wire to a metre rule; connect a crocodile clip at the zero end",
+          "Connect the wire in series with an ammeter and a power supply (or cell)",
+          "Connect a voltmeter in parallel across the length of wire being tested",
+          "Move the second crocodile clip to set the length (e.g. 10 cm, 20 cm … 100 cm)",
+          "Record the current and potential difference for each length",
+          "Calculate resistance R = V ÷ I",
+          "Use a low pd / switch off between readings so the wire does not heat up (resistance changes with temperature)",
+          "Plot resistance against length: a straight line through the origin shows they are directly proportional"
+        ],
+        "guidance": "Level 3 needs a correct circuit, R = V ÷ I and a way of keeping the temperature of the wire steady."
+      }
+    },
+    {
+      "number": 3,
+      "topic": "Electricity",
+      "subtopic": "Power, energy transfers and the National Grid",
+      "spec_ref": "4.2.4.1-4.2.4.2",
+      "command_word": "calculate",
+      "difficulty": "higher",
+      "total_marks": 6,
+      "question_text": "An electric kettle is connected to the 230 V mains supply. Its power is 3.0 kW.\n\n(a) Calculate the current in the kettle. Give your answer to 2 significant figures. Show your working. (2 marks)\n\n(b) The kettle is switched on for 4.0 minutes. Calculate the energy transferred. Show your working. (2 marks)\n\n(c) Calculate the charge that flows through the kettle in 4.0 minutes. Show your working. (2 marks)",
+      "marking_style": "points",
+      "ao_marks": {
+        "AO2": 6
+      },
+      "scheme": {
+        "max": 6,
+        "points": [
+          "(a) I = P ÷ V = 3000 ÷ 230",
+          "(a) 13 A",
+          "(b) E = Pt = 3000 × 240",
+          "(b) 720 000 J",
+          "(c) Q = E ÷ V = 720 000 ÷ 230 (or Q = It = 13 × 240)",
+          "(c) 3100 C (3130 C)"
+        ],
+        "guidance": "In (c), 3120 C from 13 A × 240 s is acceptable. Allow an error carried forward from (a) or (b). This question asks for working. A correct final answer with no working scores only the mark(s) for the answer itself, not the method marks. Award each method mark when that step is shown. If the working has a slip (e.g. a wrong number copied) but the final answer is correct, withhold only the mark(s) for the step that is wrong."
+      }
+    },
+    {
+      "number": 4,
+      "topic": "Electricity",
+      "subtopic": "Static electricity",
+      "spec_ref": "4.2.5.1-4.2.5.2",
+      "command_word": "explain",
+      "difficulty": "higher",
+      "total_marks": 6,
+      "question_text": "This question is about static electricity.\n\n(a) A plastic comb becomes negatively charged when it is pulled through dry hair. Explain why. (2 marks)\n\n(b) Describe the electric field around an isolated, positively charged sphere. (2 marks)\n\n(c) When a car is filled with fuel, the fuel nozzle is connected to earth. Explain why. (2 marks)",
+      "marking_style": "points",
+      "ao_marks": {
+        "AO1": 3,
+        "AO2": 3
+      },
+      "scheme": {
+        "max": 6,
+        "points": [
+          "(a) Friction transfers electrons from the hair to the comb",
+          "(a) The comb gains electrons, so it has more negative charge than positive",
+          "(b) The field lines point radially outwards from the sphere",
+          "(b) The field is strongest close to the sphere and gets weaker further away",
+          "(c) Charge can build up as the fuel flows, and a spark could jump",
+          "(c) A spark could ignite the fuel vapour; earthing lets the charge flow away safely"
+        ],
+        "guidance": "In (a), any mention of protons or positive charge moving scores 0 for the first mark."
+      }
+    }
+  ]
+}

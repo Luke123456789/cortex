@@ -1,0 +1,149 @@
+{
+  "subject": "Physics",
+  "exam_board": "AQA",
+  "paper": {
+    "ref": "aqa-8463-particle-model-practice",
+    "title": "Particle Model of Matter: exam practice",
+    "topic": "Particle Model of Matter",
+    "duration_minutes": 30,
+    "calculator": true,
+    "total_marks": 25,
+    "instructions": "Exam practice for one topic: about 30 minutes. You may use a calculator. Answer all the questions. Use g = 9.8 N/kg. Equations you are not expected to remember are given in the question. Show your working in calculations: you can get marks for method even if your final answer is wrong. Questions marked 6 marks are extended answers: write in full sentences and organise your ideas."
+  },
+  "questions": [
+    {
+      "number": 1,
+      "topic": "Particle Model of Matter",
+      "subtopic": "Density and changes of state",
+      "spec_ref": "4.3.1.1-4.3.1.2",
+      "command_word": "explain",
+      "difficulty": "foundation",
+      "total_marks": 6,
+      "question_text": "Water can be a solid (ice), a liquid or a gas (steam).\n\nUse the particle model to explain the differences between the three states, and what happens to the particles when ice melts and when water boils.\n\n(6 marks)",
+      "marking_style": "levels",
+      "ao_marks": {
+        "AO1": 6
+      },
+      "scheme": {
+        "levels": [
+          {
+            "level": 3,
+            "marks": [
+              5,
+              6
+            ],
+            "descriptor": "A clear, detailed explanation of the arrangement and movement of particles in all three states, linked to density, and of what happens to the particles and their energy during melting and boiling."
+          },
+          {
+            "level": 2,
+            "marks": [
+              3,
+              4
+            ],
+            "descriptor": "Some description of the particles in at least two states and some idea of what happens when a substance changes state."
+          },
+          {
+            "level": 1,
+            "marks": [
+              1,
+              2
+            ],
+            "descriptor": "Simple statements about solids, liquids or gases, with little explanation."
+          }
+        ],
+        "indicative": [
+          "Solid: particles closely packed in a regular arrangement, vibrating about fixed positions",
+          "Liquid: particles close together but randomly arranged, able to move past each other",
+          "Gas: particles far apart, moving quickly in random directions",
+          "Gases are much less dense because the particles are far apart",
+          "When ice melts, energy is used to overcome (break) the forces between the particles, so they can move around",
+          "When water boils, the particles gain enough energy to escape from the liquid completely",
+          "During melting and boiling the temperature stays constant: the energy increases the potential energy (internal energy), not the kinetic energy",
+          "Mass is conserved in a change of state; it is a physical change, so it can be reversed"
+        ],
+        "guidance": "Level 3 needs all three states and both changes of state."
+      }
+    },
+    {
+      "number": 2,
+      "topic": "Particle Model of Matter",
+      "subtopic": "Internal energy and specific latent heat",
+      "spec_ref": "4.3.2.2-4.3.2.3",
+      "command_word": "calculate",
+      "difficulty": "higher",
+      "total_marks": 7,
+      "question_text": "A 0.20 kg block of ice at −10 °C is heated until it becomes water at 20 °C.\n\nSpecific heat capacity of ice = 2100 J/kg °C\nSpecific latent heat of fusion of ice = 334 000 J/kg\nSpecific heat capacity of water = 4200 J/kg °C\nchange in thermal energy = mass × specific heat capacity × temperature change\nthermal energy for a change of state = mass × specific latent heat\n\n(a) Calculate the energy needed to warm the ice from −10 °C to 0 °C. Show your working. (2 marks)\n\n(b) Calculate the energy needed to melt the ice at 0 °C. Show your working. (2 marks)\n\n(c) Calculate the energy needed to warm the water from 0 °C to 20 °C. (1 mark)\n\n(d) Calculate the total energy needed. (1 mark)\n\n(e) Which stage needs the most energy? (1 mark)",
+      "marking_style": "points",
+      "ao_marks": {
+        "AO2": 7
+      },
+      "scheme": {
+        "max": 7,
+        "points": [
+          "(a) ΔE = 0.20 × 2100 × 10",
+          "(a) 4200 J",
+          "(b) E = mL = 0.20 × 334 000",
+          "(b) 66 800 J",
+          "(c) 0.20 × 4200 × 20 = 16 800 J",
+          "(d) 87 800 J",
+          "(e) Melting the ice"
+        ],
+        "guidance": "In (d), allow an error carried forward from (a) to (c). This question asks for working. A correct final answer with no working scores only the mark(s) for the answer itself, not the method marks. Award each method mark when that step is shown. If the working has a slip (e.g. a wrong number copied) but the final answer is correct, withhold only the mark(s) for the step that is wrong."
+      }
+    },
+    {
+      "number": 3,
+      "topic": "Particle Model of Matter",
+      "subtopic": "Particle motion in gases and gas pressure",
+      "spec_ref": "4.3.3.1-4.3.3.2",
+      "command_word": "explain",
+      "difficulty": "higher",
+      "total_marks": 6,
+      "question_text": "A gas is trapped in a sealed syringe. Its temperature stays constant.\n\n(a) The gas has a pressure of 100 kPa and a volume of 60 cm³. The plunger is pushed in until the volume is 40 cm³.\n\npressure × volume = constant\n\nCalculate the new pressure. Show your working. (2 marks)\n\n(b) Explain, in terms of particles, why the pressure increases when the volume decreases. (2 marks)\n\n(c) Describe how the motion of the gas particles is related to the temperature of the gas. (2 marks)",
+      "marking_style": "points",
+      "ao_marks": {
+        "AO1": 2,
+        "AO2": 4
+      },
+      "scheme": {
+        "max": 6,
+        "points": [
+          "(a) p₂ = 100 × 60 ÷ 40",
+          "(a) 150 kPa",
+          "(b) The particles have less space, so they hit the walls more often",
+          "(b) So there are more collisions per second on each unit area, giving a larger force per unit area (pressure)",
+          "(c) The particles move constantly in random directions",
+          "(c) The higher the temperature, the greater the average kinetic energy (speed) of the particles"
+        ],
+        "guidance": "In (b), 'the particles move faster' scores 0: the temperature is constant. This question asks for working. A correct final answer with no working scores only the mark(s) for the answer itself, not the method marks. Award each method mark when that step is shown. If the working has a slip (e.g. a wrong number copied) but the final answer is correct, withhold only the mark(s) for the step that is wrong."
+      }
+    },
+    {
+      "number": 4,
+      "topic": "Particle Model of Matter",
+      "subtopic": "Density and changes of state",
+      "spec_ref": "4.3.1.1, 4.3.2.1",
+      "command_word": "calculate",
+      "difficulty": "foundation",
+      "total_marks": 6,
+      "question_text": "(a) What is meant by the internal energy of a substance? (2 marks)\n\n(b) A metal block measures 5.0 cm × 4.0 cm × 2.0 cm and has a mass of 0.304 kg. Calculate the density of the metal in kg/m³. Show your working. (3 marks)\n\n(c) The block is melted. What happens to its mass? (1 mark)",
+      "marking_style": "points",
+      "ao_marks": {
+        "AO1": 3,
+        "AO2": 3
+      },
+      "scheme": {
+        "max": 6,
+        "points": [
+          "(a) The total energy stored by the particles (atoms or molecules) of the substance",
+          "(a) The sum of their kinetic energy and potential energy",
+          "(b) Volume = 5.0 × 4.0 × 2.0 = 40 cm³ = 4.0 × 10⁻⁵ m³",
+          "(b) ρ = m ÷ V = 0.304 ÷ 4.0 × 10⁻⁵",
+          "(b) 7600 kg/m³",
+          "(c) It stays the same (mass is conserved)"
+        ],
+        "guidance": "In (b), 7.6 g/cm³ from correct working scores 2. This question asks for working. A correct final answer with no working scores only the mark(s) for the answer itself, not the method marks. Award each method mark when that step is shown. If the working has a slip (e.g. a wrong number copied) but the final answer is correct, withhold only the mark(s) for the step that is wrong."
+      }
+    }
+  ]
+}

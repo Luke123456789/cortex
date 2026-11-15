@@ -9,10 +9,11 @@ export function useAssignments(studentId) {
   const fetchAssignments = useCallback(async () => {
     const { data, error } = await supabase
       .from('assignments')
-      .select('id, type, title, note, due_at, assigned_at, status, completed_at, quiz_id, subtopic_id, exam_question_id, fm_attempt_id, subject_id, topic_id, paper_ref, started_at')
+      .select('id, type, title, note, due_at, assigned_at, status, completed_at, quiz_id, subtopic_id, exam_question_id, fm_attempt_id, subject_id, topic_id, paper_ref, started_at, pack_id, pack_position')
       .eq('student_id', studentId)
       .order('assigned_at', { ascending: false })
-      .limit(100)
+      // Packs add a row per step, so this is generous.
+      .limit(400)
 
     if (error) {
       console.error('Failed to load assignments', error)

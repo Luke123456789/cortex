@@ -55,28 +55,25 @@ where not exists (select 1 from questions q where ${HASH_SQL('q.question_text')}
 const subs = Object.keys(authored).map((name) => ({ name, ...subtopicOrder.get(name) }))
 const subValues = subs.map((s) => `  (${sqlString(s.name)}, ${sqlString(`${s.name} quiz`)}, ${10 + s.order})`).join(',\n')
 out.push(`
-create temporary table new_subtopic_quizzes (quiz_id uuid, subtopic_id uuid) on commit drop;
+-- One quiz per subtopic (quizzes.subtopic_id set), holding every active
+-- question in the subtopic, oldest first. Skips a subtopic that already has one.
 with v(sub, title, ord) as (values
 ${subValues}
 ), ins as (
-  insert into quizzes (topic_id, title, display_order, question_count, cooldown_hours)
-  select t.id, v.title, v.ord, 0, 168
+  insert into quizzes (topic_id, subtopic_id, title, display_order, question_count, cooldown_hours)
+  select t.id, s.id, v.title, v.ord, 0, 168
   from v
   join subtopics s on s.name = v.sub
   join topics t on t.id = s.topic_id
   join subjects j on j.id = t.subject_id and j.name = 'Physics'
-  where not exists (select 1 from quizzes z where z.topic_id = t.id and z.title = v.title)
-  returning id, topic_id, title
+  where not exists (select 1 from quizzes z where z.subtopic_id = s.id)
+  returning id, subtopic_id
 )
-insert into new_subtopic_quizzes (quiz_id, subtopic_id)
-select ins.id, s.id from ins join v on v.title = ins.title join subtopics s on s.topic_id = ins.topic_id and s.name = v.sub;
-
--- Every active question in the subtopic, oldest first.
 insert into quiz_questions (quiz_id, question_id, position)
-select n.quiz_id, q.id, row_number() over (partition by n.quiz_id order by q.created_at, q.id)
-from new_subtopic_quizzes n join questions q on q.subtopic_id = n.subtopic_id and q.active;
+select ins.id, q.id, row_number() over (partition by ins.id order by q.created_at, q.id)
+from ins join questions q on q.subtopic_id = ins.subtopic_id and q.active;
 
 update quizzes z set question_count = (select count(*) from quiz_questions qq join questions q on q.id = qq.question_id where qq.quiz_id = z.id and q.active)
-where z.id in (select quiz_id from new_subtopic_quizzes);`)
+where z.subtopic_id is not null and z.question_count = 0;`)
 out.push('commit;')
 console.log(out.join('\n'))
