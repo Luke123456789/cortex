@@ -39,7 +39,8 @@ const PAGES = [
   ...(process.env.SHOTS_QUIZ_ID ? [{ name: 'student-play-quiz', path: `/play/${process.env.SHOTS_QUIZ_ID}` }] : []),
   // Parent mode
   { name: 'parent-overview', path: '/parent' },
-  { name: 'parent-assign', path: '/parent/assign' },
+  { name: 'parent-workload', path: '/parent/workload' },
+  { name: 'parent-workload-assigned', path: '/parent/workload?tab=assigned' },
   { name: 'parent-locks', path: '/parent/locks' },
   { name: 'parent-redemptions', path: '/parent/redemptions' },
   { name: 'parent-transcripts', path: '/parent/tutor-sessions' },
