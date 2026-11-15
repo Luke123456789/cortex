@@ -1,6 +1,8 @@
 import { useMemo, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { useAssignments } from '../hooks/useAssignments'
+import { useStudyPacks } from '../hooks/useStudyPacks'
+import { collapsePacks } from '../lib/studyPacks'
 import { useAuth } from '../hooks/useAuth.jsx'
 import { useCatalogNames } from '../hooks/useCatalogNames'
 import { ASSIGNMENT_TYPE_LABELS, assignmentAction } from '../lib/assignments'
@@ -11,7 +13,36 @@ function formatTime(isoString) {
   return new Date(isoString).toLocaleString([], { day: '2-digit', month: 'short', hour: '2-digit', minute: '2-digit' })
 }
 
+// A study pack: one card with progress and what to do next.
+function PackItem({ pack, where, showDue }) {
+  const action = assignmentAction(pack)
+  const { done, total, next } = pack.progress
+  return (
+    <li className={`card ${styles.item} ${styles.packItem}`} data-queued={!pack.isCurrent || undefined}>
+      <div className={styles.itemText}>
+        <div className={styles.itemTitle}>{pack.title} study pack</div>
+        {where && <div className={styles.where}>{where}</div>}
+        <div className="meta">
+          {done} of {total} done
+          {showDue && pack.due_at ? ` · ${dueLabel(pack.due_at)}` : ''}
+        </div>
+        <div className={styles.packBar} role="img" aria-label={`${done} of ${total} steps done`}>
+          <div className={styles.packBarFill} style={{ width: `${(done / total) * 100}%` }} />
+        </div>
+        <p className={styles.itemNote}>
+          {pack.isCurrent ? <>Next: {next.title}</> : <>Up next, after the {pack.waitingFor} pack</>}
+        </p>
+        {pack.note && <p className={styles.itemNote}>{pack.note}</p>}
+      </div>
+      <div className={styles.itemAction}>
+        <Link to={action.to} className={`btn ${pack.isCurrent ? 'btn--primary' : 'btn--secondary'} btn--small`}>{action.label}</Link>
+      </div>
+    </li>
+  )
+}
+
 function Item({ assignment, where, showDue = false }) {
+  if (assignment.isPack) return <PackItem pack={assignment} where={where} showDue={showDue} />
   const action = assignmentAction(assignment)
   return (
     <li className={`card ${styles.item}`}>
@@ -40,7 +71,10 @@ function Item({ assignment, where, showDue = false }) {
 // assigned work doesn't land as one long list.
 export default function Assignments() {
   const { studentId } = useAuth()
-  const { assignments, loading } = useAssignments(studentId)
+  const { assignments: raw, loading } = useAssignments(studentId)
+  const { packs } = useStudyPacks(studentId, raw)
+  // Each pending study pack is one entry instead of its steps.
+  const assignments = useMemo(() => collapsePacks(raw, packs), [raw, packs])
   const names = useCatalogNames()
   const whereOf = (a) => [names.subjects.get(a.subject_id), names.topics.get(a.topic_id)].filter(Boolean).join(' · ')
   const week = useMemo(() => groupWeek(assignments), [assignments])

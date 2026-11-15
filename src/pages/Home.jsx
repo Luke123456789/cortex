@@ -4,6 +4,8 @@ import { Link } from 'react-router-dom'
 import { useLedger } from '../hooks/useLedger'
 import { useRedemptions } from '../hooks/useRedemptions'
 import { useAssignments } from '../hooks/useAssignments'
+import { useStudyPacks } from '../hooks/useStudyPacks'
+import { collapsePacks } from '../lib/studyPacks'
 import { useAuth } from '../hooks/useAuth.jsx'
 import { ASSIGNMENT_TYPE_LABELS, assignmentAction } from '../lib/assignments'
 import { dueLabel, upNext } from '../lib/week'
@@ -22,7 +24,10 @@ export default function Home() {
   const { studentId, isPractice } = useAuth()
   const { entries, balance, loading, refresh: refreshLedger } = useLedger(studentId)
   const { pending, refresh: refreshRedemptions } = useRedemptions(studentId)
-  const { assignments, refresh: refreshAssignments } = useAssignments(studentId)
+  const { assignments: rawAssignments, refresh: refreshAssignments } = useAssignments(studentId)
+  const { packs } = useStudyPacks(studentId, rawAssignments)
+  // Each pending study pack shows once, not as all its steps.
+  const assignments = collapsePacks(rawAssignments, packs)
   const pendingAssignments = assignments.filter((a) => a.status === 'pending')
   const [modalOpen, setModalOpen] = useState(false)
   const [notifStatus, setNotifStatus] = useState('checking')
@@ -117,8 +122,11 @@ export default function Home() {
                     return (
                       <li key={a.id} className={`card ${styles.workItem}`}>
                         <div>
-                          <div className={styles.workTitle}>{a.title}</div>
-                          <span className="meta">{ASSIGNMENT_TYPE_LABELS[a.type] || a.type}{a.due_at ? ` · ${dueLabel(a.due_at)}` : ''}</span>
+                          <div className={styles.workTitle}>{a.isPack ? `${a.title} study pack` : a.title}</div>
+                          <span className="meta">
+                            {a.isPack ? `${a.progress.done} of ${a.progress.total} done${a.isCurrent ? '' : ' · up next'}` : ASSIGNMENT_TYPE_LABELS[a.type] || a.type}
+                            {a.due_at ? ` · ${dueLabel(a.due_at)}` : ''}
+                          </span>
                         </div>
                         {action ? (
                           <Link to={action.to} className="btn btn--primary btn--small">{action.label}</Link>

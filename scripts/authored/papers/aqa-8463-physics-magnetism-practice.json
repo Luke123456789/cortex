@@ -1,0 +1,150 @@
+{
+  "subject": "Physics",
+  "exam_board": "AQA",
+  "paper": {
+    "ref": "aqa-8463-magnetism-practice",
+    "title": "Magnetism and Electromagnetism: exam practice",
+    "topic": "Magnetism and Electromagnetism",
+    "duration_minutes": 30,
+    "calculator": true,
+    "total_marks": 25,
+    "instructions": "Exam practice for one topic: about 30 minutes. You may use a calculator. Answer all the questions. Use g = 9.8 N/kg. Equations you are not expected to remember are given in the question. Show your working in calculations: you can get marks for method even if your final answer is wrong. Questions marked 6 marks are extended answers: write in full sentences and organise your ideas."
+  },
+  "questions": [
+    {
+      "number": 1,
+      "topic": "Magnetism and Electromagnetism",
+      "subtopic": "Induced potential, generators and transformers",
+      "spec_ref": "4.7.3.1, 4.7.3.3",
+      "command_word": "explain",
+      "difficulty": "higher",
+      "total_marks": 6,
+      "question_text": "A moving-coil microphone contains a coil of wire attached to a thin diaphragm. The coil is around one pole of a permanent magnet.\n\nExplain how the microphone produces an electrical signal from sound waves.\n\n(6 marks)",
+      "marking_style": "levels",
+      "ao_marks": {
+        "AO1": 4,
+        "AO2": 2
+      },
+      "scheme": {
+        "levels": [
+          {
+            "level": 3,
+            "marks": [
+              5,
+              6
+            ],
+            "descriptor": "A clear, logically ordered explanation linking the sound wave to the movement of the coil, the induced potential difference and how the signal matches the sound."
+          },
+          {
+            "level": 2,
+            "marks": [
+              3,
+              4
+            ],
+            "descriptor": "Some explanation of how movement of the coil in the magnetic field produces a potential difference."
+          },
+          {
+            "level": 1,
+            "marks": [
+              1,
+              2
+            ],
+            "descriptor": "Simple statements about sound, coils or magnets, with little explanation."
+          }
+        ],
+        "indicative": [
+          "Sound waves are pressure variations that make the diaphragm vibrate",
+          "The coil, attached to the diaphragm, moves backwards and forwards with it",
+          "The coil moves in the magnetic field of the magnet",
+          "This induces a potential difference across the coil (the generator effect)",
+          "If the coil is part of a complete circuit, an induced current flows",
+          "The direction of the induced pd reverses each time the coil changes direction, so it is alternating",
+          "Louder sounds give larger movements and a larger pd; higher frequencies give a higher frequency signal",
+          "So the electrical signal has the same pattern (frequency and amplitude) as the sound wave"
+        ],
+        "guidance": "Level 3 needs the coil moving in the field, an induced pd, and the signal matching the sound."
+      }
+    },
+    {
+      "number": 2,
+      "topic": "Magnetism and Electromagnetism",
+      "subtopic": "Electromagnetism and the motor effect",
+      "spec_ref": "4.7.2.2",
+      "command_word": "calculate",
+      "difficulty": "higher",
+      "total_marks": 7,
+      "question_text": "A wire of length 0.20 m carries a current of 2.5 A. It is at right angles to a magnetic field of flux density 0.15 T.\n\nforce = magnetic flux density × current × length\n\n(a) Calculate the force on the wire. Show your working. (2 marks)\n\n(b) Fleming's left-hand rule is used to find the direction of the force. State what the thumb, first finger and second finger each represent. (3 marks)\n\n(c) The wire is turned so that it is parallel to the magnetic field. What is the force on the wire now? Give a reason. (2 marks)",
+      "marking_style": "points",
+      "ao_marks": {
+        "AO1": 4,
+        "AO2": 3
+      },
+      "scheme": {
+        "max": 7,
+        "points": [
+          "(a) F = BIl = 0.15 × 2.5 × 0.20",
+          "(a) 0.075 N",
+          "(b) Thumb: the direction of the force (motion)",
+          "(b) First finger: the direction of the magnetic field",
+          "(b) Second finger: the direction of the current",
+          "(c) Zero",
+          "(c) There is no force when the current is parallel to the field (the wire does not cut across the field lines)"
+        ],
+        "guidance": "This question asks for working. A correct final answer with no working scores only the mark(s) for the answer itself, not the method marks. Award each method mark when that step is shown. If the working has a slip (e.g. a wrong number copied) but the final answer is correct, withhold only the mark(s) for the step that is wrong."
+      }
+    },
+    {
+      "number": 3,
+      "topic": "Magnetism and Electromagnetism",
+      "subtopic": "Induced potential, generators and transformers",
+      "spec_ref": "4.7.3.2, 4.7.3.4",
+      "command_word": "calculate",
+      "difficulty": "higher",
+      "total_marks": 6,
+      "question_text": "This question is about generators and transformers.\n\n(a) The coil of an alternator is made to rotate faster. Give two effects this has on the output. (2 marks)\n\n(b) A step-up transformer has 120 turns on its primary coil and 2400 turns on its secondary coil. The primary pd is 12 V.\n\npotential difference across primary ÷ potential difference across secondary = number of turns on primary ÷ number of turns on secondary\n\nCalculate the secondary pd. Show your working. (2 marks)\n\n(c) Explain why the coils of a transformer are wound on an iron core. (2 marks)",
+      "marking_style": "points",
+      "ao_marks": {
+        "AO1": 4,
+        "AO2": 2
+      },
+      "scheme": {
+        "max": 6,
+        "points": [
+          "(a) The peak (maximum) potential difference increases",
+          "(a) The frequency of the alternating pd increases",
+          "(b) Vs = 12 × 2400 ÷ 120",
+          "(b) 240 V",
+          "(c) Iron is easily magnetised (a magnetic material)",
+          "(c) It carries the changing magnetic field from the primary coil through the secondary coil"
+        ],
+        "guidance": "This question asks for working. A correct final answer with no working scores only the mark(s) for the answer itself, not the method marks. Award each method mark when that step is shown. If the working has a slip (e.g. a wrong number copied) but the final answer is correct, withhold only the mark(s) for the step that is wrong."
+      }
+    },
+    {
+      "number": 4,
+      "topic": "Magnetism and Electromagnetism",
+      "subtopic": "Permanent and induced magnetism and magnetic fields",
+      "spec_ref": "4.7.1.1-4.7.1.2",
+      "command_word": "describe",
+      "difficulty": "foundation",
+      "total_marks": 6,
+      "question_text": "This question is about magnets.\n\n(a) A compass needle points north when it is away from any magnets. Explain what this shows about the Earth. (2 marks)\n\n(b) What is a magnetic material? Give two examples. (2 marks)\n\n(c) Two magnets attract each other without touching. What does this tell you about the poles facing each other and about the type of force? (2 marks)",
+      "marking_style": "points",
+      "ao_marks": {
+        "AO1": 5,
+        "AO2": 1
+      },
+      "scheme": {
+        "max": 6,
+        "points": [
+          "(a) The Earth has a magnetic field",
+          "(a) The compass needle (a small magnet) lines up with the Earth's field; this is evidence that the Earth's core is magnetic",
+          "(b) A material that is attracted to a magnet (and can be magnetised)",
+          "(b) Two of iron, steel, cobalt, nickel",
+          "(c) They are opposite poles (north facing south)",
+          "(c) The magnetic force is a non-contact force"
+        ]
+      }
+    }
+  ]
+}

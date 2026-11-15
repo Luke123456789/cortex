@@ -26,6 +26,10 @@ export default function TutorChat() {
   const { subjects, loading: catalogLoading } = useQuizCatalog(studentId)
   const [searchParams] = useSearchParams()
   const deepLinkedSubtopicId = searchParams.get('subtopicId')
+  // The assignment this session was started from, so finishing it ticks off
+  // that assignment (a study pack step) rather than an older one.
+  const deepLinkedAssignmentId = searchParams.get('assignment')
+  const assignmentFor = (id) => (deepLinkedAssignmentId && id === deepLinkedSubtopicId ? deepLinkedAssignmentId : null)
 
   const [subjectId, setSubjectId] = useState('')
   const [topicId, setTopicId] = useState('')
@@ -210,13 +214,13 @@ export default function TutorChat() {
       : openSession
         ? await supabase
             .from('tutor_sessions')
-            .update({ started_at: new Date().toISOString(), message_count: 0, messages: [], lesson_plan: null })
+            .update({ started_at: new Date().toISOString(), message_count: 0, messages: [], lesson_plan: null, assignment_id: assignmentFor(subtopicId) })
             .eq('id', openSession.id)
             .select('id')
             .single()
         : await supabase
             .from('tutor_sessions')
-            .insert({ student_id: studentId, subtopic_id: subtopicId })
+            .insert({ student_id: studentId, subtopic_id: subtopicId, assignment_id: assignmentFor(subtopicId) })
             .select('id')
             .single()
     if (sessionError) {

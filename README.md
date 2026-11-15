@@ -170,6 +170,31 @@ for each row execute function public.notify_redemption_resolved();
 Same as before, remember to turn off "Enforce JWT Verification" on the
 `notify-redemption-resolved` function itself.
 
+## Study packs
+
+A study pack bundles a topic's work so it's done in one go instead of as
+scattered single assignments. On **Assign work → Study pack**, pick a subject
+and topic: the pack lists, for each lesson in order, a tutor session, that
+lesson's quiz and a written question, then the topic's exam practice set.
+Untick anything you don't want; steps already done or already set are flagged.
+
+- Each step is an ordinary assignment (with `pack_id` / `pack_position`), so
+  marking, rewards and work history are unchanged. `study_packs` holds the
+  bundle; a trigger marks it completed when no step is pending.
+- The student sees one card per pack in "Your week" and on Home, and a pack
+  page at `/pack/:id`. Steps can be done in any order; "Next up" points to the
+  first one not done. Packs are worked one per subject at a time: later packs
+  for the same subject show as "Up next" and can be previewed, not started.
+- Finishing a quiz, tutor session or written answer ticks off the assignment
+  it was started from (links carry `?assignment=<id>`), falling back to the
+  oldest matching pending one. This keeps a pack step from being confused
+  with a loose assignment for the same lesson.
+- Lesson quizzes have `quizzes.subtopic_id`; exam practice sets are
+  `fm_papers` rows with `topic_id`. Physics has both for every lesson/topic
+  (`scripts/authoring/build-physics-subtopic-quizzes.mjs`,
+  `scripts/authored/papers/aqa-8463-physics-*-practice.json`); other subjects
+  need them added before their packs are complete (the builder shows the gaps).
+
 ## Folder structure
 
 ```

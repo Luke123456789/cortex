@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
-import { useParams, Link } from 'react-router-dom'
+import { useParams, useSearchParams, Link } from 'react-router-dom'
 import { supabase } from '../lib/supabaseClient'
 import { useAuth } from '../hooks/useAuth.jsx'
 import { useSubjectWallpaper } from '../components/shell/Wallpaper.jsx'
@@ -10,6 +10,10 @@ const optionKeys = ['a', 'b', 'c', 'd']
 
 export default function PlayQuiz() {
   const { quizId } = useParams()
+  // Started from an assignment (e.g. a study pack step): that assignment is
+  // the one ticked off, not just the oldest pending one for this quiz.
+  const [searchParams] = useSearchParams()
+  const assignmentId = searchParams.get('assignment')
   // The student themselves, or a parent's practice student (see useAuth).
   const { studentId } = useAuth()
   const [quiz, setQuiz] = useState(null)
@@ -63,6 +67,7 @@ export default function PlayQuiz() {
         body: JSON.stringify({
           studentId,
           quizId,
+          assignmentId: assignmentId || undefined,
           answers: Object.entries(answers).map(([questionId, selectedOption]) => ({ questionId, selectedOption })),
         }),
       })

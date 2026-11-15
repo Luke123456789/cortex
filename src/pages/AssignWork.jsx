@@ -4,10 +4,13 @@ import { useAuth } from '../hooks/useAuth.jsx'
 import { useAssignableCatalog } from '../hooks/useAssignableCatalog'
 import { useAssignments } from '../hooks/useAssignments'
 import { useDoneBefore } from '../hooks/useDoneBefore'
+import { useStudyPacks } from '../hooks/useStudyPacks'
+import { buildPackSteps, groupSteps, packProgress, PACK_STEP_LABELS } from '../lib/studyPacks'
 import { doneSentence } from '../lib/doneBefore'
 import styles from './AssignWork.module.css'
 
 const TYPES = [
+  { value: 'study_pack', label: 'Study pack' },
   { value: 'quiz', label: 'Quiz' },
   { value: 'tutor_session', label: 'Tutor session' },
   { value: 'written_test', label: 'Written test' },
@@ -45,9 +48,10 @@ export default function AssignWork() {
   const { subjects, topics, subtopics, quizzes, examQuestions, papers, loading: catalogLoading } = useAssignableCatalog()
   const { assignments, refresh } = useAssignments(studentId)
   const done = useDoneBefore(studentId)
+  const { packs, refresh: refreshPacks } = useStudyPacks(studentId, assignments)
   const DONE_MARK = ' ✓ done'
 
-  const [type, setType] = useState('quiz')
+  const [type, setType] = useState('study_pack')
   const [subjectId, setSubjectId] = useState('')
   const [topicId, setTopicId] = useState('')
   const [subtopicId, setSubtopicId] = useState('')
@@ -55,6 +59,8 @@ export default function AssignWork() {
   const [examQuestionId, setExamQuestionId] = useState('')
   const [paperRef, setPaperRef] = useState('')
   const [pastPaperTitle, setPastPaperTitle] = useState('')
+  // Study pack steps the parent has unticked (by step key).
+  const [excluded, setExcluded] = useState(() => new Set())
   const [note, setNote] = useState('')
   const [dueDate, setDueDate] = useState('')
   const [busy, setBusy] = useState(false)
@@ -64,7 +70,7 @@ export default function AssignWork() {
 
   useEffect(() => {
     setSuccess(null)
-  }, [studentId, type, topicId, subtopicId, quizId, examQuestionId, paperRef])
+  }, [studentId, type, topicId, subtopicId, quizId, examQuestionId, paperRef, excluded])
 
   useEffect(() => {
     if (subjects.length && !subjectId) setSubjectId(subjects[0].id)
@@ -95,11 +101,30 @@ export default function AssignWork() {
     setSubtopicId(subtopicsForTopic[0]?.id || '')
     setQuizId(quizzesForTopic[0]?.id || '')
     setExamQuestionId(examQuestionsForTopic[0]?.id || '')
+    setExcluded(new Set())
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [topicId])
 
+  // Study pack for the picked topic.
+  const topic = topics.find((x) => x.id === topicId)
+  const packSteps = type === 'study_pack' ? buildPackSteps(topic, { subtopics, quizzes, examQuestions, papers }, done, assignments) : []
+  const chosenSteps = packSteps.filter((s) => s.available && !excluded.has(s.key))
+  const availableSteps = packSteps.filter((s) => s.available)
+  const pendingPacks = packs.filter((p) => p.status === 'pending')
+  const packsAhead = pendingPacks.filter((p) => p.subject_id === subjectId)
+  const samePackPending = packsAhead.some((p) => p.topic_id === topicId)
+  function toggleStep(key) {
+    setExcluded((prev) => {
+      const next = new Set(prev)
+      if (next.has(key)) next.delete(key)
+      else next.add(key)
+      return next
+    })
+  }
+
   function canPush() {
     if (!studentId) return false
+    if (type === 'study_pack') return chosenSteps.length > 0
     if (type === 'quiz') return !!quizId
     if (type === 'tutor_session') return !!subtopicId
     if (type === 'written_test') return !!examQuestionId
@@ -121,6 +146,26 @@ export default function AssignWork() {
         note: note.trim() || null,
         due_at: dueDate ? new Date(dueDate).toISOString() : null,
         assigned_by: user.id,
+      }
+
+      if (type === 'study_pack') {
+        const { error: rpcError } = await supabase.rpc('create_study_pack', {
+          p_student: studentId,
+          p_subject: subjectId || null,
+          p_topic: topicId || null,
+          p_title: topic?.name || 'Study pack',
+          p_note: note.trim() || null,
+          p_due: base.due_at,
+          p_items: chosenSteps.map((s) => s.item),
+        })
+        if (rpcError) throw rpcError
+        setNote('')
+        setDueDate('')
+        setExcluded(new Set())
+        setSuccess(`Assigned the “${topic?.name}” study pack (${chosenSteps.length} steps) to ${target?.isPractice ? 'the practice student' : studentName || 'the student'}.`)
+        refresh()
+        refreshPacks()
+        return
       }
 
       let payload
@@ -156,6 +201,19 @@ export default function AssignWork() {
     }
   }
 
+  // Cancel the pack first, so cancelling its steps doesn't mark it completed.
+  async function cancelPack(id) {
+    if (!window.confirm('Cancel this study pack and every step not done yet?')) return
+    const { error: packError } = await supabase.from('study_packs').update({ status: 'cancelled' }).eq('id', id)
+    if (packError) console.error('Failed to cancel study pack', packError)
+    else {
+      const { error: stepsError } = await supabase.from('assignments').update({ status: 'cancelled' }).eq('pack_id', id).eq('status', 'pending')
+      if (stepsError) console.error('Failed to cancel study pack steps', stepsError)
+    }
+    refresh()
+    refreshPacks()
+  }
+
   async function cancelAssignment(id) {
     const { error: updateError } = await supabase.from('assignments').update({ status: 'cancelled' }).eq('id', id)
     if (updateError) console.error('Failed to cancel assignment', updateError)
@@ -163,8 +221,10 @@ export default function AssignWork() {
   }
 
   const pending = assignments.filter((a) => a.status === 'pending')
+  // Pack steps are listed under their pack, not one by one.
+  const loosePending = pending.filter((a) => !a.pack_id)
   // The item currently picked in the form is already waiting for this student.
-  const alreadyPending = pending.some((a) => a.type === type && (
+  const alreadyPending = type !== 'study_pack' && pending.some((a) => a.type === type && (
     (type === 'quiz' && a.quiz_id === quizId) ||
     (type === 'written_test' && a.exam_question_id === examQuestionId) ||
     (type === 'tutor_session' && a.subtopic_id === subtopicId) ||
@@ -173,7 +233,7 @@ export default function AssignWork() {
   ))
   const completed = assignments.filter((a) => a.status === 'completed').slice(0, 6)
   // The picked item has been finished before (assigned or self-started).
-  const doneEntry = !done ? null
+  const doneEntry = !done || type === 'study_pack' ? null
     : type === 'quiz' ? done.quiz.get(quizId)
     : type === 'written_test' ? done.written.get(examQuestionId)
     : type === 'tutor_session' ? done.tutor.get(subtopicId)
@@ -274,6 +334,42 @@ export default function AssignWork() {
                       </div>
                     </div>
 
+                    {type === 'study_pack' && (
+                      <div className={styles.pack}>
+                        <p className={styles.preview}>
+                          Each lesson in order: tutor session, then quiz, then a written question, with an exam practice set at the end. Untick anything you don’t want. Packs are done one at a time for each subject.
+                        </p>
+                        {groupSteps(packSteps).map((g) => (
+                          <fieldset key={g.name} className={styles.packGroup}>
+                            <legend className={styles.packLesson}>{g.name}</legend>
+                            {g.steps.map((s) => (
+                              <label key={s.key} className={styles.packStep} data-unavailable={!s.available || undefined}>
+                                <input
+                                  type="checkbox"
+                                  checked={s.available && !excluded.has(s.key)}
+                                  disabled={!s.available}
+                                  onChange={() => toggleStep(s.key)}
+                                />
+                                <span className={styles.packStepText}>
+                                  <span className={styles.packStepName}>{PACK_STEP_LABELS[s.type]}</span>
+                                  <span className="meta">{s.detail}</span>
+                                  {s.done && <span className={styles.flagDone}>Done before</span>}
+                                  {s.pending && <span className={styles.flagPending}>Already set</span>}
+                                </span>
+                              </label>
+                            ))}
+                          </fieldset>
+                        ))}
+                        <p className={styles.packCount}>
+                          {chosenSteps.length} of {availableSteps.length} steps
+                          {packsAhead.length > 0 ? ` · comes after ${packsAhead.length} ${subjectName(subjectId)} pack${packsAhead.length === 1 ? '' : 's'} already set` : ''}
+                        </p>
+                        {samePackPending && !success && (
+                          <p className={styles.duplicate}>There’s already a {topic?.name} pack waiting. Assigning this will set a second one.</p>
+                        )}
+                      </div>
+                    )}
+
                     {type === 'quiz' && (
                       quizzesForTopic.length === 0 ? (
                         <p className={styles.notice}>No quizzes for this topic.</p>
@@ -348,7 +444,7 @@ export default function AssignWork() {
                 )}
 
                 <button type="button" className="btn btn--primary btn--block" onClick={handlePush} disabled={busy || !canPush()}>
-                  {busy ? 'Pushing…' : alreadyPending && !success ? 'Push again' : 'Push to student'}
+                  {busy ? 'Pushing…' : type === 'study_pack' ? `Assign pack (${chosenSteps.length} steps)` : alreadyPending && !success ? 'Push again' : 'Push to student'}
                 </button>
 
                 {error && <p className="error-text" role="alert">{error}</p>}
@@ -365,7 +461,24 @@ export default function AssignWork() {
               <p className="empty">Nothing outstanding.</p>
             ) : (
               <ul className={styles.pending}>
-                {pending.map((a) => (
+                {pendingPacks.map((p) => {
+                  const progress = packProgress(assignments.filter((a) => a.pack_id === p.id))
+                  return (
+                    <li key={p.id} className={`card ${styles.pendingItem}`}>
+                      <div>
+                        <div className={styles.pendingTitle}>{p.title} study pack</div>
+                        <span className="meta">
+                          {subjectName(p.subject_id)} · {progress.done} of {progress.total} done · {formatTime(p.assigned_at)}
+                          {p.due_at ? ` · due ${new Date(p.due_at).toLocaleDateString([], { day: '2-digit', month: 'short' })}` : ''}
+                        </span>
+                      </div>
+                      <button type="button" className="btn btn--secondary btn--small" onClick={() => cancelPack(p.id)}>
+                        Cancel
+                      </button>
+                    </li>
+                  )
+                })}
+                {loosePending.map((a) => (
                   <li key={a.id} className={`card ${styles.pendingItem}`}>
                     <div>
                       <div className={styles.pendingTitle}>{a.title}</div>

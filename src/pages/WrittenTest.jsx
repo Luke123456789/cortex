@@ -125,6 +125,8 @@ export default function WrittenTest() {
   // Answering as part of a mock paper: ?paper=<assignment id>.
   const [searchParams] = useSearchParams()
   const paperId = searchParams.get('paper')
+  // Answering a written-test assignment: ?assignment=<id> (e.g. a study pack step).
+  const assignmentId = searchParams.get('assignment')
   const { studentId } = useAuth()
   const [question, setQuestion] = useState(null)
   const [pending, setPending] = useState(false)
@@ -153,7 +155,7 @@ export default function WrittenTest() {
         supabase.from('fm_exam_questions').select('id, question_text, command_word, total_marks, paper_ref, paper_number, topics (name, subjects (name))').eq('id', questionId).single(),
         paperId
           ? supabase.from('assignments').select('id').eq('id', paperId).eq('student_id', studentId).eq('type', 'mock_paper').eq('status', 'pending').limit(1)
-          : supabase.from('assignments').select('id').eq('student_id', studentId).eq('type', 'written_test').eq('exam_question_id', questionId).eq('status', 'pending').limit(1),
+          : supabase.from('assignments').select('id').eq('student_id', studentId).eq('type', 'written_test').eq('exam_question_id', questionId).eq('status', 'pending').order('assigned_at').limit(1),
         paperId
           ? supabase.from('fm_attempts').select('*').eq('assignment_id', paperId).eq('question_id', questionId).limit(1)
           : supabase.from('fm_attempts').select('*').eq('student_id', studentId).eq('question_id', questionId).order('submitted_at', { ascending: false }).limit(1),
@@ -264,7 +266,7 @@ export default function WrittenTest() {
       const res = await fetch(`${import.meta.env.VITE_SUPABASE_URL}/functions/v1/mark-written-answer`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${session.access_token}` },
-        body: JSON.stringify({ questionId, answer, studentId, telemetry: telemetry.current, assignmentId: paperId || undefined }),
+        body: JSON.stringify({ questionId, answer, studentId, telemetry: telemetry.current, assignmentId: paperId || assignmentId || undefined }),
       })
       const data = await res.json().catch(() => ({}))
       if (!res.ok) throw new Error(data.error || 'Marking failed. Try again in a moment.')

@@ -74,11 +74,15 @@ Deno.serve(async (req) => {
   // Written work is parent-assigned: there must be a pending assignment,
   // either for this question or a mock paper that contains it.
   let assignment: { id: string; type: string; paper_ref: string | null } | null = null
-  if (assignmentId) {
+  // The assignment the student started from (a mock paper, or a written-test
+  // step such as one in a study pack) if it still fits; otherwise the oldest
+  // pending written-test assignment for this question.
+  const wanted = typeof assignmentId === 'string' && /^[0-9a-f-]{36}$/i.test(assignmentId) ? assignmentId : null
+  if (wanted) {
     const { data, error } = await admin
       .from('assignments')
       .select('id, type, paper_ref, exam_question_id')
-      .eq('id', assignmentId)
+      .eq('id', wanted)
       .eq('student_id', student.id)
       .eq('status', 'pending')
       .maybeSingle()
@@ -87,7 +91,8 @@ Deno.serve(async (req) => {
       return json({ error: 'failed to check assignment' }, 500)
     }
     if (data && (data.type === 'mock_paper' || (data.type === 'written_test' && data.exam_question_id === questionId))) assignment = data
-  } else {
+  }
+  if (!assignment) {
     const { data, error } = await admin
       .from('assignments')
       .select('id, type, paper_ref')

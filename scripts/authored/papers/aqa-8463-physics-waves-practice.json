@@ -1,0 +1,150 @@
+{
+  "subject": "Physics",
+  "exam_board": "AQA",
+  "paper": {
+    "ref": "aqa-8463-waves-practice",
+    "title": "Waves: exam practice",
+    "topic": "Waves",
+    "duration_minutes": 30,
+    "calculator": true,
+    "total_marks": 25,
+    "instructions": "Exam practice for one topic: about 30 minutes. You may use a calculator. Answer all the questions. Use g = 9.8 N/kg. Equations you are not expected to remember are given in the question. Show your working in calculations: you can get marks for method even if your final answer is wrong. Questions marked 6 marks are extended answers: write in full sentences and organise your ideas."
+  },
+  "questions": [
+    {
+      "number": 1,
+      "topic": "Waves",
+      "subtopic": "Electromagnetic waves: properties, uses and hazards",
+      "spec_ref": "4.6.2.2",
+      "command_word": "describe",
+      "difficulty": "higher",
+      "total_marks": 6,
+      "question_text": "A student wants to investigate how light is refracted by a rectangular glass block.\n\nShe has a ray box, a glass block, a protractor, a ruler, a pencil and a sheet of paper.\n\nDescribe a method the student could use, including the measurements she should take and what she would expect to find.\n\n(6 marks)",
+      "marking_style": "levels",
+      "ao_marks": {
+        "AO1": 4,
+        "AO2": 2
+      },
+      "scheme": {
+        "levels": [
+          {
+            "level": 3,
+            "marks": [
+              5,
+              6
+            ],
+            "descriptor": "A clear, logically ordered method that would produce valid results, including what is measured, how it is controlled and how the results are used to reach a conclusion."
+          },
+          {
+            "level": 2,
+            "marks": [
+              3,
+              4
+            ],
+            "descriptor": "A method with most of the key steps that could produce results, with some idea of how they would be used."
+          },
+          {
+            "level": 1,
+            "marks": [
+              1,
+              2
+            ],
+            "descriptor": "Some relevant steps, but the method would not produce valid results."
+          }
+        ],
+        "indicative": [
+          "Place the glass block on the paper and draw around it",
+          "Draw a normal (at 90°) to one side of the block",
+          "Shine a ray of light from the ray box at the block, hitting it where the normal meets the surface",
+          "Mark the path of the ray going in and coming out with crosses or dots, then remove the block and join them up",
+          "Measure the angle of incidence and the angle of refraction from the normal with the protractor",
+          "Repeat for several angles of incidence",
+          "Work in a darkened room so the ray is easy to see",
+          "The ray bends towards the normal entering the glass and away from the normal leaving it, because light slows down in glass"
+        ],
+        "guidance": "Level 3 needs angles measured from the normal and the expected result."
+      }
+    },
+    {
+      "number": 2,
+      "topic": "Waves",
+      "subtopic": "Transverse and longitudinal waves and the wave equation",
+      "spec_ref": "4.6.1.2",
+      "command_word": "calculate",
+      "difficulty": "higher",
+      "total_marks": 7,
+      "question_text": "A sound wave has a frequency of 500 Hz and a wavelength of 0.68 m in air.\n\n(a) Calculate the speed of the sound wave in air. Show your working. (2 marks)\n\n(b) The sound wave passes into water, where its speed is 1500 m/s. Calculate its wavelength in water. Show your working. (2 marks)\n\n(c) What happens to the frequency of the wave when it passes into water? (1 mark)\n\n(d) Describe a simple method to measure the speed of sound in air outdoors. (2 marks)",
+      "marking_style": "points",
+      "ao_marks": {
+        "AO1": 3,
+        "AO2": 4
+      },
+      "scheme": {
+        "max": 7,
+        "points": [
+          "(a) v = fλ = 500 × 0.68",
+          "(a) 340 m/s",
+          "(b) λ = v ÷ f = 1500 ÷ 500",
+          "(b) 3.0 m",
+          "(c) It stays the same",
+          "(d) Measure a long distance (e.g. 100 m or more) between a sound source (e.g. clapping boards) and an observer",
+          "(d) Time how long the sound takes to travel that distance (e.g. start the stopclock when the boards are seen to clap); speed = distance ÷ time"
+        ],
+        "guidance": "This question asks for working. A correct final answer with no working scores only the mark(s) for the answer itself, not the method marks. Award each method mark when that step is shown. If the working has a slip (e.g. a wrong number copied) but the final answer is correct, withhold only the mark(s) for the step that is wrong."
+      }
+    },
+    {
+      "number": 3,
+      "topic": "Waves",
+      "subtopic": "Electromagnetic waves: properties, uses and hazards",
+      "spec_ref": "4.6.2.1, 4.6.2.3-4.6.2.4",
+      "command_word": "explain",
+      "difficulty": "foundation",
+      "total_marks": 6,
+      "question_text": "This question is about the electromagnetic spectrum.\n\n(a) Give one use for each of these electromagnetic waves: radio waves, ultraviolet and gamma rays. (3 marks)\n\n(b) Explain why gamma rays are more dangerous to people than radio waves. (2 marks)\n\n(c) Which type of electromagnetic wave has the shortest wavelength? (1 mark)",
+      "marking_style": "points",
+      "ao_marks": {
+        "AO1": 5,
+        "AO2": 1
+      },
+      "scheme": {
+        "max": 6,
+        "points": [
+          "(a) Radio waves: television or radio broadcasting / communications",
+          "(a) Ultraviolet: energy-efficient lamps / sun tanning / detecting forged banknotes",
+          "(a) Gamma rays: medical imaging or treatment (killing cancer cells) / sterilising equipment",
+          "(b) Gamma rays have a much higher frequency, so they transfer more energy",
+          "(b) Gamma rays are ionising, so they can damage cells and cause mutations (cancer); radio waves are not ionising",
+          "(c) Gamma rays"
+        ]
+      }
+    },
+    {
+      "number": 4,
+      "topic": "Waves",
+      "subtopic": "Lenses",
+      "spec_ref": "4.6.2.5",
+      "command_word": "calculate",
+      "difficulty": "foundation",
+      "total_marks": 6,
+      "question_text": "An object is placed a long way from a convex lens. The lens forms an image on a screen.\n\n(a) Describe the image formed on the screen. (3 marks)\n\n(b) The object is 3.0 cm tall and the image is 1.2 cm tall. Calculate the magnification. Show your working. (2 marks)\n\n(c) Explain why magnification has no unit. (1 mark)",
+      "marking_style": "points",
+      "ao_marks": {
+        "AO1": 3,
+        "AO2": 3
+      },
+      "scheme": {
+        "max": 6,
+        "points": [
+          "(a) Real (it can be projected onto a screen)",
+          "(a) Inverted (upside down)",
+          "(a) Smaller than the object (diminished)",
+          "(b) magnification = image height ÷ object height = 1.2 ÷ 3.0",
+          "(b) 0.40",
+          "(c) It is a ratio of two lengths with the same unit, so the units cancel"
+        ],
+        "guidance": "This question asks for working. A correct final answer with no working scores only the mark(s) for the answer itself, not the method marks. Award each method mark when that step is shown. If the working has a slip (e.g. a wrong number copied) but the final answer is correct, withhold only the mark(s) for the step that is wrong."
+      }
+    }
+  ]
+}

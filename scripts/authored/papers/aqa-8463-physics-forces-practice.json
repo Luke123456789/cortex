@@ -1,0 +1,150 @@
+{
+  "subject": "Physics",
+  "exam_board": "AQA",
+  "paper": {
+    "ref": "aqa-8463-forces-practice",
+    "title": "Forces: exam practice",
+    "topic": "Forces",
+    "duration_minutes": 30,
+    "calculator": true,
+    "total_marks": 25,
+    "instructions": "Exam practice for one topic: about 30 minutes. You may use a calculator. Answer all the questions. Use g = 9.8 N/kg. Equations you are not expected to remember are given in the question. Show your working in calculations: you can get marks for method even if your final answer is wrong. Questions marked 6 marks are extended answers: write in full sentences and organise your ideas."
+  },
+  "questions": [
+    {
+      "number": 1,
+      "topic": "Forces",
+      "subtopic": "Momentum",
+      "spec_ref": "4.5.7.1-4.5.7.3",
+      "command_word": "explain",
+      "difficulty": "higher",
+      "total_marks": 7,
+      "question_text": "A cricket ball of mass 0.16 kg is travelling at 25 m/s. A fielder catches it and brings it to rest in 0.080 s.\n\n(a) Calculate the momentum of the ball before it is caught. Show your working. (2 marks)\n\n(b) Calculate the average force on the ball while it is being caught. Show your working. (2 marks)\n\n(c) Explain why the fielder moves their hands backwards while catching the ball. (3 marks)",
+      "marking_style": "points",
+      "ao_marks": {
+        "AO1": 2,
+        "AO2": 5
+      },
+      "scheme": {
+        "max": 7,
+        "points": [
+          "(a) p = mv = 0.16 × 25",
+          "(a) 4.0 kg m/s",
+          "(b) F = change in momentum ÷ time = 4.0 ÷ 0.080",
+          "(b) 50 N",
+          "(c) Moving the hands back increases the time taken for the ball to stop",
+          "(c) So the rate of change of momentum is smaller",
+          "(c) So the force on the hands is smaller, which hurts less"
+        ],
+        "guidance": "In (b), allow an error carried forward from (a). This question asks for working. A correct final answer with no working scores only the mark(s) for the answer itself, not the method marks. Award each method mark when that step is shown. If the working has a slip (e.g. a wrong number copied) but the final answer is correct, withhold only the mark(s) for the step that is wrong."
+      }
+    },
+    {
+      "number": 2,
+      "topic": "Forces",
+      "subtopic": "Newton's laws of motion",
+      "spec_ref": "4.5.6.2.2",
+      "command_word": "describe",
+      "difficulty": "higher",
+      "total_marks": 6,
+      "question_text": "A student wants to investigate how the acceleration of a trolley depends on the resultant force on it.\n\nShe has a trolley, a long bench, a pulley, a string, a set of 1 N masses on a hanger, light gates connected to a data logger, and a ruler.\n\nDescribe a method the student could use. Include how she would keep the investigation fair and how she would process her results.\n\n(6 marks)",
+      "marking_style": "levels",
+      "ao_marks": {
+        "AO1": 4,
+        "AO2": 2
+      },
+      "scheme": {
+        "levels": [
+          {
+            "level": 3,
+            "marks": [
+              5,
+              6
+            ],
+            "descriptor": "A clear, logically ordered method that would produce valid results, including what is measured, how it is controlled and how the results are used to reach a conclusion."
+          },
+          {
+            "level": 2,
+            "marks": [
+              3,
+              4
+            ],
+            "descriptor": "A method with most of the key steps that could produce results, with some idea of how they would be used."
+          },
+          {
+            "level": 1,
+            "marks": [
+              1,
+              2
+            ],
+            "descriptor": "Some relevant steps, but the method would not produce valid results."
+          }
+        ],
+        "indicative": [
+          "Attach the trolley to the masses with a string over a pulley at the end of the bench",
+          "The weight of the hanging masses provides the accelerating force",
+          "Release the trolley from rest at the same point each time",
+          "Use the light gates (or a stopclock and marked distances) to measure the acceleration",
+          "Move masses from the trolley to the hanger so the total mass being accelerated stays the same",
+          "Repeat for several forces (e.g. 1 N to 5 N), taking repeat readings and calculating means",
+          "Plot acceleration against force",
+          "A straight line through the origin shows acceleration is directly proportional to force"
+        ],
+        "guidance": "Level 3 needs the total mass kept constant and a graph of acceleration against force."
+      }
+    },
+    {
+      "number": 3,
+      "topic": "Forces",
+      "subtopic": "Describing motion: speed, velocity, acceleration and graphs",
+      "spec_ref": "4.5.6.1.2, 4.5.6.1.5",
+      "command_word": "calculate",
+      "difficulty": "foundation",
+      "total_marks": 6,
+      "question_text": "A cyclist rides 1.2 km in 4.0 minutes.\n\n(a) Calculate her average speed in m/s. Show your working. (2 marks)\n\n(b) Later, she starts from rest and accelerates uniformly to 6.0 m/s in 3.0 s.\n\n(i) Calculate her acceleration. Show your working. (2 marks)\n(ii) Calculate the distance she travels in these 3.0 s, using the area under a velocity–time graph. Show your working. (2 marks)",
+      "marking_style": "points",
+      "ao_marks": {
+        "AO2": 6
+      },
+      "scheme": {
+        "max": 6,
+        "points": [
+          "(a) speed = distance ÷ time = 1200 ÷ 240",
+          "(a) 5.0 m/s",
+          "(b)(i) a = Δv ÷ t = 6.0 ÷ 3.0",
+          "(b)(i) 2.0 m/s²",
+          "(b)(ii) Distance = area of triangle = ½ × 3.0 × 6.0",
+          "(b)(ii) 9.0 m"
+        ],
+        "guidance": "In (a), 0.3 (no unit conversion) scores 1. This question asks for working. A correct final answer with no working scores only the mark(s) for the answer itself, not the method marks. Award each method mark when that step is shown. If the working has a slip (e.g. a wrong number copied) but the final answer is correct, withhold only the mark(s) for the step that is wrong."
+      }
+    },
+    {
+      "number": 4,
+      "topic": "Forces",
+      "subtopic": "Moments, levers and gears",
+      "spec_ref": "4.5.4",
+      "command_word": "calculate",
+      "difficulty": "foundation",
+      "total_marks": 6,
+      "question_text": "This question is about moments.\n\n(a) A metre rule is balanced at its centre. A 50 N weight hangs 0.30 m to the left of the centre. Calculate how far to the right of the centre a 75 N weight must hang to balance the rule. Show your working. (3 marks)\n\n(b) Explain why a tower crane has a heavy counterweight on the opposite side to the load. (2 marks)\n\n(c) State the principle of moments. (1 mark)",
+      "marking_style": "points",
+      "ao_marks": {
+        "AO1": 2,
+        "AO2": 4
+      },
+      "scheme": {
+        "max": 6,
+        "points": [
+          "(a) Anticlockwise moment = 50 × 0.30 = 15 N m",
+          "(a) 75 × d = 15",
+          "(a) d = 0.20 m",
+          "(b) The load produces a moment about the tower that could make it topple",
+          "(b) The counterweight produces a moment in the opposite direction, which balances it",
+          "(c) For an object in balance, the total clockwise moment about a pivot equals the total anticlockwise moment about that pivot"
+        ],
+        "guidance": "This question asks for working. A correct final answer with no working scores only the mark(s) for the answer itself, not the method marks. Award each method mark when that step is shown. If the working has a slip (e.g. a wrong number copied) but the final answer is correct, withhold only the mark(s) for the step that is wrong."
+      }
+    }
+  ]
+}
