@@ -1,0 +1,1959 @@
+{
+ "Conservation, dissipation and efficiency": [
+  {
+   "question": "A hairdryer is supplied with 1200 J of energy each second and transfers 900 J usefully. How much energy is wasted each second?",
+   "correct_answer": "300 J",
+   "distractors": [
+    "900 J",
+    "2100 J",
+    "0.75 J"
+   ],
+   "explanation": "Wasted energy = total input − useful output = 1200 − 900 = 300 J. 0.75 is the efficiency, not an energy.",
+   "difficulty": "medium",
+   "skill": "application",
+   "involves_calculation": true
+  },
+  {
+   "question": "Which of these would reduce unwanted energy transfers in a machine with moving parts?",
+   "correct_answer": "Lubricating the moving parts",
+   "distractors": [
+    "Running the machine faster",
+    "Using thinner connecting wires",
+    "Removing the outer casing"
+   ],
+   "explanation": "Lubrication reduces friction between moving parts, so less energy is dissipated as thermal energy.",
+   "difficulty": "easy",
+   "skill": "recall",
+   "involves_calculation": false
+  },
+  {
+   "question": "How does making a brick wall thicker affect the rate of energy transfer through it?",
+   "correct_answer": "The rate of energy transfer decreases",
+   "distractors": [
+    "The rate of energy transfer increases",
+    "The rate of energy transfer is unchanged",
+    "The wall's thermal conductivity increases"
+   ],
+   "explanation": "A thicker wall means energy has further to travel by conduction, so the rate of transfer is lower. Thermal conductivity is a property of the material and does not change.",
+   "difficulty": "medium",
+   "skill": "recall",
+   "involves_calculation": false
+  },
+  {
+   "question": "A motor has an efficiency of 0.40. Its useful energy output is 200 J. How much energy is supplied to it?",
+   "correct_answer": "500 J",
+   "distractors": [
+    "80 J",
+    "240 J",
+    "800 J"
+   ],
+   "explanation": "Total input = useful output ÷ efficiency = 200 ÷ 0.40 = 500 J. Multiplying instead gives 80 J.",
+   "difficulty": "hard",
+   "skill": "application",
+   "involves_calculation": true
+  }
+ ],
+ "Energy stores and calculating energy changes": [
+  {
+   "question": "A 0.20 kg ball is thrown straight up at 10 m/s. Ignoring air resistance, what is the maximum height it reaches? (g = 9.8 N/kg)",
+   "correct_answer": "5.1 m",
+   "distractors": [
+    "10 m",
+    "1.0 m",
+    "51 m"
+   ],
+   "explanation": "Ek = ½ × 0.20 × 10² = 10 J. At the top all of this is in the gravitational store: h = Ep ÷ (mg) = 10 ÷ (0.20 × 9.8) = 5.1 m.",
+   "difficulty": "hard",
+   "skill": "application",
+   "involves_calculation": true
+  },
+  {
+   "question": "A car doubles its speed. What happens to the energy in its kinetic energy store?",
+   "correct_answer": "It becomes four times as large",
+   "distractors": [
+    "It becomes twice as large",
+    "It stays exactly the same",
+    "It becomes half as large"
+   ],
+   "explanation": "Ek = ½mv², so kinetic energy depends on speed squared: doubling the speed multiplies Ek by 2² = 4.",
+   "difficulty": "medium",
+   "skill": "analysis",
+   "involves_calculation": false
+  },
+  {
+   "question": "An archer pulls back a bow string before firing. Which energy store increases as the string is pulled back?",
+   "correct_answer": "Elastic potential",
+   "distractors": [
+    "Kinetic",
+    "Gravitational potential",
+    "Nuclear"
+   ],
+   "explanation": "Stretching (deforming) the bow stores energy in its elastic potential store. This becomes kinetic energy of the arrow when it is released.",
+   "difficulty": "easy",
+   "skill": "recall",
+   "involves_calculation": false
+  }
+ ],
+ "National and global energy resources": [
+  {
+   "question": "Why is a gas-fired power station useful when the demand for electricity rises suddenly?",
+   "correct_answer": "It has a short start-up time",
+   "distractors": [
+    "It releases no carbon dioxide",
+    "It uses a renewable fuel",
+    "It has no fuel costs to pay"
+   ],
+   "explanation": "Gas power stations have short start-up times, so they can meet sudden increases in demand. Burning gas does release carbon dioxide and the fuel must be paid for.",
+   "difficulty": "medium",
+   "skill": "recall",
+   "involves_calculation": false
+  },
+  {
+   "question": "Which of these renewable energy resources is the most predictable?",
+   "correct_answer": "Tidal",
+   "distractors": [
+    "Wind",
+    "Solar",
+    "Wave"
+   ],
+   "explanation": "Tides happen at times that can be predicted well in advance. Wind, waves and sunlight depend on the weather.",
+   "difficulty": "medium",
+   "skill": "recall",
+   "involves_calculation": false
+  },
+  {
+   "question": "What is a major environmental problem caused by burning coal in power stations?",
+   "correct_answer": "It releases carbon dioxide and sulfur dioxide",
+   "distractors": [
+    "It produces long-lived radioactive waste",
+    "It floods large areas of land behind a dam",
+    "It disturbs habitats on the sea bed"
+   ],
+   "explanation": "Burning coal releases carbon dioxide (which contributes to climate change) and sulfur dioxide (which causes acid rain).",
+   "difficulty": "easy",
+   "skill": "recall",
+   "involves_calculation": false
+  },
+  {
+   "question": "Hydroelectric power stations usually need a dam. What is an environmental disadvantage of this?",
+   "correct_answer": "Flooding a valley destroys habitats",
+   "distractors": [
+    "It releases a lot of carbon dioxide",
+    "It produces radioactive waste",
+    "It causes acid rain from emissions"
+   ],
+   "explanation": "Building a dam floods the land behind it, destroying habitats. Generating hydroelectricity does not release carbon dioxide or radioactive waste.",
+   "difficulty": "medium",
+   "skill": "recall",
+   "involves_calculation": false
+  }
+ ],
+ "Power": [
+  {
+   "question": "A 1.5 kW kettle is switched on for 2.0 minutes. How much energy does it transfer?",
+   "correct_answer": "180 000 J",
+   "distractors": [
+    "3000 J",
+    "180 J",
+    "18 000 J"
+   ],
+   "explanation": "E = Pt = 1500 W × 120 s = 180 000 J. Using 2.0 minutes instead of 120 s gives 3000 J; leaving the power in kW gives 180 J.",
+   "difficulty": "medium",
+   "skill": "application",
+   "involves_calculation": true
+  },
+  {
+   "question": "Which of these is equal to one watt?",
+   "correct_answer": "One joule per second",
+   "distractors": [
+    "One newton per metre",
+    "One joule per minute",
+    "One coulomb per second"
+   ],
+   "explanation": "Power is the rate of energy transfer: 1 W = 1 J/s. One coulomb per second is one ampere.",
+   "difficulty": "easy",
+   "skill": "recall",
+   "involves_calculation": false
+  },
+  {
+   "question": "A crane lifts a 500 kg load through 12 m in 30 s. What is its useful power output? (g = 9.8 N/kg)",
+   "correct_answer": "1960 W",
+   "distractors": [
+    "200 W",
+    "58 800 W",
+    "5880 W"
+   ],
+   "explanation": "Energy transferred = mgh = 500 × 9.8 × 12 = 58 800 J. Power = 58 800 ÷ 30 = 1960 W.",
+   "difficulty": "hard",
+   "skill": "application",
+   "involves_calculation": true
+  },
+  {
+   "question": "A motor has a power of 250 W. How long does it take to transfer 5000 J of energy?",
+   "correct_answer": "20 s",
+   "distractors": [
+    "2 s",
+    "200 s",
+    "50 s"
+   ],
+   "explanation": "t = E ÷ P = 5000 ÷ 250 = 20 s.",
+   "difficulty": "medium",
+   "skill": "application",
+   "involves_calculation": true
+  },
+  {
+   "question": "Two motors lift identical loads through the same height. Motor A takes 4 s and motor B takes 8 s. Which statement is correct?",
+   "correct_answer": "Motor A has twice the power of motor B",
+   "distractors": [
+    "Motor B has twice the power of motor A",
+    "Both motors have the same power",
+    "Motor A does twice as much work"
+   ],
+   "explanation": "Both do the same work (same load, same height), but A does it in half the time, so A's power is twice B's.",
+   "difficulty": "medium",
+   "skill": "analysis",
+   "involves_calculation": false
+  }
+ ],
+ "Specific heat capacity": [
+  {
+   "question": "Water has a specific heat capacity of 4200 J/kg °C and oil has 2000 J/kg °C. Equal masses of each are given the same amount of energy. Which statement is correct?",
+   "correct_answer": "The oil's temperature rises more",
+   "distractors": [
+    "The water's temperature rises more",
+    "Both temperatures rise by the same amount",
+    "The water's temperature falls instead"
+   ],
+   "explanation": "Δθ = ΔE ÷ (mc). Oil has the smaller specific heat capacity, so its temperature rises more for the same energy and mass.",
+   "difficulty": "medium",
+   "skill": "analysis",
+   "involves_calculation": false
+  },
+  {
+   "question": "0.50 kg of water is supplied with 21 000 J of energy. By how much does its temperature rise? (specific heat capacity of water = 4200 J/kg °C)",
+   "correct_answer": "10 °C",
+   "distractors": [
+    "5 °C",
+    "20 °C",
+    "2.5 °C"
+   ],
+   "explanation": "Δθ = ΔE ÷ (mc) = 21 000 ÷ (0.50 × 4200) = 10 °C.",
+   "difficulty": "medium",
+   "skill": "application",
+   "involves_calculation": true
+  },
+  {
+   "question": "A student finds the specific heat capacity of a metal block. Which measurement does she NOT need?",
+   "correct_answer": "The volume of the block",
+   "distractors": [
+    "The mass of the block",
+    "The energy supplied",
+    "The temperature change"
+   ],
+   "explanation": "c = ΔE ÷ (m Δθ), so she needs the energy, the mass and the temperature change, but not the volume.",
+   "difficulty": "easy",
+   "skill": "recall",
+   "involves_calculation": false
+  },
+  {
+   "question": "In a specific heat capacity experiment, the value calculated is higher than the true value. What is the most likely reason?",
+   "correct_answer": "Energy was lost to the surroundings",
+   "distractors": [
+    "The temperature rise was measured too high",
+    "The mass used was measured too large",
+    "The joulemeter reading was too low"
+   ],
+   "explanation": "If energy is lost, the temperature rise is smaller than it should be, so ΔE ÷ (mΔθ) comes out too big. The other three would all make the value too low.",
+   "difficulty": "hard",
+   "skill": "analysis",
+   "involves_calculation": false
+  }
+ ],
+ "Charge and current": [
+  {
+   "question": "What is the unit of electric charge?",
+   "correct_answer": "Coulomb",
+   "distractors": [
+    "Ampere",
+    "Volt",
+    "Ohm"
+   ],
+   "explanation": "Charge is measured in coulombs (C). Current is in amperes, potential difference in volts and resistance in ohms.",
+   "difficulty": "easy",
+   "skill": "recall",
+   "involves_calculation": false
+  },
+  {
+   "question": "A charge of 120 C flows through a lamp in 1 minute. What is the current?",
+   "correct_answer": "2.0 A",
+   "distractors": [
+    "120 A",
+    "7200 A",
+    "0.50 A"
+   ],
+   "explanation": "I = Q ÷ t = 120 ÷ 60 = 2.0 A. Remember to convert 1 minute to 60 s.",
+   "difficulty": "medium",
+   "skill": "application",
+   "involves_calculation": true
+  },
+  {
+   "question": "Which of these is needed for a current to flow in a circuit?",
+   "correct_answer": "A closed circuit and a source of potential difference",
+   "distractors": [
+    "An open circuit and a source of potential difference",
+    "A closed circuit with no source of potential difference",
+    "A magnet held close to the wires in the circuit"
+   ],
+   "explanation": "Charge only flows if there is a complete (closed) loop and something, such as a cell, providing a potential difference.",
+   "difficulty": "medium",
+   "skill": "recall",
+   "involves_calculation": false
+  },
+  {
+   "question": "A current of 0.25 A flows for 4.0 hours. How much charge flows?",
+   "correct_answer": "3600 C",
+   "distractors": [
+    "1.0 C",
+    "60 C",
+    "14 400 C"
+   ],
+   "explanation": "t = 4.0 × 3600 = 14 400 s. Q = It = 0.25 × 14 400 = 3600 C.",
+   "difficulty": "hard",
+   "skill": "application",
+   "involves_calculation": true
+  },
+  {
+   "question": "In a metal wire, which particles move to carry the current?",
+   "correct_answer": "Electrons",
+   "distractors": [
+    "Protons",
+    "Positive ions",
+    "Neutrons"
+   ],
+   "explanation": "In metals, current is a flow of free (delocalised) electrons. The positive ions stay fixed in the lattice.",
+   "difficulty": "easy",
+   "skill": "recall",
+   "involves_calculation": false
+  }
+ ],
+ "Domestic uses and safety": [
+  {
+   "question": "What is the frequency of the UK mains supply?",
+   "correct_answer": "50 Hz",
+   "distractors": [
+    "230 Hz",
+    "60 Hz",
+    "13 Hz"
+   ],
+   "explanation": "UK mains is an alternating supply at 50 Hz and about 230 V.",
+   "difficulty": "easy",
+   "skill": "recall",
+   "involves_calculation": false
+  },
+  {
+   "question": "What is the purpose of the earth wire in an appliance with a metal case?",
+   "correct_answer": "To stop the case becoming live if there is a fault",
+   "distractors": [
+    "To carry the current back to the supply",
+    "To complete the circuit when it is switched on",
+    "To raise the potential difference of the supply"
+   ],
+   "explanation": "The earth wire only carries current if there is a fault; it stops the metal case becoming live. The neutral wire completes the circuit normally.",
+   "difficulty": "medium",
+   "skill": "recall",
+   "involves_calculation": false
+  },
+  {
+   "question": "What is the potential difference of the neutral wire?",
+   "correct_answer": "About 0 V",
+   "distractors": [
+    "About 230 V",
+    "About 50 V",
+    "About 12 V"
+   ],
+   "explanation": "The neutral wire is at or close to earth potential (0 V). The live wire is at about 230 V.",
+   "difficulty": "easy",
+   "skill": "recall",
+   "involves_calculation": false
+  },
+  {
+   "question": "What colour is the earth wire in a three-core mains cable?",
+   "correct_answer": "Green/yellow",
+   "distractors": [
+    "Brown",
+    "Blue",
+    "Red/black"
+   ],
+   "explanation": "Earth is green and yellow, live is brown and neutral is blue.",
+   "difficulty": "easy",
+   "skill": "recall",
+   "involves_calculation": false
+  },
+  {
+   "question": "What is the difference between direct and alternating potential difference?",
+   "correct_answer": "Alternating pd reverses direction; direct pd does not",
+   "distractors": [
+    "Direct pd reverses direction; alternating pd does not",
+    "Alternating pd is bigger than direct pd",
+    "Direct pd is what the mains supplies to homes"
+   ],
+   "explanation": "An alternating pd keeps changing direction (50 times a second for UK mains). A direct pd, such as from a cell, stays in one direction.",
+   "difficulty": "medium",
+   "skill": "recall",
+   "involves_calculation": false
+  }
+ ],
+ "Power, energy transfers and the National Grid": [
+  {
+   "question": "A 230 V heater draws a current of 8.0 A. How much energy does it transfer in 60 s?",
+   "correct_answer": "110 400 J",
+   "distractors": [
+    "1840 J",
+    "13 800 J",
+    "480 J"
+   ],
+   "explanation": "P = VI = 230 × 8.0 = 1840 W. E = Pt = 1840 × 60 = 110 400 J.",
+   "difficulty": "hard",
+   "skill": "application",
+   "involves_calculation": true
+  },
+  {
+   "question": "Why are step-down transformers used before electricity reaches homes?",
+   "correct_answer": "To reduce the pd to a safer level for use",
+   "distractors": [
+    "To reduce energy losses in the cables",
+    "To change alternating current to direct current",
+    "To increase the frequency of the supply"
+   ],
+   "explanation": "Step-down transformers reduce the very high transmission pd to about 230 V so it is safe to use. Step-up transformers are the ones that reduce cable losses.",
+   "difficulty": "medium",
+   "skill": "recall",
+   "involves_calculation": false
+  },
+  {
+   "question": "Which equation links power, current and resistance?",
+   "correct_answer": "P = I²R",
+   "distractors": [
+    "P = IR²",
+    "P = I ÷ R",
+    "P = R ÷ I²"
+   ],
+   "explanation": "P = I²R. It comes from P = VI with V = IR.",
+   "difficulty": "easy",
+   "skill": "recall",
+   "involves_calculation": false
+  },
+  {
+   "question": "A 9.0 V battery moves 20 C of charge around a circuit. How much energy is transferred?",
+   "correct_answer": "180 J",
+   "distractors": [
+    "2.2 J",
+    "29 J",
+    "0.45 J"
+   ],
+   "explanation": "E = QV = 20 × 9.0 = 180 J.",
+   "difficulty": "medium",
+   "skill": "application",
+   "involves_calculation": true
+  }
+ ],
+ "Resistance and I-V characteristics": [
+  {
+   "question": "A lamp has a potential difference of 6.0 V across it and a current of 0.30 A through it. What is its resistance?",
+   "correct_answer": "20 Ω",
+   "distractors": [
+    "1.8 Ω",
+    "0.050 Ω",
+    "6.3 Ω"
+   ],
+   "explanation": "R = V ÷ I = 6.0 ÷ 0.30 = 20 Ω. Multiplying gives 1.8 Ω.",
+   "difficulty": "medium",
+   "skill": "application",
+   "involves_calculation": true
+  },
+  {
+   "question": "What does the I–V graph of a resistor at constant temperature look like?",
+   "correct_answer": "A straight line through the origin",
+   "distractors": [
+    "A curve that gets less steep",
+    "A line that is flat in one direction",
+    "A curve that gets steeper and steeper"
+   ],
+   "explanation": "At constant temperature the current is directly proportional to the potential difference (an ohmic conductor), giving a straight line through the origin.",
+   "difficulty": "easy",
+   "skill": "recall",
+   "involves_calculation": false
+  },
+  {
+   "question": "How does the resistance of a light-dependent resistor (LDR) change as the light gets brighter?",
+   "correct_answer": "It decreases",
+   "distractors": [
+    "It increases",
+    "It stays the same",
+    "It reverses direction"
+   ],
+   "explanation": "An LDR's resistance falls as light intensity increases, which is why LDRs are used in circuits that switch lights on when it gets dark.",
+   "difficulty": "medium",
+   "skill": "recall",
+   "involves_calculation": false
+  },
+  {
+   "question": "In the resistance of a wire practical, how does the resistance change as the length of wire increases?",
+   "correct_answer": "It increases in proportion to the length",
+   "distractors": [
+    "It decreases in proportion to the length",
+    "It does not change with length",
+    "It increases at first then levels off"
+   ],
+   "explanation": "Resistance is directly proportional to the length of the wire: double the length, double the resistance.",
+   "difficulty": "medium",
+   "skill": "recall",
+   "involves_calculation": false
+  }
+ ],
+ "Series and parallel circuits": [
+  {
+   "question": "Two resistors are connected in parallel across a 6.0 V battery. What is the potential difference across each resistor?",
+   "correct_answer": "6.0 V",
+   "distractors": [
+    "3.0 V",
+    "12 V",
+    "0 V"
+   ],
+   "explanation": "Components in parallel each have the same potential difference across them as the supply.",
+   "difficulty": "easy",
+   "skill": "recall",
+   "involves_calculation": false
+  },
+  {
+   "question": "In a parallel circuit, the currents in the two branches are 0.20 A and 0.30 A. What is the current from the supply?",
+   "correct_answer": "0.50 A",
+   "distractors": [
+    "0.10 A",
+    "0.25 A",
+    "0.060 A"
+   ],
+   "explanation": "The total current in a parallel circuit is the sum of the branch currents: 0.20 + 0.30 = 0.50 A.",
+   "difficulty": "medium",
+   "skill": "application",
+   "involves_calculation": true
+  },
+  {
+   "question": "Why is the total resistance of two resistors in parallel less than the resistance of the smaller resistor?",
+   "correct_answer": "There are more paths for the current to flow through",
+   "distractors": [
+    "The potential difference across each resistor is halved",
+    "The current in each branch is the same",
+    "The resistors share the total charge equally"
+   ],
+   "explanation": "Adding a parallel branch gives charge another path, so more current flows for the same pd and the total resistance falls.",
+   "difficulty": "hard",
+   "skill": "analysis",
+   "involves_calculation": false
+  },
+  {
+   "question": "A 2 Ω, a 3 Ω and a 5 Ω resistor are connected in series to a 20 V supply. What is the current?",
+   "correct_answer": "2.0 A",
+   "distractors": [
+    "10 A",
+    "200 A",
+    "0.50 A"
+   ],
+   "explanation": "Total resistance = 2 + 3 + 5 = 10 Ω. I = V ÷ R = 20 ÷ 10 = 2.0 A.",
+   "difficulty": "medium",
+   "skill": "application",
+   "involves_calculation": true
+  }
+ ],
+ "Static electricity": [
+  {
+   "question": "What happens when two objects with opposite charges are brought close together?",
+   "correct_answer": "They attract",
+   "distractors": [
+    "They repel",
+    "They lose charge",
+    "They become neutral"
+   ],
+   "explanation": "Opposite charges attract; like charges repel. This is a non-contact force.",
+   "difficulty": "easy",
+   "skill": "recall",
+   "involves_calculation": false
+  },
+  {
+   "question": "A charged balloon sticks to a neutral wall. Why?",
+   "correct_answer": "It induces an opposite charge on the wall's surface",
+   "distractors": [
+    "The wall already has a strong positive charge",
+    "Protons from the wall flow onto the balloon",
+    "Rubbing made the balloon into a magnet"
+   ],
+   "explanation": "The balloon's charge repels or attracts electrons in the wall, leaving the nearby surface oppositely charged, so the balloon is attracted.",
+   "difficulty": "hard",
+   "skill": "analysis",
+   "involves_calculation": false
+  },
+  {
+   "question": "What is an electric field?",
+   "correct_answer": "A region where a charge feels a force",
+   "distractors": [
+    "A region where a magnet feels a force",
+    "The path the current takes in a wire",
+    "The energy stored by a charged object"
+   ],
+   "explanation": "A charged object creates an electric field around it. Any other charge placed in the field experiences a force.",
+   "difficulty": "medium",
+   "skill": "recall",
+   "involves_calculation": false
+  },
+  {
+   "question": "How does the electric field around a charged sphere change as you move further away from it?",
+   "correct_answer": "It gets weaker",
+   "distractors": [
+    "It gets stronger",
+    "It stays the same",
+    "It reverses direction"
+   ],
+   "explanation": "The electric field is strongest close to the charged object and gets weaker with distance.",
+   "difficulty": "medium",
+   "skill": "recall",
+   "involves_calculation": false
+  },
+  {
+   "question": "Why can a spark jump from a highly charged object to an earthed conductor close to it?",
+   "correct_answer": "The strong electric field ionises the air",
+   "distractors": [
+    "The object's magnetic field collapses",
+    "Protons flow through the air to earth",
+    "The air conducts well when it is cold"
+   ],
+   "explanation": "A strong enough electric field ionises air molecules, making a conducting path; electrons then flow through the air as a spark.",
+   "difficulty": "hard",
+   "skill": "analysis",
+   "involves_calculation": false
+  },
+  {
+   "question": "A rod is rubbed with a cloth and becomes positively charged. What has happened?",
+   "correct_answer": "Electrons have moved from the rod to the cloth",
+   "distractors": [
+    "Protons have moved from the cloth to the rod",
+    "Electrons have moved from the cloth to the rod",
+    "Protons have moved from the rod to the cloth"
+   ],
+   "explanation": "Only electrons move when objects are rubbed. The rod lost electrons, leaving it with an overall positive charge.",
+   "difficulty": "medium",
+   "skill": "application",
+   "involves_calculation": false
+  }
+ ],
+ "Density and changes of state": [
+  {
+   "question": "A liquid has a density of 800 kg/m³. What is the mass of 0.050 m³ of the liquid?",
+   "correct_answer": "40 kg",
+   "distractors": [
+    "16 kg",
+    "4.0 kg",
+    "400 kg"
+   ],
+   "explanation": "m = ρV = 800 × 0.050 = 40 kg.",
+   "difficulty": "medium",
+   "skill": "application",
+   "involves_calculation": true
+  }
+ ],
+ "Atoms, isotopes and the development of the atomic model": [
+  {
+   "question": "What did the alpha particle scattering experiment show?",
+   "correct_answer": "Most of an atom's mass is in a tiny, positive nucleus",
+   "distractors": [
+    "Electrons are spread through a ball of positive charge",
+    "Atoms are solid spheres that cannot be divided",
+    "Neutrons orbit the nucleus in fixed energy levels"
+   ],
+   "explanation": "Most alpha particles passed straight through but a few bounced back, so the mass and positive charge must be concentrated in a tiny nucleus. This replaced the plum pudding model.",
+   "difficulty": "medium",
+   "skill": "recall",
+   "involves_calculation": false
+  },
+  {
+   "question": "Which particle did James Chadwick provide evidence for?",
+   "correct_answer": "The neutron",
+   "distractors": [
+    "The electron",
+    "The proton",
+    "The nucleus"
+   ],
+   "explanation": "About 20 years after the nucleus was discovered, Chadwick's experiments showed the existence of neutrons.",
+   "difficulty": "easy",
+   "skill": "recall",
+   "involves_calculation": false
+  },
+  {
+   "question": "What are isotopes of an element?",
+   "correct_answer": "Atoms with the same number of protons but different numbers of neutrons",
+   "distractors": [
+    "Atoms with the same number of neutrons but different numbers of protons",
+    "Atoms with the same mass number but different numbers of electrons",
+    "Atoms with different numbers of both protons and electrons"
+   ],
+   "explanation": "Isotopes are the same element (same number of protons) with different mass numbers because they have different numbers of neutrons.",
+   "difficulty": "easy",
+   "skill": "recall",
+   "involves_calculation": false
+  }
+ ],
+ "Background radiation, uses of radiation, fission and fusion": [
+  {
+   "question": "Which of these is a man-made source of background radiation?",
+   "correct_answer": "Nuclear weapons test fallout",
+   "distractors": [
+    "Cosmic rays from outer space",
+    "Radon gas from the ground",
+    "Rocks such as granite"
+   ],
+   "explanation": "Fallout from weapons testing and nuclear accidents is man-made. Cosmic rays, radon and rocks are natural sources.",
+   "difficulty": "easy",
+   "skill": "recall",
+   "involves_calculation": false
+  },
+  {
+   "question": "Why is the radiation dose from radon gas different in different parts of the UK?",
+   "correct_answer": "It depends on the type of rock in the area",
+   "distractors": [
+    "It depends on the height of the buildings",
+    "It depends on how close the area is to the sea",
+    "It depends on how many people live there"
+   ],
+   "explanation": "Radon is released by certain rocks, such as granite, so areas built on those rocks have higher doses.",
+   "difficulty": "medium",
+   "skill": "recall",
+   "involves_calculation": false
+  },
+  {
+   "question": "Why are very high temperatures and pressures needed for nuclear fusion?",
+   "correct_answer": "To overcome the repulsion between positive nuclei",
+   "distractors": [
+    "To split heavy nuclei into smaller nuclei",
+    "To slow down the neutrons that are released",
+    "To absorb the gamma rays that are given out"
+   ],
+   "explanation": "Nuclei are positively charged and repel each other. They must be moving very fast and be very close together to fuse.",
+   "difficulty": "hard",
+   "skill": "analysis",
+   "involves_calculation": false
+  }
+ ],
+ "Half-life, contamination and irradiation": [
+  {
+   "question": "A sample has a count rate of 640 counts per minute. What will the count rate be after 3 half-lives? (Ignore background radiation.)",
+   "correct_answer": "80 counts per minute",
+   "distractors": [
+    "213 counts per minute",
+    "320 counts per minute",
+    "160 counts per minute"
+   ],
+   "explanation": "Halve three times: 640 → 320 → 160 → 80. Dividing by 3 gives 213, which is wrong.",
+   "difficulty": "medium",
+   "skill": "application",
+   "involves_calculation": true
+  },
+  {
+   "question": "The activity of a source falls from 400 Bq to 100 Bq in 12 days. What is its half-life?",
+   "correct_answer": "6 days",
+   "distractors": [
+    "3 days",
+    "12 days",
+    "4 days"
+   ],
+   "explanation": "400 → 200 → 100 is two half-lives, so one half-life = 12 ÷ 2 = 6 days.",
+   "difficulty": "medium",
+   "skill": "application",
+   "involves_calculation": true
+  },
+  {
+   "question": "Why are isotopes with short half-lives chosen as medical tracers?",
+   "correct_answer": "Their activity falls quickly, so the patient's dose is lower",
+   "distractors": [
+    "They emit alpha particles, which are easy to detect",
+    "They stay radioactive inside the body for many years",
+    "They are more penetrating than long-lived isotopes"
+   ],
+   "explanation": "A short half-life means the source is only active for a short time, so the patient is exposed to less radiation.",
+   "difficulty": "medium",
+   "skill": "analysis",
+   "involves_calculation": false
+  }
+ ],
+ "Radioactive decay, nuclear radiation and nuclear equations": [
+  {
+   "question": "What is an alpha particle?",
+   "correct_answer": "Two protons and two neutrons",
+   "distractors": [
+    "A fast-moving electron",
+    "A high-frequency electromagnetic wave",
+    "A single neutron from the nucleus"
+   ],
+   "explanation": "An alpha particle is the same as a helium nucleus: two protons and two neutrons.",
+   "difficulty": "easy",
+   "skill": "recall",
+   "involves_calculation": false
+  },
+  {
+   "question": "Carbon-14 (atomic number 6) decays by emitting a beta particle. What is the atomic number of the new nucleus?",
+   "correct_answer": "7",
+   "distractors": [
+    "5",
+    "6",
+    "4"
+   ],
+   "explanation": "In beta decay a neutron becomes a proton, so the atomic number goes up by 1 and the mass number stays the same.",
+   "difficulty": "medium",
+   "skill": "application",
+   "involves_calculation": false
+  },
+  {
+   "question": "Radioactive decay is random. What does this mean?",
+   "correct_answer": "You cannot predict which nucleus will decay next",
+   "distractors": [
+    "The nuclei in a sample decay at the same moment",
+    "Decay can be sped up by heating the sample",
+    "Half of the nuclei decay each second"
+   ],
+   "explanation": "You can't say when a particular nucleus will decay, but you can predict how a large number of nuclei will behave on average (half-life).",
+   "difficulty": "medium",
+   "skill": "recall",
+   "involves_calculation": false
+  }
+ ],
+ "Describing motion: speed, velocity, acceleration and graphs": [
+  {
+   "question": "What does the gradient of a distance–time graph represent?",
+   "correct_answer": "Speed",
+   "distractors": [
+    "Acceleration",
+    "Distance",
+    "Resultant force"
+   ],
+   "explanation": "Gradient = change in distance ÷ change in time = speed. The gradient of a velocity–time graph is acceleration.",
+   "difficulty": "easy",
+   "skill": "recall",
+   "involves_calculation": false
+  },
+  {
+   "question": "A cyclist slows down from 12 m/s to 4.0 m/s in 2.0 s. What is the deceleration?",
+   "correct_answer": "4.0 m/s²",
+   "distractors": [
+    "8.0 m/s²",
+    "6.0 m/s²",
+    "2.0 m/s²"
+   ],
+   "explanation": "a = Δv ÷ t = (12 − 4.0) ÷ 2.0 = 4.0 m/s² (a deceleration).",
+   "difficulty": "medium",
+   "skill": "application",
+   "involves_calculation": true
+  },
+  {
+   "question": "What is the difference between speed and velocity?",
+   "correct_answer": "Velocity is speed in a given direction",
+   "distractors": [
+    "Speed is velocity in a given direction",
+    "Velocity is bigger than speed",
+    "Speed is measured in metres per second squared"
+   ],
+   "explanation": "Speed is a scalar; velocity is a vector, so it has a direction as well as a size.",
+   "difficulty": "easy",
+   "skill": "recall",
+   "involves_calculation": false
+  },
+  {
+   "question": "What is a typical walking speed for a person?",
+   "correct_answer": "1.5 m/s",
+   "distractors": [
+    "15 m/s",
+    "0.15 m/s",
+    "6.0 m/s"
+   ],
+   "explanation": "Typical speeds: walking about 1.5 m/s, running about 3 m/s, cycling about 6 m/s.",
+   "difficulty": "easy",
+   "skill": "recall",
+   "involves_calculation": false
+  }
+ ],
+ "Forces and elasticity": [
+  {
+   "question": "A spring stretches by 0.040 m when a 2.0 N force is applied. What is its spring constant?",
+   "correct_answer": "50 N/m",
+   "distractors": [
+    "0.080 N/m",
+    "20 N/m",
+    "8.0 N/m"
+   ],
+   "explanation": "k = F ÷ e = 2.0 ÷ 0.040 = 50 N/m. Multiplying gives 0.080.",
+   "difficulty": "medium",
+   "skill": "application",
+   "involves_calculation": true
+  },
+  {
+   "question": "Why is more than one force needed to stretch, bend or squash an object?",
+   "correct_answer": "With one force the object would just move",
+   "distractors": [
+    "One force cannot do any work on it",
+    "Objects change shape when they are heated",
+    "One force would compress it instead"
+   ],
+   "explanation": "With a single force there is a resultant force, so the object accelerates instead of changing shape. Stretching needs forces in opposite directions.",
+   "difficulty": "medium",
+   "skill": "analysis",
+   "involves_calculation": false
+  },
+  {
+   "question": "What is inelastic deformation?",
+   "correct_answer": "The object does not return to its original shape",
+   "distractors": [
+    "The object returns to its original shape",
+    "The object breaks cleanly into two pieces",
+    "The object stretches with no force"
+   ],
+   "explanation": "After inelastic deformation the object stays permanently stretched or bent when the forces are removed.",
+   "difficulty": "easy",
+   "skill": "recall",
+   "involves_calculation": false
+  },
+  {
+   "question": "A spring with a spring constant of 25 N/m is stretched by 0.20 m. How much elastic potential energy is stored? (elastic potential energy = 0.5 × spring constant × extension²)",
+   "correct_answer": "0.50 J",
+   "distractors": [
+    "5.0 J",
+    "2.5 J",
+    "0.25 J"
+   ],
+   "explanation": "Ee = ½ke² = 0.5 × 25 × 0.20² = 0.5 × 25 × 0.040 = 0.50 J. Forgetting to square gives 2.5 J.",
+   "difficulty": "hard",
+   "skill": "application",
+   "involves_calculation": true
+  },
+  {
+   "question": "A graph of force against extension for a spring is a straight line through the origin. What does this show?",
+   "correct_answer": "Extension is directly proportional to force",
+   "distractors": [
+    "Extension is inversely proportional to force",
+    "The spring has passed its limit of proportionality",
+    "The spring constant increases with the force"
+   ],
+   "explanation": "A straight line through the origin means the spring obeys Hooke's law, F = ke.",
+   "difficulty": "medium",
+   "skill": "analysis",
+   "involves_calculation": false
+  }
+ ],
+ "Moments, levers and gears": [
+  {
+   "question": "What is the unit of a moment?",
+   "correct_answer": "Newton-metre (N m)",
+   "distractors": [
+    "Newton (N)",
+    "Joule per metre (J/m)",
+    "Newton per metre (N/m)"
+   ],
+   "explanation": "Moment = force × perpendicular distance, so its unit is N m.",
+   "difficulty": "easy",
+   "skill": "recall",
+   "involves_calculation": false
+  },
+  {
+   "question": "Why is it easier to open a door by pushing near the handle than near the hinge?",
+   "correct_answer": "A bigger distance from the pivot gives a bigger moment",
+   "distractors": [
+    "A bigger distance from the pivot gives a smaller moment",
+    "The door's weight is smaller near the handle",
+    "Friction at the hinge is lower near the handle"
+   ],
+   "explanation": "The hinge is the pivot. Pushing further from it increases the moment for the same force, so less force is needed.",
+   "difficulty": "medium",
+   "skill": "analysis",
+   "involves_calculation": false
+  },
+  {
+   "question": "A 5.0 N force acts 0.40 m from a pivot. What force, acting 0.10 m from the pivot on the other side, would balance it?",
+   "correct_answer": "20 N",
+   "distractors": [
+    "1.25 N",
+    "2.0 N",
+    "0.50 N"
+   ],
+   "explanation": "Clockwise moment = anticlockwise moment: 5.0 × 0.40 = F × 0.10, so F = 2.0 ÷ 0.10 = 20 N.",
+   "difficulty": "medium",
+   "skill": "application",
+   "involves_calculation": true
+  },
+  {
+   "question": "What does the principle of moments state?",
+   "correct_answer": "For a balanced object, total clockwise moment equals total anticlockwise moment",
+   "distractors": [
+    "For a balanced object, the forces on each side of the pivot are equal",
+    "For a balanced object, the distances on each side of the pivot are equal",
+    "For a balanced object, there is no force acting on the pivot"
+   ],
+   "explanation": "If an object is balanced, the sum of the clockwise moments about the pivot equals the sum of the anticlockwise moments.",
+   "difficulty": "easy",
+   "skill": "recall",
+   "involves_calculation": false
+  },
+  {
+   "question": "A small gear with 10 teeth drives a large gear with 40 teeth. How does the large gear turn compared with the small gear?",
+   "correct_answer": "More slowly, with a bigger moment",
+   "distractors": [
+    "Faster, with a bigger moment",
+    "More slowly, with a smaller moment",
+    "At the same speed and moment"
+   ],
+   "explanation": "A larger driven gear turns more slowly but the force acts at a bigger radius, so it gives a bigger moment.",
+   "difficulty": "hard",
+   "skill": "analysis",
+   "involves_calculation": false
+  }
+ ],
+ "Momentum": [
+  {
+   "question": "What is the unit of momentum?",
+   "correct_answer": "kg m/s",
+   "distractors": [
+    "kg m/s²",
+    "N/m",
+    "J/s"
+   ],
+   "explanation": "Momentum = mass × velocity, so its unit is kg m/s.",
+   "difficulty": "easy",
+   "skill": "recall",
+   "involves_calculation": false
+  },
+  {
+   "question": "What does conservation of momentum mean?",
+   "correct_answer": "In a closed system, total momentum before equals total momentum after",
+   "distractors": [
+    "In a closed system, total kinetic energy is the same after",
+    "In a closed system, total momentum after a collision is zero",
+    "In a closed system, heavier objects keep their momentum"
+   ],
+   "explanation": "In a closed system the total momentum before an event (such as a collision or explosion) equals the total momentum after.",
+   "difficulty": "medium",
+   "skill": "recall",
+   "involves_calculation": false
+  },
+  {
+   "question": "Two skaters stand still on ice, then push apart. The 60 kg skater moves off at 2.0 m/s. How fast does the 40 kg skater move?",
+   "correct_answer": "3.0 m/s",
+   "distractors": [
+    "2.0 m/s",
+    "1.3 m/s",
+    "5.0 m/s"
+   ],
+   "explanation": "Total momentum before is zero, so the skaters have equal and opposite momentum after: 60 × 2.0 = 40 × v, so v = 120 ÷ 40 = 3.0 m/s.",
+   "difficulty": "hard",
+   "skill": "application",
+   "involves_calculation": true
+  },
+  {
+   "question": "A force of 200 N acts on a ball for 0.050 s. What is the change in the ball's momentum?",
+   "correct_answer": "10 kg m/s",
+   "distractors": [
+    "4000 kg m/s",
+    "40 kg m/s",
+    "0.25 kg m/s"
+   ],
+   "explanation": "Force = rate of change of momentum, so change in momentum = F × t = 200 × 0.050 = 10 kg m/s.",
+   "difficulty": "hard",
+   "skill": "application",
+   "involves_calculation": true
+  },
+  {
+   "question": "Why do crash mats in a gym reduce injuries?",
+   "correct_answer": "They increase the time taken to stop, so the force is smaller",
+   "distractors": [
+    "They reduce the gymnast's momentum before they land",
+    "They increase the time taken to stop, so the force is larger",
+    "They reduce the gymnast's mass as they land on them"
+   ],
+   "explanation": "The change of momentum is the same, but it happens over a longer time, so the rate of change of momentum (the force) is smaller.",
+   "difficulty": "medium",
+   "skill": "analysis",
+   "involves_calculation": false
+  },
+  {
+   "question": "A 1500 kg car moves at 20 m/s. What is its momentum?",
+   "correct_answer": "30 000 kg m/s",
+   "distractors": [
+    "75 kg m/s",
+    "300 000 kg m/s",
+    "3000 kg m/s"
+   ],
+   "explanation": "p = mv = 1500 × 20 = 30 000 kg m/s.",
+   "difficulty": "medium",
+   "skill": "application",
+   "involves_calculation": true
+  }
+ ],
+ "Newton's laws of motion": [
+  {
+   "question": "What does Newton's first law say about an object with zero resultant force on it?",
+   "correct_answer": "It stays at rest or moves at a constant velocity",
+   "distractors": [
+    "It slows down until it eventually stops",
+    "It speeds up in its direction of motion",
+    "It changes direction but keeps its speed"
+   ],
+   "explanation": "If the resultant force is zero, a stationary object stays still and a moving object keeps the same speed in the same direction.",
+   "difficulty": "medium",
+   "skill": "recall",
+   "involves_calculation": false
+  },
+  {
+   "question": "A 5.0 kg trolley has a resultant force of 15 N on it. What is its acceleration?",
+   "correct_answer": "3.0 m/s²",
+   "distractors": [
+    "75 m/s²",
+    "0.33 m/s²",
+    "10 m/s²"
+   ],
+   "explanation": "a = F ÷ m = 15 ÷ 5.0 = 3.0 m/s².",
+   "difficulty": "medium",
+   "skill": "application",
+   "involves_calculation": true
+  },
+  {
+   "question": "What is inertia?",
+   "correct_answer": "The tendency of an object to stay at rest or keep moving uniformly",
+   "distractors": [
+    "The force needed to keep an object moving at a steady speed",
+    "The rate at which an object speeds up when pushed",
+    "The total momentum of the moving parts of an object"
+   ],
+   "explanation": "Inertia is the tendency to keep the same motion. Inertial mass measures how hard it is to change an object's velocity.",
+   "difficulty": "hard",
+   "skill": "recall",
+   "involves_calculation": false
+  },
+  {
+   "question": "A box falls through the air at terminal velocity. Which statement is correct?",
+   "correct_answer": "Its weight equals the air resistance on it",
+   "distractors": [
+    "Its weight is greater than the air resistance",
+    "The air resistance is greater than its weight",
+    "There are no forces acting on the box"
+   ],
+   "explanation": "At terminal velocity the forces are balanced, so the resultant force is zero and the velocity stays constant.",
+   "difficulty": "medium",
+   "skill": "application",
+   "involves_calculation": false
+  },
+  {
+   "question": "In the acceleration practical, the resultant force on a trolley is doubled and its mass is kept the same. What happens to its acceleration?",
+   "correct_answer": "It doubles",
+   "distractors": [
+    "It halves",
+    "It stays the same",
+    "It quadruples"
+   ],
+   "explanation": "a = F ÷ m, so acceleration is directly proportional to resultant force when the mass is constant.",
+   "difficulty": "medium",
+   "skill": "application",
+   "involves_calculation": false
+  }
+ ],
+ "Pressure in fluids": [
+  {
+   "question": "What is the unit of pressure?",
+   "correct_answer": "Pascal (Pa)",
+   "distractors": [
+    "Newton (N)",
+    "Joule (J)",
+    "Newton-metre (N m)"
+   ],
+   "explanation": "Pressure = force ÷ area, measured in pascals. 1 Pa = 1 N/m².",
+   "difficulty": "easy",
+   "skill": "recall",
+   "involves_calculation": false
+  },
+  {
+   "question": "Why does atmospheric pressure decrease as you go higher above the ground?",
+   "correct_answer": "There is less air above, so less weight of air",
+   "distractors": [
+    "The air particles move much faster higher up",
+    "Gravity is much stronger higher up",
+    "There is more air above pushing down"
+   ],
+   "explanation": "Higher up there is less air above you, so the weight of air pushing down on each square metre is smaller. The air is also less dense.",
+   "difficulty": "medium",
+   "skill": "analysis",
+   "involves_calculation": false
+  },
+  {
+   "question": "An object floats in water. What is true about the upthrust on it?",
+   "correct_answer": "It is equal to the object's weight",
+   "distractors": [
+    "It is greater than the object's weight",
+    "It is less than the object's weight",
+    "It is zero because the object floats"
+   ],
+   "explanation": "A floating object is in equilibrium: the upthrust balances its weight.",
+   "difficulty": "medium",
+   "skill": "application",
+   "involves_calculation": false
+  },
+  {
+   "question": "What is the pressure due to a 2.0 m column of a liquid with a density of 1200 kg/m³? (pressure = height × density × g, g = 9.8 N/kg)",
+   "correct_answer": "23 520 Pa",
+   "distractors": [
+    "2400 Pa",
+    "6000 Pa",
+    "235 200 Pa"
+   ],
+   "explanation": "p = hρg = 2.0 × 1200 × 9.8 = 23 520 Pa. Leaving out g gives 2400 Pa.",
+   "difficulty": "hard",
+   "skill": "application",
+   "involves_calculation": true
+  },
+  {
+   "question": "Why is a dam built thicker at the bottom than at the top?",
+   "correct_answer": "Water pressure is greater at greater depth",
+   "distractors": [
+    "The water is denser near the surface",
+    "Water pressure is greatest at the surface",
+    "Air pressure pushes harder on the bottom"
+   ],
+   "explanation": "Pressure in a liquid increases with depth, so the bottom of the dam has the largest force on it.",
+   "difficulty": "medium",
+   "skill": "analysis",
+   "involves_calculation": false
+  },
+  {
+   "question": "In which direction does the pressure in a fluid act on a surface?",
+   "correct_answer": "At right angles to the surface",
+   "distractors": [
+    "Straight down onto the surface",
+    "Parallel to the surface",
+    "Straight up from the surface"
+   ],
+   "explanation": "The pressure in a fluid causes a force at right angles (normal) to any surface it touches.",
+   "difficulty": "easy",
+   "skill": "recall",
+   "involves_calculation": false
+  }
+ ],
+ "Scalars, vectors, weight and resultant forces": [
+  {
+   "question": "Which of these is a scalar quantity?",
+   "correct_answer": "Mass",
+   "distractors": [
+    "Weight",
+    "Velocity",
+    "Displacement"
+   ],
+   "explanation": "A scalar has size only. Weight is a force, so it is a vector; velocity and displacement are vectors too.",
+   "difficulty": "easy",
+   "skill": "recall",
+   "involves_calculation": false
+  },
+  {
+   "question": "What is the weight of a 2.0 kg bag on the Moon, where g = 1.6 N/kg?",
+   "correct_answer": "3.2 N",
+   "distractors": [
+    "1.25 N",
+    "19.6 N",
+    "2.0 N"
+   ],
+   "explanation": "W = mg = 2.0 × 1.6 = 3.2 N. Its mass is still 2.0 kg.",
+   "difficulty": "medium",
+   "skill": "application",
+   "involves_calculation": true
+  },
+  {
+   "question": "A 3.0 N force acts north and a 4.0 N force acts east on an object. What is the size of the resultant force?",
+   "correct_answer": "5.0 N",
+   "distractors": [
+    "7.0 N",
+    "1.0 N",
+    "12 N"
+   ],
+   "explanation": "The forces are at right angles: resultant = √(3.0² + 4.0²) = 5.0 N. You could also find this with a scale drawing.",
+   "difficulty": "medium",
+   "skill": "application",
+   "involves_calculation": true
+  },
+  {
+   "question": "What is the centre of mass of an object?",
+   "correct_answer": "The point where its weight acts",
+   "distractors": [
+    "The point where its mass is greatest",
+    "The point at the bottom of the object",
+    "The point where friction acts on it"
+   ],
+   "explanation": "The weight of an object can be thought of as acting at a single point, its centre of mass.",
+   "difficulty": "medium",
+   "skill": "recall",
+   "involves_calculation": false
+  },
+  {
+   "question": "How is the weight of an object related to its mass?",
+   "correct_answer": "Weight is directly proportional to mass",
+   "distractors": [
+    "Weight is inversely proportional to mass",
+    "Weight and mass are the same quantity",
+    "Weight does not depend on mass"
+   ],
+   "explanation": "W = mg, so in a given gravitational field weight is directly proportional to mass.",
+   "difficulty": "easy",
+   "skill": "recall",
+   "involves_calculation": false
+  }
+ ],
+ "Stopping distances": [
+  {
+   "question": "Which of these increases the braking distance of a car?",
+   "correct_answer": "Icy roads",
+   "distractors": [
+    "Tiredness",
+    "Drinking alcohol",
+    "Using a phone"
+   ],
+   "explanation": "Icy roads reduce friction between the tyres and the road. The other three increase reaction time, which affects thinking distance.",
+   "difficulty": "easy",
+   "skill": "recall",
+   "involves_calculation": false
+  },
+  {
+   "question": "A car's speed is doubled. For the same braking force, how does its braking distance change?",
+   "correct_answer": "It quadruples",
+   "distractors": [
+    "It doubles",
+    "It is unchanged",
+    "It halves"
+   ],
+   "explanation": "Work done by the brakes (F × d) must equal the kinetic energy, which depends on speed squared. Doubling speed gives 4 times the energy, so 4 times the distance.",
+   "difficulty": "hard",
+   "skill": "analysis",
+   "involves_calculation": false
+  },
+  {
+   "question": "What is a typical reaction time for a person?",
+   "correct_answer": "0.2 s to 0.9 s",
+   "distractors": [
+    "2 s to 3 s",
+    "0.01 s to 0.02 s",
+    "5 s to 9 s"
+   ],
+   "explanation": "Most people react in between about 0.2 s and 0.9 s.",
+   "difficulty": "easy",
+   "skill": "recall",
+   "involves_calculation": false
+  },
+  {
+   "question": "Why are large decelerations dangerous for the people in a car?",
+   "correct_answer": "They need large forces that injure people",
+   "distractors": [
+    "They make the car's mass increase",
+    "They make the brakes cool down too fast",
+    "They reduce the car's speed too slowly"
+   ],
+   "explanation": "F = ma, so a large deceleration needs a large force on the people in the car, which can injure them.",
+   "difficulty": "medium",
+   "skill": "analysis",
+   "involves_calculation": false
+  },
+  {
+   "question": "What happens to a car's kinetic energy when the brakes are applied?",
+   "correct_answer": "Work done by friction transfers it to thermal energy in the brakes",
+   "distractors": [
+    "It is transferred to the car's gravitational potential store",
+    "It is destroyed by the friction force between the brake pads",
+    "It is transferred to the elastic store of the car's tyres"
+   ],
+   "explanation": "Friction between the brake pads and discs does work, transferring kinetic energy to the thermal store of the brakes, which heat up.",
+   "difficulty": "medium",
+   "skill": "recall",
+   "involves_calculation": false
+  },
+  {
+   "question": "A car travels at 15 m/s and the driver's reaction time is 0.60 s. What is the thinking distance?",
+   "correct_answer": "9.0 m",
+   "distractors": [
+    "25 m",
+    "0.040 m",
+    "15.6 m"
+   ],
+   "explanation": "Thinking distance = speed × reaction time = 15 × 0.60 = 9.0 m.",
+   "difficulty": "medium",
+   "skill": "application",
+   "involves_calculation": true
+  }
+ ],
+ "Work done and energy transfer": [
+  {
+   "question": "What is the unit of work done?",
+   "correct_answer": "Joule",
+   "distractors": [
+    "Watt",
+    "Newton",
+    "Pascal"
+   ],
+   "explanation": "Work done is energy transferred, so it is measured in joules (1 J = 1 N m).",
+   "difficulty": "easy",
+   "skill": "recall",
+   "involves_calculation": false
+  },
+  {
+   "question": "A person lifts a box with a weight of 20 N through a height of 1.5 m. How much work is done on the box?",
+   "correct_answer": "30 J",
+   "distractors": [
+    "13 J",
+    "21.5 J",
+    "300 J"
+   ],
+   "explanation": "W = Fs = 20 × 1.5 = 30 J.",
+   "difficulty": "medium",
+   "skill": "application",
+   "involves_calculation": true
+  },
+  {
+   "question": "A box is pushed across a rough floor. Work is done against friction. What happens to the box and the floor?",
+   "correct_answer": "Their temperature rises",
+   "distractors": [
+    "Their temperature falls",
+    "They gain potential energy",
+    "They lose some mass"
+   ],
+   "explanation": "Work done against friction transfers energy to the thermal store of the box and floor, so they warm up.",
+   "difficulty": "easy",
+   "skill": "recall",
+   "involves_calculation": false
+  },
+  {
+   "question": "How far must a 40 N force push a trolley to do 200 J of work?",
+   "correct_answer": "5.0 m",
+   "distractors": [
+    "8000 m",
+    "0.20 m",
+    "160 m"
+   ],
+   "explanation": "s = W ÷ F = 200 ÷ 40 = 5.0 m.",
+   "difficulty": "medium",
+   "skill": "application",
+   "involves_calculation": true
+  },
+  {
+   "question": "Which equation links work done, force and distance moved along the line of the force?",
+   "correct_answer": "W = F × s",
+   "distractors": [
+    "W = F ÷ s",
+    "W = s ÷ F",
+    "W = F × s²"
+   ],
+   "explanation": "Work done = force × distance moved along the line of action of the force.",
+   "difficulty": "easy",
+   "skill": "recall",
+   "involves_calculation": false
+  },
+  {
+   "question": "A car's driving force is 2000 N while it travels 500 m. How much work does the driving force do?",
+   "correct_answer": "1 000 000 J",
+   "distractors": [
+    "4.0 J",
+    "2500 J",
+    "250 J"
+   ],
+   "explanation": "W = Fs = 2000 × 500 = 1 000 000 J (1.0 MJ).",
+   "difficulty": "medium",
+   "skill": "application",
+   "involves_calculation": true
+  }
+ ],
+ "Black body radiation": [
+  {
+   "question": "Why does the Earth's average temperature stay roughly constant?",
+   "correct_answer": "It absorbs and emits radiation at about the same rate",
+   "distractors": [
+    "It absorbs radiation but does not emit any",
+    "It emits radiation but does not absorb any",
+    "It neither absorbs nor emits any radiation"
+   ],
+   "explanation": "If absorption and emission happen at the same rate, there is no overall gain or loss of energy, so the temperature stays constant.",
+   "difficulty": "medium",
+   "skill": "analysis",
+   "involves_calculation": false
+  },
+  {
+   "question": "As an object gets hotter, what happens to the wavelength at which it emits the most radiation?",
+   "correct_answer": "It gets shorter",
+   "distractors": [
+    "It gets longer",
+    "It stays the same",
+    "It becomes infinite"
+   ],
+   "explanation": "Hotter objects emit more radiation at every wavelength and the peak moves to shorter wavelengths (e.g. red-hot to white-hot).",
+   "difficulty": "hard",
+   "skill": "recall",
+   "involves_calculation": false
+  },
+  {
+   "question": "Which surface is the best absorber of infrared radiation?",
+   "correct_answer": "Matt black",
+   "distractors": [
+    "Shiny silver",
+    "Matt white",
+    "Shiny white"
+   ],
+   "explanation": "Dark, matt surfaces are the best absorbers and emitters of infrared. Light, shiny surfaces are the worst.",
+   "difficulty": "easy",
+   "skill": "recall",
+   "involves_calculation": false
+  },
+  {
+   "question": "An object absorbs radiation faster than it emits radiation. What happens to its temperature?",
+   "correct_answer": "It increases",
+   "distractors": [
+    "It decreases",
+    "It stays the same",
+    "It falls to zero"
+   ],
+   "explanation": "It gains energy overall, so its temperature rises.",
+   "difficulty": "easy",
+   "skill": "application",
+   "involves_calculation": false
+  },
+  {
+   "question": "Which of these affects the temperature of the Earth?",
+   "correct_answer": "The radiation the atmosphere absorbs and emits",
+   "distractors": [
+    "How fast the Earth spins on its axis each day",
+    "How many moons orbit around the Earth",
+    "How far the Moon is from the Earth"
+   ],
+   "explanation": "The Earth's temperature depends on the balance of radiation absorbed and emitted, which depends on the atmosphere (e.g. clouds and greenhouse gases).",
+   "difficulty": "medium",
+   "skill": "recall",
+   "involves_calculation": false
+  }
+ ],
+ "Electromagnetic waves: properties, uses and hazards": [
+  {
+   "question": "Which type of electromagnetic wave is used to cook food quickly in an oven?",
+   "correct_answer": "Microwaves",
+   "distractors": [
+    "Radio waves",
+    "Ultraviolet",
+    "Gamma rays"
+   ],
+   "explanation": "Microwaves are absorbed by water molecules in food, heating it.",
+   "difficulty": "easy",
+   "skill": "recall",
+   "involves_calculation": false
+  },
+  {
+   "question": "Which list puts the electromagnetic spectrum in order from longest to shortest wavelength?",
+   "correct_answer": "Radio, microwave, infrared, visible, UV, X-ray, gamma",
+   "distractors": [
+    "Gamma, X-ray, UV, visible, infrared, microwave, radio",
+    "Radio, infrared, microwave, visible, UV, gamma, X-ray",
+    "Microwave, radio, infrared, visible, X-ray, UV, gamma"
+   ],
+   "explanation": "Radio waves have the longest wavelength and gamma rays the shortest.",
+   "difficulty": "medium",
+   "skill": "recall",
+   "involves_calculation": false
+  },
+  {
+   "question": "What is the speed of all electromagnetic waves in a vacuum?",
+   "correct_answer": "3 × 10⁸ m/s",
+   "distractors": [
+    "340 m/s",
+    "3 × 10⁴ m/s",
+    "1500 m/s"
+   ],
+   "explanation": "All electromagnetic waves travel at 3 × 10⁸ m/s in a vacuum. 340 m/s is the speed of sound in air.",
+   "difficulty": "easy",
+   "skill": "recall",
+   "involves_calculation": false
+  },
+  {
+   "question": "Why are X-rays and gamma rays dangerous to people?",
+   "correct_answer": "They are ionising, so they damage DNA",
+   "distractors": [
+    "They strongly heat the surface of the skin",
+    "They are absorbed by the skin's surface",
+    "They have very long wavelengths"
+   ],
+   "explanation": "X-rays and gamma rays are ionising radiation, which can cause mutation of genes and cancer.",
+   "difficulty": "medium",
+   "skill": "recall",
+   "involves_calculation": false
+  }
+ ],
+ "Lenses": [
+  {
+   "question": "What is the principal focus of a convex lens?",
+   "correct_answer": "The point where parallel rays meet after passing through it",
+   "distractors": [
+    "The point in the exact centre of the lens itself",
+    "The point where rays first enter the lens surface",
+    "The point where rays are reflected back by the lens"
+   ],
+   "explanation": "Parallel rays are refracted by a convex lens and brought together at the principal focus.",
+   "difficulty": "medium",
+   "skill": "recall",
+   "involves_calculation": false
+  },
+  {
+   "question": "A magnifying glass gives a magnification of 4. An object is 0.50 cm tall. How tall is the image?",
+   "correct_answer": "2.0 cm",
+   "distractors": [
+    "0.125 cm",
+    "4.5 cm",
+    "8.0 cm"
+   ],
+   "explanation": "Image height = magnification × object height = 4 × 0.50 = 2.0 cm.",
+   "difficulty": "medium",
+   "skill": "application",
+   "involves_calculation": true
+  },
+  {
+   "question": "What is a virtual image?",
+   "correct_answer": "An image that cannot be projected onto a screen",
+   "distractors": [
+    "An image that is upside down and smaller",
+    "An image formed where the rays actually meet",
+    "An image that is larger than the object"
+   ],
+   "explanation": "A virtual image is formed where rays only appear to come from, so it cannot be shown on a screen.",
+   "difficulty": "medium",
+   "skill": "recall",
+   "involves_calculation": false
+  },
+  {
+   "question": "What does a concave lens do to parallel rays of light?",
+   "correct_answer": "Spreads them out",
+   "distractors": [
+    "Brings them to a point",
+    "Reflects them back",
+    "Leaves them unchanged"
+   ],
+   "explanation": "A concave lens is a diverging lens: it spreads parallel rays out so they appear to come from a principal focus.",
+   "difficulty": "easy",
+   "skill": "recall",
+   "involves_calculation": false
+  },
+  {
+   "question": "Which of these is true for a real image formed by a convex lens?",
+   "correct_answer": "It is inverted",
+   "distractors": [
+    "It is upright",
+    "It is virtual",
+    "It cannot be seen"
+   ],
+   "explanation": "Real images from a convex lens are always upside down (inverted) and can be projected onto a screen.",
+   "difficulty": "medium",
+   "skill": "recall",
+   "involves_calculation": false
+  }
+ ],
+ "Reflection, sound, ultrasound and seismic waves": [
+  {
+   "question": "What is the law of reflection?",
+   "correct_answer": "The angle of incidence equals the angle of reflection",
+   "distractors": [
+    "The angle of incidence is twice the angle of reflection",
+    "The angle of incidence equals the angle of refraction",
+    "The angle of reflection is equal to 90° minus the angle of incidence"
+   ],
+   "explanation": "Both angles are measured from the normal, and they are equal.",
+   "difficulty": "easy",
+   "skill": "recall",
+   "involves_calculation": false
+  },
+  {
+   "question": "Sound waves pass from air into water. What happens to them?",
+   "correct_answer": "Their speed and wavelength both increase",
+   "distractors": [
+    "Their speed decreases and frequency increases",
+    "Their frequency increases and wavelength decreases",
+    "Their speed and wavelength both decrease"
+   ],
+   "explanation": "Sound travels faster in water. The frequency stays the same, so from v = fλ the wavelength increases too.",
+   "difficulty": "hard",
+   "skill": "analysis",
+   "involves_calculation": false
+  },
+  {
+   "question": "Why can P-waves travel through the Earth's outer core but S-waves cannot?",
+   "correct_answer": "S-waves are transverse and cannot travel through liquids",
+   "distractors": [
+    "P-waves are faster, so they reach the core first",
+    "S-waves are longitudinal and are absorbed by rock",
+    "The outer core is solid, which stops S-waves"
+   ],
+   "explanation": "P-waves are longitudinal and travel through solids and liquids. S-waves are transverse and only travel through solids, so the outer core must be liquid.",
+   "difficulty": "hard",
+   "skill": "analysis",
+   "involves_calculation": false
+  },
+  {
+   "question": "Why is ultrasound used for prenatal scans rather than X-rays?",
+   "correct_answer": "It is not ionising, so it is safer for the fetus",
+   "distractors": [
+    "It produces clearer images of bones",
+    "It travels faster than X-rays in the body",
+    "It passes easily through metal objects"
+   ],
+   "explanation": "Ultrasound is partly reflected at boundaries between tissues to build an image, and it does not ionise cells.",
+   "difficulty": "medium",
+   "skill": "recall",
+   "involves_calculation": false
+  }
+ ],
+ "Transverse and longitudinal waves and the wave equation": [
+  {
+   "question": "Which of these is a transverse wave?",
+   "correct_answer": "Light",
+   "distractors": [
+    "Sound",
+    "Ultrasound",
+    "A P-wave"
+   ],
+   "explanation": "All electromagnetic waves, including light, are transverse. Sound, ultrasound and P-waves are longitudinal.",
+   "difficulty": "easy",
+   "skill": "recall",
+   "involves_calculation": false
+  },
+  {
+   "question": "What is the wavelength of a wave?",
+   "correct_answer": "The distance from a point on one wave to the same point on the next",
+   "distractors": [
+    "The maximum height of the wave from its rest position",
+    "The number of waves passing a point each second",
+    "The time taken for one complete wave to pass a point"
+   ],
+   "explanation": "Wavelength is the distance from one point to the equivalent point on the next wave, e.g. crest to crest.",
+   "difficulty": "easy",
+   "skill": "recall",
+   "involves_calculation": false
+  },
+  {
+   "question": "A sound wave has a speed of 340 m/s and a frequency of 170 Hz. What is its wavelength?",
+   "correct_answer": "2.0 m",
+   "distractors": [
+    "0.50 m",
+    "57 800 m",
+    "510 m"
+   ],
+   "explanation": "λ = v ÷ f = 340 ÷ 170 = 2.0 m.",
+   "difficulty": "medium",
+   "skill": "application",
+   "involves_calculation": true
+  },
+  {
+   "question": "A water wave travels across a pond. What is transferred from one side of the pond to the other?",
+   "correct_answer": "Energy, but not water",
+   "distractors": [
+    "Water, but not energy",
+    "Both water and energy",
+    "Neither water nor energy"
+   ],
+   "explanation": "Waves transfer energy. The water particles only oscillate about a fixed position.",
+   "difficulty": "medium",
+   "skill": "recall",
+   "involves_calculation": false
+  }
+ ],
+ "Visible light and colour": [
+  {
+   "question": "Which colour of visible light has the longest wavelength?",
+   "correct_answer": "Red",
+   "distractors": [
+    "Violet",
+    "Green",
+    "Blue"
+   ],
+   "explanation": "In the visible spectrum, red has the longest wavelength and violet the shortest.",
+   "difficulty": "easy",
+   "skill": "recall",
+   "involves_calculation": false
+  },
+  {
+   "question": "What does a green filter do to white light?",
+   "correct_answer": "It transmits green light and absorbs other colours",
+   "distractors": [
+    "It absorbs green light and transmits other colours",
+    "It reflects green light and transmits other colours",
+    "It turns the white light into green light"
+   ],
+   "explanation": "A coloured filter only lets through (transmits) its own colour and absorbs the rest.",
+   "difficulty": "medium",
+   "skill": "recall",
+   "involves_calculation": false
+  },
+  {
+   "question": "Why does a white object look white in white light?",
+   "correct_answer": "It reflects all wavelengths equally",
+   "distractors": [
+    "It absorbs all wavelengths equally",
+    "It transmits all wavelengths",
+    "It gives out its own white light"
+   ],
+   "explanation": "White objects reflect all visible wavelengths equally. Black objects absorb all of them.",
+   "difficulty": "easy",
+   "skill": "recall",
+   "involves_calculation": false
+  },
+  {
+   "question": "What is specular reflection?",
+   "correct_answer": "Reflection from a smooth surface in a single direction",
+   "distractors": [
+    "Reflection from a rough surface in many directions",
+    "Light changing direction as it enters a material",
+    "Light being absorbed by a dark, matt surface"
+   ],
+   "explanation": "Smooth surfaces give specular reflection (like a mirror). Rough surfaces scatter light: diffuse reflection.",
+   "difficulty": "medium",
+   "skill": "recall",
+   "involves_calculation": false
+  },
+  {
+   "question": "A blue object is looked at through a red filter in white light. What colour does it appear?",
+   "correct_answer": "Black",
+   "distractors": [
+    "Blue",
+    "Red",
+    "Purple"
+   ],
+   "explanation": "The object only reflects blue light, and the red filter absorbs blue light, so no light reaches the eye.",
+   "difficulty": "hard",
+   "skill": "analysis",
+   "involves_calculation": false
+  },
+  {
+   "question": "What happens to light that hits an opaque object?",
+   "correct_answer": "None of it is transmitted",
+   "distractors": [
+    "All of it is transmitted",
+    "It is transmitted but scattered",
+    "Only red light is reflected"
+   ],
+   "explanation": "Opaque objects do not let light pass through; the light is reflected or absorbed.",
+   "difficulty": "easy",
+   "skill": "recall",
+   "involves_calculation": false
+  }
+ ],
+ "Electromagnetism and the motor effect": [],
+ "Induced potential, generators and transformers": [
+  {
+   "question": "What does an alternator use to produce an alternating current?",
+   "correct_answer": "A coil rotating in a magnetic field, with slip rings",
+   "distractors": [
+    "A coil rotating in a magnetic field, with a split-ring commutator",
+    "A fixed coil carrying a steady current",
+    "A magnet held still inside a fixed coil"
+   ],
+   "explanation": "An alternator uses slip rings so the current reverses every half turn. A dynamo uses a split-ring commutator to give direct current.",
+   "difficulty": "hard",
+   "skill": "recall",
+   "involves_calculation": false
+  },
+  {
+   "question": "A transformer has 200 turns on its primary coil and 800 turns on its secondary coil. The primary pd is 12 V. What is the secondary pd?",
+   "correct_answer": "48 V",
+   "distractors": [
+    "3.0 V",
+    "12 V",
+    "9600 V"
+   ],
+   "explanation": "Vs = Vp × Ns ÷ Np = 12 × 800 ÷ 200 = 48 V.",
+   "difficulty": "medium",
+   "skill": "application",
+   "involves_calculation": true
+  }
+ ],
+ "Permanent and induced magnetism and magnetic fields": [
+  {
+   "question": "How can you plot the magnetic field lines around a bar magnet?",
+   "correct_answer": "Move a plotting compass around it and mark the needle's direction",
+   "distractors": [
+    "Hold a thermometer near it and record the temperature",
+    "Place an ammeter near it and record the current",
+    "Sprinkle salt grains around it and watch them dissolve"
+   ],
+   "explanation": "A plotting compass lines up with the field. Marking its direction at many points and joining them shows the field lines.",
+   "difficulty": "easy",
+   "skill": "recall",
+   "involves_calculation": false
+  },
+  {
+   "question": "What happens to an induced magnet when it is taken out of the magnetic field?",
+   "correct_answer": "It loses most or all of its magnetism",
+   "distractors": [
+    "It becomes a permanent magnet",
+    "Its north and south poles swap",
+    "It becomes more strongly magnetised"
+   ],
+   "explanation": "An induced magnet is only a magnet while it is in a magnetic field.",
+   "difficulty": "medium",
+   "skill": "recall",
+   "involves_calculation": false
+  }
+ ],
+ "Orbital motion, natural and artificial satellites": [
+  {
+   "question": "A satellite's speed changes. What must happen for it to stay in a stable orbit?",
+   "correct_answer": "Its orbit radius must change",
+   "distractors": [
+    "Its mass must change",
+    "Its speed must drop to zero",
+    "Its direction must reverse"
+   ],
+   "explanation": "For a stable orbit, the speed and radius are linked: a faster satellite must be in a smaller orbit.",
+   "difficulty": "hard",
+   "skill": "analysis",
+   "involves_calculation": false
+  },
+  {
+   "question": "What is an artificial satellite?",
+   "correct_answer": "A man-made object placed in orbit",
+   "distractors": [
+    "A moon that orbits a planet",
+    "A star that orbits a galaxy",
+    "A planet that orbits the Sun"
+   ],
+   "explanation": "Artificial satellites are made and launched by people. Moons are natural satellites.",
+   "difficulty": "easy",
+   "skill": "recall",
+   "involves_calculation": false
+  }
+ ],
+ "Red-shift and the Big Bang": [
+  {
+   "question": "A galaxy is moving away from the Earth. How does the wavelength of light we receive from it compare with light from the same source at rest?",
+   "correct_answer": "It is longer",
+   "distractors": [
+    "It is shorter",
+    "It is the same",
+    "It is zero"
+   ],
+   "explanation": "Light from a receding galaxy is stretched to longer wavelengths (shifted towards red).",
+   "difficulty": "medium",
+   "skill": "application",
+   "involves_calculation": false
+  },
+  {
+   "question": "When would scientists change the Big Bang theory?",
+   "correct_answer": "If new evidence does not fit it",
+   "distractors": [
+    "After a fixed number of years has passed",
+    "When enough scientists vote to change it",
+    "When the universe stops expanding"
+   ],
+   "explanation": "Scientific theories change when new observations can't be explained by the current theory, for example the discovery that the expansion is speeding up.",
+   "difficulty": "medium",
+   "skill": "analysis",
+   "involves_calculation": false
+  }
+ ],
+ "The solar system and the life cycle of a star": []
+}
