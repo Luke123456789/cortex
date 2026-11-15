@@ -20,12 +20,16 @@ const authored = JSON.parse(readFileSync(join(ROOT, 'scripts/authored/aqa-8463-p
 const spec = JSON.parse(readFileSync(join(ROOT, 'scripts/specs/aqa-8463-physics.json'), 'utf8'))
 const HASH_SQL = (col) => `encode(sha256(convert_to(lower(btrim(regexp_replace(${col}, '\\s+', ' ', 'g'))), 'UTF8')), 'hex')`
 const batch = process.argv[2] || randomUUID()
+// Optional: only these subtopics (comma-separated), for a follow-up batch that
+// adds lessons without regenerating (and re-lettering) ones already applied.
+const only = process.argv[3] ? new Set(process.argv[3].split(',').map((s) => s.trim())) : null
 
 const subtopicOrder = new Map()
 spec.topics.forEach((t) => t.subtopics.forEach((s, i) => subtopicOrder.set(s.name, { topic: t.name, order: i + 1 })))
 
 const rows = []
 for (const [sub, qs] of Object.entries(authored)) {
+  if (only && !only.has(sub)) continue
   if (!subtopicOrder.has(sub)) throw new Error(`unknown subtopic: ${sub}`)
   for (const q of qs) {
     if (!isWellFormed(q)) throw new Error(`badly formed question: ${q.question}`)
@@ -52,7 +56,7 @@ join subjects j on j.id = t.subject_id and j.name = 'Physics'
 where not exists (select 1 from questions q where ${HASH_SQL('q.question_text')} = ${HASH_SQL('v.qt')});`)
 
 // One quiz per subtopic in the authored file.
-const subs = Object.keys(authored).map((name) => ({ name, ...subtopicOrder.get(name) }))
+const subs = Object.keys(authored).filter((name) => !only || only.has(name)).map((name) => ({ name, ...subtopicOrder.get(name) }))
 const subValues = subs.map((s) => `  (${sqlString(s.name)}, ${sqlString(`${s.name} quiz`)}, ${10 + s.order})`).join(',\n')
 out.push(`
 -- One quiz per subtopic (quizzes.subtopic_id set), holding every active

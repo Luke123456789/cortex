@@ -933,6 +933,30 @@
         ],
         "guidance": "In (b), the stages must be in the correct order. Describing a supernova or black hole scores 0 for (b)."
       }
+    },
+    {
+      "topic": "Particle Model of Matter",
+      "subtopic": "Internal energy and specific latent heat",
+      "spec_ref": "4.3.2.2-4.3.2.3",
+      "command_word": "calculate",
+      "difficulty": "higher",
+      "total_marks": 4,
+      "question_text": "A kettle boils water. While it boils, 0.10 kg of the water turns into steam at 100 °C.\n\nSpecific latent heat of vaporisation of water = 2 260 000 J/kg\nthermal energy for a change of state = mass × specific latent heat\n\n(a) Calculate the energy needed to turn the 0.10 kg of water into steam. Show your working. (2 marks)\n\n(b) Explain the difference between specific heat capacity and specific latent heat. (2 marks)",
+      "marking_style": "points",
+      "ao_marks": {
+        "AO1": 2,
+        "AO2": 2
+      },
+      "scheme": {
+        "max": 4,
+        "points": [
+          "(a) E = mL = 0.10 × 2 260 000",
+          "(a) 226 000 J (2.26 × 10⁵ J)",
+          "(b) Specific heat capacity is the energy needed to raise the temperature of 1 kg of a substance by 1 °C",
+          "(b) Specific latent heat is the energy needed to change the state of 1 kg of a substance with no change in temperature"
+        ],
+        "guidance": "In (b), both definitions must refer to 1 kg (unit mass) for full marks; award 1 if both are described without the mass. This question asks for working. A correct final answer with no working scores only the mark(s) for the answer itself, not the method marks. Award each method mark when that step is shown. If the working has a slip (e.g. a wrong number copied) but the final answer is correct, withhold only the mark(s) for the step that is wrong."
+      }
     }
   ]
 }

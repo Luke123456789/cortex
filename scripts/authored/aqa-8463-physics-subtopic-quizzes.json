@@ -1955,5 +1955,48 @@
    "involves_calculation": false
   }
  ],
- "The solar system and the life cycle of a star": []
+ "The solar system and the life cycle of a star": [],
+ "Internal energy and specific latent heat": [
+  {
+   "question": "What is the unit of specific latent heat?",
+   "correct_answer": "J/kg",
+   "distractors": [
+    "J/kg °C",
+    "J/°C",
+    "W/kg"
+   ],
+   "explanation": "Specific latent heat is the energy needed to change the state of 1 kg of a substance, so it is measured in joules per kilogram. J/kg °C is the unit of specific heat capacity.",
+   "difficulty": "easy",
+   "skill": "recall",
+   "involves_calculation": false
+  }
+ ],
+ "Particle motion in gases and gas pressure": [
+  {
+   "question": "A gas in a sealed container is cooled. What happens to the average speed of its particles?",
+   "correct_answer": "It decreases",
+   "distractors": [
+    "It increases",
+    "It stays the same",
+    "It reverses direction"
+   ],
+   "explanation": "The temperature of a gas is related to the average kinetic energy of its particles, so cooling it makes the particles move more slowly.",
+   "difficulty": "medium",
+   "skill": "application",
+   "involves_calculation": false
+  },
+  {
+   "question": "A fixed mass of gas is compressed to half its volume at constant temperature. What happens to its pressure?",
+   "correct_answer": "It doubles",
+   "distractors": [
+    "It halves",
+    "It stays the same",
+    "It quadruples"
+   ],
+   "explanation": "At constant temperature, pressure × volume is constant, so halving the volume doubles the pressure.",
+   "difficulty": "medium",
+   "skill": "application",
+   "involves_calculation": false
+  }
+ ]
 }
