@@ -49,7 +49,8 @@ export default function App() {
           <Route path="/activity" element={<Activity />} />
 
           <Route path="/parent" element={parentOnly(<Parent />)} />
-          <Route path="/parent/assign" element={parentOnly(<AssignWork />)} />
+          <Route path="/parent/workload" element={parentOnly(<AssignWork />)} />
+          <Route path="/parent/assign" element={<Navigate to="/parent/workload" replace />} />
           <Route path="/parent/history" element={parentOnly(<WorkHistory />)} />
           <Route path="/parent/locks" element={parentOnly(<SubjectLocksPage />)} />
           <Route path="/parent/redemptions" element={parentOnly(<RedemptionHistory />)} />
