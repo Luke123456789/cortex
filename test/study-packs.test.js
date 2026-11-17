@@ -114,20 +114,20 @@ describe('collapsePacks', () => {
     expect(out.map((a) => a.id).sort()).toEqual(['e1', 'loose', 'o1', 'pack:p1', 'pack:p2'])
   })
 
-  it('marks the current pack and what later packs wait for', () => {
+  it('lets every pending pack be worked on, with no queue per subject', () => {
     const out = collapsePacks(assignments, packs)
     const energy = out.find((a) => a.id === 'pack:p1')
     const elec = out.find((a) => a.id === 'pack:p2')
     expect(energy).toMatchObject({ isCurrent: true, waitingFor: null, type: 'study_pack' })
     expect(energy.progress).toMatchObject({ total: 2, done: 1 })
     expect(energy.progress.next.id).toBe('e2')
-    expect(elec).toMatchObject({ isCurrent: false, waitingFor: 'Energy' })
+    expect(elec).toMatchObject({ isCurrent: true, waitingFor: null })
   })
 
-  it('links a current pack to start or continue, and a later one to preview', () => {
+  it('links every pending pack to start or continue', () => {
     const out = collapsePacks(assignments, packs)
     expect(assignmentAction(out.find((a) => a.id === 'pack:p1'))).toEqual({ label: 'Continue', to: '/pack/p1' })
-    expect(assignmentAction(out.find((a) => a.id === 'pack:p2'))).toEqual({ label: 'Preview', to: '/pack/p2' })
+    expect(assignmentAction(out.find((a) => a.id === 'pack:p2'))).toEqual({ label: 'Start pack', to: '/pack/p2' })
   })
 })
 

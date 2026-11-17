@@ -7,7 +7,7 @@ import { useStudyPacks } from '../hooks/useStudyPacks'
 import { useCatalogNames } from '../hooks/useCatalogNames'
 import { useSubjectWallpaper } from '../components/shell/Wallpaper.jsx'
 import { assignmentAction } from '../lib/assignments'
-import { currentPacks, packProgress, PACK_STEP_LABELS, EXAM_GROUP } from '../lib/studyPacks'
+import { packProgress, PACK_STEP_LABELS, EXAM_GROUP } from '../lib/studyPacks'
 import { dueLabel } from '../lib/week'
 import styles from './StudyPack.module.css'
 
@@ -16,8 +16,8 @@ function shortDate(iso) {
 }
 
 // One study pack: every step grouped by lesson, ticked off as it's done, with
-// the next one to do picked out. Steps can be done in any order; a pack that
-// is queued behind another for the same subject can be looked at, not started.
+// the next one to do picked out. Steps can be done in any order, and any
+// pending pack can be worked on (packs are no longer queued per subject).
 export default function StudyPack() {
   const { packId } = useParams()
   const { studentId } = useAuth()
@@ -28,8 +28,7 @@ export default function StudyPack() {
 
   const pack = packs.find((p) => p.id === packId)
   const progress = useMemo(() => packProgress(assignments.filter((a) => a.pack_id === packId)), [assignments, packId])
-  const current = currentPacks(packs).get(pack?.subject_id)
-  const isCurrent = pack?.status === 'pending' && current?.id === packId
+  const isCurrent = pack?.status === 'pending'
   useSubjectWallpaper(names.subjects.get(pack?.subject_id))
 
   const subtopicIds = useMemo(() => [...new Set(progress.items.map((a) => a.subtopic_id).filter(Boolean))], [progress.items])
@@ -89,11 +88,6 @@ export default function StudyPack() {
       )}
       {pack.status === 'cancelled' && (
         <p className={styles.banner} role="status">This pack was cancelled.</p>
-      )}
-      {pack.status === 'pending' && !isCurrent && current && (
-        <p className={styles.banner} role="status">
-          This pack is up next. Finish the <Link to={`/pack/${current.id}`}>{current.title} pack</Link> first; you can look at what’s in this one below.
-        </p>
       )}
       {isCurrent && next && (
         <div className={`card ${styles.next}`}>

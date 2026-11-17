@@ -1,6 +1,6 @@
 // Study packs: a bundle of work on one topic (tutor session, quiz and written
-// question for each subtopic, then an exam practice set), worked through one
-// pack per subject at a time. Pure; tested in test/study-packs.test.js.
+// question for each subtopic, then an exam practice set). Any pending pack can
+// be worked on, in any order. Pure; tested in test/study-packs.test.js.
 
 export const PACK_STEP_LABELS = {
   tutor_session: 'Tutor session',
@@ -127,17 +127,16 @@ export function currentPacks(packs) {
 // The student's work list with each pending pack shown once instead of its
 // pending steps. Finished steps stay (they still count as done this week);
 // packs that are finished or cancelled add nothing. Each pack entry carries
-// its progress, whether it's the one to work on now, and if not, which pack
-// comes first.
+// its progress. Every pending pack can be worked on: there is no longer a
+// one-pack-per-subject queue (isCurrent is always true, waitingFor null; both
+// are kept so callers don't need to change).
 export function collapsePacks(assignments, packs) {
   const pendingPacks = packs.filter((p) => p.status === 'pending')
   const pendingIds = new Set(pendingPacks.map((p) => p.id))
-  const current = currentPacks(packs)
   const out = assignments.filter((a) => !(a.pack_id && pendingIds.has(a.pack_id) && a.status === 'pending'))
   for (const p of pendingPacks) {
     const progress = packProgress(assignments.filter((a) => a.pack_id === p.id))
     if (!progress.next) continue
-    const first = current.get(p.subject_id)
     out.push({
       id: `pack:${p.id}`,
       packId: p.id,
@@ -151,8 +150,8 @@ export function collapsePacks(assignments, packs) {
       subject_id: p.subject_id,
       topic_id: p.topic_id,
       progress,
-      isCurrent: first?.id === p.id,
-      waitingFor: first && first.id !== p.id ? first.title : null,
+      isCurrent: true,
+      waitingFor: null,
     })
   }
   return out
