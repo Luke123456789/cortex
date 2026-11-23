@@ -1,6 +1,18 @@
 import { useEffect, useState, useCallback } from 'react'
 import { supabase } from '../lib/supabaseClient'
 
+// The API returns at most 1000 rows per request; read in pages so large
+// tables (written questions especially) never get silently cut short.
+async function readAllPages(build, page = 1000) {
+  const rows = []
+  for (let from = 0; ; from += page) {
+    const { data, error } = await build().range(from, from + page - 1)
+    if (error) return { data: rows, error }
+    rows.push(...data)
+    if (data.length < page) return { data: rows, error: null }
+  }
+}
+
 // Everything the parent's "Assign work" screen needs to build cascading
 // subject -> topic -> (subtopic | quiz | written-test question) pickers,
 // fetched once and filtered client-side, same approach as useSubjectLocks.
@@ -24,7 +36,7 @@ export function useAssignableCatalog() {
       // deactivated, so an emptied quiz drops out of the picker.
       supabase.from('quizzes').select('id, topic_id, subtopic_id, title, question_count').gt('question_count', 0).order('display_order'),
       // Questions that belong to a mock paper are set through the paper.
-      supabase.from('fm_exam_questions').select('id, topic_id, subtopic_id, question_text, command_word, total_marks').eq('active', true).is('paper_ref', null),
+      readAllPages(() => supabase.from('fm_exam_questions').select('id, topic_id, subtopic_id, question_text, command_word, total_marks').eq('active', true).is('paper_ref', null).order('id')),
       supabase.from('fm_papers').select('ref, subject_id, topic_id, title, duration_minutes, calculator, total_marks').eq('active', true).order('title'),
     ])
 

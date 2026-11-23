@@ -8,6 +8,7 @@ import { WallpaperContext } from './Wallpaper.jsx'
 import { wallpaperFor } from '../../lib/wallpapers'
 import { PARENT_NAV, STUDENT_NAV, isActive, isParentPath } from './navConfig'
 import styles from './AppShell.module.css'
+import UpdateBanner from '../UpdateBanner'
 
 function NavLinks({ items, pathname, className, linkClassName, labelKey = 'label' }) {
   return (
@@ -153,6 +154,7 @@ export default function AppShell() {
         </div>
       </aside>
 
+      <UpdateBanner />
       <main id="main" ref={mainRef} className={styles.main} tabIndex={-1}>
         <Outlet />
       </main>
