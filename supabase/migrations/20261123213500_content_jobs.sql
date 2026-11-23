@@ -77,3 +77,17 @@ select s.name subject, j.kind, count(*) jobs,
   sum(j.made) made, sum(j.target) target
 from public.content_jobs j join public.subjects s on s.id = j.subject_id
 group by s.name, j.kind order by 1, 2;
+
+-- Schedule (migration content_jobs_cron, then widened to 2 calls per tick):
+-- every 20 seconds while work is left. Stop with: select cron.unschedule('generate-exam-content');
+create extension if not exists pg_cron;
+select cron.schedule('generate-exam-content', '20 seconds', $cron$
+  select net.http_post(
+    url := 'https://mkmzesmzwjcfxtvayvlz.supabase.co/functions/v1/generate-exam-content',
+    headers := jsonb_build_object('Content-Type', 'application/json',
+      'x-cron-secret', (select decrypted_secret from vault.decrypted_secrets where name = 'content_cron_secret')),
+    body := '{}'::jsonb,
+    timeout_milliseconds := 170000)
+  from generate_series(1, 2)
+  where exists (select 1 from public.content_jobs where status in ('pending', 'running') and failures < 5);
+$cron$);
