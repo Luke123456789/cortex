@@ -30,6 +30,17 @@ describe('validateQuestion', () => {
     expect(v.ok).toBe(true)
     expect(v.row.scheme.levels.map((l) => l.level)).toEqual([3, 2, 1])
   })
+  it('tolerates a 0-mark band, SPaG left out of the total and 2-mark points', () => {
+    const zero = validateQuestion({ ...levelsQ, levels: [...levelsQ.levels, { level: 0, marks: [0, 0], descriptor: 'nothing' }] }, subtopics)
+    expect(zero.ok).toBe(true)
+    const startsAtZero = validateQuestion({ ...levelsQ, levels: [{ level: 2, marks: [4, 6], descriptor: 'a' }, { level: 1, marks: [0, 3], descriptor: 'b' }] }, subtopics)
+    expect(startsAtZero.ok).toBe(true)
+    expect(startsAtZero.row.scheme.levels[1].marks).toEqual([1, 3])
+    const essay = validateQuestion({ ...levelsQ, total_marks: 6, spag_marks: 4, spag: 'bands' }, subtopics)
+    expect(essay.ok).toBe(true)
+    expect(essay.row.total_marks).toBe(10)
+    expect(validateQuestion({ ...pointsQ, total_marks: 5, points: ['a', 'b', 'c'] }, subtopics).ok).toBe(true)
+  })
   it('rejects too few points, unknown subtopics and broken bands', () => {
     expect(validateQuestion({ ...pointsQ, points: ['a'] }, subtopics).ok).toBe(false)
     expect(validateQuestion({ ...pointsQ, subtopic: 'Nope' }, subtopics).ok).toBe(false)

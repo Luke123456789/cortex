@@ -201,10 +201,14 @@ export function validateQuestion(q, subtopics) {
   if (!q || typeof q !== 'object') return { ok: false, reason: 'not an object' }
   const text = String(q.question_text ?? '').trim()
   if (text.length < 25) return { ok: false, reason: 'question too short' }
-  const total = Number(q.total_marks)
+  let total = Number(q.total_marks)
   if (!Number.isInteger(total) || total < 1 || total > 40) return { ok: false, reason: 'bad total_marks' }
   const spag = Number.isInteger(q.spag_marks) ? q.spag_marks : 0
   if (spag < 0 || spag >= total) return { ok: false, reason: 'bad spag_marks' }
+  // A common slip: total_marks given without the SPaG marks (30 for a 30 + 4
+  // essay) while the bands run to 30. Treat the bands as the content marks.
+  const topBand = Math.max(0, ...((q.levels ?? []).map((l) => Number(l?.marks?.[1]) || 0)))
+  if (q.marking_style === 'levels' && spag > 0 && topBand === total && total + spag <= 40) total += spag
   const content = total - spag
   const sub = subtopics ? subtopics.find((s) => norm(s.name) === norm(q.subtopic)) : null
   if (subtopics && !sub) return { ok: false, reason: `unknown subtopic "${q.subtopic}"` }
@@ -212,12 +216,15 @@ export function validateQuestion(q, subtopics) {
   let scheme
   if (q.marking_style === 'points') {
     const points = (q.points ?? []).map((p) => String(p).trim()).filter(Boolean)
-    if (points.length < content) return { ok: false, reason: `only ${points.length} points for ${content} marks` }
+    // Usually one point per mark, but a point can carry 2 marks ("(b) correct
+    // method and answer"), so require at least 60% as many points as marks.
+    if (points.length < Math.ceil(content * 0.6)) return { ok: false, reason: `only ${points.length} points for ${content} marks` }
     scheme = { max: content, points }
   } else if (q.marking_style === 'levels') {
     const levels = (q.levels ?? [])
       .map((l) => ({ level: Number(l.level), marks: (l.marks ?? []).map(Number), descriptor: String(l.descriptor ?? '').trim() }))
-      .filter((l) => l.marks.length === 2 && l.descriptor)
+      .filter((l) => l.marks.length === 2 && l.descriptor && l.marks[1] > 0) // drop a "0 marks" band
+      .map((l) => (l.marks[0] === 0 ? { ...l, marks: [1, l.marks[1]] } : l))
       .sort((a, b) => b.marks[1] - a.marks[1])
     if (levels.length < 2) return { ok: false, reason: 'fewer than 2 levels' }
     if (levels[0].marks[1] !== content) return { ok: false, reason: `top band ${levels[0].marks[1]} != ${content}` }
