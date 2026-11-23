@@ -12,6 +12,7 @@ export const STUDENT_NAV = [
 // Room for Goals later: add entries here.
 export const PARENT_NAV = [
   { to: '/parent', label: 'Overview', short: 'Overview', icon: 'overview', end: true },
+  { to: '/parent/plan', label: 'Weekly plan', short: 'Plan', icon: 'calendar' },
   { to: '/parent/workload', label: 'Workload', short: 'Workload', icon: 'assign' },
   { to: '/parent/history', label: 'Work history', short: 'History', icon: 'history' },
   { to: '/parent/locks', label: 'Subject locks', short: 'Locks', icon: 'lock' },

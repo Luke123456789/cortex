@@ -8,6 +8,7 @@ import { useCatalogNames } from '../hooks/useCatalogNames'
 import { ASSIGNMENT_TYPE_LABELS, assignmentAction } from '../lib/assignments'
 import { dueLabel, groupWeek } from '../lib/week'
 import styles from './Assignments.module.css'
+import StudentWeekPlan from '../components/StudentWeekPlan'
 
 function formatTime(isoString) {
   return new Date(isoString).toLocaleString([], { day: '2-digit', month: 'short', hour: '2-digit', minute: '2-digit' })
@@ -103,6 +104,7 @@ export default function Assignments() {
 
   return (
     <div className="page page--wide">
+      <StudentWeekPlan studentId={studentId} />
       <div className={styles.head}>
         <h1 className="section-label">Your week</h1>
         {!loading && (
