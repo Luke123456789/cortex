@@ -47,7 +47,6 @@ describe('gradeAndClaimReward', () => {
     expect(options.headers.Authorization).toBe('Bearer test-token')
     expect(JSON.parse(options.body)).toEqual({
       sessionId: 's1',
-      messages: [{ role: 'user', content: 'hi' }],
       subjectName: 'Economics',
       topicName: 'Markets',
       subtopicName: 'Supply and demand',

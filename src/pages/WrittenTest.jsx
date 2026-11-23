@@ -5,6 +5,8 @@ import { useAuth } from '../hooks/useAuth.jsx'
 import { useSubjectWallpaper } from '../components/shell/Wallpaper.jsx'
 import { commandWordHint } from '../../supabase/functions/mark-written-answer/marking-logic.js'
 import styles from './WrittenTest.module.css'
+import ShareButton from '../components/ShareButton'
+import { writtenShareText } from '../lib/share'
 
 const draftKey = (studentId, questionId) => `cortex:written-draft:${studentId}:${questionId}`
 
@@ -45,7 +47,7 @@ const fmtClock = (s) => `${Math.floor(s / 60)}:${String(s % 60).padStart(2, '0')
 // Exam pace: AQA papers allow roughly 1 to 1.3 minutes per mark.
 const suggestedMinutes = (marks) => Math.max(2, Math.round(marks * 1.2))
 
-function Result({ attempt, question, paperId }) {
+function Result({ attempt, question, paperId, studentName }) {
   const marks = attempt.parent_marks ?? attempt.marks_awarded
   const credited = attempt.credited || []
   const missing = attempt.missing || []
@@ -112,6 +114,19 @@ function Result({ attempt, question, paperId }) {
         <p>{question.question_text}</p>
       </details>
 
+      <ShareButton
+        getText={() => writtenShareText({
+          name: studentName,
+          subject: question.topics?.subjects?.name,
+          question: question.question_text,
+          answer: attempt.transcribed_answer,
+          marks,
+          total: attempt.total_marks,
+          summary: attempt.feedback_summary,
+          nextStep: attempt.next_step,
+        })}
+      />
+
       {paperId
         ? <Link to={`/paper/${paperId}`} className="btn btn--primary">Back to the paper</Link>
         : <Link to="/assignments" className="btn btn--primary">Back to your week</Link>}
@@ -127,7 +142,7 @@ export default function WrittenTest() {
   const paperId = searchParams.get('paper')
   // Answering a written-test assignment: ?assignment=<id> (e.g. a study pack step).
   const assignmentId = searchParams.get('assignment')
-  const { studentId } = useAuth()
+  const { studentId, profile } = useAuth()
   const [question, setQuestion] = useState(null)
   const [pending, setPending] = useState(false)
   const [attempt, setAttempt] = useState(null)
@@ -305,7 +320,7 @@ export default function WrittenTest() {
       </div>
 
       {!pending && attempt ? (
-        <Result attempt={attempt} question={question} paperId={paperId} />
+        <Result attempt={attempt} question={question} paperId={paperId} studentName={profile?.role === 'student' ? profile?.display_name : null} />
       ) : !pending ? (
         <p className="empty">{paperId ? 'This paper has been handed in, so this question can no longer be answered.' : "This question hasn't been set for you."}</p>
       ) : (

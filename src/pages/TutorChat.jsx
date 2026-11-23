@@ -2,6 +2,8 @@ import { useState, useEffect, useRef, useCallback } from 'react'
 import { Link, useSearchParams } from 'react-router-dom'
 import { supabase } from '../lib/supabaseClient'
 import { gradeAndClaimReward } from '../lib/gradeAndClaimReward'
+import ShareButton from '../components/ShareButton'
+import { tutorShareText } from '../lib/share'
 import { useAuth } from '../hooks/useAuth.jsx'
 import { useQuizCatalog } from '../hooks/useQuizCatalog'
 import { useFillViewport } from '../hooks/useFillViewport'
@@ -22,7 +24,7 @@ async function readJson(res) {
 
 export default function TutorChat() {
   // The student themselves, or a parent's practice student (see useAuth).
-  const { studentId, isPractice } = useAuth()
+  const { studentId, isPractice, profile } = useAuth()
   const { subjects, loading: catalogLoading } = useQuizCatalog(studentId)
   const [searchParams] = useSearchParams()
   const deepLinkedSubtopicId = searchParams.get('subtopicId')
@@ -69,6 +71,10 @@ export default function TutorChat() {
   const [feedback, setFeedback] = useState('')
   const [finishing, setFinishing] = useState(false)
   const [error, setError] = useState(null)
+  // Shown when Finish is pressed before the session counts: what's still to do.
+  const [notice, setNotice] = useState(null)
+  const [examResult, setExamResult] = useState(null)
+  const [answersCount, setAnswersCount] = useState(null)
 
   const [outlineOpen, setOutlineOpen] = useState(false)
 
@@ -272,6 +278,7 @@ export default function TutorChat() {
     finishedRef.current = true
     setFinishing(true)
     setError(null)
+    setNotice(null)
 
     const topic = topics.find((t) => t.id === topicId)
     const subtopic = subtopics.find((st) => st.id === subtopicId)
@@ -279,7 +286,6 @@ export default function TutorChat() {
     try {
       const result = await gradeAndClaimReward({
         sessionId,
-        messages,
         subjectName: selectedSubject?.name,
         topicName: topic?.name,
         subtopicName: subtopic?.name,
@@ -288,7 +294,12 @@ export default function TutorChat() {
       if (result.claimed) {
         setMinutesAwarded(result.minutesAwarded ?? 0)
         setFeedback(result.feedback ?? '')
+        setExamResult(result.exam ?? null)
+        setAnswersCount(result.answers ?? null)
         setRewardClaimed(true)
+      } else if (result.incomplete) {
+        setNotice(result.toFinish || 'Not finished yet — keep going with the tutor.')
+        finishedRef.current = false
       } else {
         setError(
           result.alreadyClaimed
@@ -314,8 +325,20 @@ export default function TutorChat() {
           <p className={styles.doneText}>
             {isPractice ? 'Practice session graded (practice sessions earn no minutes).' : `+${minutesAwarded} minutes earned for the chat.`}
           </p>
+          {examResult && <p className={styles.doneText}>Exam question: {examResult.awarded}/{examResult.available}</p>}
           {feedback && <p className={styles.feedback}>{feedback}</p>}
         </div>
+        <ShareButton
+          getText={() => tutorShareText({
+            name: profile?.role === 'student' ? profile?.display_name : null,
+            subject: selectedSubject?.name,
+            topic: topics.find((t) => t.id === topicId)?.name,
+            lesson: subtopics.find((st) => st.id === subtopicId)?.name,
+            exam: examResult,
+            feedback,
+            answers: answersCount,
+          })}
+        />
         <Link to="/" className="btn btn--primary">Back to home</Link>
       </div>
     )
@@ -423,6 +446,10 @@ export default function TutorChat() {
           ))}
           {thinking && <div className={`${styles.bubble} ${styles.typing}`}>Tutor is typing…</div>}
         </div>
+
+        {notice && (
+          <p className={`card ${styles.notice}`} role="status">{notice}</p>
+        )}
 
         {error && (
           <div className={styles.errorRow}>

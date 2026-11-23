@@ -1,6 +1,6 @@
 import { createClient } from 'npm:@supabase/supabase-js@2.45.0'
 import { getCaller } from '../_shared/access.ts'
-import { MIN_MINUTES, MAX_MINUTES, buildGradingPrompt, extractGradeFromResponse } from './grading-logic.js'
+import { GRADE_TOOL, buildGradingPrompt, countContentReplies, decideOutcome, extractGradeFromResponse, formatTranscript, pickExamAnswer } from './grading-logic.js'
 
 const ANTHROPIC_API_KEY = Deno.env.get('ANTHROPIC_API_KEY')
 const SUPABASE_URL = Deno.env.get('SUPABASE_URL')!
@@ -26,9 +26,11 @@ Deno.serve(async (req) => {
   const caller = await getCaller(req)
   if (!caller) return new Response('unauthorized', { status: 401, headers: corsHeaders })
 
-  const { sessionId, messages, subjectName, topicName, subtopicName } = await req.json()
-  if (!sessionId || !Array.isArray(messages) || messages.length === 0) {
-    return new Response(JSON.stringify({ error: 'sessionId and messages required' }), { status: 400, headers: { ...corsHeaders, 'Content-Type': 'application/json' } })
+  // The transcript is read from the database (written turn by turn by
+  // tutor-chat), never taken from the request body.
+  const { sessionId, subjectName, topicName, subtopicName } = await req.json()
+  if (!sessionId) {
+    return new Response(JSON.stringify({ error: 'sessionId required' }), { status: 400, headers: { ...corsHeaders, 'Content-Type': 'application/json' } })
   }
 
   // Ownership check, through the caller's own JWT (RLS-scoped), never the
@@ -38,7 +40,7 @@ Deno.serve(async (req) => {
   // but can never grade them.
   const { data: session, error: sessionErr } = await caller.client
     .from('tutor_sessions')
-    .select('id, student_id, reward_claimed')
+    .select('id, student_id, reward_claimed, messages, lesson_plan')
     .eq('id', sessionId)
     .single()
 
@@ -53,11 +55,21 @@ Deno.serve(async (req) => {
     return new Response(JSON.stringify({ claimed: false, alreadyClaimed: true }), { status: 200, headers: { ...corsHeaders, 'Content-Type': 'application/json' } })
   }
 
-  const transcriptText = messages
-    .filter((m: { role: string; content: string }) => m.role === 'user')
-    .map((m: { content: string }) => m.content)
-    .join('\n\n')
+  // The tutor's opening question isn't part of the stored turns, so put it
+  // back in front: the first answer is a reply to it.
+  const stored = Array.isArray(session.messages) ? session.messages : []
+  const opening = session.lesson_plan?.openingLine
+  const messages = typeof opening === 'string' && opening ? [{ role: 'assistant', content: opening }, ...stored] : stored
+  const contentReplies = countContentReplies(messages)
+  const json = (body: unknown, status = 200) =>
+    new Response(JSON.stringify(body), { status, headers: { ...corsHeaders, 'Content-Type': 'application/json' } })
 
+  // Nothing worth sending to the grader yet.
+  if (contentReplies === 0) {
+    return json({ claimed: false, incomplete: true, toFinish: "You haven't answered any of the tutor's questions yet — have a go at the first one." })
+  }
+
+  const transcriptText = formatTranscript(messages)
   const prompt = buildGradingPrompt(subjectName ?? 'the subject', topicName ?? 'the topic', subtopicName ?? 'this subtopic', transcriptText)
 
   const gradingRes = await fetch('https://api.anthropic.com/v1/messages', {
@@ -69,30 +81,9 @@ Deno.serve(async (req) => {
     },
     body: JSON.stringify({
       model: 'claude-sonnet-5',
-      max_tokens: 400,
+      max_tokens: 800,
       messages: [{ role: 'user', content: prompt }],
-      tools: [
-        {
-          name: 'submit_grade',
-          description: 'Submit the grading result for this tutoring session',
-          input_schema: {
-            type: 'object',
-            properties: {
-              minutes: {
-                type: 'integer',
-                minimum: MIN_MINUTES,
-                maximum: MAX_MINUTES,
-                description: `Minutes of screen time earned, ${MIN_MINUTES} (minimal engagement) to ${MAX_MINUTES} (excellent, thorough reasoning)`,
-              },
-              feedback: {
-                type: 'string',
-                description: 'One or two sentences of feedback for the student, specific to what they did well or should improve',
-              },
-            },
-            required: ['minutes', 'feedback'],
-          },
-        },
-      ],
+      tools: [GRADE_TOOL],
       tool_choice: { type: 'tool', name: 'submit_grade' },
     }),
   })
@@ -110,26 +101,52 @@ Deno.serve(async (req) => {
     return new Response(JSON.stringify({ error: 'grading response malformed' }), { status: 502, headers: { ...corsHeaders, 'Content-Type': 'application/json' } })
   }
 
-  const { minutes, feedback } = grade
+  const outcome = decideOutcome(grade, contentReplies)
+  const exam = grade.examMarksAvailable > 0
+    ? {
+        awarded: grade.examMarksAwarded,
+        available: grade.examMarksAvailable,
+        question: grade.examQuestion,
+        answer: pickExamAnswer(messages, grade.examAnswerTurns),
+      }
+    : null
+
+  // Not done yet: no reward, session stays open so they can carry on.
+  if (!outcome.complete) {
+    return json({ claimed: false, incomplete: true, toFinish: outcome.toFinish, answers: outcome.answers, exam })
+  }
+  const { minutes } = outcome
+  const { feedback } = grade
 
   // Service-role client: the only caller allowed to execute
   // grade_and_claim_tutor_reward. Never exposed to the browser.
   const serviceClient = createClient(SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY)
   const { data: claimResult, error: claimErr } = await serviceClient
     .rpc('grade_and_claim_tutor_reward', { p_session_id: sessionId, p_minutes: minutes })
-    .single()
+    .single<{ claimed: boolean; minutes_awarded: number | null }>()
 
   if (claimErr) {
     console.error('grade_and_claim_tutor_reward error', claimErr)
     return new Response(JSON.stringify({ error: 'reward claim failed' }), { status: 502, headers: { ...corsHeaders, 'Content-Type': 'application/json' } })
   }
 
-  return new Response(JSON.stringify({
+  // Keep the result so it can be reviewed and shared later.
+  const savedGrade = {
+    minutes,
+    quality: grade.quality,
+    answers: outcome.answers,
+    feedback,
+    exam,
+    gradedAt: new Date().toISOString(),
+  }
+  const { error: saveErr } = await serviceClient.from('tutor_sessions').update({ grade: savedGrade }).eq('id', sessionId)
+  if (saveErr) console.error('Failed to save tutor session grade', saveErr)
+
+  return json({
     claimed: claimResult?.claimed ?? false,
     minutesAwarded: claimResult?.minutes_awarded ?? null,
     feedback,
-  }), {
-    status: 200,
-    headers: { ...corsHeaders, 'Content-Type': 'application/json' },
+    answers: outcome.answers,
+    exam,
   })
 })

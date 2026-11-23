@@ -41,30 +41,31 @@ const LESSON_PLAN_TOOL = {
       learningOutcomes: { type: 'array', items: { type: 'string' }, description: '2-3 outcomes, each starting "By the end of this you\'ll be able to..."' },
       sections: {
         type: 'array',
-        description: '2-3 teaching sections',
+        description: '3 teaching sections',
         items: {
           type: 'object',
           properties: {
             heading: { type: 'string' },
             keyPoints: { type: 'array', items: { type: 'string' }, description: '2-4 concise talking points' },
-            checkIn: { type: 'string', description: 'A conversational question to check understanding' },
+            checkIn: { type: 'string', description: 'An open "explain why/how" question that needs a 1-3 sentence answer in the student\'s own words — never yes/no, never answerable with one word' },
           },
           required: ['heading', 'keyPoints', 'checkIn'],
         },
       },
       essayQuestions: {
         type: 'array',
-        description: '1-2 GCSE-style extended-response questions',
+        description: '1-2 GCSE exam-style questions worth 4-9 marks; the first is compulsory for the student',
         items: {
           type: 'object',
           properties: {
-            question: { type: 'string' },
-            markingFocus: { type: 'string', description: 'What a strong answer needs for top marks' },
+            question: { type: 'string', description: 'Phrased exactly as on the paper, with the command word and the mark tariff in brackets, e.g. "Explain why... [6 marks]"' },
+            marks: { type: 'integer', minimum: 4, maximum: 9 },
+            markingFocus: { type: 'string', description: 'The creditworthy points / level descriptors a strong answer needs for full marks' },
           },
-          required: ['question', 'markingFocus'],
+          required: ['question', 'marks', 'markingFocus'],
         },
       },
-      openingLine: { type: 'string', description: 'A short, warm opening message (1-2 sentences) naming the subtopic and what they will cover' },
+      openingLine: { type: 'string', description: 'A short, warm opening message (1-2 sentences) naming the subtopic, ending with a question asking what the student already knows about it' },
     },
     required: ['learningOutcomes', 'sections', 'essayQuestions', 'openingLine'],
   },
@@ -97,11 +98,11 @@ Subject: ${subjectName}
 Topic: ${topicName}
 Subtopic: ${subtopicName}${specRef ? ` (spec ref ${specRef})` : ''}
 
-Plan a conversational, text-based one-to-one session of roughly 10-15 minutes.
+Plan a demanding, text-based one-to-one session of roughly 15-20 minutes. Students coast if they can, so the plan must make the student do the thinking and the writing.
 - 2-3 learning outcomes
-- 2-3 sections, each with 2-4 concise talking points (for the tutor, not a script) and one natural check-in question
-- 1-2 GCSE-level (not A-level) extended-response questions genuinely testing this subtopic, phrased as they would appear on the ${examBoardLine} paper, each with a note on what earns top marks
-- A short, friendly opening message
+- 3 sections, each with 2-4 concise talking points (for the tutor, not a script) and one open check-in question that makes the student explain WHY or HOW in their own words (never yes/no, never a one-word recall)
+- 1-2 GCSE-level (not A-level) exam questions worth 4-9 marks, genuinely testing this subtopic, phrased exactly as they would appear on the ${examBoardLine} paper with the command word and mark tariff, each with the points a full-mark answer needs. The first one is compulsory — the student must write an answer to it before the session counts.
+- A short, friendly opening message that ends with a question asking what they already know about the subtopic
 
 Call submit_lesson_plan with the plan.`
 
