@@ -59,3 +59,23 @@ export async function shareToWhatsApp(text) {
   window.open(whatsappUrl(text), '_blank', 'noopener')
   return 'opened'
 }
+
+// wrong: [{ question, yourAnswer, correctAnswer }]
+export function quizShareText({ name, subject, title, score, total, wrong = [], date = new Date() }) {
+  const when = date.toLocaleDateString('en-GB', { weekday: 'short', day: 'numeric', month: 'short' })
+  const out = [
+    `✅ ${name ? `${name}'s` : 'My'} quiz — ${when}`,
+    [subject, title].filter(Boolean).join(' › '),
+    `Score: ${score}/${total}${total ? ` (${Math.round((100 * score) / total)}%)` : ''}`,
+  ]
+  if (wrong.length) {
+    out.push('', 'Got wrong:')
+    for (const w of wrong.slice(0, 8)) {
+      out.push(`• ${clip(w.question, 160)}`, `  Me: ${w.yourAnswer || '—'} · Answer: ${w.correctAnswer}`)
+    }
+    if (wrong.length > 8) out.push(`…and ${wrong.length - 8} more`)
+  } else if (total) {
+    out.push('', 'Full marks! 🎉')
+  }
+  return lines(...out)
+}

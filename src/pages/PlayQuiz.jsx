@@ -5,6 +5,8 @@ import { useAuth } from '../hooks/useAuth.jsx'
 import { useSubjectWallpaper } from '../components/shell/Wallpaper.jsx'
 import card from '../components/QuestionCard.module.css'
 import styles from './PlayQuiz.module.css'
+import ShareButton from '../components/ShareButton'
+import { quizShareText } from '../lib/share'
 
 const optionKeys = ['a', 'b', 'c', 'd']
 
@@ -15,7 +17,7 @@ export default function PlayQuiz() {
   const [searchParams] = useSearchParams()
   const assignmentId = searchParams.get('assignment')
   // The student themselves, or a parent's practice student (see useAuth).
-  const { studentId } = useAuth()
+  const { studentId, profile } = useAuth()
   const [quiz, setQuiz] = useState(null)
   const [questions, setQuestions] = useState([])
   const [answers, setAnswers] = useState({})
@@ -177,6 +179,22 @@ export default function PlayQuiz() {
           })}
         </ol>
 
+        <ShareButton
+          getText={() => quizShareText({
+            name: profile?.role === 'student' ? profile?.display_name : null,
+            subject: quiz?.topics?.subjects?.name,
+            title: quiz?.title,
+            score: result.score,
+            total: result.totalCount,
+            wrong: questions
+              .filter((q) => resultByQuestionId[q.id] && !resultByQuestionId[q.id].correct)
+              .map((q) => {
+                const r = resultByQuestionId[q.id]
+                const opt = (l) => (l ? `${l} ${q[`option_${l.toLowerCase()}`] ?? ''}`.trim() : '')
+                return { question: q.question_text, yourAnswer: opt(r.selectedOption), correctAnswer: opt(r.correctOption) }
+              }),
+          })}
+        />
         <Link to="/" className="btn btn--primary btn--block">Done</Link>
       </div>
     )
