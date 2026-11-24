@@ -60,7 +60,7 @@ describe('history rows, summary, filter and CSV', () => {
     expect(rows[2]).toMatchObject({ state: 'overdue', daysLate: 2 })
   })
   it('counts each outcome', () => {
-    expect(summarizeHistory(rows)).toEqual({ set: 5, done: 2, onTime: 1, late: 1, overdue: 1, pending: 1, cancelled: 1, onTimePct: 50 })
+    expect(summarizeHistory(rows)).toEqual({ set: 5, done: 2, onTime: 1, late: 1, overdue: 1, pending: 1, cancelled: 1, expired: 0, onTimePct: 50 })
   })
   it('filters by outcome group, single state, subject and date set', () => {
     expect(filterRows(rows, { group: 'not_done' }).map((r) => r.id)).toEqual(['3', '4'])
@@ -83,5 +83,11 @@ describe('mock paper result', () => {
       paperTotals: new Map([['p1', { marks: 52, answered: 23 }]]), paperMarks: new Map([['m1', 80]]),
     })
     expect(r).toEqual({ text: '52/80 marks (65%), 23 questions answered', pct: 65 })
+  })
+})
+
+describe('expired plan work', () => {
+  it('shows as not done once the week has ended', () => {
+    expect(stateOf({ status: 'expired', due_at: '2026-11-29T23:59:59Z' })).toBe('expired')
   })
 })
