@@ -10,10 +10,12 @@ export const STATES = {
   overdue: { label: 'Overdue', group: 'not_done' },
   pending: { label: 'Not done yet', group: 'not_done' },
   cancelled: { label: 'Cancelled', group: 'cancelled' },
+  expired: { label: 'Not done (week ended)', group: 'not_done' },
 }
 
 export function stateOf(a, now = new Date()) {
   if (a.status === 'cancelled') return 'cancelled'
+  if (a.status === 'expired') return 'expired'
   if (a.status === 'completed') {
     if (!a.due_at || !a.completed_at) return 'done'
     return daysLate(a.due_at, new Date(a.completed_at)) > 0 ? 'late' : 'on_time'
@@ -90,6 +92,7 @@ export function summarizeHistory(rows) {
     overdue: count('overdue'),
     pending: count('pending'),
     cancelled: count('cancelled'),
+    expired: count('expired'),
     onTimePct: dated ? Math.round((count('on_time') / dated) * 100) : null,
   }
 }

@@ -5,8 +5,9 @@ import styles from './WeeklyPlanProgress.module.css'
 // the parent's plan page and the student's week.
 export default function WeeklyPlanProgress({ plan, progress, subjects }) {
   if (!plan) return null
-  const rows = targetRows(plan, progress)
-  const focus = (plan.subject_ids ?? []).map((id) => subjects.find((s) => s.id === id)).filter(Boolean)
+  const rows = targetRows(plan, progress, subjects)
+  const focusIds = Object.keys(plan.subject_minutes ?? {}).length ? Object.keys(plan.subject_minutes) : (plan.subject_ids ?? [])
+  const focus = focusIds.map((id) => subjects.find((s) => s.id === id)).filter(Boolean)
   return (
     <div className={styles.wrap}>
       {rows.length > 0 && (

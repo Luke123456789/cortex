@@ -87,3 +87,41 @@ describe('targetRows and share text', () => {
     expect(fmtMinutes(90)).toBe('1h 30m')
   })
 })
+
+describe('per-subject time, papers and set work', () => {
+  const subjects = [{ id: 'phy', name: 'Physics' }, { id: 'mat', name: 'Maths' }]
+  const plan = { subject_minutes: { phy: 120, mat: 90 }, tutor_sessions: 4, exam_questions: 5, papers: 2, quizzes: 0, study_minutes: 0 }
+  const progress = { minutes: 100, minutesBySubject: { phy: 130, mat: 20 }, tutorSessions: 1, examQuestions: 5, papers: 1, quizzes: 0, subjects: new Set(), daysActive: 2, examPct: null }
+
+  it('has a time row per subject and a papers row', () => {
+    const rows = targetRows(plan, progress, subjects)
+    expect(rows.map((r) => r.key)).toEqual(['time:phy', 'time:mat', 'tutor_sessions', 'exam_questions', 'papers'])
+    expect(rows[0]).toMatchObject({ label: 'Physics time', met: true, doneText: '2h 10m', targetText: '2h' })
+    expect(rows[1]).toMatchObject({ label: 'Maths time', met: false, doneText: '20 min' })
+    expect(rows[4]).toMatchObject({ label: 'Exam papers', done: 1, target: 2, met: false })
+  })
+
+  it('lists the set work in the share text, ticked when done', () => {
+    const items = [{ title: 'Forces tutor session', status: 'completed' }, { title: 'Physics Paper 1: Mock 2', status: 'pending' }]
+    const plain = planShareText({ plan, subjects, items, weekStart: '2026-11-23' })
+    expect(plain).toContain('• Physics time: 2h')
+    expect(plain).toContain('• Forces tutor session')
+    const checkin = planShareText({ plan, subjects, items, progress, weekStart: '2026-11-23' })
+    expect(checkin).toContain('✅ Physics time: 2h 10m of 2h')
+    expect(checkin).toContain('✅ Forces tutor session')
+    expect(checkin).toContain('⬜ Physics Paper 1: Mock 2')
+  })
+
+  it('counts papers completed in the week and minutes per subject', () => {
+    const bounds = weekBounds('2026-11-23')
+    const at = (d) => new Date(2026, 10, d, 18).toISOString()
+    const p = computeProgress({
+      tutorSessions: [{ started_at: at(23), completed_at: new Date(2026, 10, 23, 18, 30).toISOString(), reward_claimed: true, subject_id: 'phy' }],
+      attempts: [{ submitted_at: at(24), active_ms: 600000, subject_id: 'mat' }],
+      quizzes: [],
+      papers: [{ completed_at: at(25) }, { completed_at: at(16) }],
+    }, bounds)
+    expect(p.minutesBySubject).toEqual({ phy: 30, mat: 10 })
+    expect(p.papers).toBe(1)
+  })
+})

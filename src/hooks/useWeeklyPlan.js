@@ -5,7 +5,7 @@ import { computeProgress, weekBounds } from '../lib/weeklyPlan'
 // A student's plan for one week plus their actual activity in it. Works for
 // the student (own rows) and a linked parent (RLS: is_parent_of).
 export function useWeeklyPlan(studentId, weekStart) {
-  const [state, setState] = useState({ loading: true, error: null, plan: null, subjects: [], progress: null })
+  const [state, setState] = useState({ loading: true, error: null, plan: null, subjects: [], progress: null, items: [] })
 
   const load = useCallback(async () => {
     if (!studentId) return
@@ -14,7 +14,7 @@ export function useWeeklyPlan(studentId, weekStart) {
     const from = bounds.from.toISOString()
     const to = bounds.to.toISOString()
     try {
-      const [plan, subjects, tutor, attempts, quizzes] = await Promise.all([
+      const [plan, subjects, tutor, attempts, quizzes, papers] = await Promise.all([
         supabase.from('weekly_plans').select('*').eq('student_id', studentId).eq('week_start', weekStart).maybeSingle(),
         supabase.from('subjects').select('id, name').order('name'),
         supabase.from('tutor_sessions')
@@ -26,8 +26,10 @@ export function useWeeklyPlan(studentId, weekStart) {
         supabase.from('quiz_sessions')
           .select('started_at, completed_at, question_count, score, topics (subject_id), quizzes (topics (subject_id))')
           .eq('student_id', studentId).gte('completed_at', from).lt('completed_at', to),
+        supabase.from('assignments').select('completed_at')
+          .eq('student_id', studentId).eq('type', 'mock_paper').eq('status', 'completed').gte('completed_at', from).lt('completed_at', to),
       ])
-      const failed = [plan, subjects, tutor, attempts, quizzes].find((r) => r.error)
+      const failed = [plan, subjects, tutor, attempts, quizzes, papers].find((r) => r.error)
       if (failed) throw failed.error
 
       const activity = {
@@ -40,8 +42,18 @@ export function useWeeklyPlan(studentId, weekStart) {
           subject_id: a.fm_exam_questions?.topics?.subject_id ?? null,
         })),
         quizzes: quizzes.data.map((q) => ({ ...q, subject_id: q.topics?.subject_id ?? q.quizzes?.topics?.subject_id ?? null })),
+        papers: papers.data,
       }
-      setState({ loading: false, error: null, plan: plan.data, subjects: subjects.data, progress: computeProgress(activity, bounds) })
+      // The work set by this plan (approved items), oldest first.
+      let items = []
+      if (plan.data?.id) {
+        const res = await supabase.from('assignments')
+          .select('id, type, title, status, completed_at, subject_id, topic_id, subtopic_id, quiz_id, exam_question_id, paper_ref')
+          .eq('plan_id', plan.data.id).order('assigned_at')
+        if (res.error) throw res.error
+        items = res.data
+      }
+      setState({ loading: false, error: null, plan: plan.data, subjects: subjects.data, progress: computeProgress(activity, bounds), items })
     } catch (err) {
       console.error('Failed to load weekly plan', err)
       setState((s) => ({ ...s, loading: false, error: 'Could not load the weekly plan.' }))

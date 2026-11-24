@@ -59,10 +59,17 @@ export function computeProgress(activity, { from, to }) {
   const attempts = (activity.attempts ?? []).filter((a) => inWeek(a.submitted_at))
   const quizzes = (activity.quizzes ?? []).filter((q) => q.completed_at && inWeek(q.completed_at))
 
+  const minutesBySubject = {}
+  const addMin = (sid, m) => { if (sid && m > 0) minutesBySubject[sid] = (minutesBySubject[sid] ?? 0) + m }
+  for (const s of tutor) addMin(s.subject_id, minutesBetween(s.started_at, s.completed_at, TUTOR_CAP_MIN))
+  for (const a of attempts) addMin(a.subject_id, a.active_ms ? a.active_ms / 60000 : 0)
+  for (const q of quizzes) addMin(q.subject_id, (q.question_count ?? 0) * QUIZ_MIN_PER_QUESTION)
   const minutes =
     tutor.reduce((n, s) => n + minutesBetween(s.started_at, s.completed_at, TUTOR_CAP_MIN), 0) +
     attempts.reduce((n, a) => n + (a.active_ms ? a.active_ms / 60000 : 0), 0) +
     quizzes.reduce((n, q) => n + (q.question_count ?? 0) * QUIZ_MIN_PER_QUESTION, 0)
+  for (const k of Object.keys(minutesBySubject)) minutesBySubject[k] = Math.round(minutesBySubject[k])
+  const papers = (activity.papers ?? []).filter((p) => inWeek(p.completed_at)).length
 
   const subjects = new Set([...tutor, ...attempts, ...quizzes].map((x) => x.subject_id).filter(Boolean))
   const days = new Set([
@@ -80,6 +87,8 @@ export function computeProgress(activity, { from, to }) {
     examQuestions: attempts.length,
     quizzes: quizzes.length,
     minutes: Math.round(minutes),
+    minutesBySubject,
+    papers,
     subjects,
     daysActive: days.size,
     examPct,
@@ -87,14 +96,20 @@ export function computeProgress(activity, { from, to }) {
 }
 
 // One row per target that was set: { key, label, done, target, met }.
-export function targetRows(plan, progress) {
+// subjects: [{ id, name }] for naming per-subject time targets.
+export function targetRows(plan, progress, subjects = []) {
   if (!plan) return []
-  const rows = [
-    ['study_minutes', 'Study time', progress.minutes, plan.study_minutes, (n) => fmtMinutes(n)],
+  const name = (id) => subjects.find((s) => s.id === id)?.name ?? 'Subject'
+  const perSubject = Object.entries(plan.subject_minutes ?? {}).filter(([, m]) => m > 0)
+  const rows = perSubject.length
+    ? perSubject.map(([id, m]) => [`time:${id}`, `${name(id)} time`, progress.minutesBySubject?.[id] ?? 0, m, fmtMinutes])
+    : [['study_minutes', 'Study time', progress.minutes, plan.study_minutes, fmtMinutes]]
+  rows.push(
     ['tutor_sessions', 'Tutor sessions', progress.tutorSessions, plan.tutor_sessions, String],
-    ['exam_questions', 'Exam questions', progress.examQuestions, plan.exam_questions, String],
+    ['exam_questions', 'Written answers', progress.examQuestions, plan.exam_questions, String],
+    ['papers', 'Exam papers', progress.papers ?? 0, plan.papers ?? 0, String],
     ['quizzes', 'Quizzes', progress.quizzes, plan.quizzes, String],
-  ]
+  )
   return rows
     .filter(([, , , target]) => target > 0)
     .map(([key, label, done, target, fmt]) => ({ key, label, done, target, met: done >= target, doneText: fmt(done), targetText: fmt(target) }))
@@ -110,12 +125,13 @@ export function fmtMinutes(n) {
 const tick = (met) => (met ? '✅' : '⬜')
 
 // WhatsApp text. With progress it reads as a check-in; without, as the plan.
-export function planShareText({ plan, name, subjectNames = [], progress = null, weekStart }) {
+// items: the week's set work, [{ title, status }] (status 'completed' ticks it).
+export function planShareText({ plan, name, subjectNames = [], subjects = [], progress = null, weekStart, items = [] }) {
   const who = name ? `${name}'s` : 'The'
   const out = [`🗓️ ${who} revision plan — w/c ${weekLabel(weekStart)}`]
   if (!plan) return `${out[0]}\nNo plan set for this week yet.`
 
-  const rows = targetRows(plan, progress ?? { minutes: 0, tutorSessions: 0, examQuestions: 0, quizzes: 0 })
+  const rows = targetRows(plan, progress ?? { minutes: 0, minutesBySubject: {}, tutorSessions: 0, examQuestions: 0, papers: 0, quizzes: 0 }, subjects)
   if (rows.length) {
     out.push('')
     for (const r of rows) {
@@ -133,6 +149,10 @@ export function planShareText({ plan, name, subjectNames = [], progress = null, 
     } else {
       out.push(`Focus subjects: ${subjectNames.map((s) => s.name).join(', ')}`)
     }
+  }
+  if (items.length) {
+    out.push('', 'Set work this week:')
+    for (const i of items) out.push(`${progress ? `${tick(i.status === 'completed')} ` : '• '}${i.title}`)
   }
   if (progress) {
     out.push('')

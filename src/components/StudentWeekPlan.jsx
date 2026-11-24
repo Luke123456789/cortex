@@ -10,9 +10,9 @@ import ShareButton from './ShareButton'
 export default function StudentWeekPlan({ studentId }) {
   const { profile } = useAuth()
   const weekStart = mondayOf()
-  const { loading, plan, subjects, progress } = useWeeklyPlan(studentId, weekStart)
+  const { loading, plan, subjects, progress, items } = useWeeklyPlan(studentId, weekStart)
   const subjectNames = useMemo(
-    () => (plan?.subject_ids ?? []).map((id) => {
+    () => Object.keys(plan?.subject_minutes ?? {}).map((id) => {
       const s = subjects.find((x) => x.id === id)
       return s ? { name: s.name, covered: progress?.subjects.has(id) } : null
     }).filter(Boolean),
@@ -25,7 +25,7 @@ export default function StudentWeekPlan({ studentId }) {
       <h2 id="plan-title" className="section-label">This week's targets</h2>
       <WeeklyPlanProgress plan={plan} progress={progress} subjects={subjects} />
       <ShareButton label="Share my progress on WhatsApp" className="btn btn--secondary btn--small"
-        getText={() => planShareText({ plan, name, subjectNames, progress, weekStart })} />
+        getText={() => planShareText({ plan, name, subjectNames, subjects, progress, weekStart, items: items.filter((i) => i.status !== 'cancelled').map((i) => ({ title: i.title, status: i.status })) })} />
     </section>
   )
 }

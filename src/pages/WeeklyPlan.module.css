@@ -8,3 +8,17 @@
 .subjectChip[data-on] { background: var(--ink); color: var(--card); border-color: var(--ink); }
 .subjectChip:focus-within { outline: 2px solid var(--brass); outline-offset: 2px; }
 .shareRow { display: flex; gap: var(--space-2); flex-wrap: wrap; }
+.hoursGrid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: var(--space-2); }
+.hoursRow { display: flex; align-items: center; gap: var(--space-2); padding: var(--space-1) var(--space-2); border: 1px solid var(--rule); border-radius: var(--radius, 10px); }
+.hoursRow > span:first-child { flex: 1; }
+.hoursRow[data-on] { border-color: var(--ink); font-weight: 600; }
+.hoursInput { width: 4.5em; text-align: right; }
+.actions { display: flex; gap: var(--space-2); flex-wrap: wrap; }
+.setWork { display: flex; flex-direction: column; gap: var(--space-2); }
+.itemList { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: var(--space-1); }
+.item { display: flex; align-items: center; gap: var(--space-2); padding: var(--space-2) 0; border-bottom: 1px solid var(--rule); }
+.item:last-child { border-bottom: 0; }
+.item[data-status='completed'] .itemText > span:first-child { text-decoration: line-through; opacity: 0.7; }
+.itemTick { width: 1.2em; text-align: center; }
+.itemText { flex: 1; display: flex; flex-direction: column; min-width: 0; }
+.itemButtons { display: flex; gap: var(--space-1); }
