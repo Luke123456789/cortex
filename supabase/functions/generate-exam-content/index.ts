@@ -8,7 +8,7 @@
 import { createClient } from 'npm:@supabase/supabase-js@2.45.0'
 import {
   BOARDS, QUESTIONS_TOOL, BLUEPRINT_TOOL, validateQuestion, validateBlueprint, withSources,
-  questionsPrompt, blueprintPrompt, slotsPrompt,
+  questionsPrompt, blueprintPrompt, slotsPrompt, normaliseToolInput,
 } from './content-logic.js'
 
 const ANTHROPIC_API_KEY = Deno.env.get('ANTHROPIC_API_KEY')
@@ -41,7 +41,7 @@ async function callTool(prompt: string, tool: any, maxTokens: number) {
   if (data.stop_reason === 'max_tokens') throw new Error('reply cut off at max_tokens')
   const input = data.content?.find((b: any) => b.type === 'tool_use')?.input
   if (!input) throw new Error('no tool call in reply')
-  return input
+  return normaliseToolInput(input)
 }
 
 async function must<T>(p: PromiseLike<{ data: T; error: any }>): Promise<T> {

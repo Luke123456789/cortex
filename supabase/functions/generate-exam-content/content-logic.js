@@ -177,6 +177,24 @@ export const BLUEPRINT_TOOL = {
 
 const norm = (s) => String(s ?? '').trim().toLowerCase().replace(/\s+/g, ' ')
 
+// The standard GCSE SPaG bands, used when a question has SPaG marks but the
+// model left the bands out.
+export const DEFAULT_SPAG = 'High performance: spelling and punctuation consistently accurate, grammar used to control meaning, a wide range of specialist terms used precisely (top marks). Intermediate performance: considerable accuracy, general control of meaning, a good range of specialist terms. Threshold performance: reasonable accuracy, no errors that significantly hinder meaning, a limited range of specialist terms (1 mark). No marks: nothing written, or errors that severely hinder meaning.'
+
+// Occasionally a tool call returns an array field as a JSON string. Parse
+// those back into arrays.
+export function normaliseToolInput(input) {
+  if (!input || typeof input !== 'object') return input
+  const out = { ...input }
+  for (const k of ['questions', 'sources', 'slots']) {
+    if (typeof out[k] === 'string') {
+      try { out[k] = JSON.parse(out[k]) } catch { out[k] = [] }
+    }
+    if (out[k] != null && !Array.isArray(out[k])) out[k] = []
+  }
+  return out
+}
+
 // fm_exam_questions.command_word only allows these (a database check).
 export const COMMAND_WORDS = ['state', 'describe', 'explain', 'evaluate', 'compare', 'justify', 'calculate', 'analyse', 'determine', 'explore']
 const COMMAND_ALIASES = {
@@ -242,10 +260,7 @@ export function validateQuestion(q, subtopics) {
     return { ok: false, reason: 'bad marking_style' }
   }
   if (q.guidance) scheme.guidance = String(q.guidance)
-  if (spag > 0) {
-    if (!q.spag) return { ok: false, reason: 'spag marks without spag bands' }
-    scheme.spag = String(q.spag)
-  }
+  if (spag > 0) scheme.spag = q.spag ? String(q.spag) : DEFAULT_SPAG
 
   const ao = {}
   for (const [k, v] of Object.entries(q.ao_marks ?? {})) {

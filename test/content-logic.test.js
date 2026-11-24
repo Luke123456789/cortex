@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest'
-import { BOARDS, normaliseCommandWord, COMMAND_WORDS, validateQuestion, validateBlueprint, withSources, nextComponents, questionsPrompt } from '../supabase/functions/generate-exam-content/content-logic.js'
+import { BOARDS, normaliseToolInput, normaliseCommandWord, COMMAND_WORDS, validateQuestion, validateBlueprint, withSources, nextComponents, questionsPrompt } from '../supabase/functions/generate-exam-content/content-logic.js'
 
 const subtopics = [{ id: 's1', name: 'Cell structure', spec_ref: '4.1.1' }, { id: 's2', name: 'Cell division', spec_ref: '4.1.2' }]
 const pointsQ = {
@@ -50,7 +50,9 @@ describe('validateQuestion', () => {
   it('handles SPaG marks: content bands exclude them and the bands are required', () => {
     const essay = { ...levelsQ, total_marks: 10, spag_marks: 4, spag: 'bands' }
     expect(validateQuestion(essay, subtopics).ok).toBe(true)
-    expect(validateQuestion({ ...essay, spag: undefined }, subtopics).ok).toBe(false)
+    const noBands = validateQuestion({ ...essay, spag: undefined }, subtopics)
+    expect(noBands.ok).toBe(true)
+    expect(noBands.row.scheme.spag).toContain('High performance')
   })
   it('skips the subtopic check for paper questions', () => {
     const v = validateQuestion({ ...pointsQ, subtopic: 'Whatever' }, null)
@@ -120,5 +122,13 @@ describe('normaliseCommandWord', () => {
     expect(normaliseCommandWord('write')).toBe('explore')
     expect(normaliseCommandWord('ponder')).toBe('explain')
     for (const w of ['Name', 'outline', 'suggest', 'plot', 'prove']) expect(COMMAND_WORDS).toContain(normaliseCommandWord(w))
+  })
+})
+
+describe('normaliseToolInput', () => {
+  it('parses arrays sent as JSON strings and drops junk', () => {
+    expect(normaliseToolInput({ questions: '[{"a":1}]' }).questions).toEqual([{ a: 1 }])
+    expect(normaliseToolInput({ sources: 'not json', slots: { x: 1 } })).toEqual({ sources: [], slots: [] })
+    expect(normaliseToolInput({ questions: [1] }).questions).toEqual([1])
   })
 })
