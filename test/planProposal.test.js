@@ -114,3 +114,42 @@ describe('assignment rows', () => {
     expect(keyOfAssignment({ type: 'mock_paper', paper_ref: 'x' })).toBe('paper:x')
   })
 })
+
+import { writtenMinutes, quizMinutes, estimateAssignment, plannedBySubject, timeCheck, fillToHours } from '../src/lib/planProposal.js'
+
+describe('time estimates and fill to hours', () => {
+  const cat = { ...catalog, papers: catalog.papers.map((p) => ({ ...p, duration_minutes: p.topic_id ? 30 : 105 })), quizzes: [{ ...catalog.quizzes[0], question_count: 12 }] }
+  const ctx = { catalog: cat, history: history() }
+
+  it('estimates by type', () => {
+    expect(writtenMinutes(6)).toBe(9)
+    expect(writtenMinutes(1)).toBe(3)
+    expect(quizMinutes(12)).toBe(9)
+    expect(estimateAssignment({ type: 'mock_paper', paper_ref: 'phy-p1' }, cat)).toBe(105)
+    expect(estimateAssignment({ type: 'written_test', exam_question_id: 'q2' }, cat)).toBe(9)
+    expect(estimateAssignment({ type: 'tutor_session' }, cat)).toBe(20)
+  })
+
+  it('compares planned time with the hours, per subject', () => {
+    const p = proposeWork({ subjectMinutes: { phy: 120, mat: 30 }, tutor_sessions: 2 }, ctx)
+    const planned = plannedBySubject(p.items)
+    const check = timeCheck({ phy: 120, mat: 30 }, planned)
+    expect(check.find((c) => c.subject_id === 'phy')).toMatchObject({ planned: 40, status: 'short', gap: 80 }) // both sessions go to Physics (1.6 vs 0.4)
+  })
+
+  it('fills short subjects with written answers, then tutor sessions, without repeats', () => {
+    const p = proposeWork({ subjectMinutes: { phy: 60 }, tutor_sessions: 1 }, ctx)
+    const filled = fillToHours(p, { phy: 60 }, ctx)
+    const keys = filled.items.map((i) => i.key)
+    expect(new Set(keys).size).toBe(keys.length)
+    const planned = plannedBySubject(filled.items).phy
+    expect(planned).toBeGreaterThanOrEqual(50)
+    expect(filled.items.some((i) => i.type === 'written_test')).toBe(true)
+  })
+
+  it('counts already-set work towards the hours', () => {
+    const existing = [{ key: 'paper:phy-p1', subject_id: 'phy', est: 105 }]
+    const filled = fillToHours({ items: [], pools: {}, shortfall: {} }, { phy: 100 }, ctx, existing)
+    expect(filled.items).toHaveLength(0)
+  })
+})

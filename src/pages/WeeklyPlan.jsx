@@ -4,8 +4,8 @@ import { useAuth } from '../hooks/useAuth.jsx'
 import { useWeeklyPlan } from '../hooks/useWeeklyPlan'
 import { usePlanHistory } from '../hooks/usePlanHistory'
 import { useAssignableCatalog } from '../hooks/useAssignableCatalog'
-import { mondayOf, shiftWeek, weekLabel, planShareText } from '../lib/weeklyPlan'
-import { proposeWork, swapItem, removeItem, toAssignmentRows, keyOfAssignment, PLAN_TYPE_LABELS } from '../lib/planProposal'
+import { mondayOf, shiftWeek, weekLabel, planShareText, fmtMinutes } from '../lib/weeklyPlan'
+import { proposeWork, swapItem, removeItem, toAssignmentRows, keyOfAssignment, PLAN_TYPE_LABELS, estimateAssignment, plannedBySubject, timeCheck, fillToHours } from '../lib/planProposal'
 import WeeklyPlanProgress from '../components/WeeklyPlanProgress'
 import ShareButton from '../components/ShareButton'
 import styles from './WeeklyPlan.module.css'
@@ -54,6 +54,11 @@ export default function WeeklyPlan() {
   }, [plan, weekStart])
 
   const liveItems = useMemo(() => items.filter((i) => i.status !== 'cancelled'), [items])
+  // Already-set work as estimate-carrying items (expired work no longer counts).
+  const setEst = useMemo(
+    () => (catalog.loading ? [] : liveItems.filter((i) => i.status !== 'expired').map((i) => ({ key: keyOfAssignment(i), subject_id: i.subject_id, est: estimateAssignment(i, catalog) }))),
+    [liveItems, catalog],
+  )
   const set = (k) => (v) => setForm((f) => ({ ...f, [k]: v }))
   const setHours = (id, hours) => setForm((f) => ({ ...f, subject_minutes: { ...f.subject_minutes, [id]: Math.round(hours * 60) } }))
   const focusIds = Object.entries(form.subject_minutes).filter(([, m]) => m > 0).map(([id]) => id)
@@ -86,7 +91,7 @@ export default function WeeklyPlan() {
     setMsg(null)
     if (!focusIds.length) { setMsg({ error: true, text: 'Give at least one subject some hours first.' }); return }
     if (!history.history || catalog.loading) { setMsg({ error: true, text: 'Still loading his history — try again in a moment.' }); return }
-    const existing = liveItems.map((i) => ({ type: i.type, key: keyOfAssignment(i) }))
+    const existing = liveItems.filter((i) => i.status !== 'expired').map((i) => ({ type: i.type, key: keyOfAssignment(i) }))
     const p = proposeWork(
       { subjectMinutes: Object.fromEntries(focusIds.map((id) => [id, form.subject_minutes[id]])), tutor_sessions: form.tutor_sessions, exam_questions: form.exam_questions, papers: form.papers, quizzes: form.quizzes },
       { catalog, history: history.history },
@@ -94,6 +99,15 @@ export default function WeeklyPlan() {
     )
     setProposal(p)
     if (!p.items.length) setMsg({ error: false, text: liveItems.length ? 'The set work already covers these targets.' : 'Nothing to propose for these targets.' })
+  }
+
+  function fillHours() {
+    if (!proposal || !history.history) return
+    const minutes = Object.fromEntries(focusIds.map((id) => [id, form.subject_minutes[id]]))
+    const next = fillToHours(proposal, minutes, { catalog, history: history.history }, setEst)
+    setProposal(next)
+    const n = Object.values(next.added).reduce((a, b) => a + b, 0)
+    setMsg({ error: false, text: n ? `Added ${n} item${n > 1 ? 's' : ''} to reach the hours.` : 'No more new content to add for the short subjects.' })
   }
 
   async function saveTargetsOnly(e) {
@@ -149,6 +163,11 @@ export default function WeeklyPlan() {
   const shareItems = liveItems.map((i) => ({ title: i.title, status: i.status }))
   const subjectName = (id) => subjects.find((s) => s.id === id)?.name ?? ''
 
+  const focusMinutes = Object.fromEntries(focusIds.map((id) => [id, form.subject_minutes[id]]))
+  const proposedCheck = proposal ? timeCheck(focusMinutes, plannedBySubject([...setEst, ...proposal.items])) : []
+  const setCheck = plan ? timeCheck(plan.subject_minutes ?? {}, plannedBySubject(setEst)) : []
+  const checkLine = (c) => `${subjectName(c.subject_id)}: ≈ ${fmtMinutes(c.planned)} of ${fmtMinutes(c.target)}${c.status === 'short' ? ` — ${fmtMinutes(c.gap)} short` : c.status === 'over' ? ` — ${fmtMinutes(-c.gap)} over` : ' ✓'}`
+
   const isPast = weekStart < thisWeek
   const weekName = weekStart === thisWeek ? 'This week' : weekStart === shiftWeek(thisWeek, 1) ? 'Next week' : weekStart === shiftWeek(thisWeek, -1) ? 'Last week' : 'Week of'
 
@@ -180,13 +199,18 @@ export default function WeeklyPlan() {
             {liveItems.length > 0 && (
               <div className={styles.setWork}>
                 <h3 className="field-label">Set work ({liveItems.filter((i) => i.status === 'completed').length}/{liveItems.length} done)</h3>
+                {setCheck.length > 0 && (
+                  <ul className={styles.timeCheck} aria-label="Set work against the hours">
+                    {setCheck.map((c) => <li key={c.subject_id} data-status={c.status}>{checkLine(c)}</li>)}
+                  </ul>
+                )}
                 <ul className={styles.itemList}>
                   {liveItems.map((i) => (
                     <li key={i.id} className={styles.item} data-status={i.status}>
                       <span className={styles.itemTick} aria-hidden="true">{i.status === 'completed' ? '✓' : i.status === 'expired' ? '✗' : '○'}</span>
                       <span className={styles.itemText}>
                         <span>{i.title}</span>
-                        <span className="meta">{PLAN_TYPE_LABELS[i.type] ?? i.type} · {subjectName(i.subject_id)} · {STATUS_TEXT[i.status] ?? i.status}</span>
+                        <span className="meta">{PLAN_TYPE_LABELS[i.type] ?? i.type} · {subjectName(i.subject_id)}{catalog.loading ? '' : ` · ≈ ${fmtMinutes(estimateAssignment(i, catalog))}`} · {STATUS_TEXT[i.status] ?? i.status}</span>
                       </span>
                       {i.status === 'pending' && !isPast && (
                         <button type="button" className="btn btn--small btn--soft" onClick={() => removeSetItem(i.id)} aria-label={`Remove ${i.title}`}>Remove</button>
@@ -255,6 +279,16 @@ export default function WeeklyPlan() {
             <section className={`card card--strong ${styles.section}`} aria-labelledby="proposal-title">
               <h2 id="proposal-title" className="section-label">Proposed work ({proposal.items.length})</h2>
               <p className="meta">Weakest topics first, then topics he hasn&apos;t done. Swap or remove anything, then approve to send it to {name || 'the student'}, due by Sunday.</p>
+              <div className={styles.timeBox}>
+                <span className="field-label">Time against your hours{setEst.length ? ' (including work already set)' : ''}</span>
+                <ul className={styles.timeCheck}>
+                  {proposedCheck.map((c) => <li key={c.subject_id} data-status={c.status}>{checkLine(c)}</li>)}
+                </ul>
+                {proposedCheck.some((c) => c.status === 'short') && (
+                  <button type="button" className="btn btn--secondary btn--small" onClick={fillHours}>Fill to hours</button>
+                )}
+                <p className="meta">Estimates: written answers ≈ 1.5 min per mark, tutor session ≈ 20 min, quiz ≈ 45 s per question, papers at their real length.</p>
+              </div>
               {TYPE_ORDER.map((type) => {
                 const list = proposal.items.filter((i) => i.type === type)
                 if (!list.length) return null
@@ -268,7 +302,7 @@ export default function WeeklyPlan() {
                           <li key={i.key} className={styles.item}>
                             <span className={styles.itemText}>
                               <span>{i.title}</span>
-                              <span className="meta">{subjectName(i.subject_id)}</span>
+                              <span className="meta">{subjectName(i.subject_id)} · ≈ {fmtMinutes(i.est ?? 0)}</span>
                             </span>
                             <span className={styles.itemButtons}>
                               <button type="button" className="btn btn--small btn--soft" onClick={() => setProposal((p) => swapItem(p, i.key))} disabled={!canSwap}>Swap</button>

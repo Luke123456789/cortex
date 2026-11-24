@@ -11,6 +11,66 @@
 const TYPES = ['tutor_session', 'written_test', 'mock_paper', 'quiz']
 export const PLAN_TYPE_LABELS = { tutor_session: 'Tutor session', written_test: 'Written answer', mock_paper: 'Exam paper', quiz: 'Quiz' }
 
+// Time estimates, in minutes, from exam timing: about 1.5 minutes per mark
+// for a written answer (reading, planning, writing), a tutor session at
+// about 20 minutes, 45 seconds per quiz question, a paper at its real length.
+export const TUTOR_MINUTES = 20
+export const writtenMinutes = (marks) => Math.max(3, Math.round((marks || 1) * 1.5))
+export const quizMinutes = (questions) => Math.max(3, Math.round((questions || 10) * 0.75))
+
+// Estimate for an assignment row (already-set work), using the catalog.
+export function estimateAssignment(a, catalog) {
+  if (a.type === 'tutor_session') return TUTOR_MINUTES
+  if (a.type === 'written_test') return writtenMinutes(catalog.examQuestions.find((q) => q.id === a.exam_question_id)?.total_marks)
+  if (a.type === 'quiz') return quizMinutes(catalog.quizzes.find((q) => q.id === a.quiz_id)?.question_count)
+  if (a.type === 'mock_paper') return catalog.papers.find((p) => p.ref === a.paper_ref)?.duration_minutes || 60
+  return 0
+}
+
+// Planned minutes per subject. items: [{ subject_id, est }].
+export function plannedBySubject(items) {
+  const out = {}
+  for (const i of items) if (i.subject_id) out[i.subject_id] = (out[i.subject_id] ?? 0) + (i.est ?? 0)
+  return out
+}
+
+// Per-subject comparison of planned time against the hours target.
+// Within 10 minutes counts as on target.
+export function timeCheck(subjectMinutes, planned) {
+  return Object.entries(subjectMinutes).filter(([, m]) => m > 0).map(([id, target]) => {
+    const p = planned[id] ?? 0
+    const gap = target - p
+    return { subject_id: id, target, planned: p, gap, status: gap > 10 ? 'short' : gap < -10 ? 'over' : 'ok' }
+  })
+}
+
+// Top up each subject that's short of its hours: written answers first
+// (weakest topics), then tutor sessions, until within 10 minutes or out of
+// content. existing: already-set items [{ key, subject_id, est }].
+export function fillToHours(proposal, subjectMinutes, ctx, existing = []) {
+  const items = proposal.items.slice()
+  const inUse = new Set([...existing, ...items].map((i) => i.key))
+  const planned = plannedBySubject([...existing, ...items])
+  const added = {}
+  for (const [sid, target] of Object.entries(subjectMinutes)) {
+    if (!(target > 0)) continue
+    for (const type of ['written_test', 'tutor_session']) {
+      if ((planned[sid] ?? 0) >= target - 10) break
+      for (const c of candidatesFor(type, sid, ctx)) {
+        if ((planned[sid] ?? 0) >= target - 10) break
+        if (inUse.has(c.key)) continue
+        // Don't overshoot by a lot with one big question.
+        if ((planned[sid] ?? 0) + c.est > target + 15 && type === 'written_test') continue
+        items.push(c)
+        inUse.add(c.key)
+        planned[sid] = (planned[sid] ?? 0) + c.est
+        added[sid] = (added[sid] ?? 0) + 1
+      }
+    }
+  }
+  return { ...proposal, items, added }
+}
+
 // Split n across keys in proportion to weights (largest remainder).
 export function apportion(n, weights) {
   const keys = Object.keys(weights).filter((k) => weights[k] > 0)
@@ -57,7 +117,7 @@ export function candidatesFor(type, subjectId, ctx) {
       .sort((a, b) => a.last - b.last) // never tutored (0) first, then longest ago
     return roundRobin(byTopic(rows, (r) => r.s.topic_id)).map(({ s }) => ({
       type, key: `tutor:${s.id}`, subject_id: subjectId, topic_id: s.topic_id, subtopic_id: s.id,
-      title: `${s.name} tutor session`,
+      title: `${s.name} tutor session`, est: TUTOR_MINUTES,
     }))
   }
 
@@ -69,6 +129,7 @@ export function candidatesFor(type, subjectId, ctx) {
     return roundRobin(byTopic(rows, (q) => q.topic_id)).map((q) => ({
       type, key: `written:${q.id}`, subject_id: subjectId, topic_id: q.topic_id, subtopic_id: q.subtopic_id ?? null, exam_question_id: q.id,
       title: `${subtopicName.get(q.subtopic_id) ?? catalog.topics.find((t) => t.id === q.topic_id)?.name ?? 'Written answer'}: written answer (${q.total_marks} marks)`,
+      est: writtenMinutes(q.total_marks),
     }))
   }
 
@@ -76,7 +137,7 @@ export function candidatesFor(type, subjectId, ctx) {
     const papers = catalog.papers
       .filter((p) => p.subject_id === subjectId && !history.donePapers.has(p.ref) && !history.pendingPapers.has(p.ref))
       .sort((a, b) => (a.topic_id ? 1 : 0) - (b.topic_id ? 1 : 0) || a.title.localeCompare(b.title)) // full mocks before topic practice
-    return papers.map((p) => ({ type, key: `paper:${p.ref}`, subject_id: subjectId, topic_id: p.topic_id ?? null, paper_ref: p.ref, title: p.title }))
+    return papers.map((p) => ({ type, key: `paper:${p.ref}`, subject_id: subjectId, topic_id: p.topic_id ?? null, paper_ref: p.ref, title: p.title, est: p.duration_minutes || 60 }))
   }
 
   if (type === 'quiz') {
@@ -86,6 +147,7 @@ export function candidatesFor(type, subjectId, ctx) {
       .sort((a, b) => a.last - b.last)
     return roundRobin(byTopic(rows, (r) => r.q.topic_id)).map(({ q }) => ({
       type, key: `quiz:${q.id}`, subject_id: subjectId, topic_id: q.topic_id, subtopic_id: q.subtopic_id ?? null, quiz_id: q.id, title: q.title,
+      est: quizMinutes(q.question_count),
     }))
   }
   return []
