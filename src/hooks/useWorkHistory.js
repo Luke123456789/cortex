@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useState } from 'react'
 import { supabase } from '../lib/supabaseClient'
+import { getHistoryFrom } from '../lib/historyFrom'
 
 const PAGE = 1000
 
@@ -38,11 +39,15 @@ export function useWorkHistory(studentId) {
     setLoading(true)
     setError(null)
     try {
+      const from = await getHistoryFrom(studentId)
       const [assignments, subjects, topics] = await Promise.all([
-        readAll(() => supabase.from('assignments')
-          .select('id, type, title, note, due_at, assigned_at, status, completed_at, subject_id, topic_id, quiz_session_id, fm_attempt_id, tutor_session_id, paper_ref')
-          .eq('student_id', studentId)
-          .order('assigned_at', { ascending: false })),
+        readAll(() => {
+          let q = supabase.from('assignments')
+            .select('id, type, title, note, due_at, assigned_at, status, completed_at, subject_id, topic_id, quiz_session_id, fm_attempt_id, tutor_session_id, paper_ref')
+            .eq('student_id', studentId)
+          if (from) q = q.gte('assigned_at', from)
+          return q.order('assigned_at', { ascending: false })
+        }),
         readAll(() => supabase.from('subjects').select('id, name').order('name')),
         readAll(() => supabase.from('topics').select('id, name').order('id')),
       ])

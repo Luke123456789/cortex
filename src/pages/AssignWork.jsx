@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { useSearchParams } from 'react-router-dom'
 import { supabase } from '../lib/supabaseClient'
+import { getHistoryFrom } from '../lib/historyFrom'
 import { useAuth } from '../hooks/useAuth.jsx'
 import { useAssignableCatalog } from '../hooks/useAssignableCatalog'
 import { useAssignments } from '../hooks/useAssignments'
@@ -40,12 +41,19 @@ function truncate(text, max) {
 
 export default function AssignWork() {
   const { user, childStudent, linkedStudents } = useAuth()
+  // Parent's fresh-start date: recent work only shows from here.
+  const [historyFrom, setHistoryFrom] = useState(null)
   // Defaults to the practice student, so work is tried out from the student
   // view first; the real student is picked deliberately. Falls back to the
   // real student if there's no practice student.
   const [targetId, setTargetId] = useState('')
   const practiceStudent = linkedStudents.find((s) => s.isPractice)
   const studentId = targetId || practiceStudent?.id || childStudent?.id
+  useEffect(() => {
+    let live = true
+    getHistoryFrom(studentId).then((d) => { if (live) setHistoryFrom(d) })
+    return () => { live = false }
+  }, [studentId])
   const target = linkedStudents.find((s) => s.id === studentId)
   const studentName = target ? (target.isPractice ? 'practice student' : target.displayName) : null
   const { subjects, topics, subtopics, quizzes, examQuestions, papers, loading: catalogLoading } = useAssignableCatalog()
@@ -303,7 +311,7 @@ export default function AssignWork() {
     (type === 'past_paper' && a.title === pastPaperTitle.trim()) ||
     (type === 'mock_paper' && a.paper_ref === paperRef)
   ))
-  const completed = assignments.filter((a) => a.status === 'completed').sort((a, b) => new Date(b.completed_at) - new Date(a.completed_at)).slice(0, 8)
+  const completed = assignments.filter((a) => a.status === 'completed' && (!historyFrom || new Date(a.completed_at) >= new Date(historyFrom))).sort((a, b) => new Date(b.completed_at) - new Date(a.completed_at)).slice(0, 8)
   // The picked item has been finished before (assigned or self-started).
   const doneEntry = !done || type === 'study_pack' ? null
     : type === 'quiz' ? done.quiz.get(quizId)

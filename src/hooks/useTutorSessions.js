@@ -1,5 +1,6 @@
 import { useEffect, useState, useCallback } from 'react'
 import { supabase } from '../lib/supabaseClient'
+import { getHistoryFrom } from '../lib/historyFrom'
 
 // studentId: whose rows to show (see useAuth). Nothing loads until it's known.
 export function useTutorSessions(studentId) {
@@ -9,10 +10,13 @@ export function useTutorSessions(studentId) {
   const fetchSessions = useCallback(async () => {
     setLoading(true)
 
-    const { data, error } = await supabase
+    const from = await getHistoryFrom(studentId)
+    let query = supabase
       .from('tutor_sessions')
       .select('id, started_at, completed_at, message_count, minutes_earned, reward_claimed, messages, subtopics (name, topics (name, subjects (name)))')
       .eq('student_id', studentId)
+    if (from) query = query.gte('started_at', from)
+    const { data, error } = await query
       .order('started_at', { ascending: false })
       .limit(50)
 
